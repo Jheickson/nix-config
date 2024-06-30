@@ -4,10 +4,15 @@
 
   stylix = {
 
-  base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-medium.yaml";
+    enable = true;
+    autoEnable = true;
 
-  # It can also be generated from an inmage
-  image = ../wallpapers/Themed/catpuccin_tetris.png;
+    polarity = "dark";
+
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-medium.yaml";
+
+    # It can also be generated from an inmage
+    image = ./wallpapers/Themed/catpuccin_tetris.png;
 
   };
 
