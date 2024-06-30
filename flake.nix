@@ -18,7 +18,7 @@
     packages.x86_64-linux.default = self.packages.x86_64-linux.hello;
 
     # nixos - system hostname
-    nixosConfigurations.felipe = nixpkgs.lib.nixosSystem {
+    nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
       specialArgs = {
         pkgs-stable = import nixpkgs-stable {
           inherit system;
