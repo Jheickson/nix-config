@@ -5,6 +5,9 @@
 # in
 
 {
+
+  xsession.scriptPath = ".hm-xsession";
+
   xsession.windowManager.i3 = {
     enable = true;
 
