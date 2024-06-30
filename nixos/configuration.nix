@@ -58,7 +58,7 @@
 
   services.xserver = {
     enable = true;
-    windowManager.13.enable = true;
+    windowManager.i3.enable = true;
   }
   services.displayManager = {
     defaultSession = "none+i3";
