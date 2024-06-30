@@ -6,6 +6,7 @@
 
     ./alacritty.nix
     ./i3.nix
+    ./polybar/polybar.nix
     ./zsh.nix
 
   ];
