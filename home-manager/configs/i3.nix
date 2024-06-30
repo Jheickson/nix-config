@@ -87,21 +87,21 @@
           always = true;
           notification = false;
         }
-        {
-          command = "${pkgs.feh}/bin/feh --bg-fill ${wallpaper}";
-          always = true;
-          notification = false;
-        }
+        # {
+        #   command = "${pkgs.feh}/bin/feh --bg-fill ${wallpaper}";
+        #   always = true;
+        #   notification = false;
+        # }
         {
           command = "picom -f";
           always = true;
           notification = false;
         }
-        {
-          command = "wal -i ${wallpaper}";
-          always = true;
-          notification = false;
-        }
+        # {
+        #   command = "wal -i ${wallpaper}";
+        #   always = true;
+        #   notification = false;
+        # }
         {
           command = "whatsapp-for-linux";
           always = true;
