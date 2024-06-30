@@ -5,13 +5,13 @@
     permittedInsecurePackages = [];
   };
 
-};
 
-environment.systemPackages = with pkgs; [
+  environment.systemPackages = with pkgs; [
 
-  hello
-  cowsay
-  neofetch
-  zsh
+    hello
+    cowsay
+    neofetch
+    zsh
 
-]
+  ];
+}
