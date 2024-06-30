@@ -27,7 +27,7 @@
     whatsapp-for-linux
 
     # UTILITIES
-    peazip
+    # peazip
     xfce.thunar
 
     # NETWORK
