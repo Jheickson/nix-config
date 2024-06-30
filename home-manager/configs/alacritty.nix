@@ -17,10 +17,10 @@
         };
       };
 
-      font = {
-        normal.family = "Hack Nerd Font";
-        size = 12.0;
-      };
+      # font = {
+      #   normal.family = "Hack Nerd Font";
+      #   size = 12.0;
+      # };
 
       shell = { program = "${pkgs.zsh}/bin/zsh"; };
 
