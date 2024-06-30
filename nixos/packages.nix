@@ -46,6 +46,11 @@
     lazydocker
     lazygit
 
+    # SYSTEM
+    brightnessctl
+    playerctl
+    libnotify
+
     # FONTS
     nerdfonts
     siji
