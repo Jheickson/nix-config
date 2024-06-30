@@ -4,8 +4,9 @@
 
   imports = [
 
-    ./zsh.nix
     ./alacritty.nix
+    ./i3.nix
+    ./zsh.nix
 
   ];
 
