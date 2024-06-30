@@ -35,8 +35,6 @@
     networkmanagerapplet
     networkmanager_dmenu
 
-
-
     # MEDIA
     flameshot
     stremio
@@ -48,6 +46,11 @@
     lazydocker
     lazygit
 
+    # FONTS
+    nerdfonts
+    siji
+    rounded-mgenplus
+    termsyn
 
   ];
 }
