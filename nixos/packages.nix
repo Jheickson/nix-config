@@ -46,6 +46,8 @@
     playerctl
     libnotify
 
+    # CUSTOMIZATION
+
     # FONTS
     nerdfonts
     siji
