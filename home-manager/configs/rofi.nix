@@ -3,7 +3,7 @@
 {
   programs.rofi = {
     enable = true;
-    font = "Hack Nerd Font 12";
+    # font = "Hack Nerd Font 12"; # Let Stylix manage this
     # theme = "~/.cache/wal/colors-rofi-dark.rasi";
   };
 

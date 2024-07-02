@@ -28,7 +28,7 @@
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
       specialArgs = {
         pkgs-stable = import nixpkgs-stable {
-          inherit system;
+          inherit inputs system;
           config.allowUnfree = true;
         };
         inherit inputs system;

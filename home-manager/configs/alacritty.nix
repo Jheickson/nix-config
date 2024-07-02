@@ -8,7 +8,7 @@
       window = {
         title = "Terminal";
 
-        opacity = 0.5;
+        # opacity = 0.5; # Let Stylix manage this
 
         padding = { y = 5; };
         dimensions = {
