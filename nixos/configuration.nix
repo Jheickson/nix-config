@@ -16,7 +16,7 @@
 
   home-manager = {
     extraSpecialArgs = { inherit inputs; };
-    backupFileExtension = "hm-backup";
+    backupFileExtension = "hm-backup"; # Felt like a god when I finally fixed Stylix with this
     users = {
       felipe = import ../home-manager/home.nix;
     };
