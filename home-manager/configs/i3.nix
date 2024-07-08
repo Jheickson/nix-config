@@ -71,6 +71,9 @@
         "${modifier}+Control+0" = "restart";
         "${modifier}+Control+r" = "mode resize";
 
+        # "${modifier}+Control+W" = "workspace_layout tabbed"; 
+        # TODO Implement keybind to toggle tabbed layout on i3 (https://i3wm.org/docs/userguide.html#_layout_mode_for_new_containers)
+
         # "${modifier}+Alt_L+a" = "resize shrink width 5 px or 5 ppt";
         # "${modifier}+Alt_L+r" = "resize grow height 5 px or 5 ppt";
         # "${modifier}+Alt_L+w" = "resize shrink height 5 px or 5 ppt";
