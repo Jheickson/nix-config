@@ -12,7 +12,7 @@
     # base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-medium.yaml";
 
     # It can also be generated from an inmage
-    image = ./wallpapers/Landscape/wallhaven-jxqrw5_3840x2160.png;
+    image = ./wallpapers/Aesthetic/1328558.png;
 
   };
 
