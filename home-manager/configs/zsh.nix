@@ -32,6 +32,7 @@
       enable = true;
       plugins = [ "git" "sudo" ];
       theme = "jonathan"; # blinks is also really nice
+      # TODO Create own zsh theme
     };
   };
 }
