@@ -43,6 +43,7 @@
     lazygit
 
     # SYSTEM
+    libmpdclient
     brightnessctl
     playerctl
     libnotify
