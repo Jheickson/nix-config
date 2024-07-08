@@ -18,6 +18,7 @@
     zsh
 
     # DESKTOP APPS
+    anki
     brave
     chromium
     drawio
