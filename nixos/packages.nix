@@ -29,6 +29,10 @@
 
     # UTILITIES
     # peazip
+    zip
+    unzip
+    rar
+    unrar
     xfce.thunar
 
     # MEDIA
