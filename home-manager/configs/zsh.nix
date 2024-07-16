@@ -1,4 +1,4 @@
-{ config, ... }: {
+{ config, pkgs, lib, ... }: {
   programs.zsh = {
     enable = true;
     enableCompletion = true;
@@ -37,6 +37,8 @@
       # TODO Create own zsh theme
     };
 
+  };
+
     programs.zoxide = {
       enable = true;
       enableZshIntegration = true;
@@ -52,5 +54,4 @@
       zoxide
     ];
 
-  };
 }
