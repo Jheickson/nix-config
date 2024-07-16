@@ -21,8 +21,8 @@
 
   fonts = with pkgs; rec {
     monospace = {
-      package = nerdfonts.override {fonts = ["FiraCode"];};
-      name = "FiraCodeNerdFontMono";
+      package = nerdfonts.override {fonts = ["Hack"];};
+      name = "HackNerdFontMono";
     };
     sansSerif = monospace;
     serif = monospace;
@@ -54,7 +54,7 @@
   fonts = {
     fontDir.enable = true;
     enableDefaultPackages = true;
-    packages = with pkgs; [ipafont (nerdfonts.override {fonts = ["FiraCode"];})];
+    packages = with pkgs; [ipafont (nerdfonts.override {fonts = ["Hack"];})];
   };
 
 }
