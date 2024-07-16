@@ -51,6 +51,7 @@
     brightnessctl
     playerctl
     libnotify
+    feh
 
     # CUSTOMIZATION
 
