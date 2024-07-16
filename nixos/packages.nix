@@ -11,6 +11,7 @@
     # CLI
     hello
     cowsay
+    cbonsai
     tldr
     scrcpy
     neofetch
