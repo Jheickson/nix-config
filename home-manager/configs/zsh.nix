@@ -23,6 +23,8 @@
       v = "nvim";
       se = "sudoedit";
       ff = "fastfetch";
+
+      z = "__zoxide_z";
     };
 
     history.size = 10000;
@@ -34,5 +36,21 @@
       theme = "jonathan"; # blinks is also really nice
       # TODO Create own zsh theme
     };
+
+    programs.zoxide = {
+      enable = true;
+      enableZshIntegration = true;
+    };
+
+    programs.fzf = {
+      enable = true;
+      enableZshIntegration = true;
+    };
+
+    home.packages = with pkgs; [
+      thefuck
+      zoxide
+    ];
+
   };
 }
