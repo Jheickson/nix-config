@@ -1,5 +1,7 @@
 {pkgs, config, lib, ...}:
 
+# https://github.com/vimjoyer/stylix-video
+
 {
 
   stylix = {
@@ -38,11 +40,14 @@
     # };
 
     cursor = {
-      package = pkgs.catppuccin-cursors.frappeMauve;
-      name = "Catppuccin-Frappe-Mauve-Cursors";
+      # package = pkgs.bibata-cursors;
+      # name = "Bibata-Modern-Ice";
+
+      package = pkgs.phinger-cursors;
+      name = "phinger-cursors-light";
+
       size = 8;
     };
-
 
     # base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-medium.yaml";
 
