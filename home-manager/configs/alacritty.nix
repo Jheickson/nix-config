@@ -10,7 +10,7 @@
 
         # opacity = 0.5; # Let Stylix manage this
 
-        padding = { y = 5; };
+        padding = { y = 32; x = 32; };
         dimensions = {
           lines = 75;
           columns = 100;
