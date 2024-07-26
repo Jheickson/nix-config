@@ -49,10 +49,10 @@
       size = 8;
     };
 
-    # base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-medium.yaml";
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/vice.yaml";
 
     # It can also be generated from an inmage
-    image = ./wallpapers/Aesthetic/wallhaven-wevker_3840x2160.png;
+    image = ./wallpapers/Gradient/9171181.jpg;
 
   };
 
