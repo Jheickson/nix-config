@@ -58,6 +58,8 @@
     feh
 
     # CUSTOMIZATION
+    base16-schemes
+    base16-shell-preview
 
     # FONTS
     nerdfonts
