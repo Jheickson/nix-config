@@ -44,7 +44,6 @@
     vlc
 
     # DEV
-    lazydocker
     lazygit
     nodejs_22
     nodePackages.expo-cli

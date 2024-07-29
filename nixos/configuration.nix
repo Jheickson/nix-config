@@ -12,6 +12,7 @@
 
     ./packages.nix
     ./stylix.nix
+    ./docker.nix
   ];
 
   home-manager = {
