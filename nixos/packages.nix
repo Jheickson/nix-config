@@ -45,6 +45,7 @@
 
     # DEV
     lazygit
+    yarn
     nodejs_22
     nodePackages.expo-cli
     genymotion
