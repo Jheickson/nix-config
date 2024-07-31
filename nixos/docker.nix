@@ -3,7 +3,7 @@
 {
   virtualisation.docker.enable = true;
 
-  home.packages = with pkgs; [
+  environment.systemPackages = with pkgs; [
     docker
     docker-client
     lazydocker

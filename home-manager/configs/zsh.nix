@@ -19,7 +19,7 @@
       conf = "nvim ${flakeDir}/nixos/configuration.nix";
       pkgs = "nvim ${flakeDir}/nixos/packages.nix";
 
-      ll = "ls -l";
+      ll = "ls -a";
       v = "nvim";
       se = "sudoedit";
       ff = "fastfetch";
