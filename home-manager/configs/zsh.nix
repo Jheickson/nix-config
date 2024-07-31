@@ -32,8 +32,8 @@
 
     oh-my-zsh = {
       enable = true;
-      plugins = [ "git" "sudo" ];
-      theme = "jonathan"; # blinks is also really nice
+      plugins = [ "git" "sudo" "thefuck"];
+      theme = "lambda"; # blinks is also really nice
       # TODO Create own zsh theme
     };
 
@@ -51,6 +51,8 @@
 
     home.packages = with pkgs; [
       thefuck
+      zsh-autocomplete
+      zsh-autosuggestions
       zoxide
     ];
 
