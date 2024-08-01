@@ -49,7 +49,7 @@
       size = 8;
     };
 
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-city-dark.yaml";
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-night-terminal-dark.yaml";
 
     # It can also be generated from an inmage
     image = ./wallpapers/Themed/wallpapersden.com_the-neon-shallows-building_5120x2880.jpg;
