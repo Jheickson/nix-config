@@ -49,6 +49,9 @@
     nodejs_22
     nodePackages.expo-cli
     genymotion
+    mysql84
+    mysql-workbench
+    postman
 
     # SYSTEM
     libmpdclient
