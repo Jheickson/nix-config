@@ -109,7 +109,7 @@
   users.users.felipe = {
     isNormalUser = true;
     description = "felipe";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" ];
     packages = with pkgs; [
       kdePackages.kate
     #  thunderbird
