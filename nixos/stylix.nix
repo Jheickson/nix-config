@@ -9,7 +9,7 @@
     enable = true;
     autoEnable = true;
 
-    polarity = "dark";
+    polarity = "light";
 
     targets = {
 
@@ -49,10 +49,10 @@
       size = 8;
     };
 
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-night-storm.yaml";
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-night-light.yaml";
 
     # It can also be generated from an inmage
-    image = ./wallpapers/Landscape/wallhaven-9dvl38.png;
+    image = ./wallpapers/Landscape/wallhaven-wegw36.jpg;
   };
 
   fonts = {
