@@ -49,10 +49,10 @@
       size = 8;
     };
 
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-night-storm.yaml";
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/lime.yaml";
 
-    # It can also be generated from an inmage
-    image = ./wallpapers/Landscape/wallhaven-wegw36.jpg;
+    # It can also be generated from an image
+    image = ./wallpapers/Other/wallhaven-qzyqo7.png;
   };
 
   fonts = {
