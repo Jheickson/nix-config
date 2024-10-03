@@ -22,6 +22,7 @@
     anki
     brave
     chromium
+    discord
     drawio
     libreoffice
     electron-mail
@@ -29,11 +30,11 @@
     whatsapp-for-linux
 
     # UTILITIES
-    # peazip
     zip
     unzip
     rar
     unrar
+    peazip
     xfce.thunar
 
     # MEDIA
