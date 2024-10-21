@@ -69,7 +69,7 @@
     base16-shell-preview
 
     # FONTS
-    nerdfonts
+    # nerdfonts # Big package. Font is already being set on stylix.nix
     siji
     rounded-mgenplus
     termsyn
