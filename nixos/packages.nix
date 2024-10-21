@@ -1,10 +1,13 @@
-{ pkgs, ...}: {
+{ pkgs, config, ...}: {
 
   nixpkgs.config = {
     allowUnfree = true;
     permittedInsecurePackages = [];
   };
 
+  programs.kdeconnect = {
+    enable = true;
+  };
 
   environment.systemPackages = with pkgs; [
 
