@@ -18,6 +18,7 @@
     tldr
     scrcpy
     neofetch
+    yazi
     zenith
     zsh
 
