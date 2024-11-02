@@ -16,8 +16,9 @@
     cowsay
     cbonsai
     tldr
-    scrcpy
     neofetch
+    scrcpy
+    superfile
     yazi
     zenith
     zsh
