@@ -55,6 +55,7 @@
     nodejs_22
     nodePackages.expo-cli
     genymotion
+    qemu
     mysql84
     mysql-workbench
     postman
