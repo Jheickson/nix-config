@@ -49,10 +49,10 @@
       size = 8;
     };
 
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/black-metal-venom.yaml";
+    # base16Scheme = "${pkgs.base16-schemes}/share/themes/black-metal-venom.yaml";
 
     # It can also be generated from an image
-    image = ./wallpapers/Aesthetic/wallhaven-yxwj2l.png;
+    image = ./wallpapers/Landscape/wallhaven-3lpymv.png;
   };
 
   fonts = {
