@@ -122,6 +122,10 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
+  nixpkgs.config.permittedInsecurePackages = [
+    "googleearth-pro-7.3.6.9796"
+  ];
+
   # Enable Flakes
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 

@@ -33,6 +33,7 @@
     electron-mail
     telegram-desktop
     whatsapp-for-linux
+    googleearth-pro
 
     # UTILITIES
     zip
