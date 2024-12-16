@@ -15,11 +15,11 @@
     hello
     cowsay
     cbonsai
+    fd
     tldr
     neofetch
     scrcpy
     superfile
-    yazi
     zenith
     zsh
 
