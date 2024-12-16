@@ -138,6 +138,7 @@
     micro
     git
     vscode
+    inputs.zen-browser.packages."${system}".generic
   ];
 
   nix.gc = {
