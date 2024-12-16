@@ -52,7 +52,7 @@
     # base16Scheme = "${pkgs.base16-schemes}/share/themes/black-metal-venom.yaml";
 
     # It can also be generated from an image
-    image = ./wallpapers/Landscape/wallhaven-3lpymv.png;
+    image = ./wallpapers/Landscape/wallhaven-7pzyko.png;
   };
 
   fonts = {
