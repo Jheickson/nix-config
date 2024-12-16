@@ -60,6 +60,7 @@
     mysql84
     mysql-workbench
     postman
+    nodePackages.eas-cli
 
     # SYSTEM
     libmpdclient
