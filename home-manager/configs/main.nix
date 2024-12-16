@@ -10,6 +10,7 @@
     ./picom.nix
     ./polybar/polybar.nix
     ./rofi.nix
+    ./yazi.nix
     ./zsh.nix
 
   ];
