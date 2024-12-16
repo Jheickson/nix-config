@@ -13,6 +13,11 @@
 
     package = pkgs.i3;
 
+    # extraConfig = ''
+    #   # Keybind to toggle i3 to tabbed layout
+    #   bindsym Mod4+Control+W workspace_layout tabbed
+    # '';
+
     config = rec {
       modifier = "Mod4";
       bars = [ ];
@@ -48,9 +53,9 @@
         "${modifier}+Return" = "exec ${pkgs.alacritty}/bin/alacritty";
         "${modifier}+d" = "exec ${pkgs.rofi}/bin/rofi -modi drun -show drun -show-icons";
         "${modifier}+Shift+d" = "exec ${pkgs.rofi}/bin/rofi -show window -show-icons";
-        "${modifier}+Shift+b" = "exec ${pkgs.brave}/bin/brave";
+        "${modifier}+Shift+b" = "exec zen";
         "${modifier}+Shift+c" = "exec code";
-        "${modifier}+Shift+t" = "exec thunar";
+        "${modifier}+Shift+t" = "exec yazi";
 
         # "${modifier}+Shift+x" = "exec systemctl suspend";
 
