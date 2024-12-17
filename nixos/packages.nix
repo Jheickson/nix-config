@@ -54,7 +54,7 @@
     lazygit
     yarn
     nodejs_22
-    nodePackages.expo-cli
+    nodePackages.eas-cli
     genymotion
     qemu
     mysql84
