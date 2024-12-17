@@ -23,7 +23,7 @@
 
   fonts = with pkgs; rec {
     monospace = {
-      package = nerdfonts.override {fonts = ["Hack"];};
+      package = nerd-fonts.hack;
       name = "HackNerdFontMono";
     };
     sansSerif = monospace;
@@ -58,7 +58,7 @@
   fonts = {
     fontDir.enable = true;
     enableDefaultPackages = true;
-    packages = with pkgs; [ipafont (nerdfonts.override {fonts = ["Hack"];})];
+    packages = with pkgs; [ipafont (nerd-fonts.hack)];
   };
 
 }
