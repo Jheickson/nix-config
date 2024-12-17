@@ -12,6 +12,7 @@
 
     ./packages.nix
     ./stylix.nix
+    ./upower.nix
     ./docker.nix
   ];
 
