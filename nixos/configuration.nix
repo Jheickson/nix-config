@@ -79,9 +79,10 @@
   };
 
   # Configure keymap in X11
-  services.xserver = {
+  services.xserver.xkb = {
     layout = "us";
-    xkbVariant = "colemak_dh_wide";
+    variant = "colemak_dh_wide";
+    options = "caps:backspace";
   };
 
   # Enable CUPS to print documents.
