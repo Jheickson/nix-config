@@ -114,7 +114,7 @@
         #   notification = false;
         # }
         {
-          command = "whatsapp-for-linux";
+          command = "whatsie";
           always = true;
           notification = true;
         }
