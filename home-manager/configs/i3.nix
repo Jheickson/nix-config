@@ -114,7 +114,7 @@
         #   notification = false;
         # }
         {
-          command = "whatsie";
+          command = "wasistlos";
           always = true;
           notification = true;
         }

@@ -32,7 +32,7 @@
     libreoffice
     electron-mail
     telegram-desktop
-    whatsie
+    whatsapp-for-linux
     googleearth-pro
 
     # UTILITIES
