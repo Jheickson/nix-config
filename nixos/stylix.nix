@@ -49,10 +49,10 @@
       size = 8;
     };
 
-    # base16Scheme = "${pkgs.base16-schemes}/share/themes/black-metal-venom.yaml";
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-hard.yaml";
 
     # It can also be generated from an image
-    image = ./wallpapers/Aesthetic/1328558.png;
+    image = ./wallpapers/Themed/wallhaven-p9pd23.png;
   };
 
   fonts = {
