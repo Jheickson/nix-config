@@ -118,6 +118,11 @@
           always = true;
           notification = true;
         }
+        {
+          command = "kdeconnect-app";
+          always = true;
+          notification = true;
+        }
       ];
     };
   };
