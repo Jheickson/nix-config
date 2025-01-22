@@ -144,6 +144,8 @@
     inputs.zen-browser.packages."${system}".default
   ];
 
+  nix.nixPath = [ "nixpkgs = ${inputs.nixpkgs}" ];
+
   nix.gc = {
     automatic = true;
     dates = "weekly";

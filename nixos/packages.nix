@@ -15,6 +15,10 @@
 
   environment.systemPackages = with pkgs; [
 
+    # NIX
+    nixfmt-rfc-style # Run `nixfmt file.nix`
+    nixd
+
     # CLI
     hello
     cowsay
