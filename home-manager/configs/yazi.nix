@@ -3,13 +3,13 @@
   home.packages = with pkgs; [
     # Add Yazi to your Home Manager managed packages
     yazi
-    
+
     # Optional: Dependencies for Yazi plugins
-    ueberzugpp     # For image preview (alternative to ueberzug)
-    zsh            # For Zsh integration
-    bat            # For syntax-highlighted file previews
-    ripgrep        # For file search functionality
-    fd             # For efficient file listing
+    ueberzugpp # For image preview (alternative to ueberzug)
+    zsh # For Zsh integration
+    bat # For syntax-highlighted file previews
+    ripgrep # For file search functionality
+    fd # For efficient file listing
   ];
 
   # Configuration for Zsh integration (optional, required for Zsh plugin)

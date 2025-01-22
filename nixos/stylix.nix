@@ -1,4 +1,9 @@
-{pkgs, config, lib, ...}:
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
 
 # https://github.com/vimjoyer/stylix-video
 
@@ -21,14 +26,14 @@
       terminal = 0.75;
     };
 
-  fonts = with pkgs; rec {
-    monospace = {
-      package = nerd-fonts.hack;
-      name = "HackNerdFontMono";
+    fonts = with pkgs; rec {
+      monospace = {
+        package = nerd-fonts.hack;
+        name = "HackNerdFontMono";
+      };
+      sansSerif = monospace;
+      serif = monospace;
     };
-    sansSerif = monospace;
-    serif = monospace;
-  };
 
     # cursor = {
 
@@ -58,7 +63,10 @@
   fonts = {
     fontDir.enable = true;
     enableDefaultPackages = true;
-    packages = with pkgs; [ipafont (nerd-fonts.hack)];
+    packages = with pkgs; [
+      ipafont
+      (nerd-fonts.hack)
+    ];
   };
 
 }

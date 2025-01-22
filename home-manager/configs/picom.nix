@@ -9,7 +9,10 @@
     fadeDelta = 5;
 
     shadow = true;
-    shadowOffsets = [ (-7) (-7) ];
+    shadowOffsets = [
+      (-7)
+      (-7)
+    ];
     shadowOpacity = 0.7;
     shadowExclude = [ "window_type *= 'normal' && ! name ~= ''" ];
 

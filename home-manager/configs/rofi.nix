@@ -1,4 +1,9 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
   programs.rofi = {
@@ -13,18 +18,20 @@
     rofi-power-menu
   ];
 
-  xsession.windowManager.i3.config.keybindings = let
-    modifier = config.xsession.windowManager.i3.config.modifier;
-  in lib.mkOptionDefault {
-    "${modifier}+d" = "exec ${pkgs.rofi}/bin/rofi -modi drun -show drun -show-icons";
+  xsession.windowManager.i3.config.keybindings =
+    let
+      modifier = config.xsession.windowManager.i3.config.modifier;
+    in
+    lib.mkOptionDefault {
+      "${modifier}+d" = "exec ${pkgs.rofi}/bin/rofi -modi drun -show drun -show-icons";
 
-    # Rofi calc keybinding
-    "${modifier}+c" = "exec ${pkgs.rofi}/bin/rofi -modi calc -show calc -no-show-match -no-sort";
+      # Rofi calc keybinding
+      "${modifier}+c" = "exec ${pkgs.rofi}/bin/rofi -modi calc -show calc -no-show-match -no-sort";
 
-    # Rofi screenshot keybinding
-    "${modifier}+Alt+s" = "exec ${pkgs.rofi}/bin/rofi -modi screenshot -show screenshot";
+      # Rofi screenshot keybinding
+      "${modifier}+Alt+s" = "exec ${pkgs.rofi}/bin/rofi -modi screenshot -show screenshot";
 
-    # Rofi power menu keybinding
-    "${modifier}+p" = "exec ${pkgs.rofi}/bin/rofi -modi power-menu -show power-menu";
-  };
+      # Rofi power menu keybinding
+      "${modifier}+p" = "exec ${pkgs.rofi}/bin/rofi -modi power-menu -show power-menu";
+    };
 }

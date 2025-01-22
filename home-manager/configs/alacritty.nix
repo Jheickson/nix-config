@@ -10,7 +10,10 @@
 
         # opacity = 0.5; # Let Stylix manage this
 
-        padding = { y = 32; x = 32; };
+        padding = {
+          y = 32;
+          x = 32;
+        };
         dimensions = {
           lines = 75;
           columns = 100;
@@ -22,7 +25,9 @@
       #   size = 12.0;
       # };
 
-      shell = { program = "${pkgs.zsh}/bin/zsh"; };
+      shell = {
+        program = "${pkgs.zsh}/bin/zsh";
+      };
 
       # colors = {
       #   primary = {
