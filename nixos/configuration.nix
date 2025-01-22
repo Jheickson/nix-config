@@ -14,6 +14,7 @@
     ./stylix.nix
     ./upower.nix
     ./docker.nix
+    ./xautolock.nix
   ];
 
   home-manager = {
