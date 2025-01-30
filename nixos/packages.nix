@@ -70,6 +70,7 @@
     mysql-workbench
     postman
     nodePackages.eas-cli
+    neovim
 
     # SYSTEM
     libmpdclient
