@@ -20,6 +20,7 @@
     ./stylix.nix
     ./upower.nix
     ./docker.nix
+    ./steam.nix
     ./xautolock.nix
   ];
 

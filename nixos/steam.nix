@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 {
-  services.steam = {
+  programs.steam = {
     enable = true;
     extraCompatPackages = with pkgs; [
       proton-ge-bin
