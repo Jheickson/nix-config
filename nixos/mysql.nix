@@ -13,7 +13,7 @@
     httpd.enablePHP = true; # oof... not a great idea in my opinion
     httpd.adminAddr = "admin@admin.com"; # Set your admin email
     # httpd.documentRoot = "/var/www/html";  # Set your document root
-    httpd.virtualHosts = { 
+    httpd.virtualHosts = {
       "bar.example.com" = {
         # addSSL = true;
         documentRoot = "/var/www/bar.example.com";
