@@ -16,6 +16,7 @@
     ./picom.nix
     ./polybar/polybar.nix
     ./rofi.nix
+    ./vscode.nix
     ./yazi.nix
     ./zsh.nix
 
