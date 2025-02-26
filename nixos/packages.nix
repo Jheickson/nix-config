@@ -49,6 +49,7 @@
     unzip
     rar
     unrar
+    udiskie
     peazip
     xfce.thunar
 

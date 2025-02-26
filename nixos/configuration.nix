@@ -159,6 +159,8 @@
     inputs.zen-browser.packages."${system}".default
   ];
 
+  services.udisks2.enable = true;
+
   nix.nixPath = [ "nixpkgs = ${inputs.nixpkgs}" ];
 
   nix.gc = {
