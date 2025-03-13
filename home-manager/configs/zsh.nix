@@ -18,7 +18,7 @@
       in
       {
         rb = "sudo nixos-rebuild switch --flake ${flakeDir}";
-        upd = "sudo nix flake update ${flakeDir}";
+        upd = "sudo nix flake update --flake ${flakeDir}";
         upg = "sudo nixos-rebuild switch --upgrade --flake ${flakeDir}";
 
         hms = "home-manager switch --flake ${flakeDir}";
