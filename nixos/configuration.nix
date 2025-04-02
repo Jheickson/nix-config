@@ -138,7 +138,7 @@
   nixpkgs.config.allowUnfree = true;
 
   nixpkgs.config.permittedInsecurePackages = [
-    "googleearth-pro-7.3.6.9796"
+    "googleearth-pro-7.3.6.10201"
   ];
 
   # Enable Flakes
