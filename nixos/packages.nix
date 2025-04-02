@@ -52,6 +52,8 @@
     udiskie
     peazip
     xfce.thunar
+    arandr
+    autorandr
 
     # MEDIA
     flameshot
