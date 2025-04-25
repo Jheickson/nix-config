@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 {
-  programs.vscode.userSettings = {
+  programs.vscode.profiles.default.userSettings = {
     "workbench.colorCustomizations" = {
       "[Stylix]" = {
         "button.background" = "#${config.lib.stylix.colors.base0D}BB";
