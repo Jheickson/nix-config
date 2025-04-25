@@ -54,10 +54,10 @@
       size = 8;
     };
 
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/oceanicnext.yaml";
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/apathy.yaml";
 
     # It can also be generated from an image
-    image = ./wallpapers/Minimalistic/wallhaven-1pzdmg.png;
+    image = ./wallpapers/Themed/2095754.png;
   };
 
   fonts = {
