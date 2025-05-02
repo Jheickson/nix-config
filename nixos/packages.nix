@@ -54,6 +54,8 @@
     xfce.thunar
     arandr
     autorandr
+    networkmanager
+    networkmanagerapplet
 
     # MEDIA
     flameshot
