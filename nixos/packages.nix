@@ -76,6 +76,9 @@
     postman
     nodePackages.eas-cli
     neovim
+    mongosh
+    mongodb
+    mongodb-compass
 
     # SYSTEM
     libmpdclient
