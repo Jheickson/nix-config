@@ -56,6 +56,7 @@
     autorandr
     networkmanager
     networkmanagerapplet
+    baobab
 
     # MEDIA
     flameshot
@@ -63,6 +64,8 @@
     obs-studio
     youtube-music
     vlc
+    qbittorrent
+    qbittorrent-enhanced
 
     # DEV
     lazygit
