@@ -82,6 +82,7 @@
     mongosh
     mongodb
     mongodb-compass
+    openssl
 
     # SYSTEM
     libmpdclient
