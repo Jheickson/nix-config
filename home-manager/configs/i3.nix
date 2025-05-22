@@ -128,6 +128,11 @@
           always = true;
           notification = true;
         }
+        {
+          command = "nm-applet";
+          always = true;
+          notification = true;
+        }
       ];
     };
   };
