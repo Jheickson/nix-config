@@ -83,6 +83,8 @@
     mongodb
     mongodb-compass
     openssl
+    sqlite
+    sqlitebrowser
 
     # SYSTEM
     libmpdclient
