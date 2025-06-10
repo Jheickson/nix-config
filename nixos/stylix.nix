@@ -54,10 +54,10 @@
       size = 8;
     };
 
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-soft.yaml";
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/nebula.yaml";
 
     # It can also be generated from an image
-    image = ./wallpapers/Themed/wallhaven-zyr8mw.png;
+    image = ./wallpapers/Aesthetic/wallhaven-zpx3xw.png;
   };
 
   fonts = {
