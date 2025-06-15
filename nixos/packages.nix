@@ -57,6 +57,8 @@
     networkmanager
     networkmanagerapplet
     baobab
+    vial
+    usbutils
 
     # MEDIA
     flameshot

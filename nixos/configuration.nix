@@ -23,6 +23,7 @@
     ./mysql.nix
     ./steam.nix
     ./xautolock.nix
+    ./vial.nix
   ];
 
   home-manager = {
