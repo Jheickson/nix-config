@@ -2,7 +2,7 @@
 
 let
   vialUdevRules = pkgs.writeTextFile {
-    name        = "vial-udev-rules";
+    name = "vial-udev-rules";
     destination = "/etc/udev/rules.d/60-vial.rules";
     text = ''
       # Vial keyboard (vendor 0xFEED, product 0x1212)
@@ -10,6 +10,7 @@ let
         MODE="0660", TAG+="uaccess"
     '';
   };
-in {
+in
+{
   services.udev.packages = [ vialUdevRules ];
 }

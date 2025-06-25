@@ -123,11 +123,11 @@
           always = true;
           notification = true;
         }
-        {
-          command = "nixd";
-          always = true;
-          notification = true;
-        }
+        # {
+        #   command = "nixd";
+        #   always = true;
+        #   notification = true;
+        # }
         {
           command = "nm-applet";
           always = true;

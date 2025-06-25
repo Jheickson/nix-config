@@ -1,5 +1,10 @@
 # /etc/nixos/postgresql.nix
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
   # 1) Enable Postgres

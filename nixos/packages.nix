@@ -19,6 +19,7 @@
     # NIX
     nixfmt-rfc-style # Run `nixfmt file.nix`
     nixd
+    nixfmt-tree
 
     # CLI
     hello
