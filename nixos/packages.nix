@@ -77,7 +77,6 @@
     nodePackages.eas-cli
     genymotion
     qemu
-    mysql84
     mysql-workbench
     postman
     nodePackages.eas-cli

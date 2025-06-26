@@ -20,7 +20,7 @@
     ./stylix.nix
     ./upower.nix
     ./docker.nix
-    ./mysql.nix
+    # ./mysql.nix
     ./steam.nix
     ./xautolock.nix
     ./vial.nix
