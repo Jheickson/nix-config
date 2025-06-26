@@ -54,7 +54,7 @@
       package = pkgs.xcursor-pro;
       name = "XCursor-Pro-Light";
 
-      size = 12;
+      size = 20;
     };
 
     # base16Scheme = "${pkgs.base16-schemes}/share/themes/nebula.yaml";
