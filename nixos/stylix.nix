@@ -48,16 +48,19 @@
       # package = pkgs.bibata-cursors;
       # name = "Bibata-Modern-Ice";
 
-      package = pkgs.phinger-cursors;
-      name = "phinger-cursors-light";
+      # package = pkgs.phinger-cursors;
+      # name = "phinger-cursors-light";
 
-      size = 8;
+      package = pkgs.xcursor-pro;
+      name = "XCursor-Pro-Light";
+
+      size = 12;
     };
 
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/nebula.yaml";
+    # base16Scheme = "${pkgs.base16-schemes}/share/themes/nebula.yaml";
 
     # It can also be generated from an image
-    image = ./wallpapers/Aesthetic/wallhaven-zpx3xw.png;
+    image = ./wallpapers/Landscape/wallhaven-2yp6gg.png;
   };
 
   fonts = {
