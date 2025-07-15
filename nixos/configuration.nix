@@ -84,16 +84,28 @@
     # displayManager.gdm.enable = true;
     # desktopManager.gnome.enable = true;
   };
+
   services.displayManager = {
     defaultSession = "none+i3";
   };
 
-  # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "us";
-    variant = "colemak_dh_wide";
-    options = "caps:backspace";
+
+  services.xserver = {
+    # Configure keymap in X11
+    xkb = {
+      layout = "us";
+      variant = "colemak_dh_wide";
+      options = "caps:backspace, backspace:caps";
+    };
+    
   };
+  services.libinput = {
+      mouse = {
+        accelProfile = "flat"; # Use flat mouse acceleration profile
+        transformationMatrix = "1 0 0 0 2 0 0 0 1"; # Sets the vertical mouse speed to 2x
+      };
+    };
+
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
