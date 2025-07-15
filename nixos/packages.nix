@@ -87,6 +87,7 @@
     openssl
     sqlite
     sqlitebrowser
+    code-cursor
 
     # SYSTEM
     libmpdclient
