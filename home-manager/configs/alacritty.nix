@@ -25,9 +25,7 @@
       #   size = 12.0;
       # };
 
-      shell = {
-        program = "${pkgs.zsh}/bin/zsh";
-      };
+      terminal.shell = "${pkgs.zsh}/bin/zsh";
 
       # colors = {
       #   primary = {
