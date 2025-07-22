@@ -42,7 +42,7 @@
       plugins = [
         "git"
         "sudo"
-        "thefuck"
+        # "thefuck"
       ];
       theme = "lambda"; # blinks is also really nice
       # TODO Create own zsh theme
@@ -61,7 +61,7 @@
   };
 
   home.packages = with pkgs; [
-    thefuck
+    # thefuck
     zsh-autocomplete
     zsh-autosuggestions
     zoxide
