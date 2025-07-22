@@ -122,7 +122,7 @@
     printing.enable = true;
     
     # Audio
-    pulseaudio.enable = true;
+    # pulseaudio.enable = true;
     
     # PipeWire (audio server)
     pipewire = {
