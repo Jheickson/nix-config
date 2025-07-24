@@ -30,6 +30,7 @@
     ./steam.nix
     ./xautolock.nix
     ./vial.nix
+    ./niri.nix
     # ./mysql.nix  # Disabled - uncomment to enable MySQL
   ];
 
@@ -157,6 +158,7 @@
       "wheel"
       "docker"
       "audio" # Required for microphone access
+      "video" # Required for graphics access
     ];
     packages = with pkgs; [
       kdePackages.kate
