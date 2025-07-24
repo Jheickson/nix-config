@@ -13,6 +13,7 @@
     ./dunst/dunst.nix
     # ./ghostty.nix
     ./i3.nix
+    ./niri
     ./picom.nix
     ./polybar/polybar.nix
     ./rofi.nix
@@ -21,5 +22,20 @@
     ./zsh.nix
 
   ];
+
+  home.packages = with pkgs; [
+    # screenshot
+    grim
+    slurp
+
+    # utils
+    wl-clipboard
+  ];
+
+  home.sessionVariables = {
+    QT_QPA_PLATFORM = "wayland";
+    SDL_VIDEODRIVER = "wayland";
+    XDG_SESSION_TYPE = "wayland";
+  };
 
 }
