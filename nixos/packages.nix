@@ -32,6 +32,11 @@
     superfile
     zenith
     zsh
+    
+    # Audio tools
+    alsa-utils
+    pavucontrol
+    pipewire
 
     # DESKTOP APPS
     anki
@@ -79,7 +84,6 @@
     qemu
     mysql-workbench
     postman
-    nodePackages.eas-cli
     neovim
     mongosh
     mongodb
