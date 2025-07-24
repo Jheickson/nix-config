@@ -38,13 +38,13 @@
       "Mod+U".action = spawn "env XDG_CURRENT_DESKTOP=gnome gnome-control-center";
 
       "Mod+Shift+Q".action = close-window;
-      "Mod+F".action = maximize-column;
+      "Mod+Shift+F".action = maximize-column;
 
       "Mod+1".action = set-column-width "25%";
       "Mod+2".action = set-column-width "50%";
       "Mod+3".action = set-column-width "75%";
       "Mod+4".action = set-column-width "100%";
-      "Mod+Shift+F".action = expand-column-to-available-width;
+      # "Mod+Shift+F".action = expand-column-to-available-width;
       "Mod+Space".action = toggle-window-floating;
 
       "Mod+Comma".action = consume-window-into-column;
@@ -66,6 +66,8 @@
       "Mod+Right".action = focus-column-right;
       "Mod+Down".action = focus-workspace-down;
       "Mod+Up".action = focus-workspace-up;
+      "Mod+F".action = focus-monitor-next;
+      "Mod+Q".action = focus-monitor-previous;
 
       # Window movement with Colemak_dh_wide (matching i3)
       "Mod+Shift+A".action = move-column-left;
