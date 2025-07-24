@@ -23,7 +23,7 @@ in
 
         modules-left = [
           "custom/launcher"
-          "workspaces"
+          "niri/workspaces"
         ];
         modules-center = [ "clock" ];
         modules-right = [
@@ -40,22 +40,17 @@ in
           on-click = "wofi --show drun";
         };
 
-        workspaces = {
-          disable-scroll = true;
-          all-outputs = true;
+        "niri/workspaces" = {
           format = "{name}";
           format-icons = {
-            "1" = "1";
-            "2" = "2";
-            "3" = "3";
-            "4" = "4";
-            "5" = "5";
-            "6" = "6";
-            "7" = "7";
-            "8" = "8";
-            "9" = "9";
-            "10" = "10";
+            active = "";
+            inactive = "";
+            urgent = "";
+            visible = "";
           };
+          all-outputs = false;
+          disable-scroll = false;
+          smooth-scrolling-threshold = 120;
         };
 
         pulseaudio = {
@@ -163,26 +158,32 @@ in
         box-shadow: inset 0 -3px #${colors.base0D};
       }
 
-      #workspaces {
+      #niri-workspaces {
         margin: 0 4px;
       }
 
-      #workspaces button {
+      #niri-workspaces button {
         padding: 0 8px;
         background-color: transparent;
         color: #${colors.base05};
+        border-radius: 4px;
+        margin: 0 2px;
       }
 
-      #workspaces button:hover {
+      #niri-workspaces button:hover {
         background: #${colors.base01};
       }
 
-      #workspaces button.focused {
+      #niri-workspaces button.active {
         background-color: #${colors.base0D};
         color: #${colors.base00};
       }
 
-      #workspaces button.urgent {
+      #niri-workspaces button.visible {
+        background-color: #${colors.base02};
+      }
+
+      #niri-workspaces button.urgent {
         background-color: #${colors.base08};
       }
 
@@ -213,17 +214,17 @@ in
       }
 
       #window,
-      #workspaces {
+      #niri-workspaces {
         margin: 0 4px;
       }
 
       /* If workspaces is the leftmost module, omit left margin */
-      .modules-left > widget:first-child > #workspaces {
+      .modules-left > widget:first-child > #niri-workspaces {
         margin-left: 0;
       }
 
       /* If workspaces is the rightmost module, omit right margin */
-      .modules-right > widget:last-child > #workspaces {
+      .modules-right > widget:last-child > #niri-workspaces {
         margin-right: 0;
       }
 
