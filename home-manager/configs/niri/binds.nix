@@ -52,10 +52,10 @@
       "Mod+C".action = center-visible-columns;
       "Mod+Tab".action = switch-focus-between-floating-and-tiling;
 
-      "Mod+Minus".action = set-column-width "-10%";
-      "Mod+Plus".action = set-column-width "+10%";
-      "Mod+Shift+Minus".action = set-window-height "-10%";
-      "Mod+Shift+Plus".action = set-window-height "+10%";
+      "Mod+Shift+X".action = set-column-width "-10%";
+      "Mod+Shift+D".action = set-column-width "+10%";
+      "Mod+Shift+T".action = set-window-height "-10%";
+      "Mod+Shift+V".action = set-window-height "+10%";
 
       # Colemak_dh_wide navigation: a,s,w,r for left,right,up,down (matching i3)
       "Mod+A".action = focus-column-left;
@@ -82,9 +82,7 @@
       "Mod+Shift+Ctrl+W".action = move-column-to-monitor-up;
 
       # Additional i3 keybindings
-      "Mod+Shift+D".action = spawn "${pkgs.rofi}/bin/rofi -show window -show-icons";
       "Mod+Shift+B".action = spawn "zen";
       "Mod+Shift+C".action = spawn "code";
-      "Mod+Shift+T".action = spawn "yazi";
     };
 }
