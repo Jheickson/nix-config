@@ -6,7 +6,8 @@
 }:
 
 let
-  stylix = config.stylix;
+  colors = config.lib.stylix.colors;
+  fonts = config.stylix.fonts;
 in
 {
   programs.waybar = {
@@ -70,8 +71,8 @@ in
             car = "󰋋";
             default = [
               "󰕿"
-              "��"
-              "��"
+              "󰖀"
+              "󰕾"
               "󰕾"
             ];
           };
@@ -136,13 +137,13 @@ in
       * {
         border: none;
         border-radius: 0;
-        font-family: '${stylix.fonts.monospace.name}';
+        font-family: '${fonts.monospace.name}';
         font-size: 13px;
       }
 
       window#waybar {
-        background-color: ${stylix.colors.base00};
-        color: ${stylix.colors.base05};
+        background-color: #${colors.base00};
+        color: #${colors.base05};
         transition-property: background-color;
         transition-duration: .5s;
       }
@@ -159,7 +160,7 @@ in
 
       button:hover {
         background: inherit;
-        box-shadow: inset 0 -3px ${stylix.colors.base0D};
+        box-shadow: inset 0 -3px #${colors.base0D};
       }
 
       #workspaces {
@@ -169,25 +170,25 @@ in
       #workspaces button {
         padding: 0 8px;
         background-color: transparent;
-        color: ${stylix.colors.base05};
+        color: #${colors.base05};
       }
 
       #workspaces button:hover {
-        background: ${stylix.colors.base01};
+        background: #${colors.base01};
       }
 
       #workspaces button.focused {
-        background-color: ${stylix.colors.base0D};
-        color: ${stylix.colors.base00};
+        background-color: #${colors.base0D};
+        color: #${colors.base00};
       }
 
       #workspaces button.urgent {
-        background-color: ${stylix.colors.base08};
+        background-color: #${colors.base08};
       }
 
       #mode {
-        background-color: ${stylix.colors.base0E};
-        border-bottom: 3px solid ${stylix.colors.base05};
+        background-color: #${colors.base0E};
+        border-bottom: 3px solid #${colors.base05};
       }
 
       #clock,
@@ -208,7 +209,7 @@ in
       #power-profiles-daemon,
       #mpd {
         padding: 0 10px;
-        color: ${stylix.colors.base05};
+        color: #${colors.base05};
       }
 
       #window,
@@ -227,32 +228,32 @@ in
       }
 
       #clock {
-        background-color: ${stylix.colors.base02};
+        background-color: #${colors.base02};
         border-radius: 4px;
         margin: 4px 0;
       }
 
       #battery {
-        background-color: ${stylix.colors.base02};
+        background-color: #${colors.base02};
         border-radius: 4px;
         margin: 4px 0;
       }
 
       #battery.charging, #battery.plugged {
-        color: ${stylix.colors.base0B};
-        background-color: ${stylix.colors.base02};
+        color: #${colors.base0B};
+        background-color: #${colors.base02};
       }
 
       @keyframes blink {
         to {
-          background-color: ${stylix.colors.base05};
-          color: ${stylix.colors.base00};
+          background-color: #${colors.base05};
+          color: #${colors.base00};
         }
       }
 
       #battery.critical:not(.charging) {
-        background-color: ${stylix.colors.base08};
-        color: ${stylix.colors.base00};
+        background-color: #${colors.base08};
+        color: #${colors.base00};
         animation-name: blink;
         animation-duration: 0.5s;
         animation-timing-function: linear;
@@ -261,42 +262,42 @@ in
       }
 
       #pulseaudio {
-        background-color: ${stylix.colors.base02};
+        background-color: #${colors.base02};
         border-radius: 4px;
         margin: 4px 0;
       }
 
       #pulseaudio.muted {
-        background-color: ${stylix.colors.base08};
-        color: ${stylix.colors.base00};
+        background-color: #${colors.base08};
+        color: #${colors.base00};
       }
 
       #backlight {
-        background-color: ${stylix.colors.base02};
+        background-color: #${colors.base02};
         border-radius: 4px;
         margin: 4px 0;
       }
 
       #network {
-        background-color: ${stylix.colors.base02};
+        background-color: #${colors.base02};
         border-radius: 4px;
         margin: 4px 0;
       }
 
       #network.disconnected {
-        background-color: ${stylix.colors.base08};
+        background-color: #${colors.base08};
       }
 
       #custom-launcher {
-        background-color: ${stylix.colors.base0D};
-        color: ${stylix.colors.base00};
+        background-color: #${colors.base0D};
+        color: #${colors.base00};
         border-radius: 4px;
         margin: 4px 0;
         padding: 0 10px;
       }
 
       #tray {
-        background-color: ${stylix.colors.base02};
+        background-color: #${colors.base02};
         border-radius: 4px;
         margin: 4px 0;
       }
@@ -307,7 +308,7 @@ in
 
       #tray > .needs-attention {
         -gtk-icon-effect: highlight;
-        background-color: ${stylix.colors.base08};
+        background-color: #${colors.base08};
       }
     '';
   };
