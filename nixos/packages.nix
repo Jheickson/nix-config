@@ -97,6 +97,7 @@ in
     brightnessctl
     playerctl
     libnotify
+    pamixer
 
     # CUSTOMIZATION
     base16-schemes

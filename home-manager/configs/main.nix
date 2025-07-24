@@ -18,6 +18,7 @@
     ./polybar/polybar.nix
     ./rofi.nix
     ./vscode.nix
+    ./waybar/waybar.nix
     ./yazi.nix
     ./zsh.nix
 
