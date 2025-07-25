@@ -227,11 +227,6 @@
 in {
   programs.niri.settings = {
     window-rules = windowRules;
-    layer-rules = [
-      {
-        matches = [{namespace = "^swww$";}];
-        place-within-backdrop = true;
-      }
-    ];
+    layer-rules = [ ];
   };
 }
