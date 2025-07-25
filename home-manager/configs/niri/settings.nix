@@ -99,8 +99,8 @@ in {
         border = {
           enable = true;
           width = 4;
-          active.color = "#ED61D730";
-          inactive.color = "#B8149F30";
+          active.color = "#${config.lib.stylix.colors.base0D}30";
+          inactive.color = "#${config.lib.stylix.colors.base03}30";
         };
         shadow = {
           enable = true;
@@ -130,6 +130,7 @@ in {
           gaps-between-tabs = 10.0;
           width = 4.0;
           length.total-proportion = 0.1;
+          # color = "#${config.lib.stylix.colors.base0D}";
         };
       };
 
