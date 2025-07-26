@@ -45,7 +45,7 @@ in
         };
 
         "niri/workspaces" = {
-          format = "{name}";
+          format = "{icon}";
           format-icons = {
             active = "";
             inactive = "";
