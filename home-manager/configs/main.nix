@@ -8,8 +8,8 @@
 {
 
   imports = [
-
     ./alacritty.nix
+    ./anyrun.nix
     ./dunst/dunst.nix
     # ./ghostty.nix
     ./i3.nix
@@ -21,7 +21,6 @@
     ./waybar/waybar.nix
     ./yazi.nix
     ./zsh.nix
-
   ];
 
   home.packages = with pkgs; [
