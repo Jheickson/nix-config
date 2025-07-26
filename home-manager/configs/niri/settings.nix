@@ -67,20 +67,20 @@ in {
         "eDP-1" = {
           scale = 1.0;
           position = {
-            x = 0;
-            y = 0;
+            x = 1920;
+            y = 900;
           };
         };
-        "HDMI-1" = {
+        "HDMI-A-1" = {
           mode = {
             width = 1920;
             height = 1080;
-            refresh = null;
+            refresh = 144.00;
           };
           scale = 1.0;
           position = {
             x = 0;
-            y = 1080;
+            y = 0;
           };
         };
       };
