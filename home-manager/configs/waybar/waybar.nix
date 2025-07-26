@@ -337,7 +337,7 @@ in
         background-color: transparent;
         color: #${colors.base0D};
         margin: 0 10px;
-        font-size: 28px;
+        font-size: 30px;
       }
 
       #tray {
