@@ -24,6 +24,10 @@ in
         modules-left = [
           "custom/launcher"
           "niri/workspaces"
+          #"custom/playerctl#backward"
+          #"custom/playerctl#play"
+          #"custom/playerctl#forward"
+          "custom/playerlabel"
         ];
         modules-center = [ "clock" ];
         modules-right = [
@@ -51,6 +55,42 @@ in
           all-outputs = false;
           disable-scroll = false;
           smooth-scrolling-threshold = 120;
+        };
+
+        "custom/playerctl#backward" = {
+          format = "󰙣 ";
+          on-click = "playerctl previous";
+          on-scroll-up = "playerctl volume .05+";
+          on-scroll-down = "playerctl volume .05-";
+        };
+
+        "custom/playerctl#play" = {
+          format = "{icon}";
+          return-type = "json";
+          exec = "playerctl -a metadata --format '{\"text\": \"{{artist}} - {{markup_escape(title)}}\", \"tooltip\": \"{{playerName}} : {{markup_escape(title)}}\", \"alt\": \"{{status}}\", \"class\": \"{{status}}\"}' -F";
+          on-click = "playerctl play-pause";
+          on-scroll-up = "playerctl volume .05+";
+          on-scroll-down = "playerctl volume .05-";
+          format-icons = {
+            Playing = "<span>󰏥 </span>";
+            Paused = "<span> </span>";
+            Stopped = "<span> </span>";
+          };
+        };
+
+        "custom/playerctl#forward" = {
+          format = "󰙡 ";
+          on-click = "playerctl next";
+          on-scroll-up = "playerctl volume .05+";
+          on-scroll-down = "playerctl volume .05-";
+        };
+
+        "custom/playerlabel" = {
+          format = "<span>󰎈 {} 󰎈</span>";
+          return-type = "json";
+          max-length = 40;
+          exec = "playerctl -a metadata --format '{\"text\": \"{{artist}} - {{markup_escape(title)}}\", \"tooltip\": \"{{playerName}} : {{markup_escape(title)}}\", \"alt\": \"{{status}}\", \"class\": \"{{status}}\"}' -F";
+          on-click = "playerctl play-pause";
         };
 
         pulseaudio = {
@@ -208,7 +248,11 @@ in
       #idle_inhibitor,
       #scratchpad,
       #power-profiles-daemon,
-      #mpd {
+      #mpd,
+      #custom-playerctl.backward,
+      #custom-playerctl.play,
+      #custom-playerctl.forward,
+      #custom-playerlabel {
         padding: 0 10px;
         color: #${colors.base05};
       }
@@ -311,6 +355,30 @@ in
         -gtk-icon-effect: highlight;
         background-color: #${colors.base08};
       }
+
+      #custom-playerctl.backward,
+      #custom-playerctl.play,
+      #custom-playerctl.forward {
+        background-color: #${colors.base02};
+        border-radius: 4px;
+        margin: 4px 0;
+      }
+
+      #custom-playerctl.backward:hover,
+      #custom-playerctl.play:hover,
+      #custom-playerctl.forward:hover {
+        background-color: #${colors.base01};
+      }
+
+      #custom-playerlabel {
+        background-color: #${colors.base02};
+        border-radius: 4px;
+        margin: 4px 0;
+      }
     '';
   };
+
+  home.packages = with pkgs; [
+    playerctl
+  ];
 }
