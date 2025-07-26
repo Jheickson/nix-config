@@ -137,7 +137,7 @@ in
       }
 
       window#waybar {
-        background-color: #${colors.base00};
+        background-color: transparent;
         color: #${colors.base05};
         transition-property: background-color;
         transition-duration: .5s;
