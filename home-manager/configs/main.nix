@@ -10,6 +10,7 @@
   imports = [
     ./alacritty.nix
     # ./anyrun.nix
+    ./battery-notify.nix
     ./dunst/dunst.nix
     ./fuzzel.nix
     # ./ghostty.nix
