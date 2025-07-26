@@ -235,6 +235,11 @@ let
       matches = [ { title = "Error"; } ];
       open-floating = true;
     }
+    {
+      matches = [ { app-id = "wasistlos"; } ];
+      open-on-output = "eDP-1";
+      open-maximized = true;
+    }
   ];
 in
 {
