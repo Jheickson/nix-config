@@ -49,8 +49,8 @@
 
       "Mod+Comma".action = consume-window-into-column;
       "Mod+Period".action = expel-window-from-column;
-      "Mod+C".action = center-visible-columns;
-      "Mod+Tab".action = switch-focus-between-floating-and-tiling;
+      # "Mod+C".action = center-visible-columns;
+      # "Mod+Tab".action = switch-focus-between-floating-and-tiling;
 
       "Mod+Shift+X".action = set-column-width "-10%";
       "Mod+Shift+D".action = set-column-width "+10%";
@@ -66,8 +66,8 @@
       "Mod+Right".action = focus-column-right;
       "Mod+Down".action = focus-workspace-down;
       "Mod+Up".action = focus-workspace-up;
-      "Mod+F".action = focus-monitor-next;
-      "Mod+Q".action = focus-monitor-previous;
+      "Mod+Tab".action = focus-monitor-next;
+      # "Mod+Q".action = focus-monitor-previous;
 
       # Window movement with Colemak_dh_wide (matching i3)
       "Mod+Shift+A".action = move-column-left;
@@ -76,10 +76,10 @@
       "Mod+Shift+R".action = move-column-to-workspace-down;
 
       # Workspace/monitor movement with Colemak_dh_wide (matching i3)
-      "Mod+Ctrl+A".action = move-workspace-to-monitor-left;
-      "Mod+Ctrl+S".action = move-workspace-to-monitor-right;
-      "Mod+Shift+Ctrl+R".action = move-column-to-monitor-down;
-      "Mod+Shift+Ctrl+W".action = move-column-to-monitor-up;
+      "Mod+Ctrl+Tab".action = move-workspace-to-monitor-next;
+      # "Mod+Ctrl+F".action = move-workspace-to-monitor-right;
+      "Mod+Shift+Tab".action = move-column-to-monitor-next;
+      # "Mod+Shift+F".action = move-column-to-monitor-right;
 
       # Additional i3 keybindings
       "Mod+Shift+B".action = spawn "zen";
