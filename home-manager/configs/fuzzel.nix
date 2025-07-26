@@ -9,7 +9,7 @@ in
     enable = true;
     package = pkgs.fuzzel;
     settings = {
-      main = {
+      main = lib.mkForce {
         font = "${fonts.monospace.name}:size=14";
         prompt = "❯ ";
         terminal = "alacritty";
@@ -30,7 +30,7 @@ in
         term = "alacritty";
       };
 
-      list = {
+      list = lib.mkForce {
         font = "${fonts.monospace.name}:size=14";
         single-exec = false;
         prompt = "❯ ";
@@ -54,26 +54,26 @@ in
         scrollbar-radius = 4;
       };
 
-      colors = {
-        background = "#${colors.base00}";
-        text = "#${colors.base05}";
-        prompt = "#${colors.base0D}";
-        placeholder = "#${colors.base03}";
-        selection = "#${colors.base02}";
-        selection-text = "#${colors.base05}";
-        selection-border = "#${colors.base0D}";
-        border = "#${colors.base03}";
-        separator = "#${colors.base01}";
-        scrollbar = "#${colors.base03}";
-        scrollbar-thumb = "#${colors.base04}";
-        icon-placeholder = "#${colors.base03}";
-        action = "#${colors.base0C}";
-        action-text = "#${colors.base05}";
-        action-border = "#${colors.base0C}";
-        password-background = "#${colors.base00}";
-        password-text = "#${colors.base05}";
-        password-border = "#${colors.base03}";
-        password-placeholder = "#${colors.base03}";
+      colors = lib.mkForce {
+        background = "${colors.base00}FF";
+        text = "${colors.base05}FF";
+        prompt = "${colors.base0D}FF";
+        placeholder = "${colors.base03}FF";
+        selection = "${colors.base02}FF";
+        selection-text = "${colors.base05}FF";
+        selection-border = "${colors.base0D}FF";
+        border = "${colors.base03}FF";
+        separator = "${colors.base01}FF";
+        scrollbar = "${colors.base03}FF";
+        scrollbar-thumb = "${colors.base04}FF";
+        icon-placeholder = "${colors.base03}FF";
+        action = "${colors.base0C}FF";
+        action-text = "${colors.base05}FF";
+        action-border = "${colors.base0C}FF";
+        password-background = "${colors.base00}FF";
+        password-text = "${colors.base05}FF";
+        password-border = "${colors.base03}FF";
+        password-placeholder = "${colors.base03}FF";
       };
 
       key-bindings = {
