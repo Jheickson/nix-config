@@ -39,9 +39,9 @@ in
         ];
 
         "custom/launcher" = {
-          format = "󰣇";
+          format = "<span color='#${colors.base0D}'>󱄅</span>";
           tooltip = false;
-          on-click = "wofi --show drun";
+          on-click = "${pkgs.anyrun}/bin/anyrun";
         };
 
         "niri/workspaces" = {
@@ -52,7 +52,7 @@ in
             urgent = "";
             visible = "";
           };
-          all-outputs = false;
+          all-outputs = true;
           disable-scroll = false;
           smooth-scrolling-threshold = 120;
         };
@@ -334,11 +334,10 @@ in
       }
 
       #custom-launcher {
-        background-color: #${colors.base0D};
-        color: #${colors.base00};
-        border-radius: 4px;
-        margin: 4px 0;
-        padding: 0 10px;
+        background-color: transparent;
+        color: #${colors.base0D};
+        margin: 0 10px;
+        font-size: 28px;
       }
 
       #tray {
