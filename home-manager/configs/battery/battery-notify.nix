@@ -158,5 +158,5 @@ in
   };
   
   # Ensure the service starts with the graphical session
-  systemd.user.startServices = [ "battery-monitor.service" ];
+  systemd.user.startServices = true;
 }
