@@ -9,8 +9,9 @@
 
   imports = [
     ./alacritty.nix
-    ./anyrun.nix
+    # ./anyrun.nix
     ./dunst/dunst.nix
+    ./fuzzel.nix
     # ./ghostty.nix
     ./i3.nix
     ./niri

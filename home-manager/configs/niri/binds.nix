@@ -31,7 +31,7 @@
       };
       "Mod+Shift+Alt+S".action = screenshot-window;
 
-      "Mod+D".action = spawn "${pkgs.anyrun}/bin/anyrun";
+      "Mod+D".action = spawn "${pkgs.fuzzel}/bin/fuzzel";
       "Mod+Return".action = spawn "${pkgs.alacritty}/bin/alacritty";
       "Ctrl+Alt+L".action = spawn "sh -c pgrep hyprlock || hyprlock";
 
