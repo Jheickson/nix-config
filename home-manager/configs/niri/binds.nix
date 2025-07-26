@@ -38,7 +38,7 @@
       "Mod+U".action = spawn "env XDG_CURRENT_DESKTOP=gnome gnome-control-center";
 
       "Mod+Shift+Q".action = close-window;
-      "Mod+Shift+F".action = maximize-column;
+      "Mod+F".action = maximize-column;
 
       "Mod+1".action = set-column-width "25%";
       "Mod+2".action = set-column-width "50%";
