@@ -8,7 +8,7 @@ pkill swaybg || true
 
 # Start swww daemon if not already running
 if ! pgrep -x "swww-daemon" > /dev/null; then
-    swww-daemon --no-daemon &
+    swww-daemon &
     sleep 1
 fi
 

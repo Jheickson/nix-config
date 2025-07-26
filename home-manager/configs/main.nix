@@ -31,6 +31,9 @@
 
     # utils
     wl-clipboard
+    
+    # wallpaper daemon
+    swww
   ];
 
   home.sessionVariables = {

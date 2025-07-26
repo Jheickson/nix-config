@@ -24,7 +24,7 @@ in {
       };
       spawn-at-startup = [
         (makeCommand "hyprlock")
-        {command = ["swaybg" "-i" "${config.stylix.image}" "-m" "fill"];}
+        {command = ["${./swww-init.sh}" "${config.stylix.image}"];}
         (makeCommand "waybar")
         {command = ["wl-paste" "--watch" "cliphist" "store"];}
         {command = ["wl-paste" "--type text" "--watch" "cliphist" "store"];}
