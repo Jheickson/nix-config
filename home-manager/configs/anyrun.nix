@@ -13,6 +13,19 @@ in
   programs.anyrun = {
     enable = true;
     package = pkgs.anyrun;
+    config.plugins = [
+        "applications"
+        "shell"
+        "symbols"
+        "translate"
+        "websearch"
+        "stdin"
+        "calc"
+        "dictionary"
+        "randr"
+        "system"
+        "bookmarks"
+      ];
   };
 
   # Create anyrun configuration directory and files
@@ -156,6 +169,5 @@ in
   # Add anyrun plugins to home packages
   home.packages = with pkgs; [
     anyrun
-    anyrun-with-plugins
   ];
 }
