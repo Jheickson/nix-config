@@ -52,6 +52,9 @@ in
     telegram-desktop
     whatsapp-for-linux
     googleearth-pro
+    nemo
+    nemo-preview
+    nemo-with-extensions
 
     # UTILITIES
     zip
