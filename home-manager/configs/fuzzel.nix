@@ -10,7 +10,7 @@ in
     package = pkgs.fuzzel;
     settings = {
       main = lib.mkForce {
-        font = "${fonts.monospace.name}:size=14";
+        font = "${fonts.monospace.name}:size=12";
         prompt = "❯ ";
         terminal = "alacritty";
         layers = "overlay";
@@ -18,9 +18,9 @@ in
         width = 300;
         height = 200;
         columns = 2;
-        dpi-aware = "yes";
+        dpi-aware = "no";
         icon-theme = "Papirus";
-        icon-size = 32;
+        icon-size = 28;
         show-actions = true;
         action-key = "Ctrl+Return";
         password-character = "●";
@@ -32,7 +32,7 @@ in
       };
 
       list = lib.mkForce {
-        font = "${fonts.monospace.name}:size=14";
+        font = "${fonts.monospace.name}:size=12";
         single-exec = false;
         prompt = "❯ ";
         icon-theme = "Papirus";
