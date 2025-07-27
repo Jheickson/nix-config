@@ -15,10 +15,10 @@ in
         terminal = "alacritty";
         layers = "overlay";
         anchor = "center";
-        width = 800;
-        height = 400;
-        columns = 1;
-        dpi-aware = "no";
+        width = 300;
+        height = 200;
+        columns = 2;
+        dpi-aware = "yes";
         icon-theme = "Papirus";
         icon-size = 32;
         show-actions = true;
@@ -28,6 +28,7 @@ in
         drun-launch = true;
         drun-print = false;
         term = "alacritty";
+        keyboard-focus = "on-demand";
       };
 
       list = lib.mkForce {
