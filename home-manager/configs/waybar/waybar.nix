@@ -28,6 +28,7 @@ in
           #"custom/playerctl#play"
           #"custom/playerctl#forward"
           "custom/playerlabel"
+          "custom/weather"
         ];
         modules-center = [ "clock" ];
         modules-right = [
@@ -430,10 +431,25 @@ in
         border-radius: 4px;
         margin: 4px 0;
       }
+
+      #custom-weather {
+        background-color: #${colors.base02};
+        border-radius: 4px;
+        margin: 4px 0;
+      }
     '';
   };
 
   home.packages = with pkgs; [
     playerctl
+    curl
   ];
+
+  programs.waybar.settings.mainBar."custom/weather" = {
+    format = "{}";
+    return-type = "json";
+    exec = "${config.home.homeDirectory}/nix-config/home-manager/configs/waybar/weather.sh";
+    interval = 1800;  # 30 minutes
+    tooltip = true;
+  };
 }
