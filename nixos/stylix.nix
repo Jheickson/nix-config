@@ -14,7 +14,7 @@
     enable = true;
     autoEnable = true;
 
-    polarity = "dark";
+    polarity = "light";
 
     targets = {
 
@@ -57,10 +57,10 @@
       size = 20;
     };
 
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-night-dark.yaml";
+    # base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-night-dark.yaml";
 
     # It can also be generated from an image
-    image = ./wallpapers/Themed/wallhaven-5yd6d5.png;
+    image = ./wallpapers/Aesthetic/wallhaven-45wj58.jpg;
   };
 
   fonts = {
