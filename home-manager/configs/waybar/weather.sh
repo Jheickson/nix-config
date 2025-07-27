@@ -8,7 +8,7 @@ CACHE_FILE="/tmp/waybar_weather_cache"
 CACHE_DURATION=1800  # 30 minutes in seconds
 
 # Location - you can change this to your city
-LOCATION=""
+LOCATION="santarem-pa"
 
 # Function to fetch weather data
 fetch_weather() {
@@ -56,24 +56,35 @@ fetch_weather() {
 # Function to get weather icon based on condition
 get_weather_icon() {
     local condition="$1"
-    case "$condition" in
-        *"Sunny"*|*"Clear"*) echo "☀️" ;;
-        *"Partly cloudy"*|*"Few clouds"*) echo "⛅" ;;
-        *"Cloudy"*|*"Overcast"*) echo "☁️" ;;
-        *"Rain"*|*"Drizzle"*) echo "🌧️" ;;
-        *"Thunderstorm"*) echo "⛈️" ;;
-        *"Snow"*) echo "❄️" ;;
-        *"Mist"*|*"Fog"*) echo "🌫️" ;;
-        *) echo "🌡️" ;;
-    esac
+    
+    # If condition is already an emoji, use it directly
+    if [[ "$condition" =~ [☀⛅☁🌧⛈❄🌫] ]]; then
+        echo "$condition"
+    else
+        # Handle text conditions
+        condition=$(echo "$condition" | tr '[:upper:]' '[:lower:]')
+        case "$condition" in
+            *"sunny"*|*"clear"*) echo "☀️" ;;
+            *"partly cloudy"*|*"few clouds"*|*"partly"*) echo "⛅" ;;
+            *"cloudy"*|*"overcast"*|*"clouds"*) echo "☁️" ;;
+            *"rain"*|*"drizzle"*|*"shower"*) echo "🌧️" ;;
+            *"thunderstorm"*|*"storm"*) echo "⛈️" ;;
+            *"snow"*|*"sleet"*) echo "❄️" ;;
+            *"mist"*|*"fog"*|*"haze"*) echo "🌫️" ;;
+            *) echo "🌡️" ;;
+        esac
+    fi
 }
 
 # Main execution
 weather_data=$(fetch_weather)
 IFS='|' read -r temperature condition <<< "$weather_data"
 
+# Clean up condition text
+condition=$(echo "$condition" | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
+
 # Format output for waybar
 icon=$(get_weather_icon "$condition")
 
-# Output JSON for waybar
+# Output JSON for waybar with icon before temperature
 echo "{\"text\":\"$icon $temperature\", \"tooltip\":\"$condition\", \"class\":\"weather\"}"
