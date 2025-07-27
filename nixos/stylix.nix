@@ -57,7 +57,7 @@
       size = 20;
     };
 
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-material-dark-hard.yaml";
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-night-dark.yaml";
 
     # It can also be generated from an image
     image = ./wallpapers/Themed/wallhaven-5yd6d5.png;

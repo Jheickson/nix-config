@@ -86,23 +86,23 @@ let
 # Urgency levels with dynamic stylix colors
 [urgency_low]
     # Low urgency uses base0D (blue accent) for border
-    frame_color = "${colors.base0D}"
+    frame_color = "#83a598"
     background = "${colors.base00}"
-    foreground = "${colors.base05}"
+    foreground = "${colors.base03}"
     timeout = 8
 
 [urgency_normal]
     # Normal urgency uses base03 (gray) for border
-    frame_color = "${colors.base03}"
+    frame_color = "#504945"
     background = "${colors.base00}"
-    foreground = "${colors.base05}"
+    foreground = "${colors.base03}"
     timeout = 12
 
 [urgency_critical]
     # Critical urgency uses base08 (red accent) for border
-    frame_color = "${colors.base08}"
+    frame_color = "#cc241d"
     background = "${colors.base00}"
-    foreground = "${colors.base05}"
+    foreground = "${colors.base03}"
     timeout = 0
 
 # Special formatting rules for common applications
