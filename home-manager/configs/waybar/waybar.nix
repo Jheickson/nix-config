@@ -436,6 +436,7 @@ in
         background-color: #${colors.base02};
         border-radius: 4px;
         margin: 4px 0;
+        padding: 0 10px;
       }
     '';
   };
