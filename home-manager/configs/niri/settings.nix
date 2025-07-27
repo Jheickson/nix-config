@@ -51,6 +51,13 @@ in
           ];
         }
         { command = [ "wasistlos" ]; }
+        {
+          command = [
+            "udiskie"
+            "-a"
+            "-s"
+          ];
+        }
       ];
       input = {
 
