@@ -44,7 +44,7 @@ in
         "custom/launcher" = {
           format = "<span color='#${colors.base0D}'>󱄅</span>";
           tooltip = false;
-          on-click = "${pkgs.anyrun}/bin/anyrun";
+          on-click = "${pkgs.fuzzel}/bin/fuzzel";
         };
 
         "niri/workspaces" = {
