@@ -30,4 +30,13 @@
 
   # Ensure user is in the video group for graphics access
   users.users.felipe.extraGroups = [ "video" ];
+
+  # Configure mouse sensitivity via libinput
+  services.libinput = {
+    enable = true;
+    mouse = {
+      accelProfile = "flat";
+      transformationMatrix = "1.0 0.0 0.0 0.0 2.0 0.0 0.0 0.0 1.0"; # 2x vertical sensitivity
+    };
+  };
 }

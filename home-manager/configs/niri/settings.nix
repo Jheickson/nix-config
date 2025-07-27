@@ -72,10 +72,7 @@ in
           accel-profile = "adaptive";
         };
 
-        # mouse = {
-        #   accelProfile = "flat";
-        #   transformationMatrix = "1 0 0 0 2 0 0 0 1"; # 2x vertical speed
-        # };
+        # mouse configuration will be handled via libinput
 
         focus-follows-mouse = {
           enable = true;
