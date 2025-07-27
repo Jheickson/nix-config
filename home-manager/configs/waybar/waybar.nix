@@ -31,10 +31,13 @@ in
         ];
         modules-center = [ "clock" ];
         modules-right = [
+          "network"
           "pulseaudio"
           "backlight"
           "battery"
-          "network"
+          "cpu"
+          "memory"
+          "temperature"
           "tray"
         ];
 
@@ -155,11 +158,36 @@ in
         };
 
         network = {
-          format-wifi = "󰤨 {essid}";
+          format-wifi = "󰤨 {essid} {bandwidthTotalBytes}";
           format-ethernet = "󰈀";
           format-disconnected = "󰤭";
           tooltip = true;
           on-click = "nm-connection-editor";
+          interval = 1;
+        };
+
+        cpu = {
+          format = "󰍛 {usage:02d}%";
+          tooltip = true;
+          interval = 1;
+        };
+
+        memory = {
+          format = "󰘚 {used:0.1f}G/{total:0.1f}G";
+          format-alt = "󰘚 {percentage}%";
+          tooltip = true;
+          tooltip-format = "Memory: {used:0.1f}G/{total:0.1f}G ({percentage}%)";
+          interval = 1;
+        };
+
+        temperature = {
+          thermal-zone = 1;
+          critical-threshold = 80;
+          format = "󰔏 {temperatureC}°C";
+          format-critical = "󰔏 {temperatureC}°C";
+          format-warn = "󰔏 {temperatureC}°C";
+          tooltip = true;
+          interval = 1;
         };
 
         tray = {
@@ -331,6 +359,34 @@ in
 
       #network.disconnected {
         background-color: #${colors.base08};
+      }
+
+      #cpu {
+        background-color: #${colors.base02};
+        border-radius: 4px;
+        margin: 4px 0;
+      }
+
+      #memory {
+        background-color: #${colors.base02};
+        border-radius: 4px;
+        margin: 4px 0;
+      }
+
+      #temperature {
+        background-color: #${colors.base02};
+        border-radius: 4px;
+        margin: 4px 0;
+      }
+
+      #temperature.critical {
+        background-color: #${colors.base08};
+        color: #${colors.base00};
+      }
+
+      #temperature.warn {
+        background-color: #${colors.base09};
+        color: #${colors.base00};
       }
 
       #custom-launcher {
