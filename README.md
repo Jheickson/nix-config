@@ -4,14 +4,14 @@
     <img src="https://img.shields.io/static/v1?label=NIRI&message=latest&style=flat&logo=nixos&colorA=24273A&colorB=8AADF4&logoColor=CAD3F5"/>
   </a>
   <a href="https://nixos.wiki/wiki/Flakes">
-    <img src="https://img.shields.io/static/v1?label=Nix Flake&message=check&style=flat&logo=nixos&colorA=24273A&colorB=9173ff&logoColor=CAD3F5">
+    <img src="https://img.shields.io/static/v1?label=Nix_Flake&message=check&style=flat&logo=nixos&colorA=24273A&colorB=9173ff&logoColor=CAD3F5">
   </a>
   <a href="https://nixos.org/">
     <img src="https://img.shields.io/badge/NixOS-unstable-informational.svg?style=flat&logo=nixos&logoColor=CAD3F5&colorA=24273A&colorB=8AADF4">
   </a>
 </p>
 
-<p align="center"><img src="gallery/Screenshot-from-2025-07-26-23-31-34.png" width=600px></p>
+<p align="center"><img src="gallery/Screenshot-from-2025-07-26-23-31-34.png" width=1200px></p>
 
 <h2 align="center">NixOS Configuration</h2>
 
