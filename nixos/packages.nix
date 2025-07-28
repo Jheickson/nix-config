@@ -55,6 +55,7 @@ in
     nemo
     nemo-preview
     nemo-with-extensions
+    xfce.thunar
 
     # UTILITIES
     zip
