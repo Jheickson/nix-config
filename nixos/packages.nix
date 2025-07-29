@@ -140,6 +140,8 @@ in
       # Additional Wayland utilities
       wl-clipboard  # Wayland clipboard utilities
       wofi          # Application launcher for Wayland
+      swayidle      # Idle management for Wayland
+      wlopm         # Wayland output power manager
     ]
   else
     # X11-SPECIFIC PACKAGES
