@@ -1,9 +1,4 @@
-{
-  config,
-  pkgs,
-  lib,
-  ...
-}:
+{ inputs, config, pkgs, lib, ... }:
 
 {
 
@@ -22,6 +17,7 @@
     ./waybar/waybar.nix
     ./yazi.nix
     ./zsh.nix
+    ./zen-browser.nix
   ];
 
   home.packages = with pkgs; [

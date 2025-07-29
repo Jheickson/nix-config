@@ -17,7 +17,8 @@
         --add-flags "--enable-features=WebRTCPipeWireCapturer" \
         --add-flags "--enable-gpu-rasterization" \
         --add-flags "--enable-accelerated-video-decode" \
-        --add-flags "--enable-accelerated-video-encode"
+        --add-flags "--enable-accelerated-video-encode" \
+        --add-flags "--no-sandbox"
     '';
   };
 in {
