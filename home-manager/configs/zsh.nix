@@ -24,7 +24,7 @@
         upd = "nh os update ${flakeDir}";
 
         # Upgrade system packages and rebuild
-        upg = "nh os switch ${flakeDir} --upgrade";
+        upg = "nh os switch ${flakeDir} -u";
 
         # ===== HOME-MANAGER CONFIGURATION (nh) =====
         # Apply home-manager configuration
