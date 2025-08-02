@@ -1,4 +1,3 @@
-
 <p align="center">
   <a href="https://niri.app/">
     <img src="https://img.shields.io/static/v1?label=NIRI&message=latest&style=flat&logo=nixos&colorA=24273A&colorB=8AADF4&logoColor=CAD3F5"/>
@@ -15,9 +14,11 @@
 
 <h2 align="center">NixOS Configuration</h2>
 
-
-
 ## ❄️ <samp>COMPONENTS</samp>
+
+## 🎵 <samp>MUSICBEE</samp>
+
+For instructions on setting up MusicBee with Wine on NixOS, see [README-MusicBee.md](README-MusicBee.md).
 
 - **Window Manager** • [Niri](https://niri.app/) - Scrollable tiling Wayland compositor
 - **Status Bar** • [Waybar](https://github.com/Alexays/Waybar) - Highly customizable Wayland bar
@@ -34,7 +35,6 @@
 <p align="center">
 <img src="gallery/Screenshot-from-2025-07-26-23-31-34.png" width="500"></p>
 
-
 ## 🎩 <samp>ACKNOWLEDGEMENTS</samp>
 
 This configuration was inspired by:
@@ -42,7 +42,6 @@ This configuration was inspired by:
 - NixOS community and documentation
 - Various dotfiles repositories on GitHub
 - r/UnixPorn
-
 
 <pre align="center">
 <a href="#readme">BACK TO TOP</a>
