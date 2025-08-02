@@ -32,6 +32,7 @@
     ./vial.nix
     ./niri.nix
     ./wine.nix
+    ./xdg.nix
     # ./mysql.nix  # Disabled - uncomment to enable
   ];
 
@@ -141,6 +142,9 @@
 
     # Disk management
     udisks2.enable = true;
+
+    # Flatpak support
+    flatpak.enable = true;
   };
 
   # ============================================================================
