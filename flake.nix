@@ -4,10 +4,16 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
+    
     # When updating the flake, zen-browser will create a new user profile.
     # To go back to the previous profile, you can need to go go "about:profiles"
     # and select the previous profile.
-    zen-browser.url = "github:0xc000022070/zen-browser-flake";
+    zen-browser = {
+    url = "github:0xc000022070/zen-browser-flake";
+    # IMPORTANT: we're using "libgbm" and is only available in unstable so ensure
+    # to have it up-to-date or simply don't specify the nixpkgs input
+    inputs.nixpkgs.follows = "nixpkgs";
+  };
 
     home-manager = {
       url = "github:nix-community/home-manager";
