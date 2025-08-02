@@ -44,6 +44,11 @@ in
     ncmpcpp
     strawberry
 
+    # Wine for Windows applications
+    wineWowPackages.full
+    winetricks
+    bottles
+
     # DESKTOP APPS
     anki
     brave

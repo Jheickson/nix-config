@@ -31,7 +31,8 @@
     ./xautolock.nix
     ./vial.nix
     ./niri.nix
-    # ./mysql.nix  # Disabled - uncomment to enable MySQL
+    ./wine.nix
+    # ./mysql.nix  # Disabled - uncomment to enable
   ];
 
   # ============================================================================
