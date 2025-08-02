@@ -27,6 +27,7 @@
     ./stylix.nix
     ./upower.nix
     ./docker.nix
+    ./nh.nix
     ./steam.nix
     ./xautolock.nix
     ./vial.nix
