@@ -29,6 +29,7 @@
     ./docker.nix
     ./nh.nix
     ./steam.nix
+    ./substituters.nix
     ./xautolock.nix
     ./vial.nix
     ./niri.nix
