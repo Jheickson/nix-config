@@ -16,10 +16,6 @@
 
 ## ❄️ <samp>COMPONENTS</samp>
 
-## 🎵 <samp>MUSICBEE</samp>
-
-For instructions on setting up MusicBee with Wine on NixOS, see [README-MusicBee.md](README-MusicBee.md).
-
 - **Window Manager** • [Niri](https://niri.app/) - Scrollable tiling Wayland compositor
 - **Status Bar** • [Waybar](https://github.com/Alexays/Waybar) - Highly customizable Wayland bar
 - **Terminal** • [Alacritty](https://alacritty.org/) - GPU-accelerated terminal emulator
