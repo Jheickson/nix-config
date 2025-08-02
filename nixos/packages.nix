@@ -41,6 +41,9 @@ in
     pavucontrol
     pipewire
 
+    ncmpcpp
+    strawberry
+
     # DESKTOP APPS
     anki
     brave
