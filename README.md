@@ -10,7 +10,7 @@
   </a>
 </p>
 
-<p align="center"><img src="gallery/Screenshot-from-2025-07-26-23-31-34.png" width=1200px></p>
+<p align="center"><img src="gallery/Screenshot-from-2025-08-02-21-17-24.png" width=1200px></p>
 
 <h2 align="center">NixOS Configuration</h2>
 
@@ -29,7 +29,14 @@
 ## 💻 <samp>SCREENSHOTS</samp>
 
 <p align="center">
-<img src="gallery/Screenshot-from-2025-07-26-23-31-34.png" width="500"></p>
+<img src="gallery/Screenshot-from-2025-08-02-20-24-43.png" width="400">
+<img src="gallery/Screenshot-from-2025-08-02-20-28-26.png" width="400">
+</p>
+<p align="center">
+<img src="gallery/Screenshot-from-2025-08-02-21-17-24.png" width="400">
+<img src="gallery/Screenshot-from-2025-08-02-20-54-37.png" width="400">
+</p>
+
 
 ## 🎩 <samp>ACKNOWLEDGEMENTS</samp>
 
