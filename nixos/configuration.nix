@@ -33,7 +33,7 @@
     ./xautolock.nix
     ./vial.nix
     ./niri.nix
-    # ./wine.nix
+    ./wine.nix
     # ./mysql.nix
   ];
 
