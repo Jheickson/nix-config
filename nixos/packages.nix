@@ -95,7 +95,6 @@ in
     qemu
     mysql-workbench
     postman
-    neovim
     mongosh
     mongodb
     mongodb-compass
