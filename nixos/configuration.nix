@@ -227,6 +227,14 @@
     inputs.zen-browser.packages."${system}".default
   ];
 
+  nixpkgs = { 
+    overlays = [
+      (final: prev: {
+        nvchad = inputs.nix4nvchad.packages."${pkgs.system}".nvchad;
+      })
+    ];
+  };
+
   # ============================================================================
   # FIREWALL & SSH
   # ============================================================================
