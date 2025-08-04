@@ -51,6 +51,8 @@ in
           ];
         }
         { command = [ "wasistlos" ]; }
+        { command = [ "kdeconnect-app" ]; }
+
         {
           command = [
             "udiskie"
