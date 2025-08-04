@@ -58,7 +58,7 @@ let
         { app-id = "chromium-browser"; }
         { app-id = "xdg-desktop-portal-gtk"; }
       ];
-      scroll-factor = 0.5;
+      scroll-factor = 1.0;
     }
     {
       matches = [
@@ -239,6 +239,7 @@ let
       matches = [ { app-id = "wasistlos"; } ];
       open-on-output = "eDP-1";
       open-maximized = true;
+      block-out-from = "screencast";
     }
   ];
 in
