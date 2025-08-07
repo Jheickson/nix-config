@@ -57,10 +57,10 @@
       size = 20;
     };
 
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/da-one-ocean.yaml";
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/nova.yaml";
 
     # It can also be generated from an image
-    image = ./wallpapers/Landscape/wallhaven-6d6vmq.jpg;
+    image = ./wallpapers/Landscape/wallhaven-6loo86.jpg;
   };
 
   fonts = {
