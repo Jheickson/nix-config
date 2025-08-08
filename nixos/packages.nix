@@ -79,12 +79,21 @@ in
     usbutils
 
     # MEDIA
-    stremio
+    # stremio # Use flatpak version
     obs-studio
     youtube-music
     vlc
     qbittorrent
     qbittorrent-enhanced
+
+    # Codecs / Video acceleration
+    libva
+    libva-utils
+    intel-media-driver  # For Intel GPUs
+    vaapiVdpau          # For Nvidia/AMD hybrid setups
+    vdpauinfo
+    libvdpau-va-gl
+    ffmpeg-full
 
     # DEV
     lazygit
