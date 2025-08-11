@@ -18,7 +18,7 @@
     ./waybar/waybar.nix
     ./yazi.nix
     ./zsh.nix
-    ./zen-browser.nix
+    # ./zen-browser.nix
   ];
 
   home.packages = with pkgs; [
