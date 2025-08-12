@@ -11,7 +11,7 @@
     # ./ghostty.nix
     ./i3.nix
     ./niri
-    ./neovim.nix
+    ./nvim/nixcats.nix
     ./picom.nix
     ./polybar/polybar.nix
     ./rofi.nix
