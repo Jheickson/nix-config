@@ -78,7 +78,8 @@ in
           tap = true;
           tap-button-map = "left-right-middle";
           middle-emulation = true;
-          accel-profile = "adaptive";
+          accel-profile = "flat";
+          accel-speed = 0.75;
         };
 
         # mouse configuration will be handled via libinput
