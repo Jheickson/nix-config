@@ -97,6 +97,7 @@ in
 
     # DEV
     lazygit
+    gh
     yarn
     nodejs_22
     nodePackages.eas-cli
