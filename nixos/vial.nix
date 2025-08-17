@@ -12,4 +12,5 @@ let
 in
 {
   services.udev.packages = [ vialUdevRules ];
+  environment.systemPackages = with pkgs; [ vial ];
 }

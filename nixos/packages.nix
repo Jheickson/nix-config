@@ -18,164 +18,185 @@ in
     enable = true;
   };
 
-  environment.systemPackages = with pkgs; [
-    # NIX
-    nixfmt-rfc-style # Run `nixfmt file.nix`
-    nixd
-    nixfmt-tree
+  environment.systemPackages =
+    with pkgs;
+    [
+      # NIX
+      nixfmt-rfc-style # Run `nixfmt file.nix`
+      nixd
+      nixfmt
 
-    # CLI
-    hello
-    cowsay
-    cbonsai
-    fd
-    tldr
-    neofetch
-    scrcpy
-    superfile
-    zenith
-    zsh
-    
-    # Audio tools
-    alsa-utils
-    pavucontrol
-    pipewire
+      nixfmt-tree
 
-    ncmpcpp
-    strawberry
+      # CLI
+      hello
+      cowsay
+      cbonsai
+      fd
+      tldr
+      neofetch
+      scrcpy
+      superfile
+      zenith
+      zsh
 
-    # Wine for Windows applications
-    wineWowPackages.full
-    winetricks
-    bottles
+      # Audio tools
+      alsa-utils
+      pavucontrol
+      pipewire
 
-    # DESKTOP APPS
-    anki
-    brave
-    chromium
-    discord
-    drawio
-    libreoffice
-    electron-mail
-    telegram-desktop
-    whatsapp-for-linux
-    googleearth-pro
-    nemo
-    nemo-preview
-    nemo-with-extensions
-    xfce.thunar
+      ncmpcpp
+      strawberry
 
-    # UTILITIES
-    zip
-    unzip
-    rar
-    unrar
-    udiskie
-    peazip
-    networkmanager
-    networkmanagerapplet
-    baobab
-    vial
-    usbutils
+      # Wine for Windows applications
+      wineWowPackages.full
+      winetricks
+      bottles
 
-    # MEDIA
-    # stremio # Use flatpak version
-    obs-studio
-    youtube-music
-    vlc
-    qbittorrent
-    qbittorrent-enhanced
+      # DESKTOP APPS
+      anki
+      brave
+      chromium
+      discord
+      drawio
+      libreoffice
+      electron-mail
+      telegram-desktop
+      whatsapp-for-linux
+      googleearth-pro
+      nemo
+      nemo-preview
+      nemo-with-extensions
+      xfce.thunar
 
-    # Codecs / Video acceleration
-    libva
-    libva-utils
-    intel-media-driver  # For Intel GPUs
-    vaapiVdpau          # For Nvidia/AMD hybrid setups
-    vdpauinfo
-    libvdpau-va-gl
-    ffmpeg-full
+      # UTILITIES
+      zip
+      unzip
+      rar
+      unrar
+      udiskie
+      peazip
+      networkmanager
+      networkmanagerapplet
+      baobab
 
-    # DEV
-    lazygit
-    gh
-    yarn
-    nodejs_22
-    nodePackages.eas-cli
-    genymotion
-    qemu
-    mysql-workbench
-    postman
-    mongosh
-    mongodb
-    mongodb-compass
-    openssl
-    sqlite
-    sqlitebrowser
-    code-cursor
+      usbutils
 
-    # SYSTEM
-    libmpdclient
-    brightnessctl
-    playerctl
-    libnotify
-    pamixer
+      # MEDIA
+      # stremio # Use flatpak version
+      obs-studio
+      youtube-music
+      vlc
+      qbittorrent
+      qbittorrent-enhanced
 
-    # CUSTOMIZATION
-    base16-schemes
-    base16-shell-preview
+      # Codecs / Video acceleration
+      libva
+      libva-utils
 
-    # FONTS
-    # nerdfonts # Big package. Font is already being set on stylix.nix
-    siji
-    rounded-mgenplus
-    termsyn
+      # For Intel GPUs
+      intel-media-driver
+      vaapiVdpau # For Nvidia/AMD hybrid setups
+      vdpauinfo
+      libvdpau-va-gl
+      ffmpeg-full
 
-    # NETWORK
-    networkmanager
-    networkmanagerapplet
-    networkmanager_dmenu
+      # DEV
+      lazygit
+      gh
+      yarn
+      nodejs_22
+      nodePackages.eas-cli
+      genymotion
+      qemu
+      mysql-workbench
+      postman
+      mongosh
+      mongodb
+      mongodb-compass
+      openssl
+      sqlite
+      sqlitebrowser
+      code-cursor
 
-  ] ++ (if useWayland then
-    # WAYLAND-SPECIFIC PACKAGES
-    with pkgs; [
-      # Display configuration
-      wdisplays  # Wayland display configuration (replaces arandr)
-      kanshi
-      
-      # File manager
-      pcmanfm-qt  # Qt-based file manager for Wayland
-      
-      # Screenshot tools
-      grim        # Screenshot tool for Wayland
-      slurp       # Region selector for Wayland
-      swappy      # Screenshot editor for Wayland
-      sway-contrib.grimshot    # Screenshot tool for Wayland
-      
-      # Background/wallpaper
-      swaybg      # Wallpaper setter for Wayland
-      
-      # Additional Wayland utilities
-      wl-clipboard  # Wayland clipboard utilities
-      wofi          # Application launcher for Wayland
-      swayidle      # Idle management for Wayland
-      wlopm         # Wayland output power manager
+      # SYSTEM
+      libmpdclient
+      brightnessctl
+      playerctl
+      libnotify
+      pamixer
+
+      # CUSTOMIZATION
+      base16-schemes
+      base16-shell-preview
+
+      # FONTS
+      # nerdfonts # Big package. Font is already being set on stylix.nix
+      siji
+      rounded-mgenplus
+      termsyn
+
+      # NETWORK
+      networkmanager
+      networkmanagerapplet
+      networkmanager_dmenu
+
     ]
-  else
-    # X11-SPECIFIC PACKAGES
-    with pkgs; [
-      # Display configuration
-      arandr      # X11 RandR GUI tool
-      autorandr
-      
-      # File manager
-      xfce.thunar  # XFCE file manager
-      
-      # Screenshot tools
-      flameshot   # Screenshot tool (X11-focused)
-      
-      # Image viewer/background
-      feh         # X11 image viewer and wallpaper setter
-    ]);
+    ++ (
+      if useWayland then
+        # WAYLAND-SPECIFIC PACKAGES
+        with pkgs;
+        [
+          # Display configuration
+          # Wayland display configuration (replaces arandr)
+          wdisplays
+          kanshi
+
+          # File manager
+
+          pcmanfm-qt # Qt-based file manager for Wayland
+
+          # Screenshot tools
+
+          # Screenshot tool for Wayland
+          grim
+          slurp # Region selector for Wayland
+          swappy # Screenshot editor for Wayland
+          sway-contrib.grimshot # Screenshot tool for Wayland
+
+          # Background/wallpaper
+
+          swaybg # Wallpaper setter for Wayland
+
+          # Additional Wayland utilities
+
+          wl-clipboard # Wayland clipboard utilities
+          wofi # Application launcher for Wayland
+          swayidle # Idle management for Wayland
+          wlopm # Wayland output power manager
+        ]
+      else
+        # X11-SPECIFIC PACKAGES
+        with pkgs;
+        [
+          # Display configuration
+          # X11 RandR GUI tool
+          arandr
+          autorandr
+
+          # File manager
+
+          xfce.thunar # XFCE file manager
+
+          # Screenshot tools
+
+          flameshot # Screenshot tool (X11-focused)
+
+          # Image viewer/background
+
+          feh # X11 image viewer and wallpaper setter
+        ]
+    );
 
   # Examples
 
