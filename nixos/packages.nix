@@ -81,6 +81,7 @@ in
       baobab
 
       usbutils
+      xorg.xeyes
 
       # MEDIA
       # stremio # Use flatpak version
@@ -151,6 +152,10 @@ in
           # Wayland display configuration (replaces arandr)
           wdisplays
           kanshi
+
+          xwayland
+          xwayland-run
+          xwayland-satellite
 
           # File manager
 
