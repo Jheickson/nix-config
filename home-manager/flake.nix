@@ -9,11 +9,19 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    
+
   };
 
   outputs =
-    {  self, nixpkgs, home-manager, stylix, nixpkgs-stable, zen-browser, ... }:
+    {
+      self,
+      nixpkgs,
+      home-manager,
+      stylix,
+      nixpkgs-stable,
+      zen-browser,
+      ...
+    }:
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs { inherit system; };
