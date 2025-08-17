@@ -14,6 +14,8 @@
     };
   };
 
+  programs.xwayland.enable = true;
+
   # Ensure Niri is available system-wide
   environment.systemPackages = with pkgs; [
     niri
