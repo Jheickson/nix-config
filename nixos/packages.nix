@@ -79,6 +79,7 @@ in
       networkmanager
       networkmanagerapplet
       baobab
+      testdisk
 
       usbutils
       xorg.xeyes
