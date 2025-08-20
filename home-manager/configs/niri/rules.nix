@@ -241,6 +241,12 @@ let
       open-maximized = true;
       block-out-from = "screencast";
     }
+    {
+      matches = [ { app-id = "electron-mail"; } ];
+      open-on-output = "eDP-1";
+      open-maximized = true;
+      block-out-from = "screencast";
+    }
   ];
 in
 {

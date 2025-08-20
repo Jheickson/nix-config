@@ -51,6 +51,7 @@ in
           ];
         }
         { command = [ "wasistlos" ]; }
+        { command = [ "electron-mail" ]; }
         { command = [ "kdeconnect-app" ]; }
         { command = [ "xwayland-satellite" ]; }
 
