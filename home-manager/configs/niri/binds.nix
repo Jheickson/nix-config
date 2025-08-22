@@ -82,7 +82,7 @@
       # "Mod+Shift+F".action = move-column-to-monitor-right;
 
       # Additional i3 keybindings
-      "Mod+Shift+B".action = spawn "zen";
+      "Mod+Shift+B".action = spawn "zen-beta";
       "Mod+Shift+C".action = spawn "code";
     };
 }
