@@ -58,6 +58,7 @@ in
       electron-mail
       telegram-desktop
       whatsapp-for-linux
+      zapzap
       googleearth-pro
       nemo
       nemo-preview
