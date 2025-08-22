@@ -10,6 +10,7 @@
   environment.systemPackages = with pkgs; [
     wineWowPackages.full
     winetricks
-    bottles
+    (bottles.override { removeWarningPopup = true; })
+    lutris
   ];
 }
