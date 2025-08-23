@@ -14,18 +14,18 @@ in
     enable = true;
     package = pkgs.anyrun;
     config.plugins = [
-        "applications"
-        "shell"
-        "symbols"
-        "translate"
-        "websearch"
-        "stdin"
-        "calc"
-        "dictionary"
-        "randr"
-        "system"
-        "bookmarks"
-      ];
+      "applications"
+      "shell"
+      "symbols"
+      "translate"
+      "websearch"
+      "stdin"
+      "calc"
+      "dictionary"
+      "randr"
+      "system"
+      "bookmarks"
+    ];
   };
 
   # Create anyrun configuration directory and files

@@ -1,4 +1,9 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 let
   colors = config.lib.stylix.colors;
@@ -206,9 +211,9 @@ in
     executable = true;
     text = ''
       #!/bin/sh
-      
+
       # Enhanced fuzzel launcher with additional features
-      
+
       case "$1" in
         "calc:"*)
           expression=$(echo "$1" | sed 's/calc://')

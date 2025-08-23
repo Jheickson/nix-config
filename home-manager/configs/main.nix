@@ -1,4 +1,10 @@
-{ inputs, config, pkgs, lib, ... }:
+{
+  inputs,
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
 
@@ -28,7 +34,7 @@
 
     # utils
     wl-clipboard
-    
+
     # wallpaper daemon
     swww
   ];
