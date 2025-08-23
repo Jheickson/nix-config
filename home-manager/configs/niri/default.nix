@@ -2,8 +2,15 @@
   inputs,
   pkgs,
   ...
-}: {
-  imports = [inputs.niri.homeModules.niri ./settings.nix ./binds.nix ./rules.nix ./swayidle.nix];
+}:
+{
+  imports = [
+    inputs.niri.homeModules.niri
+    ./settings.nix
+    ./binds.nix
+    ./rules.nix
+    ./swayidle.nix
+  ];
 
   home = {
     packages = with pkgs; [

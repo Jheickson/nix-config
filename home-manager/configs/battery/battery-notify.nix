@@ -3,10 +3,10 @@
 let
   batteryScript = pkgs.writeShellScriptBin "battery-monitor" ''
     #!/usr/bin/env bash
-    
+
     # Battery monitoring script with priority notifications
     # Monitors battery level and sends notifications at specific thresholds
-    
+
     # Get battery info
     get_battery_info() {
         local battery_path="/sys/class/power_supply/BAT0"
@@ -21,19 +21,19 @@ let
         
         echo "$battery_path"
     }
-    
+
     # Get current battery percentage
     get_battery_percentage() {
         local battery_path="$1"
         cat "$battery_path/capacity" 2>/dev/null || echo "0"
     }
-    
+
     # Get charging status
     get_charging_status() {
         local battery_path="$1"
         cat "$battery_path/status" 2>/dev/null || echo "Unknown"
     }
-    
+
     # Send notification with appropriate urgency
     send_battery_notification() {
         local level="$1"
@@ -50,7 +50,7 @@ let
             "$message" \
             -t 10000
     }
-    
+
     # Main monitoring function
     monitor_battery() {
         local battery_path
@@ -128,7 +128,7 @@ let
             sleep 30
         done
     }
-    
+
     # Start monitoring
     monitor_battery
   '';
@@ -136,7 +136,7 @@ in
 {
   # Install the battery monitoring script
   home.packages = [ batteryScript ];
-  
+
   # Create systemd user service for battery monitoring
   systemd.user.services.battery-monitor = {
     Unit = {
@@ -144,19 +144,19 @@ in
       After = [ "graphical-session.target" ];
       PartOf = [ "graphical-session.target" ];
     };
-    
+
     Service = {
       Type = "simple";
       ExecStart = "${batteryScript}/bin/battery-monitor";
       Restart = "always";
       RestartSec = "10";
     };
-    
+
     Install = {
       WantedBy = [ "graphical-session.target" ];
     };
   };
-  
+
   # Ensure the service starts with the graphical session
   systemd.user.startServices = true;
 }

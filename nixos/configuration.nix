@@ -209,11 +209,13 @@
     nixPath = [ "nixpkgs = ${inputs.nixpkgs}" ];
 
     # Automatic garbage collection
-    /* gc = {
-      automatic = true;
-      dates = "weekly";
-      options = "--delete-older-than 30d";
-    }; */
+    /*
+      gc = {
+        automatic = true;
+        dates = "weekly";
+        options = "--delete-older-than 30d";
+      };
+    */
   };
 
   # ============================================================================
@@ -227,7 +229,7 @@
     inputs.zen-browser.packages."${system}".default
   ];
 
-  nixpkgs = { 
+  nixpkgs = {
     overlays = [
       (final: prev: {
         nvchad = inputs.nix4nvchad.packages."${pkgs.system}".nvchad;
