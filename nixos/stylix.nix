@@ -57,10 +57,10 @@
       size = 20;
     };
 
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/nova.yaml";
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/heetch.yaml";
 
     # It can also be generated from an image
-    image = ./wallpapers/Landscape/wallhaven-6loo86.jpg;
+    image = ./wallpapers/Aesthetic/wallhaven-w5q8px.jpg;
   };
 
   fonts = {
