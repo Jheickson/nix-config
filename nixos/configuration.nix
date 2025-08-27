@@ -25,6 +25,7 @@
     # System modules
     ./packages.nix
     ./stylix.nix
+    ./gtk.nix
     ./upower.nix
     ./docker.nix
     ./nh.nix
@@ -227,6 +228,8 @@
     git
     vscode
     inputs.zen-browser.packages."${system}".default
+    numix-icon-theme
+    numix-solarized-gtk-theme
   ];
 
   nixpkgs = {
