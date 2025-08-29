@@ -182,7 +182,7 @@ in
         };
 
         temperature = {
-          thermal-zone = 1;
+          thermal-zone = 0;
           critical-threshold = 80;
           format = "󰔏 {temperatureC}°C";
           format-critical = "󰔏 {temperatureC}°C";
