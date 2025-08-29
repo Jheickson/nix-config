@@ -5,7 +5,7 @@
 
 # Cache file to avoid excessive API calls
 CACHE_FILE="/tmp/waybar_weather_cache"
-CACHE_DURATION=1800  # 30 minutes in seconds
+CACHE_DURATION=60  # 1 minute in seconds
 
 # Location - you can change this to your city
 LOCATION="santarem-pa"

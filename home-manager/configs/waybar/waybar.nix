@@ -450,7 +450,7 @@ in
     format = "{}";
     return-type = "json";
     exec = "${config.home.homeDirectory}/nix-config/home-manager/configs/waybar/weather.sh";
-    interval = 1800; # 30 minutes
+    interval = 60; # 1 minute
     tooltip = true;
   };
 }
