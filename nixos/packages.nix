@@ -52,6 +52,7 @@ in
       anki
       brave
       chromium
+      calibre
       discord
       drawio
       libreoffice
