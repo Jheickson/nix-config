@@ -67,10 +67,10 @@ in
       xfce.thunar
 
       # UTILITIES
-      zip
+      /* zip
       unzip
       rar
-      unrar
+      unrar */
       udiskie
       peazip
       networkmanager
