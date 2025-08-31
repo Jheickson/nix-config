@@ -50,7 +50,7 @@ in
             "store"
           ];
         }
-        { command = [ "wasistlos" ]; }
+        { command = [ "zapzap" ]; }
         { command = [ "electron-mail" ]; }
         { command = [ "kdeconnect-app" ]; }
         { command = [ "xwayland-satellite" ]; }
