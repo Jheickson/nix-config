@@ -61,6 +61,7 @@ in
       whatsapp-for-linux
       zapzap
       googleearth-pro
+      nautilus
       nemo
       nemo-preview
       nemo-with-extensions
