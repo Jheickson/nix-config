@@ -18,11 +18,14 @@ in
         CLUTTER_BACKEND = "wayland";
         DISPLAY = ":0";
         GDK_BACKEND = "wayland,x11";
+        GTK_USE_PORTAL = "1";
         MOZ_ENABLE_WAYLAND = "1";
         NIXOS_OZONE_WL = "1";
         QT_QPA_PLATFORM = "wayland;xcb";
         QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
         SDL_VIDEODRIVER = "wayland";
+        XDG_CURRENT_DESKTOP = "niri";
+        XDG_SESSION_TYPE = "wayland";
       };
       spawn-at-startup = [
         (makeCommand "hyprlock")
