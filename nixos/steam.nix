@@ -7,4 +7,6 @@
       proton-ge-bin
     ];
   };
+
+  programs.gamemode.enable = true;  # New: Optimize gaming performance
 }
