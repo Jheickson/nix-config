@@ -56,6 +56,8 @@ in
           lspsAndRuntimeDeps = {
             general = with pkgs; [
               lazygit
+              nodePackages.typescript-language-server  # New: LSP for TypeScript
+              rust-analyzer  # New: LSP for Rust
             ];
             lua = with pkgs; [
               lua-language-server
