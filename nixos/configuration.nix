@@ -205,6 +205,7 @@
       "nix-command"
       "flakes"
     ];
+    settings.auto-optimise-store = true;  # New: Deduplicate store for faster builds
 
     # Set nixpkgs path
     nixPath = [ "nixpkgs = ${inputs.nixpkgs}" ];
@@ -217,6 +218,16 @@
         options = "--delete-older-than 30d";
       };
     */
+  };
+
+  programs.direnv = {
+    enable = true;  # New: Auto-load project environments
+    enableZshIntegration = true;
+  };
+
+  services.mpd = {
+    enable = true;  # New: Music player daemon
+    musicDirectory = "/home/felipe/Music";  # Adjust path as needed
   };
 
   # ============================================================================
