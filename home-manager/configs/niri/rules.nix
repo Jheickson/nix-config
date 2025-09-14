@@ -260,9 +260,16 @@ in
     window-rules = windowRules;
     layer-rules = [
       {
-        matches = [ { namespace = "^swww$"; } ];
+        # `niri msg layers` shows the background namespace as "swww-daemon".
+        # Match that to place swww's surfaces within the backdrop.
+        matches = [ { namespace = "swww-daemon"; } ];
         place-within-backdrop = true;
       }
     ];
+    # Make the workspace background transparent so wallpapers placed within
+    # the backdrop (e.g. swww) remain stationary and don't move with workspaces.
+    layout = {
+      background-color = "transparent";
+    };
   };
 }
