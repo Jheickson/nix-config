@@ -47,6 +47,7 @@ in
 
       ncmpcpp
       strawberry
+      feishin
 
       # DESKTOP APPS
       anki
@@ -89,6 +90,8 @@ in
       vlc
       qbittorrent
       qbittorrent-enhanced
+      python313Packages.deemix
+      picard
 
       # Codecs / Video acceleration
       libva
