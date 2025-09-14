@@ -28,6 +28,8 @@
     ./gtk.nix
     ./upower.nix
     ./docker.nix
+    ./jellyfin.nix
+    # ./subsonic.nix
     ./nh.nix
     ./steam.nix
     ./substituters.nix
