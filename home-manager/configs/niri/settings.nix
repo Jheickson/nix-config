@@ -57,6 +57,7 @@ in
         { command = [ "electron-mail" ]; }
         { command = [ "kdeconnect-app" ]; }
         { command = [ "xwayland-satellite" ]; }
+        { command = [ "jellyfin" ];}
 
         {
           command = [
