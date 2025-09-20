@@ -48,19 +48,19 @@
       # package = pkgs.bibata-cursors;
       # name = "Bibata-Modern-Ice";
 
-      # package = pkgs.phinger-cursors;
-      # name = "phinger-cursors-light";
+      package = pkgs.phinger-cursors;
+      name = "phinger-cursors-light";
 
-      package = pkgs.xcursor-pro;
-      name = "XCursor-Pro-Light";
+      # package = pkgs.xcursor-pro;
+      # name = "XCursor-Pro-Light";
 
-      size = 20;
+      size = 16;
     };
 
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/heetch.yaml";
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-soft.yaml";
 
     # It can also be generated from an image
-    image = ./wallpapers/Aesthetic/wallhaven-w5q8px.jpg;
+    image = ./wallpapers/Minimalistic/gruvbox_grid.png;
   };
 
   fonts = {
