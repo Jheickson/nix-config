@@ -92,6 +92,7 @@ in
       qbittorrent-enhanced
       python313Packages.deemix
       picard
+      nicotine-plus
 
       # Codecs / Video acceleration
       libva
