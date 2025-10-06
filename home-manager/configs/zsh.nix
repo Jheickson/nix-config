@@ -91,7 +91,7 @@
         ll = "ls -a";
 
         # Quick vim alias
-        v = "nvim";
+        # v = "nvim";
 
         # Edit system files with sudo
         se = "sudoedit";

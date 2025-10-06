@@ -168,6 +168,7 @@ in
               aliases = [
                 "vim"
                 "homeVim"
+                "v"
               ];
               # neovim-unwrapped = inputs.neovim-nightly-overlay.packages.${pkgs.system}.neovim;
               hosts.python3.enable = true;
