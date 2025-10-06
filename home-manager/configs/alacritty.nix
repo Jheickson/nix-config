@@ -11,8 +11,8 @@
         # opacity = 0.5; # Let Stylix manage this
 
         padding = {
-          y = 32;
-          x = 32;
+          y = 0;
+          x = 0;
         };
         dimensions = {
           lines = 75;
