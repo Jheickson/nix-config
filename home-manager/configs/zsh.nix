@@ -86,6 +86,41 @@
         # Show nix system information
         nix-info = "nh os info";
 
+        # ===== GIT COMMANDS =====
+        # Quick status
+        gst = "git status";
+
+        # Add files
+        gadd = "git add";
+
+        # Commit changes
+        gcom = "git commit";
+
+        # Branch management
+        gbr = "git branch";
+
+        # Checkout (switch branch/file)
+        gch = "git checkout";
+        gco = "git checkout";
+
+        # Push to remote
+        gpsh = "git push";
+        gpush = "git push";
+
+        # Pull from remote
+        gpll = "git pull";
+        gpull = "git pull";
+
+        # Fetch from remote
+        gftch = "git fetch";
+        gftcho = "git fetch origin";
+
+        # Log viewing
+        glog = "git log";
+
+        # Diff viewing
+        gdiff = "git diff";
+
         # ===== GENERAL UTILITY =====
         # List all files including hidden ones
         ll = "ls -a";
