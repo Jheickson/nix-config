@@ -35,7 +35,8 @@
 
         # ===== CONFIGURATION EDITING =====
         # Edit main NixOS configuration file
-        conf = "code ${flakeDir}";
+        convc = "code ${flakeDir}";
+        confv = "vim ${flakeDir}";
 
         # Edit NixOS packages configuration
         pkgs = "nvim ${flakeDir}/nixos/packages.nix";
