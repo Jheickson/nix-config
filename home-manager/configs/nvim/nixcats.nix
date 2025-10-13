@@ -88,6 +88,7 @@ in
               lzextras
               snacks-nvim
               onedark-nvim
+              render-markdown-nvim
               vim-sleuth
               vim-wakatime
             ];
