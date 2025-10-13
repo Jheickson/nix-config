@@ -83,11 +83,13 @@ in
             general = with pkgs.vimPlugins; [
               # lazy loading isnt required with a config this small
               # but as a demo, we do it anyway.
+              copilot-vim
               lze
               lzextras
               snacks-nvim
               onedark-nvim
               vim-sleuth
+              vim-wakatime
             ];
           };
 
