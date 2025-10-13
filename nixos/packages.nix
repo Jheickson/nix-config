@@ -6,8 +6,8 @@ in
 {
 
   nixpkgs.config = {
-    allowUnfree = true;
-    permittedInsecurePackages = [ ];
+    allowUnfreePredicate = pkg: true;
+    permittedInsecurePackages = [ "googleearth-pro-7.3.6.10201" ];
   };
 
   programs.kdeconnect = {
