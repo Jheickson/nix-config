@@ -194,13 +194,6 @@
   # ============================================================================
   # NIX CONFIGURATION
   # ============================================================================
-  nixpkgs = {
-    config.allowUnfree = true;
-    config.permittedInsecurePackages = [
-      "googleearth-pro-7.3.6.10201"
-    ];
-  };
-
   nix = {
     # Enable flakes
     settings.experimental-features = [
@@ -251,6 +244,10 @@
   ];
 
   nixpkgs = {
+    config.allowUnfreePredicate = pkg: true;
+    config.permittedInsecurePackages = [
+      "googleearth-pro-7.3.6.10201"
+    ];
     overlays = [
       (final: prev: {
         nvchad = inputs.nix4nvchad.packages."${pkgs.system}".nvchad;

@@ -6,6 +6,10 @@
     ./configs/main.nix
   ];
 
+  nixpkgs = {
+    config.allowUnfreePredicate = pkg: true;
+  };
+
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home = {
