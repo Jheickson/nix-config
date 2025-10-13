@@ -121,6 +121,9 @@
         # Diff viewing
         gdiff = "git diff";
 
+        # Merge branches
+        gmrg = "git merge";
+
         # ===== GENERAL UTILITY =====
         # List all files including hidden ones
         ll = "ls -a";
