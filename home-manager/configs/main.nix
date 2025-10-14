@@ -27,6 +27,30 @@
     # ./zen-browser.nix
   ];
 
+  stylix = {
+    enable = true;
+    autoEnable = true;
+    polarity = "dark";
+    opacity = {
+      terminal = 0.75;
+    };
+    fonts = with pkgs; rec {
+      monospace = {
+        package = nerd-fonts.hack;
+        name = "HackNerdFontMono";
+      };
+      sansSerif = monospace;
+      serif = monospace;
+    };
+    cursor = {
+      package = pkgs.phinger-cursors;
+      name = "phinger-cursors-light";
+      size = 16;
+    };
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-soft.yaml";
+    image = ../../nixos/wallpapers/Minimalistic/gruvbox_grid.png;
+  };
+
   home.packages = with pkgs; [
     # screenshot
     grim
