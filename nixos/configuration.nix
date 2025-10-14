@@ -159,27 +159,30 @@
   # ============================================================================
   # USER ACCOUNTS
   # ============================================================================
-  users.users.felipe = {
-    isNormalUser = true;
-    description = "felipe";
-    extraGroups = [
-      "networkmanager"
-      "wheel"
-      "docker"
-      "audio" # Required for microphone access
-      "video" # Required for graphics access
-    ];
-    packages = with pkgs; [
-      kdePackages.kate
-      # thunderbird  # Disabled - uncomment to enable
-    ];
+  users = {
+    defaultUserShell = pkgs.zsh;
+    users.felipe = {
+      isNormalUser = true;
+      description = "felipe";
+      extraGroups = [
+        "networkmanager"
+        "wheel"
+        "docker"
+        "audio" # Required for microphone access
+        "video" # Required for graphics access
+      ];
+      packages = with pkgs; [
+        kdePackages.kate
+        # thunderbird  # Disabled - uncomment to enable
+      ];
+    };
   };
-
   # ============================================================================
   # PROGRAMS
   # ============================================================================
   programs = {
     firefox.enable = true;
+    zsh.enable = true;
 
     # GPG agent (uncomment if needed)
     # gnupg.agent = {
