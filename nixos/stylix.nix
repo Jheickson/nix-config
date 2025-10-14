@@ -57,10 +57,10 @@
       size = 16;
     };
 
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/bright.yaml";
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/zenburn.yaml";
 
     # It can also be generated from an image
-    image = ./wallpapers/Minimalistic/wallhaven-47xz13.jpg;
+    image = ./wallpapers/Themed/wallhaven-o5ky29.png;
   };
 
   fonts = {
