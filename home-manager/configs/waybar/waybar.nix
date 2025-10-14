@@ -43,7 +43,7 @@ in
         ];
 
         "custom/launcher" = {
-          format = "<span color='#${colors.base0D}'>󱄅</span>";
+          format = "<span color='#${colors.base05}'>󱄅</span>";
           tooltip = false;
           on-click = "${pkgs.fuzzel}/bin/fuzzel";
         };
@@ -240,20 +240,20 @@ in
       }
 
       #niri-workspaces button:hover {
-        background: #${colors.base01};
+        /* background: #${colors.base01}; */
       }
 
       #niri-workspaces button.active {
-        background-color: #${colors.base0D};
+        /* background-color: #${colors.base0D}; */
         color: #${colors.base00};
       }
 
       #niri-workspaces button.visible {
-        background-color: #${colors.base02};
+        /* background-color: #${colors.base02}; */
       }
 
       #niri-workspaces button.urgent {
-        background-color: #${colors.base08};
+        /* background-color: #${colors.base08}; */
       }
 
       #mode {
@@ -284,6 +284,7 @@ in
       #custom-playerlabel {
         padding: 0 10px;
         color: #${colors.base05};
+        background-color: transparent;
       }
 
       #window,
@@ -302,31 +303,31 @@ in
       }
 
       #clock {
-        background-color: #${colors.base02};
-        border-radius: 4px;
-        margin: 4px 0;
+        /* background-color: #${colors.base02}; */
+        /* border-radius: 4px; */
+        /* margin: 4px 0; */
       }
 
       #battery {
-        background-color: #${colors.base02};
-        border-radius: 4px;
-        margin: 4px 0;
+        /* background-color: #${colors.base02}; */
+        /* border-radius: 4px; */
+        /* margin: 4px 0; */
       }
 
       #battery.charging, #battery.plugged {
         color: #${colors.base0B};
-        background-color: #${colors.base02};
+        /* background-color: #${colors.base02}; */
       }
 
       @keyframes blink {
         to {
-          background-color: #${colors.base05};
+          /* background-color: #${colors.base05}; */
           color: #${colors.base00};
         }
       }
 
       #battery.critical:not(.charging) {
-        background-color: #${colors.base08};
+        /* background-color: #${colors.base08}; */
         color: #${colors.base00};
         animation-name: blink;
         animation-duration: 0.5s;
@@ -336,57 +337,57 @@ in
       }
 
       #pulseaudio {
-        background-color: #${colors.base02};
-        border-radius: 4px;
-        margin: 4px 0;
+        /* background-color: #${colors.base02}; */
+        /* border-radius: 4px; */
+        /* margin: 4px 0; */
       }
 
       #pulseaudio.muted {
-        background-color: #${colors.base08};
+        /* background-color: #${colors.base08}; */
         color: #${colors.base00};
       }
 
       #backlight {
-        background-color: #${colors.base02};
-        border-radius: 4px;
-        margin: 4px 0;
+        /* background-color: #${colors.base02}; */
+        /* border-radius: 4px; */
+        /* margin: 4px 0; */
       }
 
       #network {
-        background-color: #${colors.base02};
-        border-radius: 4px;
-        margin: 4px 0;
+        /* background-color: #${colors.base02}; */
+        /* border-radius: 4px; */
+        /* margin: 4px 0; */
       }
 
       #network.disconnected {
-        background-color: #${colors.base08};
+        /* background-color: #${colors.base08}; */
       }
 
       #cpu {
-        background-color: #${colors.base02};
-        border-radius: 4px;
-        margin: 4px 0;
+        /* background-color: #${colors.base02}; */
+        /* border-radius: 4px; */
+        /* margin: 4px 0; */
       }
 
       #memory {
-        background-color: #${colors.base02};
-        border-radius: 4px;
-        margin: 4px 0;
+        /* background-color: #${colors.base02}; */
+        /* border-radius: 4px; */
+        /* margin: 4px 0; */
       }
 
       #temperature {
-        background-color: #${colors.base02};
-        border-radius: 4px;
-        margin: 4px 0;
+        /* background-color: #${colors.base02}; */
+        /* border-radius: 4px; */
+        /* margin: 4px 0; */
       }
 
       #temperature.critical {
-        background-color: #${colors.base08};
+        /* background-color: #${colors.base08}; */
         color: #${colors.base00};
       }
 
       #temperature.warn {
-        background-color: #${colors.base09};
+        /* background-color: #${colors.base09}; */
         color: #${colors.base00};
       }
 
@@ -398,9 +399,9 @@ in
       }
 
       #tray {
-        background-color: #${colors.base02};
-        border-radius: 4px;
-        margin: 4px 0;
+        /* background-color: #${colors.base02}; */
+        /* border-radius: 4px; */
+        /* margin: 4px 0; */
       }
 
       #tray > .passive {
@@ -409,15 +410,15 @@ in
 
       #tray > .needs-attention {
         -gtk-icon-effect: highlight;
-        background-color: #${colors.base08};
+        /* background-color: #${colors.base08}; */
       }
 
       #custom-playerctl.backward,
       #custom-playerctl.play,
       #custom-playerctl.forward {
-        background-color: #${colors.base02};
-        border-radius: 4px;
-        margin: 4px 0;
+        /* background-color: #${colors.base02}; */
+        /* border-radius: 4px; */
+        /* margin: 4px 0; */
       }
 
       #custom-playerctl.backward:hover,
@@ -427,15 +428,15 @@ in
       }
 
       #custom-playerlabel {
-        background-color: #${colors.base02};
-        border-radius: 4px;
-        margin: 4px 0;
+        /* background-color: #${colors.base02}; */
+        /* border-radius: 4px; */
+        /* margin: 4px 0; */
       }
 
       #custom-weather {
-        background-color: #${colors.base02};
-        border-radius: 4px;
-        margin: 4px 0;
+        background-color: transparent; 
+        /* border-radius: 4px; */
+        /* margin: 4px 0; */
         padding: 0 10px;
       }
     '';
