@@ -104,6 +104,7 @@ in
               lazydev-nvim
             ];
             general = with pkgs.vimPlugins; [
+              devdocs-nvim
               mini-nvim
               nvim-lspconfig
               vim-startuptime
