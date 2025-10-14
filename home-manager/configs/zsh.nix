@@ -28,10 +28,10 @@
 
         # ===== HOME-MANAGER CONFIGURATION (nh) =====
         # Apply home-manager configuration
-        hms = "nh home switch";
+        hms = "nh home switch ${flakeDir}";
 
         # Apply home-manager with backup of previous generation
-        hmsb = "nh home switch -b backup";
+        hmsb = "nh home switch ${flakeDir} -b backup";
 
         # ===== CONFIGURATION EDITING =====
         # Edit main NixOS configuration file
