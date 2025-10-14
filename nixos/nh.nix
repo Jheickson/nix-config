@@ -4,7 +4,7 @@
   programs.nh = {
     enable = true;
     clean.enable = true;
-    clean.extraArgs = "--keep-since 7d --keep 10";
+    clean.extraArgs = "--keep-since 7d --keep 20";
     flake = "~/nix-config"; # sets NH_OS_FLAKE variable for you
   };
 }
