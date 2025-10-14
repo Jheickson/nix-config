@@ -74,7 +74,10 @@
 
       homeConfigurations.felipe = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.${system};
-        modules = [ ./home-manager/home.nix inputs.stylix.homeModules.stylix ];
+        modules = [
+          ./home-manager/home.nix
+          inputs.stylix.homeModules.stylix
+        ];
         extraSpecialArgs = { inherit inputs; };
       };
 
