@@ -67,6 +67,7 @@ in
       nemo-preview
       nemo-with-extensions
       xfce.thunar
+      gimp2-with-plugins
 
       # UTILITIES
       /* zip
