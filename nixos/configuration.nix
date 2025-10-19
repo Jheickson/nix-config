@@ -31,6 +31,7 @@
     ./jellyfin.nix
     # ./subsonic.nix
     ./nh.nix
+    ./networkmanager.nix
     ./steam.nix
     # ./substituters.nix
     ./xautolock.nix
