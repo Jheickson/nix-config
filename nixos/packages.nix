@@ -68,6 +68,10 @@ in
       nemo-with-extensions
       xfce.thunar
       gimp2-with-plugins
+      openvpn
+      openvpn3
+      # networkmanager-openvpn
+      pritunl-client
 
       # UTILITIES
       /* zip
@@ -76,7 +80,7 @@ in
       unrar */
       udiskie
       peazip
-      networkmanager
+      # networkmanager
       networkmanagerapplet
       baobab
       testdisk
