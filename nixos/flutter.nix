@@ -8,8 +8,13 @@
     flutter
     ninja
     pkg-config
-    libsecret
+    libsecret.dev
+    openjdk17
   ];
+
+  environment.variables = {
+    JAVA_HOME = "${pkgs.openjdk17}";
+  };
 
   programs = {
     adb.enable = true;
