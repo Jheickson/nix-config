@@ -28,6 +28,7 @@
     ./gtk.nix
     ./upower.nix
     ./docker.nix
+    ./flutter.nix
     ./jellyfin.nix
     # ./subsonic.nix
     ./nh.nix
