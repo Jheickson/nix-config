@@ -12,7 +12,8 @@
     timeouts = [
       {
         timeout = 300; # 5 minutes (300 seconds)
-        command = "${pkgs.brightnessctl}/bin/brightnessctl -d \"*backlight*\" set 10%";
+        command = "${pkgs.brightnessctl}/bin/brightnessctl -d \"*backlight*\" get > /tmp/brightness && ${pkgs.brightnessctl}/bin/brightnessctl -d \"*backlight*\" set 10%";
+        resumeCommand = "${pkgs.brightnessctl}/bin/brightnessctl -d \"*backlight*\" set $(cat /tmp/brightness)";
       }
       {
         timeout = 600; # 10 minutes (600 seconds)
