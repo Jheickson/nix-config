@@ -9,7 +9,7 @@
     ./settings.nix
     ./binds.nix
     ./rules.nix
-    ./swayidle.nix
+    #./swayidle.nix
   ];
 
   home = {
