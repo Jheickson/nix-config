@@ -1,6 +1,10 @@
 { config, pkgs, ... }:
 
 {
+  nixpkgs.config = {
+    android_sdk.accept_license = true;
+  };
+
   environment.systemPackages = with pkgs; [
     android-studio
     clang
@@ -10,10 +14,12 @@
     pkg-config
     libsecret.dev
     openjdk17
+    androidenv.androidPkgs.androidsdk
   ];
 
   environment.variables = {
     JAVA_HOME = "${pkgs.openjdk17}";
+    ANDROID_HOME = "${pkgs.androidenv.androidPkgs.androidsdk}/libexec/android-sdk";
   };
 
   programs = {
