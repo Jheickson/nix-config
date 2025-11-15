@@ -44,7 +44,7 @@
       "Mod+2".action = set-column-width "50%";
       "Mod+3".action = set-column-width "75%";
       "Mod+4".action = set-column-width "100%";
-      # "Mod+Shift+F".action = expand-column-to-available-width;
+      "Mod+Shift+F".action = fullscreen-window;
       "Mod+Space".action = toggle-window-floating;
 
       "Mod+Comma".action = consume-window-into-column;
