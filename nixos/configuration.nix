@@ -39,6 +39,7 @@
     ./vial.nix
     ./niri.nix
     ./wine.nix
+    ./nicotine-plus.nix
     # ./mysql.nix
   ];
 
