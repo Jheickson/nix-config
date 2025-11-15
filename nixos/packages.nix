@@ -99,6 +99,9 @@ in
       picard
       nicotine-plus
 
+      # GAMES
+      heroic
+
       # Codecs / Video acceleration
       libva
       libva-utils
