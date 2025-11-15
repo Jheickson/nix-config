@@ -57,10 +57,10 @@
       size = 16;
     };
 
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/zenburn.yaml";
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/dracula.yaml";
 
     # It can also be generated from an image
-    image = ./wallpapers/Themed/wallhaven-o5ky29.png;
+    image = ./wallpapers/Minimalistic/wallhaven-7pdzqv.png;
   };
 
   fonts = {
