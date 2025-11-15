@@ -14,12 +14,12 @@
     pkg-config
     libsecret.dev
     openjdk17
-    androidenv.androidPkgs.androidsdk
+    # androidenv.androidPkgs.androidsdk
   ];
 
   environment.variables = {
     JAVA_HOME = "${pkgs.openjdk17}";
-    ANDROID_HOME = "${pkgs.androidenv.androidPkgs.androidsdk}/libexec/android-sdk";
+    # ANDROID_HOME = "${pkgs.androidenv.androidPkgs.androidsdk}/libexec/android-sdk";
   };
 
   programs = {
