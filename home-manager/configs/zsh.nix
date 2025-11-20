@@ -24,13 +24,10 @@
         rbn = "sudo nixos-rebuild switch --flake ${flakeDir}";
 
         # Update flake.lock with latest versions from inputs
-        upd = "nh os update ${flakeDir}";
+        upd = "nh os switch ${flakeDir} -u";
 
         # Update flake.lock file using nix flake update
         updn = "sudo nix flake update";
-
-        # Upgrade system packages and rebuild
-        upg = "nh os switch ${flakeDir} -u";
 
         # ===== HOME-MANAGER CONFIGURATION (nh) =====
         # Apply home-manager configuration
