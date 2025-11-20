@@ -20,8 +20,14 @@
         # Rebuild and switch to new NixOS configuration
         rb = "nh os switch ${flakeDir}";
 
+        # Rebuild and switch NixOS configuration using nixos-rebuild
+        rbn = "sudo nixos-rebuild switch --flake ${flakeDir}";
+
         # Update flake.lock with latest versions from inputs
         upd = "nh os update ${flakeDir}";
+
+        # Update flake.lock file using nix flake update
+        updn = "sudo nix flake update";
 
         # Upgrade system packages and rebuild
         upg = "nh os switch ${flakeDir} -u";
