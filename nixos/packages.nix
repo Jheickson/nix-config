@@ -7,7 +7,7 @@ in
 
   nixpkgs.config = {
     allowUnfreePredicate = pkg: true;
-    permittedInsecurePackages = [ "googleearth-pro-7.3.6.10201" ];
+    permittedInsecurePackages = [ "googleearth-pro-7.3.6.10201" "xpdf-4.05" "python-2.7.18.12" ];
   };
 
   programs.kdeconnect = {
@@ -55,11 +55,11 @@ in
       chromium
       calibre
       discord
-      drawio
+      # drawio
       libreoffice
       electron-mail
       telegram-desktop
-      whatsapp-for-linux
+      # whatsapp-for-linux
       zapzap
       googleearth-pro
       nautilus
@@ -84,9 +84,16 @@ in
       networkmanagerapplet
       baobab
       testdisk
-
       usbutils
       xorg.xeyes
+
+      pdfgrep
+      python313Packages.pdftotext
+      # xpdf
+
+      texlive.combined.scheme-full
+      gnumake
+      ghostscript
 
       # MEDIA
       # stremio # Use flatpak version
@@ -107,7 +114,7 @@ in
 
       # For Intel GPUs
       intel-media-driver
-      vaapiVdpau # For Nvidia/AMD hybrid setups
+      libva-vdpau-driver # For Nvidia/AMD hybrid setups
       vdpauinfo
       libvdpau-va-gl
       ffmpeg-full
@@ -122,13 +129,17 @@ in
       qemu
       mysql-workbench
       postman
-      mongosh
-      mongodb
-      mongodb-compass
+      # mongosh
+      # mongodb
+      # mongodb-compass
       openssl
       sqlite
       sqlitebrowser
       code-cursor
+      python2
+      python313
+      python313Packages.pip
+      pipx
 
       # SYSTEM
       libmpdclient
