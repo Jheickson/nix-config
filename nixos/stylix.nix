@@ -57,10 +57,10 @@
       size = 16;
     };
 
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/dracula.yaml";
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/everforest.yaml";
 
     # It can also be generated from an image
-    image = ./wallpapers/Minimalistic/wallhaven-7pdzqv.png;
+    image = ./wallpapers/Themed/Everforest/beach_2.png;
   };
 
   fonts = {
