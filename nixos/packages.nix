@@ -74,10 +74,11 @@ in
       pritunl-client
 
       # UTILITIES
-      /* zip
+      zip
       unzip
       rar
-      unrar */
+      unrar
+      busybox
       udiskie
       peazip
       # networkmanager
