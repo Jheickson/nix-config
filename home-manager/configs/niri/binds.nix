@@ -29,7 +29,7 @@
       "Print".action.screenshot-screen = {
         write-to-disk = true;
       };
-      "Mod+Shift+Alt+S".action = screenshot-window;
+      # "Mod+Shift+Alt+S".action = screenshot-window;
 
       "Mod+D".action = spawn "${pkgs.fuzzel}/bin/fuzzel";
       "Mod+Return".action = spawn "${pkgs.alacritty}/bin/alacritty";
