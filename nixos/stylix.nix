@@ -6,7 +6,36 @@
 }:
 
 # https://github.com/vimjoyer/stylix-video
+# https://nix-community.github.io/stylix/tricks.html
 
+let
+  # ============================================================================
+  # WALLPAPER CONFIGURATION - Change these values to update your wallpaper
+  # ============================================================================
+
+  # The source wallpaper image
+  wallpaperSource = ./wallpapers/Aesthetic/wallhaven-rqqy5m.png;
+
+  # Theme file - determines the color palette
+  themeFile = "${pkgs.base16-schemes}/share/themes/horizon-dark.yaml";
+
+  # Brightness adjustment (-100 to 100, negative = darker)
+  brightness = 0;
+
+  # Contrast adjustment (-100 to 100)
+  contrast = 0;
+
+  # ============================================================================
+  # REPAINTED WALLPAPER - Automatically adjusts to match theme
+  # ============================================================================
+
+  repaintedWallpaper = pkgs.runCommand "repainted-wallpaper.png" { } ''
+    ${lib.getExe' pkgs.imagemagick "convert"} "${wallpaperSource}" \
+      -brightness-contrast ${toString brightness},${toString contrast} \
+      $out
+  '';
+
+in
 {
 
   stylix = {
@@ -57,10 +86,13 @@
       size = 16;
     };
 
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/everforest.yaml";
+    base16Scheme = themeFile;
 
-    # It can also be generated from an image
-    image = ./wallpapers/Themed/Everforest/beach_2.png;
+    # Wallpaper options:
+    # - Original: wallpaperSource
+    # - Repainted (brightness/contrast adjusted): repaintedWallpaper
+    # - Solid color from theme: config.lib.stylix.pixel "base00"
+    image = repaintedWallpaper;
   };
 
   fonts = {
