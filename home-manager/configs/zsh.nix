@@ -14,14 +14,16 @@
     shellAliases =
       let
         flakeDir = "~/nix-config";
+        # Apply stylix wallpaper after rebuild using swww
+        applyWallpaper = "swww img $(find /nix/store -maxdepth 1 -name '*repainted-wallpaper.png' -type f | head -1) --resize crop 2>/dev/null || true";
       in
       {
         # ===== NIXOS SYSTEM MANAGEMENT (nh) =====
-        # Rebuild and switch to new NixOS configuration
-        rb = "nh os switch ${flakeDir}";
+        # Rebuild and switch to new NixOS configuration (also applies wallpaper)
+        rb = "nh os switch ${flakeDir} && ${applyWallpaper}";
 
         # Rebuild and switch NixOS configuration using nixos-rebuild
-        rbn = "sudo nixos-rebuild switch --flake ${flakeDir}";
+        rbn = "sudo nixos-rebuild switch --flake ${flakeDir} && ${applyWallpaper}";
 
         # Update flake.lock with latest versions from inputs
         upd = "nh os switch ${flakeDir} -u";
