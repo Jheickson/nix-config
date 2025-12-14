@@ -15,6 +15,7 @@
     ./dunst/dunst.nix
     ./fuzzel.nix
     # ./ghostty.nix
+    ./gowall.nix
     ./i3.nix
     ./niri
     ./nvim/nixcats.nix
