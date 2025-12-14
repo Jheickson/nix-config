@@ -14,10 +14,10 @@ let
   # ============================================================================
 
   # The source wallpaper image
-  wallpaperSource = ./wallpapers/Aesthetic/wallhaven-45wj58.jpg;
+  wallpaperSource = ./wallpapers/Minimalistic/wallhaven-85z1o1.jpg;
 
   # Theme file - determines the color palette
-  themeFile = "${pkgs.base16-schemes}/share/themes/horizon-dark.yaml";
+  themeFile = "${pkgs.base16-schemes}/share/themes/greenscreen.yaml";
 
 in
 {

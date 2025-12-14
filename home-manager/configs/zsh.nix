@@ -15,8 +15,8 @@
       let
         flakeDir = "~/nix-config";
         # Apply stylix wallpaper after rebuild using swww
-        # Uses find because the nix store path changes on each rebuild
-        applyWallpaper = "swww img $(find /nix/store -maxdepth 1 -name '*repainted-wallpaper.png' -type f 2>/dev/null | tail -1) --resize crop 2>/dev/null || true";
+        # Apply stylix wallpaper after rebuild using swww
+        applyWallpaper = "swww img ~/nix-config/nixos/wallpapers/wallpaper.png --resize crop && echo 'Wallpaper applied' || echo 'Failed to apply wallpaper'";
       in
       {
         # ===== NIXOS SYSTEM MANAGEMENT (nh) =====
