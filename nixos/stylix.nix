@@ -28,7 +28,7 @@ in
 
   # Generate themed wallpaper on system activation
   system.activationScripts.gowallWallpaper = ''
-    ${pkgs.gowall}/bin/gowall convert ${wallpaperSource} -t stylix --output ~/nix-config/nixos/wallpapers/wallpaper.png
+    HOME=/home/felipe ${pkgs.gowall}/bin/gowall convert ${wallpaperSource} -t stylix --output /home/felipe/nix-config/nixos/wallpapers/wallpaper.png
   '';
 
   stylix = {
