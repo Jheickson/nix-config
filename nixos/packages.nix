@@ -81,6 +81,7 @@ in
       busybox
       udiskie
       peazip
+      jq
       # networkmanager
       networkmanagerapplet
       baobab
