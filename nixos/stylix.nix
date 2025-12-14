@@ -14,26 +14,10 @@ let
   # ============================================================================
 
   # The source wallpaper image
-  wallpaperSource = ./wallpapers/Aesthetic/wallhaven-rqqy5m.png;
+  wallpaperSource = ./wallpapers/Aesthetic/wallhaven-45wj58.jpg;
 
   # Theme file - determines the color palette
   themeFile = "${pkgs.base16-schemes}/share/themes/horizon-dark.yaml";
-
-  # Brightness adjustment (-100 to 100, negative = darker)
-  brightness = 0;
-
-  # Contrast adjustment (-100 to 100)
-  contrast = 0;
-
-  # ============================================================================
-  # REPAINTED WALLPAPER - Automatically adjusts to match theme
-  # ============================================================================
-
-  repaintedWallpaper = pkgs.runCommand "repainted-wallpaper.png" { } ''
-    ${lib.getExe' pkgs.imagemagick "convert"} "${wallpaperSource}" \
-      -brightness-contrast ${toString brightness},${toString contrast} \
-      $out
-  '';
 
 in
 {
@@ -41,6 +25,11 @@ in
   environment.systemPackages = [
     pkgs.gowall
   ];
+
+  # Generate themed wallpaper on system activation
+  system.activationScripts.gowallWallpaper = ''
+    ${pkgs.gowall}/bin/gowall convert ${wallpaperSource} -t stylix --output ~/nix-config/nixos/wallpapers/wallpaper.png
+  '';
 
   stylix = {
 
@@ -68,39 +57,29 @@ in
       serif = monospace;
     };
 
-    # cursor = {
-
-    #   # package = pkgs.volantes-cursors;
-    #   package = pkgs.qogir-icon-theme;
-    #   name = "Qogir Cursors";
-    #   size = 24;
-
-    # };
-
     cursor = {
-      # package = pkgs.bibata-cursors;
-      # name = "Bibata-Modern-Ice";
-
       package = pkgs.phinger-cursors;
       name = "phinger-cursors-light";
 
       # package = pkgs.xcursor-pro;
       # name = "XCursor-Pro-Light";
 
+      # package = pkgs.bibata-cursors;
+      # name = "Bibata-Modern-Ice";
+
+    #   package = pkgs.qogir-icon-theme;
+    #   name = "Qogir Cursors";
+
       size = 16;
     };
 
     base16Scheme = themeFile;
 
-    # Wallpaper options:
-    # - Original: wallpaperSource
-    # - Repainted (brightness/contrast adjusted): repaintedWallpaper
-    # - Solid color from theme: config.lib.stylix.pixel "base00"
-    image = repaintedWallpaper;
+    image = ./wallpapers/wallpaper.png;
   };
 
-  # Expose the repainted wallpaper path for shell scripts (swww, etc.)
-  environment.sessionVariables.STYLIX_WALLPAPER = "${repaintedWallpaper}";
+  # Expose the wallpaper path for shell scripts (swww, etc.)
+  environment.sessionVariables.STYLIX_WALLPAPER = "~/nix-config/nixos/wallpapers/wallpaper.png";
 
   fonts = {
     fontDir.enable = true;
