@@ -14,7 +14,7 @@ let
   # ============================================================================
 
   # The source wallpaper image
-  wallpaperSource = ./wallpapers/Aesthetic/wallhaven-vq1z55.png;
+  wallpaperSource = ./wallpapers/Aesthetic/wallhaven-rqqy5m.png;
 
   # Theme file - determines the color palette
   themeFile = "${pkgs.base16-schemes}/share/themes/horizon-dark.yaml";
@@ -37,6 +37,10 @@ let
 
 in
 {
+
+  environment.systemPackages = [
+    pkgs.gowall
+  ];
 
   stylix = {
 
