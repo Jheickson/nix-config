@@ -12,5 +12,6 @@ if ! pgrep -x "swww-daemon" > /dev/null; then
     sleep 1
 fi
 
-# Set wallpaper on all outputs with crop mode
-swww img "$1" --resize crop
+# Set wallpaper - use argument if provided, otherwise fall back to STYLIX_WALLPAPER
+WALLPAPER="${1:-$STYLIX_WALLPAPER}"
+swww img "$WALLPAPER" --resize crop

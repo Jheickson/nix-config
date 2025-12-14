@@ -14,7 +14,7 @@ let
   # ============================================================================
 
   # The source wallpaper image
-  wallpaperSource = ./wallpapers/Aesthetic/wallhaven-rqqy5m.png;
+  wallpaperSource = ./wallpapers/Aesthetic/wallhaven-vq1z55.png;
 
   # Theme file - determines the color palette
   themeFile = "${pkgs.base16-schemes}/share/themes/horizon-dark.yaml";
@@ -94,6 +94,9 @@ in
     # - Solid color from theme: config.lib.stylix.pixel "base00"
     image = repaintedWallpaper;
   };
+
+  # Expose the repainted wallpaper path for shell scripts (swww, etc.)
+  environment.sessionVariables.STYLIX_WALLPAPER = "${repaintedWallpaper}";
 
   fonts = {
     fontDir.enable = true;
