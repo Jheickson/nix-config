@@ -12,5 +12,5 @@ if ! pgrep -x "swww-daemon" > /dev/null; then
     sleep 1
 fi
 
-# Set wallpaper on all outputs with fill mode
-swww img "$1" --resize fill --outputs all
+# Set wallpaper on all outputs with crop mode
+swww img "$1" --resize crop
