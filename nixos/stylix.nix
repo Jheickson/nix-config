@@ -17,7 +17,43 @@ let
   wallpaperSource = ./wallpapers/Minimalistic/wallhaven-85z1o1.jpg;
 
   # Theme file - determines the color palette
-  themeFile = "${pkgs.base16-schemes}/share/themes/greenscreen.yaml";
+  themeFile = "${pkgs.base16-schemes}/share/themes/atlas.yaml";
+
+  # ============================================================================
+  # GOWALL THEME JSON - Generated at build time from the base16 theme
+  # ============================================================================
+
+  # Parse the YAML theme file to get colors
+  themeYaml = builtins.fromJSON (
+    builtins.readFile (
+      pkgs.runCommand "theme-as-json" { } ''
+        ${pkgs.yq-go}/bin/yq -o=json '.' ${themeFile} > $out
+      ''
+    )
+  );
+
+  # Generate gowall JSON theme file
+  gowallThemeJson = pkgs.writeText "gowall-theme.json" (builtins.toJSON {
+    name = "stylix";
+    colors = [
+      themeYaml.palette.base00
+      themeYaml.palette.base01
+      themeYaml.palette.base02
+      themeYaml.palette.base03
+      themeYaml.palette.base04
+      themeYaml.palette.base05
+      themeYaml.palette.base06
+      themeYaml.palette.base07
+      themeYaml.palette.base08
+      themeYaml.palette.base09
+      themeYaml.palette.base0A
+      themeYaml.palette.base0B
+      themeYaml.palette.base0C
+      themeYaml.palette.base0D
+      themeYaml.palette.base0E
+      themeYaml.palette.base0F
+    ];
+  });
 
 in
 {
@@ -28,7 +64,7 @@ in
 
   # Generate themed wallpaper on system activation
   system.activationScripts.gowallWallpaper = ''
-    HOME=/home/felipe ${pkgs.gowall}/bin/gowall convert ${wallpaperSource} -t stylix --output /home/felipe/nix-config/nixos/wallpapers/wallpaper.png
+    HOME=/home/felipe ${pkgs.gowall}/bin/gowall convert ${wallpaperSource} -t ${gowallThemeJson} --output /home/felipe/nix-config/nixos/wallpapers/wallpaper.png
   '';
 
   stylix = {
