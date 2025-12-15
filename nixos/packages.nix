@@ -82,6 +82,7 @@ in
       udiskie
       peazip
       jq
+      yq
       # networkmanager
       networkmanagerapplet
       baobab
