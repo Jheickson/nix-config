@@ -14,5 +14,5 @@ fi
 
 # Set wallpaper - use argument if provided, otherwise fall back to STYLIX_WALLPAPER
 # WALLPAPER="${1:-$STYLIX_WALLPAPER}"
-# swww img "$WALLPAPER" --resize crop
-swww img "~/nix-config/nixos/wallpapers/wallpaper.png" --resize crop
+# swww img "$WALLPAPER" --resize no
+swww img "~/nix-config/nixos/wallpapers/wallpaper.png" --resize no
