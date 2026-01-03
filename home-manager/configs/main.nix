@@ -21,7 +21,7 @@
     ./nvim/nixcats.nix
     ./picom.nix
     ./polybar/polybar.nix
-    ./quickshell.nix
+    # ./quickshell.nix
     ./rofi.nix
     ./waybar/waybar.nix
     ./yazi.nix
