@@ -23,8 +23,14 @@
         # Rebuild and switch to new NixOS configuration (also applies wallpaper)
         rb = "nh os switch ${flakeDir} && ${applyWallpaper}";
 
+        # Rebuild and switch NixOS configuration offline
+        rbo = "nh os switch ${flakeDir} --offline && ${applyWallpaper}";
+
         # Rebuild and switch NixOS configuration using nixos-rebuild
         rbn = "sudo nixos-rebuild switch --flake ${flakeDir} && ${applyWallpaper}";
+
+        # Rebuild and switch NixOS configuration offline using nixos-rebuild
+        rbno = "sudo nixos-rebuild switch --flake ${flakeDir} --offline && ${applyWallpaper}";
 
         # Update flake.lock with latest versions from inputs
         upd = "nh os switch ${flakeDir} -u";
