@@ -1,0 +1,127 @@
+* {
+  border: none;
+  border-radius: 0;
+  font-family: '{monospace}';
+  font-size: 13px;
+background-color: transparent;
+}
+
+window#waybar {
+  background-color: transparent;
+  color: #{base05};
+  transition-property: background-color;
+  transition-duration: .5s;
+}
+
+window#waybar.hidden {
+  opacity: 0.5;
+}
+
+button {
+  box-shadow: inset 0 -3px transparent;
+  border: none;
+  border-radius: 0;
+}
+
+button:hover {
+  background: inherit;
+  box-shadow: inset 0 -3px #{base0D};
+}
+
+/* Common module styling */
+#clock,
+#battery,
+#cpu,
+#memory,
+#temperature,
+#backlight,
+#network,
+#pulseaudio,
+#tray,
+#custom-playerctl.backward,
+#custom-playerctl.play,
+#custom-playerctl.forward,
+#custom-playerlabel,
+#custom-weather {
+  padding: 0 10px;
+  color: #{base05};
+  background-color: transparent;
+}
+
+/* Workspace styling */
+#niri-workspaces,
+#window {
+  margin: 0 4px;
+}
+
+#niri-workspaces button {
+  padding: 0 8px;
+  background-color: transparent;
+  color: #{base05};
+  border-radius: 4px;
+  margin: 0 2px;
+}
+
+#niri-workspaces button.active {
+  color: #{base00};
+}
+
+.modules-left > widget:first-child > #niri-workspaces {
+  margin-left: 0;
+}
+
+.modules-right > widget:last-child > #niri-workspaces {
+  margin-right: 0;
+}
+
+/* State-based styling */
+#battery.charging,
+#battery.plugged {
+  color: #{base0B};
+}
+
+#battery.critical:not(.charging) {
+  color: #{base00};
+  animation: blink 0.5s linear infinite alternate;
+}
+
+#pulseaudio.muted,
+#temperature.critical,
+#temperature.warn {
+  color: #{base00};
+}
+
+#network.disconnected {
+  color: #{base08};
+}
+
+/* Custom modules */
+#custom-launcher {
+  background-color: transparent;
+  color: #{base0D};
+  margin: 0 10px;
+  font-size: 30px;
+}
+
+#custom-playerctl.backward,
+#custom-playerctl.play,
+#custom-playerctl.forward {
+  border-radius: 0px;
+  margin: 0;
+}
+
+/* Tray */
+#tray > .passive {
+  -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+  -gtk-icon-effect: highlight;
+}
+
+/* Animations */
+@keyframes blink {
+  to {
+    color: #{base00};
+  }
+}
