@@ -25,8 +25,8 @@ in
       nixfmt-rfc-style # Run `nixfmt file.nix`
       nixd
       nixfmt
-
       nixfmt-tree
+      nix-search-cli
 
       # CLI
       hello
