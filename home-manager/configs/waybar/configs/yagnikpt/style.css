@@ -12,6 +12,7 @@
 
 window.#waybar {
   min-width: 40px;
+  background: transparent;
 }
 
 tooltip,
