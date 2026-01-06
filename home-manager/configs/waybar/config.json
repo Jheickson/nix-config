@@ -1,0 +1,165 @@
+{
+  "layer": "top",
+  "position": "top",
+  "height": 30,
+  "spacing": 4,
+  "modules-left": [
+    "custom/launcher",
+    "niri/workspaces",
+    "custom/playerctl#backward",
+    "custom/playerlabel",
+    "custom/playerctl#forward",
+    "custom/weather"
+  ],
+  "modules-center": ["clock"],
+  "modules-right": [
+    "network",
+    "pulseaudio",
+    "backlight",
+    "battery",
+    "cpu",
+    "memory",
+    "temperature",
+    "tray"
+  ],
+  "custom/launcher": {
+    "format": "<span color='#{base05}'>󱄅</span>",
+    "tooltip": false,
+    "on-click": "fuzzel"
+  },
+  "niri/workspaces": {
+    "format": "{icon}",
+    "format-icons": {
+      "active": "",
+      "inactive": "",
+      "urgent": "",
+      "visible": ""
+    },
+    "all-outputs": true,
+    "disable-scroll": false,
+    "smooth-scrolling-threshold": 120
+  },
+  "custom/playerctl#backward": {
+    "format": "󰙣 ",
+    "on-click": "playerctl previous",
+    "on-scroll-up": "playerctl volume .05+",
+    "on-scroll-down": "playerctl volume .05-"
+  },
+  "custom/playerctl#play": {
+    "format": "{icon}",
+    "return-type": "json",
+    "exec": "playerctl -a metadata --format '{\"text\": \"{{artist}} - {{markup_escape(title)}}\", \"tooltip\": \"{{playerName}} : {{markup_escape(title)}}\", \"alt\": \"{{status}}\", \"class\": \"{{status}}\"}' -F",
+    "on-click": "playerctl play-pause",
+    "on-scroll-up": "playerctl volume .05+",
+    "on-scroll-down": "playerctl volume .05-",
+    "format-icons": {
+      "Playing": "<span>󰏥 </span>",
+      "Paused": "<span> </span>",
+      "Stopped": "<span> </span>"
+    }
+  },
+  "custom/playerctl#forward": {
+    "format": "󰙡 ",
+    "on-click": "playerctl next",
+    "on-scroll-up": "playerctl volume .05+",
+    "on-scroll-down": "playerctl volume .05-"
+  },
+  "custom/playerlabel": {
+    "format": "<span>󰎈 {} 󰎈</span>",
+    "return-type": "json",
+    "max-length": 65,
+    "exec": "playerctl -a metadata --format '{\"text\": \"{{artist}} - {{markup_escape(title)}}\", \"tooltip\": \"{{playerName}} : {{markup_escape(title)}}\", \"alt\": \"{{status}}\", \"class\": \"{{status}}\"}' -F",
+    "on-click": "playerctl play-pause"
+  },
+  "pulseaudio": {
+    "format": "{icon} {volume}%",
+    "format-bluetooth": "{icon} {volume}% ",
+    "format-muted": "󰝟",
+    "format-icons": {
+      "headphone": "󰋋",
+      "headset": "󰋋",
+      "handsfree": "󰋋",
+      "phone": "󰋋",
+      "portable": "󰋋",
+      "car": "󰋋",
+      "default": ["󰕿", "󰖀", "󰕾", "󰕾"]
+    },
+    "scroll-step": 5,
+    "on-click": "pavucontrol",
+    "on-right-click": "pamixer --toggle-mute",
+    "on-scroll-up": "pamixer --increase 5",
+    "on-scroll-down": "pamixer --decrease 5"
+  },
+  "backlight": {
+    "format": "󰃞 {percent}%",
+    "tooltip": true,
+    "on-scroll-up": "brightnessctl set +5%",
+    "on-scroll-down": "brightnessctl set 5%-"
+  },
+  "clock": {
+    "format": "󰥔 {:%H:%M}",
+    "tooltip-format": "<big>{:%Y %B %d (%A)}</big>\n<tt><small>{calendar}</small></tt>",
+    "interval": 60
+  },
+  "battery": {
+    "states": {
+      "warning": 30,
+      "critical": 15
+    },
+    "format": "{icon} {capacity}%",
+    "format-charging": "󰂄 {capacity}%",
+    "format-plugged": "󰂄 {capacity}%",
+    "format-alt": "{time} {capacity}%",
+    "format-icons": [
+      "󰁺",
+      "󰁻",
+      "󰁼",
+      "󰁽",
+      "󰁾",
+      "󰁿",
+      "󰂀",
+      "󰂁",
+      "󰂂",
+      "󰁹"
+    ]
+  },
+  "network": {
+    "format-wifi": "󰤨 {essid} {bandwidthTotalBytes}",
+    "format-ethernet": "󰈀",
+    "format-disconnected": "󰤭",
+    "tooltip": true,
+    "on-click": "nm-connection-editor",
+    "interval": 1
+  },
+  "cpu": {
+    "format": "󰍛 {usage:02d}%",
+    "tooltip": true,
+    "interval": 1
+  },
+  "memory": {
+    "format": "󰘚 {used:0.1f}G/{total:0.1f}G",
+    "format-alt": "󰘚 {percentage}%",
+    "tooltip": true,
+    "tooltip-format": "Memory: {used:0.1f}G/{total:0.1f}G ({percentage}%)",
+    "interval": 1
+  },
+  "temperature": {
+    "thermal-zone": 0,
+    "critical-threshold": 80,
+    "format": "󰔏 {temperatureC}°C",
+    "format-critical": "󰔏 {temperatureC}°C",
+    "format-warn": "󰔏 {temperatureC}°C",
+    "tooltip": true,
+    "interval": 1
+  },
+  "tray": {
+    "spacing": 10
+  },
+  "custom/weather": {
+    "format": "{}",
+    "return-type": "json",
+    "exec": "$HOME/nix-config/home-manager/configs/waybar/weather.sh",
+    "interval": 60,
+    "tooltip": true
+  }
+}
