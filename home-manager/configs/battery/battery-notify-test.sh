@@ -26,16 +26,16 @@ echo "Current status: $STATUS"
 echo "Testing notifications..."
 
 # Test low battery notification
-notify-send -u normal -i "battery-low" "Battery Alert" "Test: Battery at 20% - Consider plugging in charger"
+notify-send -u normal -i "battery-low" "Battery Alert" "Test: Battery at ${CAPACITY}% - Consider plugging in charger"
 
 sleep 2
 
 # Test critical battery notification
-notify-send -u critical -i "battery-caution" "Battery Alert" "Test: Battery at 10% - Plug in charger immediately!"
+notify-send -u critical -i "battery-caution" "Battery Alert" "Test: Battery at ${CAPACITY}% - Plug in charger immediately!"
 
 sleep 2
 
 # Test full battery notification
-notify-send -u low -i "battery-full-charged" "Battery Alert" "Test: Battery fully charged at 97% - Consider unplugging"
+notify-send -u low -i "battery-full-charged" "Battery Alert" "Test: Battery fully charged at ${CAPACITY}% - Consider unplugging"
 
 echo "Test notifications sent! Check your notification system."
