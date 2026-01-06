@@ -3,11 +3,10 @@
   border-radius: 0;
   font-family: '{monospace}';
   font-size: 13px;
-background-color: transparent;
 }
 
 window#waybar {
-  background-color: transparent;
+  background-color: rgba(base00, 0.8);
   color: #{base05};
   transition-property: background-color;
   transition-duration: .5s;
@@ -66,11 +65,11 @@ button:hover {
   color: #{base00};
 }
 
-.modules-left > widget:first-child > #niri-workspaces {
+.modules-left>widget:first-child>#niri-workspaces {
   margin-left: 0;
 }
 
-.modules-right > widget:last-child > #niri-workspaces {
+.modules-right>widget:last-child>#niri-workspaces {
   margin-right: 0;
 }
 
@@ -111,11 +110,11 @@ button:hover {
 }
 
 /* Tray */
-#tray > .passive {
+#tray>.passive {
   -gtk-icon-effect: dim;
 }
 
-#tray > .needs-attention {
+#tray>.needs-attention {
   -gtk-icon-effect: highlight;
 }
 
