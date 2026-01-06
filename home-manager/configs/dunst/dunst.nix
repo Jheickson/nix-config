@@ -12,6 +12,8 @@ let
   dunstConfig = ''
     [global]
         font = ${fonts.monospace.name} 10
+        line_height = 0
+        scale = 0
         
         # Allow HTML markup for rich formatting
         allow_markup = yes
@@ -21,13 +23,18 @@ let
         
         # Icon positioning
         icon_position = left
-        icon_folders = /usr/share/icons/Papirus-Dark/16x16/panel/;/usr/share/icons/Papirus-Dark/22x22/panel/;/usr/share/icons/Papirus-Dark/24x24/panel/
+        icon_folders = /usr/share/icons/Papirus-Dark/16x16/panel/;/usr/share/icons/Papirus-Dark/22x22/panel/;/usr/share/icons/Papirus-Dark/24x24/panel/;/usr/share/icons/Papirus-Dark/32x32/panel/;/usr/share/icons/Papirus-Dark/48x48/panel/;/usr/share/icons/hicolor/32x32/status/;/usr/share/icons/hicolor/48x48/status/
+        max_icon_size = 48
         
         # Rounded corners
         corner_radius = 12
         
         # Sort by urgency
         sort = yes
+
+        # Stack duplicates but keep a count visible
+        stack_duplicates = true
+        hide_duplicate_count = false
         
         # Show hidden count
         indicate_hidden = yes
@@ -43,6 +50,10 @@ let
         
         # Geometry - positioned top-right with good spacing
         geometry = "450x5-40+60"
+
+        # Sizing and truncation
+        max_height = 400
+        ellipsize = middle
         
         # Transparency matching your current setup
         transparency = 25
@@ -55,12 +66,24 @@ let
         horizontal_padding = 20
         separator_height = 1
         separator_color = "#${colors.base01}"
+
+        # Progress bar styling for notifications that support it
+        progress_bar = true
+        progress_bar_height = 6
+        progress_bar_frame_width = 1
+        progress_bar_min_width = 50
+        progress_bar_max_width = 400
         
         # Frame styling
         frame_width = 2
         
         # Idle threshold
         idle_threshold = 120
+
+        # History and fullscreen behavior
+        history_length = 80
+        fullscreen = pushback
+        force_xinerama = false
         
         # Monitor settings
         monitor = 0
@@ -70,6 +93,11 @@ let
         
         # Browser for links
         browser = /usr/bin/firefox -new-tab
+
+        # Mouse ergonomics
+        mouse_left_click = close_current
+        mouse_middle_click = do_action
+        mouse_right_click = close_all
 
     [frame]
         width = 2
