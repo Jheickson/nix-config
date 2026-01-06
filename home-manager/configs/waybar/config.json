@@ -23,7 +23,7 @@
     "tray"
   ],
   "custom/launcher": {
-    "format": "<span color='#{base05}'>󱄅</span>",
+    "format": "<span color='{base05}'>󱄅</span>",
     "tooltip": false,
     "on-click": "fuzzel"
   },
