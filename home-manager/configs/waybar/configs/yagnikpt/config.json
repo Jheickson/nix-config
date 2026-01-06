@@ -149,7 +149,11 @@
       "title-len": 30,
       "dynamic-len": 40,
       "dynamic-separator": " • ",
-      "rotate": 90
+      "rotate": 90,
+      "expand": true,
+      "on-right-click": "pamixer --toggle-mute",
+      "on-scroll-up": "pamixer --increase 5",
+      "on-scroll-down": "pamixer --decrease 5"
     }
   }
 ]
