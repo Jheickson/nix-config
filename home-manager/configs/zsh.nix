@@ -160,13 +160,40 @@
     oh-my-zsh = {
       enable = true;
       plugins = [
+        "aliases"
+        "alias-finder"
+        "colorize"
+        "command-not-found"
+        "composer"
+        "copypath"
+        "docker"
+        "docker-compose"
+        "flutter"
         "git"
+        "golang"
+        "gh"
+        "git-auto-fetch"
         "sudo"
         # "thefuck"
+        "vscode"
+        "z"
+        "zsh-interactive-cd"
       ];
-      theme = "lambda"; # blinks is also really nice
-      # TODO Create own zsh theme
+      theme = "kardan";
+      # Themes I liked (https://github.com/ohmyzsh/ohmyzsh/wiki/Themes)
+      # lambda, blinks, strug, sammy, refined, peepcode, nicoulaj, kardan, emotty, bureau
     };
+
+    initContent = ''
+      # hook “F” (or a custom alias) to pay-respects
+      eval "$(pay-respects zsh --alias)"
+
+      # If you use oh-my-zsh command-not-found, skip its hook here to avoid duplicates:
+      # eval "$(pay-respects zsh --alias --nocnf)"
+
+      # Optional: disable AI suggestions
+      # export _PR_AI_DISABLE=1
+    '';
 
   };
 
@@ -181,7 +208,9 @@
   };
 
   home.packages = with pkgs; [
-    # thefuck
+    # thefuck # has been removed due to lack of maintenance upstream and incompatible with python 3.12+. Consider using 'pay-respects' instead
+    fzf
+    pay-respects
     zsh-autocomplete
     zsh-autosuggestions
     zoxide
