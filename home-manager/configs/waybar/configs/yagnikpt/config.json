@@ -45,28 +45,33 @@
       "icon-size": 24,
       "format": "{icon}",
       "on-click": "activate",
-      "tooltip": false,
-      "active-first": true
+      "tooltip": true,
+      "active-first": false
     },
     "niri/workspaces": {
       "format": "{index}",
       "all-outputs": true
     },
     "tray": {
-      "icon-size": 21,
-      "spacing": 10,
+      "icon-size": 16,
+      "spacing": 8,
       "icons": {
         "blueman": "bluetooth"
       }
     },
     "network": {
+      "icon-size": 24,
       "format": "{icon}",
-      "format-disabled": "\ue1da",
+      "format-disabled": "󰤭",
       "format-wifi": "{icon}",
-      "format-disconnected": "\uf067",
-      "format-ethernet": "\ue8be",
+      "format-disconnected": "󰌙",
+      "format-ethernet": "",
       "format-icons": {
-        "wifi": ["\ue4ca", "\ue4d9", "\ue63e"]
+        "wifi": [
+          "󰤟",
+          "󰤢",
+          "󰤨"
+        ]
       },
       "tooltip-format-wifi": "{essid} ({signalStrength}%)"
     },
@@ -91,15 +96,18 @@
       },
       "full-at": 98,
       "format": "{icon}",
-      "format-charging": "\uea0b",
+      "format-charging": "󰂄",
       "format-icons": [
-        "\uf30c",
-        "\uf30b",
-        "\uf30a",
-        "\uf309",
-        "\uf308",
-        "\uf307",
-        "\uf304"
+        "󰁺",
+        "󰁻",
+        "󰁼",
+        "󰁽",
+        "󰁾",
+        "󰁿",
+        "󰂀",
+        "󰂁",
+        "󰂂",
+        "󰁹"
       ],
       "interval": 5
     },
@@ -113,7 +121,7 @@
       "interval": 5
     },
     "custom/separator": {
-      "format": "\uf108",
+      "format": "",
       "tooltip": false
     },
     "clock": {
