@@ -14,7 +14,7 @@
     ./battery/battery-notify.nix
     ./dunst/dunst.nix
     ./fuzzel.nix
-    # ./ghostty.nix
+    ./ghostty.nix
     ./gowall.nix
     ./i3.nix
     ./niri
