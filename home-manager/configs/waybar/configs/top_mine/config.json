@@ -11,7 +11,9 @@
     "custom/playerctl#forward",
     "custom/weather"
   ],
-  "modules-center": ["clock"],
+  "modules-center": [
+    "clock"
+  ],
   "modules-right": [
     "network",
     "pulseaudio",
@@ -30,10 +32,10 @@
   "niri/workspaces": {
     "format": "{icon}",
     "format-icons": {
-            "active": "",
-            "inactive": "",
-            "urgent": "",
-            "visible": ""
+      "active": "",
+      "inactive": "",
+      "urgent": "",
+      "visible": ""
     },
     "all-outputs": true,
     "disable-scroll": false,
@@ -82,7 +84,12 @@
       "phone": "󰋋",
       "portable": "󰋋",
       "car": "󰋋",
-      "default": ["󰕿", "󰖀", "󰕾", "󰕾"]
+      "default": [
+        "󰕿",
+        "󰖀",
+        "󰕾",
+        "󰕾"
+      ]
     },
     "scroll-step": 5,
     "on-click": "pavucontrol",
