@@ -16,6 +16,8 @@
         "network",
         "group/battery",
         "custom/separator",
+        "mpris",
+        "custom/separator",
         "clock"
       ]
     },
@@ -127,6 +129,27 @@
     "clock": {
       "format": "{:%H\n%M}",
       "tooltip-format": "{:%a %b %d, %Y}"
+    },
+    "mpris": {
+      "format": "{player_icon} {dynamic}",
+      "format-paused": "{status_icon} {dynamic}",
+      "format-stopped": "{player_icon}",
+      "player-icons": {
+        "default": "▶",
+        "mpv": "🎵",
+        "spotify": "🎵",
+        "Feishin": "🎵",
+        "firefox": "🌐"
+      },
+      "status-icons": {
+        "paused": "⏸",
+        "stopped": "⏹"
+      },
+      "artist-len": 20,
+      "title-len": 30,
+      "dynamic-len": 40,
+      "dynamic-separator": " • ",
+      "rotate": 90
     }
   }
 ]
