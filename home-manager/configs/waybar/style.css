@@ -3,6 +3,7 @@
   border-radius: 0;
   font-family: '{monospace}';
   font-size: 13px;
+    background-color: #{base00};
 }
 
 window#waybar {
