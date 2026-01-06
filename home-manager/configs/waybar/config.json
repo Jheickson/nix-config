@@ -30,10 +30,10 @@
   "niri/workspaces": {
     "format": "{icon}",
     "format-icons": {
-      "active": "",
-      "inactive": "",
-      "urgent": "",
-      "visible": ""
+            "active": "",
+            "inactive": "",
+            "urgent": "",
+            "visible": ""
     },
     "all-outputs": true,
     "disable-scroll": false,
