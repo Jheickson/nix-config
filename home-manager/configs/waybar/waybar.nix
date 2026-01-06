@@ -24,10 +24,10 @@ in
         modules-left = [
           "custom/launcher"
           "niri/workspaces"
-          #"custom/playerctl#backward"
-          #"custom/playerctl#play"
-          #"custom/playerctl#forward"
+          "custom/playerctl#backward"
+          # "custom/playerctl#play"
           "custom/playerlabel"
+          "custom/playerctl#forward"
           "custom/weather"
         ];
         modules-center = [ "clock" ];
@@ -417,14 +417,14 @@ in
       #custom-playerctl.play,
       #custom-playerctl.forward {
         /* background-color: #${colors.base02}; */
-        /* border-radius: 4px; */
-        /* margin: 4px 0; */
+        border-radius: 0px; 
+        margin: 0; 
       }
 
       #custom-playerctl.backward:hover,
       #custom-playerctl.play:hover,
       #custom-playerctl.forward:hover {
-        background-color: #${colors.base01};
+        /* background-color: #${colors.base01}; */
       }
 
       #custom-playerlabel {
