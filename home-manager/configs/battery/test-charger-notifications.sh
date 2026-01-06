@@ -31,7 +31,7 @@ notify-send -u low -i "battery-full-charged" "Battery Alert" "Charger connected 
 sleep 3
 
 # Test charger disconnected notification (simulate discharging status)
-notify-send -u low -i "battery-low" "Battery Alert" "Charger disconnected - Battery discharging at ${CAPACITY}%"
+notify-send -u normal -i "battery-caution" "Battery Alert" "Charger disconnected - Battery discharging at ${CAPACITY}%"
 
 echo "Test charger notifications sent! Check your notification system."
 echo ""
