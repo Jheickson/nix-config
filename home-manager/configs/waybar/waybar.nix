@@ -227,7 +227,29 @@ in
         box-shadow: inset 0 -3px #${colors.base0D};
       }
 
-      #niri-workspaces {
+      /* Common module styling */
+      #clock,
+      #battery,
+      #cpu,
+      #memory,
+      #temperature,
+      #backlight,
+      #network,
+      #pulseaudio,
+      #tray,
+      #custom-playerctl.backward,
+      #custom-playerctl.play,
+      #custom-playerctl.forward,
+      #custom-playerlabel,
+      #custom-weather {
+        padding: 0 10px;
+        color: #${colors.base05};
+        background-color: transparent;
+      }
+
+      /* Workspace styling */
+      #niri-workspaces,
+      #window {
         margin: 0 4px;
       }
 
@@ -239,158 +261,40 @@ in
         margin: 0 2px;
       }
 
-      #niri-workspaces button:hover {
-        /* background: #${colors.base01}; */
-      }
-
       #niri-workspaces button.active {
-        /* background-color: #${colors.base0D}; */
         color: #${colors.base00};
       }
 
-      #niri-workspaces button.visible {
-        /* background-color: #${colors.base02}; */
-      }
-
-      #niri-workspaces button.urgent {
-        /* background-color: #${colors.base08}; */
-      }
-
-      #mode {
-        background-color: #${colors.base0E};
-        border-bottom: 3px solid #${colors.base05};
-      }
-
-      #clock,
-      #battery,
-      #cpu,
-      #memory,
-      #disk,
-      #temperature,
-      #backlight,
-      #network,
-      #pulseaudio,
-      #wireplumber,
-      #custom-media,
-      #tray,
-      #mode,
-      #idle_inhibitor,
-      #scratchpad,
-      #power-profiles-daemon,
-      #mpd,
-      #custom-playerctl.backward,
-      #custom-playerctl.play,
-      #custom-playerctl.forward,
-      #custom-playerlabel {
-        padding: 0 10px;
-        color: #${colors.base05};
-        background-color: transparent;
-      }
-
-      #window,
-      #niri-workspaces {
-        margin: 0 4px;
-      }
-
-      /* If workspaces is the leftmost module, omit left margin */
       .modules-left > widget:first-child > #niri-workspaces {
         margin-left: 0;
       }
 
-      /* If workspaces is the rightmost module, omit right margin */
       .modules-right > widget:last-child > #niri-workspaces {
         margin-right: 0;
       }
 
-      #clock {
-        /* background-color: #${colors.base02}; */
-        /* border-radius: 4px; */
-        /* margin: 4px 0; */
-      }
-
-      #battery {
-        /* background-color: #${colors.base02}; */
-        /* border-radius: 4px; */
-        /* margin: 4px 0; */
-      }
-
-      #battery.charging, #battery.plugged {
+      /* State-based styling */
+      #battery.charging,
+      #battery.plugged {
         color: #${colors.base0B};
-        /* background-color: #${colors.base02}; */
-      }
-
-      @keyframes blink {
-        to {
-          /* background-color: #${colors.base05}; */
-          color: #${colors.base00};
-        }
       }
 
       #battery.critical:not(.charging) {
-        /* background-color: #${colors.base08}; */
         color: #${colors.base00};
-        animation-name: blink;
-        animation-duration: 0.5s;
-        animation-timing-function: linear;
-        animation-iteration-count: infinite;
-        animation-direction: alternate;
+        animation: blink 0.5s linear infinite alternate;
       }
 
-      #pulseaudio {
-        /* background-color: #${colors.base02}; */
-        /* border-radius: 4px; */
-        /* margin: 4px 0; */
-      }
-
-      #pulseaudio.muted {
-        /* background-color: #${colors.base08}; */
+      #pulseaudio.muted,
+      #temperature.critical,
+      #temperature.warn {
         color: #${colors.base00};
-      }
-
-      #backlight {
-        /* background-color: #${colors.base02}; */
-        /* border-radius: 4px; */
-        /* margin: 4px 0; */
-      }
-
-      #network {
-        /* background-color: #${colors.base02}; */
-        /* border-radius: 4px; */
-        /* margin: 4px 0; */
       }
 
       #network.disconnected {
-        /* background-color: #${colors.base08}; */
+        color: #${colors.base08};
       }
 
-      #cpu {
-        /* background-color: #${colors.base02}; */
-        /* border-radius: 4px; */
-        /* margin: 4px 0; */
-      }
-
-      #memory {
-        /* background-color: #${colors.base02}; */
-        /* border-radius: 4px; */
-        /* margin: 4px 0; */
-      }
-
-      #temperature {
-        /* background-color: #${colors.base02}; */
-        /* border-radius: 4px; */
-        /* margin: 4px 0; */
-      }
-
-      #temperature.critical {
-        /* background-color: #${colors.base08}; */
-        color: #${colors.base00};
-      }
-
-      #temperature.warn {
-        /* background-color: #${colors.base09}; */
-        color: #${colors.base00};
-      }
-
+      /* Custom modules */
       #custom-launcher {
         background-color: transparent;
         color: #${colors.base0D};
@@ -398,46 +302,27 @@ in
         font-size: 30px;
       }
 
-      #tray {
-        /* background-color: #${colors.base02}; */
-        /* border-radius: 4px; */
-        /* margin: 4px 0; */
+      #custom-playerctl.backward,
+      #custom-playerctl.play,
+      #custom-playerctl.forward {
+        border-radius: 0px;
+        margin: 0;
       }
 
+      /* Tray */
       #tray > .passive {
         -gtk-icon-effect: dim;
       }
 
       #tray > .needs-attention {
         -gtk-icon-effect: highlight;
-        /* background-color: #${colors.base08}; */
       }
 
-      #custom-playerctl.backward,
-      #custom-playerctl.play,
-      #custom-playerctl.forward {
-        /* background-color: #${colors.base02}; */
-        border-radius: 0px; 
-        margin: 0; 
-      }
-
-      #custom-playerctl.backward:hover,
-      #custom-playerctl.play:hover,
-      #custom-playerctl.forward:hover {
-        /* background-color: #${colors.base01}; */
-      }
-
-      #custom-playerlabel {
-        /* background-color: #${colors.base02}; */
-        /* border-radius: 4px; */
-        /* margin: 4px 0; */
-      }
-
-      #custom-weather {
-        background-color: transparent; 
-        /* border-radius: 4px; */
-        /* margin: 4px 0; */
-        padding: 0 10px;
+      /* Animations */
+      @keyframes blink {
+        to {
+          color: #${colors.base00};
+        }
       }
     '';
   };
