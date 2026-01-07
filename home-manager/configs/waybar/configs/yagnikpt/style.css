@@ -3,7 +3,7 @@
 * {
   border: none;
   border-radius: 0;
-  font-family: "JetBrainsMono NFM";
+  font-family: "{monospace}";
   padding: 0;
   margin: 0;
   min-width: 10px;
@@ -94,7 +94,7 @@ box.empty {
 
 #bluetooth.battery,
 #battery {
-  font-family: "JetBrainsMono NFM";
+  font-family: "{monospace}";
   font-size: 14px;
 }
 
