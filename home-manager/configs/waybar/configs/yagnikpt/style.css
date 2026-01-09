@@ -5,26 +5,29 @@
   border-radius: 0;
   font-family: "{monospace}";
   padding: 0;
-margin: 0;
+    margin: 0;
   background: transparent;
+    font-size: 0.875rem;
+    /* Base font size: 14px equivalent */
 }
 
 window.#waybar {
-  min-width: 50px;
+  min-width: 2.5rem;
+    /* 40px equivalent - more standardized width */
   background: transparent;
 }
 
 tooltip,
 #tray menu {
   background: alpha(#262626, 0.999);
-  border-radius: 8px;
-  padding: 1px 2px;
+  border-radius: 0.5rem;
+    padding: 0.125rem 0.25rem;
 }
 
 #custom-separator {
   font-family: "{monospace}";
-  margin: -10px 0;
-font-size: 32px;
+    margin: -0.5rem 0;
+    font-size: 1.5rem;
   color: @surface_bright;
 }
 
@@ -32,8 +35,8 @@ font-size: 32px;
 #workspaces,
 #bottom {
   background: @surface_container;
-  padding: 8px 0;
-  border-radius: 0 16px 16px 0;
+  padding: 0.5rem 0;
+    border-radius: 0 1rem 1rem 0;
 }
 
 box.empty {
@@ -43,58 +46,58 @@ box.empty {
 }
 
 #privacy {
-  margin: 4px 0;
-  padding: 4px 12px;
+  margin: 0.25rem 0;
+    padding: 0.25rem 0.5rem;
   background: @surface_bright;
-  border-radius: 8px;
+  border-radius: 0.5rem;
 }
 
 #taskbar>* {
-  margin: 4px 0;
+  margin: 0.25rem 0;
 }
 
 #workspaces {
   min-width: 0;
-  padding: 6px 14px;
-  margin: 20px 0;
+  padding: 0.375rem 0.5rem;
+    margin: 1rem 0;
 }
 
 #workspaces button {
   color: transparent;
   transition: all 0.2s ease-in-out;
   border-radius: 9999px;
-  margin: 3px 0;
+  margin: 0.1875rem 0;
   padding: 0;
-    background: @surface_bright;
-    min-width: 6px;
-    min-height: 6px;
+  background: @surface_bright;
+  min-width: 0.375rem;
+    min-height: 0.375rem;
 }
 
 #workspaces button.active {
   background: @on_primary_container;
-  min-height: 22px;
+  min-height: 1.375rem;
 }
 
 #bottom,
 #top {
   color: @on_surface;
-  padding-right: 3px;
-    padding-left: 3px;
+  padding-right: 0.25rem;
+    padding-left: 0.25rem;
 }
 
 #network {
-  margin-bottom: 8px;
+  margin-bottom: 0.5rem;
 }
 
 #bluetooth,
 #network {
-  font-size: 18px;
+  font-size: 1.125rem;
 }
 
 #bluetooth.battery,
 #battery {
   font-family: "{monospace}";
-  font-size: 14px;
+    font-size: 0.875rem;
 }
 
 #battery.icon,
@@ -104,8 +107,8 @@ box.empty {
 }
 
 #battery {
-  margin-top: 8px;
-  margin-bottom: 4px;
+  margin-top: 0.5rem;
+    margin-bottom: 0.25rem;
 }
 
 #battery widget>* {
@@ -129,22 +132,22 @@ box.empty {
 }
 
 #battery widget:first-child>* {
-  border-radius: 8px 8px 0 0;
+  border-radius: 0.5rem 0.5rem 0 0;
 }
 
 #battery widget:last-child>* {
-  border-radius: 0 0 8px 8px;
+  border-radius: 0 0 0.5rem 0.5rem;
 }
 
 #battery>*:first-child * {
-  font-size: 20px;
+  font-size: 1.25rem;
   margin: 0;
 }
 
 #battery>*:last-child * {
   margin: 0;
-  margin-top: -4px;
-  font-size: 14px;
+  margin-top: -0.25rem;
+    font-size: 0.875rem;
 }
 
 #bluetooth.battery.on {
@@ -155,5 +158,5 @@ box.empty {
 
 #tray,
 #network {
-  margin-top: 8px;
+  margin-top: 0.5rem;
 }
