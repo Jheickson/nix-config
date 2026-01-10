@@ -4,19 +4,31 @@
     "position": "left",
     "orientation": "vertical",
     "reload_style_on_change": true,
-    "modules-center": ["group/top", "niri/workspaces", "group/bottom"],
+    "modules-left": [
+      "niri/workspaces"
+    ],
+    "modules-center": [
+      "group/bottom"
+    ],
+    "modules-right": [
+      "group/top"
+    ],
+    "spacing": 10,
     "group/top": {
       "orientation": "inherit",
-      "modules": ["privacy", "wlr/taskbar"]
+      "modules": [
+        "privacy",
+        "wlr/taskbar",
+        "clock"
+      ]
     },
     "group/bottom": {
       "orientation": "inherit",
       "modules": [
-        "tray",
         "group/system",
         "group/battery",
         "mpris",
-        "clock"
+        "tray"
       ]
     },
     "privacy": {
@@ -180,8 +192,8 @@
         "stopped": "⏹"
       },
       "artist-len": 20,
-      "title-len": 30,
-      "dynamic-len": 40,
+      "title-len": 20,
+      "dynamic-len": 30,
       "dynamic-separator": " • ",
       "rotate": 90,
       "expand": true,
