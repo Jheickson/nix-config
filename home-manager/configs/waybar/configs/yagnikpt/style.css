@@ -75,7 +75,11 @@ box.empty {
 
 #workspaces button.active {
   background: @on_primary_container;
-  padding: 0.15rem;
+  padding: 0.4rem 0;
+}
+
+#workspaces button:hover {
+  background: @primary_container; 
 }
 
 #bottom,
