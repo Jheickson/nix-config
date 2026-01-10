@@ -66,10 +66,10 @@ box.empty {
 
 #workspaces button {
   color: transparent;
-  transition: all 0.2s ease-in-out;
+  transition: all 0.15s ease;
   border-radius: 9999px;
   margin: 0.1rem 0rem;
-    padding: 0.1rem;
+    padding: 0;
   background: @surface_bright;
   min-width: 0.2rem;
     min-height: 0.2rem;
@@ -77,8 +77,7 @@ box.empty {
 
 #workspaces button.active {
   background: @on_primary_container;
-  min-height: 1.25rem;
-  padding: 0.2rem 0;
+  padding: 0.15rem;
 }
 
 #bottom,
