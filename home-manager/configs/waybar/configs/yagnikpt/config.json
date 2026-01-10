@@ -14,6 +14,7 @@
       "modules": [
         "tray",
         "network",
+        "pulseaudio",
         "group/battery",
         "custom/separator",
         "mpris",
@@ -76,6 +77,27 @@
         ]
       },
       "tooltip-format-wifi": "{essid} ({signalStrength}%)"
+    },
+    "pulseaudio": {
+      "scroll-step": 5,
+      "format": "{icon}",
+      "format-muted": "",
+      "format-icons": {
+        "default": [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ]
+      },
+      "tooltip-format": "Volume: {volume}%"
     },
     "bluetooth": {
       "format-connected": "\ue1a8",
