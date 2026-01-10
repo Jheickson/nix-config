@@ -6,7 +6,6 @@ let
   # Read the config.json (which is an array) and wrap it properly
   configArray = builtins.fromJSON (builtins.readFile ./config.json);
   configFile = { mainBar = builtins.elemAt configArray 0; };
-  styleFile = builtins.readFile ./style.css;
   
   # Generate colors.css dynamically from Stylix colors
   colorsFile = ''
@@ -39,12 +38,15 @@ in
     package = pkgs.waybar;
 
     settings = configFile;
-
-    style = styleFile;
+    style = lib.mkForce null; # allow external style file without collisions
   };
 
   # Create the colors.css file in the waybar config directory
   xdg.configFile."waybar/colors.css".text = colorsFile;
+
+  # Symlink style.css for live editing without rebuilds
+  xdg.configFile."waybar/style.css".source =
+    config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nix-config/home-manager/configs/waybar/configs/yagnikpt/style.css";
 
   home.packages = with pkgs; [
     playerctl
