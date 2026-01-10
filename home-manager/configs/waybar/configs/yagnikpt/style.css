@@ -1,7 +1,11 @@
 @import "colors.css";
 
 * {
-  border: none;
+  border: 0;
+    /*
+            border: dotted red 1px;
+            */
+    /* DEBUG: Uncomment to visualize boundaries */
   border-radius: 0;
   font-family: "{monospace}";
   padding: 0;
