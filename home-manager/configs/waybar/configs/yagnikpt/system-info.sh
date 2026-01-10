@@ -45,7 +45,7 @@ RAM: ${mem_used_gib} / ${mem_total_gib} GiB (${mem_pct}%)
 Temp: ${temp_c}°C
 Disk: ${disk_used} / ${disk_total} (${disk_avail} free, ${disk_usepct} used)"
 
-# Escape for JSON (replace " with \" and \ with \\, preserve actual newlines)
-escaped_tooltip=$(printf '%s' "$tooltip" | sed 's/\\/\\\\/g; s/"/\\"/g')
+# Escape for JSON: replace \ with \\, " with \", and newlines with \n
+escaped_tooltip=$(printf '%s' "$tooltip" | sed 's/\\/\\\\/g; s/"/\\"/g' | awk '{printf "%s\\n", $0}' | sed 's/\\n$//')
 
 printf '{"text":"","tooltip":"%s"}\n' "$escaped_tooltip"
