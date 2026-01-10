@@ -19,7 +19,7 @@ window.#waybar {
 
 tooltip,
 #tray menu {
-  background: alpha(#262626, 0.999);
+  background: alpha(@surface_container, 0.999);
   border-radius: 0.5rem;
   padding: 0.25rem;
 }
@@ -34,7 +34,7 @@ tooltip,
 #top,
 #workspaces,
 #bottom {
-  background: @surface_container;
+  background: alpha(@surface_container, 0.75);
   padding: 0.5rem 0;
   border-radius: 0 1rem 1rem 0;
 }
@@ -66,11 +66,11 @@ box.empty {
   color: transparent;
   transition: all 0.15s ease;
   border-radius: 9999px;
-  margin: 0.1rem 0rem;
+  margin: 0.15rem;
   padding: 0;
   background: @surface_bright;
-  min-width: 0.2rem;
-  min-height: 0.2rem;
+  min-width: 0rem;
+  min-height: 0rem;
 }
 
 #workspaces button.active {
@@ -79,7 +79,7 @@ box.empty {
 }
 
 #workspaces button:hover {
-  background: @primary_container; 
+  background: @primary_container;
 }
 
 #bottom,
