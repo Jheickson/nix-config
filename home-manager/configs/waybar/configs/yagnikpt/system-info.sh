@@ -39,9 +39,13 @@ done
 # Disk usage for root
 read -r _ disk_total disk_used disk_avail disk_usepct _ < <(df -h / | awk 'NR==2 {print $1, $2, $3, $4, $5, $6}')
 
-tooltip="CPU: ${cpu_usage}%\nRAM: ${mem_used_gib} / ${mem_total_gib} GiB (${mem_pct}%)\nTemp: ${temp_c}°C\nDisk: ${disk_used} / ${disk_total} (${disk_avail} free, ${disk_usepct} used)"
+# Build tooltip with actual newlines
+tooltip="CPU: ${cpu_usage}%
+RAM: ${mem_used_gib} / ${mem_total_gib} GiB (${mem_pct}%)
+Temp: ${temp_c}°C
+Disk: ${disk_used} / ${disk_total} (${disk_avail} free, ${disk_usepct} used)"
 
-# Escape for JSON
-escaped_tooltip=$(printf '%s' "$tooltip" | sed 's/\\/\\\\/g; s/"/\\"/g; s/$/\\n/' | tr -d '\n')
+# Escape for JSON (replace " with \" and \ with \\, preserve actual newlines)
+escaped_tooltip=$(printf '%s' "$tooltip" | sed 's/\\/\\\\/g; s/"/\\"/g')
 
 printf '{"text":"","tooltip":"%s"}\n' "$escaped_tooltip"
