@@ -3,10 +3,6 @@
 let
   colors = config.lib.stylix.colors;
 
-  # Read the config.json (which is an array) and wrap it properly
-  configArray = builtins.fromJSON (builtins.readFile ./config.json);
-  configFile = { mainBar = builtins.elemAt configArray 0; };
-  
   # Generate colors.css dynamically from Stylix colors
   colorsFile = ''
     /* Auto-generated from Stylix colors */
@@ -37,12 +33,16 @@ in
     enable = true;
     package = pkgs.waybar;
 
-    settings = configFile;
+    settings = lib.mkForce {}; # allow external config file without collisions
     style = lib.mkForce null; # allow external style file without collisions
   };
 
   # Create the colors.css file in the waybar config directory
   xdg.configFile."waybar/colors.css".text = colorsFile;
+
+  # Symlink config for live editing without rebuilds
+  xdg.configFile."waybar/config".source =
+    config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nix-config/home-manager/configs/waybar/configs/yagnikpt/config.json";
 
   # Symlink style.css for live editing without rebuilds
   xdg.configFile."waybar/style.css".source =
