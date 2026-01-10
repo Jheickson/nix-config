@@ -15,9 +15,7 @@
         "tray",
         "group/system",
         "group/battery",
-        "custom/separator",
         "mpris",
-        "custom/separator",
         "clock"
       ]
     },
