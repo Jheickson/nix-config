@@ -68,16 +68,17 @@ box.empty {
   color: transparent;
   transition: all 0.2s ease-in-out;
   border-radius: 9999px;
-  margin: 0.5rem 0.5rem;
-  padding: 0;
+  margin: 0.1rem 0rem;
+    padding: 0.1rem;
   background: @surface_bright;
-  min-width: 0.5rem;
-    min-height: 0.5rem;
+  min-width: 0.2rem;
+    min-height: 0.2rem;
 }
 
 #workspaces button.active {
   background: @on_primary_container;
   min-height: 1.25rem;
+  padding: 0.2rem 0;
 }
 
 #bottom,
