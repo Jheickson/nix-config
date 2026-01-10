@@ -13,8 +13,8 @@
       "orientation": "inherit",
       "modules": [
         "tray",
-        "network",
-        "pulseaudio",
+        "group/system",
+        "custom/separator",
         "group/battery",
         "custom/separator",
         "mpris",
@@ -78,6 +78,17 @@
       },
       "tooltip-format-wifi": "{essid} ({signalStrength}%)"
     },
+    "group/system": {
+      "orientation": "inherit",
+      "modules": [
+        "network",
+        "pulseaudio",
+        "cpu",
+        "memory",
+        "temperature",
+        "disk"
+      ]
+    },
     "pulseaudio": {
       "scroll-step": 5,
       "format": "{icon}",
@@ -98,6 +109,27 @@
         ]
       },
       "tooltip-format": "Volume: {volume}%"
+    },
+    "cpu": {
+      "interval": 5,
+      "format": " {usage}%",
+      "tooltip-format": "CPU: {usage}%"
+    },
+    "memory": {
+      "interval": 5,
+      "format": " {percentage}%",
+      "tooltip-format": "RAM: {used} / {total} ({percentage}%)"
+    },
+    "temperature": {
+      "critical-threshold": 80,
+      "format": " {temperatureC}°C",
+      "tooltip-format": "Temp: {temperatureC}°C"
+    },
+    "disk": {
+      "interval": 30,
+      "path": "/",
+      "format": " {percentage}%",
+      "tooltip-format": "Disk /: {used} / {total} ({free} free)"
     },
     "bluetooth": {
       "format-connected": "\ue1a8",
