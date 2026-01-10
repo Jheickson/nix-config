@@ -62,7 +62,7 @@
     },
     "niri/workspaces": {
       "format": "{index}",
-      "all-outputs": true
+      "all-outputs": false
     },
     "tray": {
       "icon-size": 16,
