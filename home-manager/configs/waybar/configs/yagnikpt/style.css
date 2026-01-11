@@ -80,6 +80,7 @@ box.empty {
 
 #workspaces button:hover {
   background: @primary_container;
+  padding: 0.4rem 0;
 }
 
 #bottom,
