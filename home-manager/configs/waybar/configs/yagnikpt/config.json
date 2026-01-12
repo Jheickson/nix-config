@@ -28,6 +28,7 @@
         "group/system",
         "group/battery",
         "mpris",
+        "custom/weather",
         "tray"
       ]
     },
@@ -203,6 +204,19 @@
       "on-right-click": "pamixer --toggle-mute",
       "on-scroll-up": "pamixer --increase 5",
       "on-scroll-down": "pamixer --decrease 5"
+    },
+    "custom/weather": {
+      "format": "{}",
+      "return-type": "json",
+      "exec": "$HOME/nix-config/home-manager/configs/waybar/weather.sh",
+      "interval": 60,
+      "tooltip": true
+    },
+    "group/weather": {
+      "orientation": "inherit",
+      "modules": [
+        "custom/weather"
+      ]
     }
   }
 ]
