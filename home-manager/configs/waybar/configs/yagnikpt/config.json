@@ -28,7 +28,6 @@
         "group/system",
         "group/battery",
         "mpris",
-        "custom/weather",
         "tray"
       ]
     },
