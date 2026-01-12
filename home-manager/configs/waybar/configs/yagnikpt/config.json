@@ -114,7 +114,10 @@
           ""
         ]
       },
-      "tooltip-format": "Volume: {volume}%"
+      "tooltip-format": "Volume: {volume}%",
+      "on-click": "pamixer --toggle-mute",
+      "on-right-click": "pamixer --set-volume 50",
+      "on-middle-click": "pavucontrol"
     },
     "custom/system-info": {
       "format": "",
