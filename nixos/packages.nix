@@ -131,6 +131,7 @@ in
       genymotion
       qemu
       mysql-workbench
+      bruno
       postman
       # mongosh
       # mongodb
