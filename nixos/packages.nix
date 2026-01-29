@@ -74,6 +74,8 @@ in
       pritunl-client
 
       # UTILITIES
+      android-tools
+      gnome-disk-utility
       zip
       unzip
       rar
