@@ -12,9 +12,15 @@
   font-size: 1rem;
 }
 
-window.#waybar {
-  min-width: 1rem;
+window#waybar {
+  min-width: 3px;
   background: transparent;
+  transition: min-width 0.3s ease-in-out 0.2s;
+}
+
+window#waybar:hover {
+  min-width: 4rem;
+  transition-delay: 0s;
 }
 
 tooltip,
