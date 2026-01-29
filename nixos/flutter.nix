@@ -23,7 +23,7 @@
   };
 
   programs = {
-    adb.enable = true;
+    # adb.enable = true;
   };
 
   users.users.felipe = {
