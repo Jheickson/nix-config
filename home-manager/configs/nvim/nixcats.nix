@@ -89,6 +89,7 @@ in
               snacks-nvim
               onedark-nvim
               render-markdown-nvim
+              tinted-vim
               vim-sleuth
               vim-wakatime
             ];
