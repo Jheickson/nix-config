@@ -97,7 +97,7 @@ in
 
         focus-follows-mouse = {
           enable = true;
-          max-scroll-amount = "90%";
+          max-scroll-amount = "25%";
         };
 
         warp-mouse-to-focus.enable = true;
@@ -178,7 +178,7 @@ in
           # color = "#${config.lib.stylix.colors.base0D}";
         };
 
-        center-focused-column = "always";
+        center-focused-column = "on-overflow";
         empty-workspace-above-first = true;
         always-center-single-column = true;
       };
