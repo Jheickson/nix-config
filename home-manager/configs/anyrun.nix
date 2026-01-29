@@ -13,161 +13,53 @@ in
   programs.anyrun = {
     enable = true;
     package = pkgs.anyrun;
-    config.plugins = [
-      "applications"
-      "shell"
-      "symbols"
-      "translate"
-      "websearch"
-      "stdin"
-      "calc"
-      "dictionary"
-      "randr"
-      "system"
-      "bookmarks"
-    ];
-  };
-
-  # Create anyrun configuration directory and files
-  xdg.configFile = {
-    "anyrun/config.ron" = {
-      text = ''
-        Config(
-          width: 800,
-          height: 400,
-          hide_plugin_info: true,
-          hide_icons: false,
-          ignore_exclusive_zones: true,
-          close_on_click: true,
-          close_on_focus: false,
-          position: Center,
-          layer: Overlay,
-          anchor: (top: false, bottom: false, left: false, right: false),
-          exclusive_zone: false,
-          margin: (top: 0, bottom: 0, left: 0, right: 0),
-          padding: (top: 0, bottom: 0, left: 0, right: 0),
-          plugins: [
-            "applications",
-            "shell",
-            "symbols",
-            "translate",
-            "websearch",
-            "stdin",
-          ],
-        )
-      '';
+    config = {
+      # Use fractions for proper centering and to prevent overflow
+      x = { fraction = 0.5; };
+      y = { fraction = 0.3; };
+      width = { fraction = 0.3; };
+      hideIcons = false;
+      ignoreExclusiveZones = false;
+      layer = "overlay";
+      hidePluginInfo = true;
+      closeOnClick = true;
+      showResultsImmediately = false;
+      maxEntries = null;
+      
+      plugins = with pkgs.anyrun; [
+        "${anyrun}/lib/libapplications.so"
+        "${anyrun}/lib/libshell.so"
+        "${anyrun}/lib/libsymbols.so"
+        "${anyrun}/lib/libtranslate.so"
+        "${anyrun}/lib/libwebsearch.so"
+        "${anyrun}/lib/libstdin.so"
+      ];
     };
 
-    "anyrun/style.css" = {
-      text = ''
-        * {
-          font-family: '${fonts.monospace.name}';
-          font-size: 14px;
-          color: #${colors.base05};
-          background-color: transparent;
-          border: none;
-          padding: 0;
-          margin: 0;
-        }
+    extraCss = /*css*/ ''
+      * {
+        font-family: '${fonts.monospace.name}';
+        font-size: 14px;
+      }
 
-        window {
-          background-color: #${colors.base00};
-          border-radius: 12px;
-          border: 2px solid #${colors.base03};
-          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-        }
+      window {
+        background-color: #${colors.base00};
+      }
 
-        #outer-box {
-          margin: 20px;
-        }
+      #entry {
+        color: #${colors.base05};
+        background-color: #${colors.base00};
+      }
 
-        #input {
-          background-color: #${colors.base01};
-          border: 1px solid #${colors.base03};
-          border-radius: 8px;
-          padding: 12px 16px;
-          margin-bottom: 12px;
-          color: #${colors.base05};
-          font-size: 16px;
-        }
+      #entry:selected {
+        color: #${colors.base05};
+        background-color: #${colors.base02};
+      }
 
-        #input:focus {
-          border-color: #${colors.base0D};
-          box-shadow: 0 0 0 2px rgba(${colors.base0D}33);
-        }
-
-        #scroll {
-          background-color: transparent;
-        }
-
-        #inner-box {
-          background-color: transparent;
-        }
-
-        #entry {
-          padding: 8px 12px;
-          margin: 2px 0;
-          border-radius: 6px;
-          background-color: transparent;
-        }
-
-        #entry:selected {
-          background-color: #${colors.base02};
-          border: 1px solid #${colors.base0D};
-        }
-
-        #entry:hover {
-          background-color: #${colors.base01};
-        }
-
-        #entry:selected:hover {
-          background-color: #${colors.base02};
-        }
-
-        #text {
-          color: #${colors.base05};
-          font-weight: normal;
-        }
-
-        #entry:selected #text {
-          color: #${colors.base05};
-          font-weight: bold;
-        }
-
-        #plugin-info {
-          color: #${colors.base03};
-          font-size: 12px;
-          margin-top: 8px;
-          padding: 4px 8px;
-          background-color: #${colors.base01};
-          border-radius: 4px;
-        }
-
-        #img {
-          margin-right: 12px;
-          border-radius: 4px;
-        }
-
-        /* Scrollbar styling */
-        scrollbar {
-          background-color: transparent;
-        }
-
-        scrollbar slider {
-          background-color: #${colors.base03};
-          border-radius: 4px;
-          min-height: 20px;
-        }
-
-        scrollbar slider:hover {
-          background-color: #${colors.base04};
-        }
-      '';
-    };
+      #input {
+        color: #${colors.base05};
+        background-color: #${colors.base01};
+      }
+    '';
   };
-
-  # Add anyrun plugins to home packages
-  home.packages = with pkgs; [
-    anyrun
-  ];
 }
