@@ -100,6 +100,7 @@ in
 
       # MEDIA
       # stremio # Use flatpak version
+      mediaelch
       obs-studio
       youtube-music
       vlc
