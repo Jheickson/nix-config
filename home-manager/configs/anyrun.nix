@@ -37,28 +37,32 @@ in
     };
 
     extraCss = /*css*/ ''
+      @define-color bg-color #${colors.base00};
+      @define-color fg-color #${colors.base05};
+      @define-color accent #${colors.base0D};
+
       * {
         font-family: '${fonts.monospace.name}';
-        font-size: 14px;
       }
 
       window {
-        background-color: #${colors.base00};
+        background: transparent;
       }
 
-      #entry {
-        color: #${colors.base05};
-        background-color: #${colors.base00};
+      box.main {
+        background-color: @bg-color;
       }
 
-      #entry:selected {
-        color: #${colors.base05};
+      text {
+        color: @fg-color;
+      }
+
+      label.match {
+        color: @fg-color;
+      }
+
+      .match:selected {
         background-color: #${colors.base02};
-      }
-
-      #input {
-        color: #${colors.base05};
-        background-color: #${colors.base01};
       }
     '';
   };
