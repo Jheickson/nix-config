@@ -793,3 +793,159 @@ require('lze').load {
     },
   },
 }
+
+-- [[ VSCode-like Visual Enhancements ]]
+require('lze').load {
+  {
+    "rainbow-delimiters.nvim",
+    enabled = nixCats('general') or false,
+    event = "DeferredUIEnter",
+    after = function(plugin)
+      require('rainbow-delimiters.setup').setup({
+        highlight = {
+          'RainbowDelimiterRed',
+          'RainbowDelimiterYellow',
+          'RainbowDelimiterBlue',
+          'RainbowDelimiterOrange',
+          'RainbowDelimiterGreen',
+          'RainbowDelimiterViolet',
+          'RainbowDelimiterCyan',
+        },
+      })
+    end,
+  },
+  {
+    "indent-blankline.nvim",
+    enabled = nixCats('general') or false,
+    event = "DeferredUIEnter",
+    after = function(plugin)
+      require('ibl').setup({
+        indent = {
+          char = '▏',
+          highlight = {
+            "RainbowDelimiterRed",
+            "RainbowDelimiterYellow",
+            "RainbowDelimiterBlue",
+            "RainbowDelimiterOrange",
+            "RainbowDelimiterGreen",
+            "RainbowDelimiterViolet",
+            "RainbowDelimiterCyan",
+          },
+        },
+        scope = {
+          enabled = true,
+          show_start = true,
+          show_end = false,
+        },
+      })
+    end,
+  },
+  {
+    "nvim-colorizer.lua",
+    enabled = nixCats('general') or false,
+    event = "DeferredUIEnter",
+    after = function(plugin)
+      require('colorizer').setup({
+        user_default_options = {
+          RGB = true,
+          RRGGBB = true,
+          names = true,
+          RRGGBBAA = true,
+          rgb_fn = true,
+          hsl_fn = true,
+          css = true,
+          css_fn = true,
+          mode = 'background',
+          tailwind = true,
+        },
+      })
+    end,
+  },
+  {
+    "trouble.nvim",
+    enabled = nixCats('general') or false,
+    event = "DeferredUIEnter",
+    after = function(plugin)
+      require('trouble').setup({})
+      vim.keymap.set('n', '<leader>xx', '<cmd>Trouble diagnostics toggle<cr>', { desc = 'Trouble: Diagnostics' })
+      vim.keymap.set('n', '<leader>xX', '<cmd>Trouble diagnostics toggle filter.buf=0<cr>', { desc = 'Trouble: Buffer Diagnostics' })
+      vim.keymap.set('n', '<leader>xl', '<cmd>Trouble loclist toggle<cr>', { desc = 'Trouble: Location List' })
+      vim.keymap.set('n', '<leader>xq', '<cmd>Trouble qflist toggle<cr>', { desc = 'Trouble: Quickfix List' })
+    end,
+  },
+  {
+    "todo-comments.nvim",
+    enabled = nixCats('general') or false,
+    event = "DeferredUIEnter",
+    after = function(plugin)
+      require('todo-comments').setup({
+        signs = true,
+        keywords = {
+          FIX = { icon = " ", color = "error", alt = { "FIXME", "BUG", "FIXIT", "ISSUE" } },
+          TODO = { icon = " ", color = "info" },
+          HACK = { icon = " ", color = "warning" },
+          WARN = { icon = " ", color = "warning", alt = { "WARNING", "XXX" } },
+          PERF = { icon = " ", alt = { "OPTIM", "PERFORMANCE", "OPTIMIZE" } },
+          NOTE = { icon = " ", color = "hint", alt = { "INFO" } },
+        },
+      })
+      vim.keymap.set('n', '<leader>xt', '<cmd>TodoTrouble<cr>', { desc = 'Todo: Trouble' })
+      vim.keymap.set('n', '<leader>xT', '<cmd>TodoTrouble keywords=TODO,FIX,FIXME<cr>', { desc = 'Todo: Trouble TODO/FIX/FIXME' })
+    end,
+  },
+  {
+    "noice.nvim",
+    enabled = nixCats('general') or false,
+    event = "DeferredUIEnter",
+    load = function(name)
+      vim.cmd.packadd(name)
+      vim.cmd.packadd('nui.nvim')
+    end,
+    after = function(plugin)
+      require('noice').setup({
+        lsp = {
+          override = {
+            ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+            ["vim.lsp.util.stylize_markdown"] = true,
+            ["cmp.entry.get_documentation"] = true,
+          },
+        },
+        presets = {
+          bottom_search = true,
+          command_palette = true,
+          long_message_to_split = true,
+          inc_rename = false,
+          lsp_doc_border = false,
+        },
+      })
+    end,
+  },
+  {
+    "dressing.nvim",
+    enabled = nixCats('general') or false,
+    event = "DeferredUIEnter",
+    after = function(plugin)
+      require('dressing').setup({})
+    end,
+  },
+  {
+    "nvim-scrollbar",
+    enabled = nixCats('general') or false,
+    event = "DeferredUIEnter",
+    after = function(plugin)
+      require('scrollbar').setup({
+        handle = {
+          color = vim.api.nvim_get_hl(0, { name = 'CursorLine' }).bg,
+        },
+        marks = {
+          Search = { color = 'orange' },
+          Error = { color = 'red' },
+          Warn = { color = 'yellow' },
+          Info = { color = 'blue' },
+          Hint = { color = 'green' },
+          Misc = { color = 'purple' },
+        },
+      })
+    end,
+  },
+}

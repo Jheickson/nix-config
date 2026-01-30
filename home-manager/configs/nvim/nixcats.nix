@@ -137,6 +137,17 @@ in
               nvim-dap
               nvim-dap-ui
               nvim-dap-virtual-text
+              # VSCode-like visual enhancements
+              rainbow-delimiters-nvim
+              indent-blankline-nvim
+              nvim-colorizer-lua
+              nvim-web-devicons
+              trouble-nvim
+              todo-comments-nvim
+              noice-nvim
+              nui-nvim
+              dressing-nvim
+              nvim-scrollbar
             ];
           };
 
