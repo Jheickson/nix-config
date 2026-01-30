@@ -76,6 +76,15 @@ in
               go-tools
               go
             ];
+            dart = with pkgs; [
+              dart
+              flutter
+            ];
+            react = with pkgs; [
+              nodePackages.eslint
+              nodePackages.prettier
+              tailwindcss-language-server
+            ];
           };
 
           # This is for plugins that will load at startup without using packadd:
@@ -103,6 +112,14 @@ in
             ];
             lua = with pkgs.vimPlugins; [
               lazydev-nvim
+            ];
+            dart = with pkgs.vimPlugins; [
+              flutter-tools-nvim
+            ];
+            react = with pkgs.vimPlugins; [
+              nvim-ts-autotag
+              package-info-nvim
+              emmet-vim
             ];
             general = with pkgs.vimPlugins; [
               devdocs-nvim
@@ -187,6 +204,8 @@ in
               lua = true;
               nix = true;
               go = false;
+              dart = true;
+              react = true;
             };
             # anything else to pass and grab in lua with `nixCats.extra`
             extra = {
