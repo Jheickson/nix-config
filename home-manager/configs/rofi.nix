@@ -14,71 +14,124 @@ in
     enable = true;
   };
 
+  xdg.configFile."rofi/colors.rasi".text = ''
+    * {
+      background:        #${colors.base00};
+      foreground:        #${colors.base05};
+      selected:          #${colors.base02};
+      input-background:  #${colors.base01};
+    }
+  '';
+
   xdg.configFile."rofi/config.rasi".text = ''
+    @import "colors.rasi"
+
     configuration {
-      modi: "drun,run,window";
-      show-icons: true;
-      display-drun: "Applications";
-      display-run: "Run";
-      display-window: "Windows";
+      modi:                       "drun";
+      show-icons:                 true;
+      display-drun:               " ";
+      drun-display-format:        "{name}";
     }
 
-    * {
-      bg: #${colors.base00};
-      bg-alt: #${colors.base01};
-      fg: #${colors.base05};
-      selected: #${colors.base02};
-      accent: #${colors.base0D};
-      
-      background-color: transparent;
-      text-color: @fg;
-      font: "${fonts.monospace.name} 12";
-    }
+    /*
+    └── window 
+        └── mainbox
+            ├── inputbar
+            │   ├── prompt
+            │   └── entry
+            └── listview
+                └── elements
+    */
 
     window {
-      background-color: @bg;
-      width: 30%;
+        width:                       750px;
+        border:                      0px;
+        border-radius:               12px;
+        border-color:                @selected;
+        background-color:            @background;
     }
 
+
     mainbox {
-      background-color: transparent;
-      children: [inputbar, listview];
+        spacing:                     20px;
+        padding:                     20px;
+        border:                      0px;
+        border-radius:               12px 12px 12px 12px;
+        border-color:                @selected;
+        background-color:            @background;
+        children:                    [ "inputbar", "listview" ];
     }
 
     inputbar {
-      background-color: @bg-alt;
-      padding: 12px;
-      children: [entry];
+        spacing:                     10px;
+        padding:                     15px;
+        border:                      0px;
+        border-radius:               10px;
+        border-color:                @selected;
+        background-color:            @input-background;
+        text-color:                  @foreground;
+        children:                    [ "prompt", "entry" ];
     }
 
     entry {
-      background-color: transparent;
-      placeholder: "Search...";
+        enabled:                     true;
+        background-color:            transparent;
+        text-color:                  inherit;
+        cursor:                      text;
+        placeholder:                 "Search";
+        placeholder-color:           inherit;
     }
 
     listview {
-      background-color: transparent;
-      padding: 8px;
-      lines: 8;
+        columns:                     4;
+        lines:                       2;
+        scrollbar:                   false;
+        layout:                      vertical;
+        border:                      0px;
+        border-color:                @selected;
+        background-color:            transparent;
+        text-color:                  @foreground;
     }
+
 
     element {
-      background-color: transparent;
-      padding: 8px;
+        spacing:                     15px;
+        padding:                     20px 10px;
+        border:                      0px;
+        border-radius:               10px;
+        border-color:                @selected;
+        background-color:            transparent;
+        text-color:                  @foreground;
+        orientation:                 vertical;
     }
-
-    element selected {
-      background-color: @selected;
+    element normal.normal {
+        background-color:            transparent;
+        text-color:                  @foreground;
     }
-
-    element-text {
-      background-color: transparent;
-      text-color: inherit;
+    element alternate.normal {
+        background-color:            transparent;
+        text-color:                  @foreground;
     }
-
+    element selected.normal {
+        background-color:            @selected;
+        text-color:                  @foreground;
+    }
     element-icon {
-      background-color: transparent;
-      size: 24px;
+        size:                        48px;
+    }
+    element-text {
+        background-color:            transparent;
+        vertical-align:              0.5;
+        horizontal-align:            0.5;
+    }
+
+    error-message {
+        padding:                     15px;
+        border:                      2px solid;
+        border-radius:               10px;
+        border-color:                @selected;
+        background-color:            black / 10%;
+        text-color:                  @foreground;
     }
   '';
 
