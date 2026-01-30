@@ -155,7 +155,7 @@ in
           { proportion = 1.0; }
         ];
         default-column-width = {
-          proportion = 0.75;
+          proportion = 0.5;
         };
 
         gaps = 6;
