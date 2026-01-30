@@ -123,7 +123,38 @@ vim.keymap.set({'n', 'v', 'x'}, '<leader>p', '"+p', { noremap = true, silent = t
 vim.keymap.set('i', '<C-p>', '<C-r><C-p>+', { noremap = true, silent = true, desc = 'Paste from clipboard from within insert mode' })
 vim.keymap.set("x", "<leader>P", '"_dP', { noremap = true, silent = true, desc = 'Paste over selection without erasing unnamed register' })
 
-vim.cmd.colorscheme('default')
+-- [[ Colorscheme Persistence ]]
+-- Save and restore the last used colorscheme
+local colorscheme_file = vim.fn.stdpath('data') .. '/last_colorscheme.txt'
+
+-- Load saved colorscheme or use default
+local function load_colorscheme()
+  local file = io.open(colorscheme_file, 'r')
+  if file then
+    local saved_colorscheme = file:read('*line')
+    file:close()
+    if saved_colorscheme and saved_colorscheme ~= '' then
+      pcall(vim.cmd.colorscheme, saved_colorscheme)
+      return
+    end
+  end
+  -- Fallback to default if no saved colorscheme
+  vim.cmd.colorscheme('default')
+end
+
+-- Save colorscheme when it changes
+vim.api.nvim_create_autocmd('ColorScheme', {
+  callback = function()
+    local file = io.open(colorscheme_file, 'w')
+    if file then
+      file:write(vim.g.colors_name or 'default')
+      file:close()
+    end
+  end,
+})
+
+load_colorscheme()
+
 require("snacks").setup({
   explorer = {},
   picker = {},
