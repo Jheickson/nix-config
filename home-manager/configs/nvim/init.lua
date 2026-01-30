@@ -630,6 +630,30 @@ require('lze').load {
     end,
   },
   {
+    "devdocs.nvim",
+    enabled = nixCats('general') or false,
+    event = "DeferredUIEnter",
+    load = function(name)
+      vim.cmd.packadd(name)
+      vim.cmd.packadd('nvim-web-devicons')
+    end,
+    after = function(plugin)
+      require('devdocs').setup({
+        ensure_installed = {},
+        float_win = {
+          relative = "editor",
+          height = 25,
+          width = 100,
+          border = "rounded",
+        },
+        wrap = true,
+      })
+      vim.keymap.set('n', '<leader>dd', '<cmd>DevdocsOpen<cr>', { desc = 'DevDocs: Open' })
+      vim.keymap.set('n', '<leader>dD', '<cmd>DevdocsOpenFloat<cr>', { desc = 'DevDocs: Open Float' })
+      vim.keymap.set('n', '<leader>di', '<cmd>DevdocsInstall<cr>', { desc = 'DevDocs: Install' })
+    end,
+  },
+  {
     -- lazydev makes your lsp way better in your config without needing extra lsp configuration.
     "lazydev.nvim",
     enabled = nixCats('lua') or false,
