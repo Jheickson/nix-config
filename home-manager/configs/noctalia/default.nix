@@ -15,7 +15,7 @@
 
     # Use your custom settings from the JSON file
     # To update: modify the bar through the GUI, then copy settings and update the JSON file
-    settings = ../../../noctalia/settings.json;
+    settings = ./settings.json;
 
     # Optional: Configure plugins
     # plugins = {
