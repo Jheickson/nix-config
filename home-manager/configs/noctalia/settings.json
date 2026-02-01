@@ -17,7 +17,7 @@
     "frameRadius": 12,
     "outerCorners": true,
     "hideOnOverview": true,
-    "displayMode": "auto_hide",
+    "displayMode": "always_visible",
     "autoHideDelay": 500,
     "autoShowDelay": 150,
     "widgets": {
