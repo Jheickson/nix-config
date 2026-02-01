@@ -15,7 +15,8 @@
 
     # Use your custom settings from the JSON file
     # To update: modify the bar through the GUI, then copy settings and update the JSON file
-    settings = ./settings.json;
+    # mkForce is needed to override the module's default settings
+    settings = lib.mkForce (builtins.fromJSON (builtins.readFile ./settings.json));
 
     # Optional: Configure plugins
     # plugins = {
