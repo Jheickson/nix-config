@@ -23,40 +23,42 @@
     "widgets": {
       "left": [
         {
-          "icon": "rocket",
-          "id": "Launcher",
-          "usePrimaryColor": false
+          "colorizeDistroLogo": false,
+          "colorizeSystemIcon": "tertiary",
+          "customIconPath": "",
+          "enableColorization": true,
+          "icon": "noctalia",
+          "id": "ControlCenter",
+          "useDistroLogo": true
         },
         {
           "characterCount": 2,
-          "colorizeIcons": false,
+          "colorizeIcons": true,
           "emptyColor": "secondary",
           "enableScrollWheel": true,
-          "focusedColor": "primary",
+          "focusedColor": "tertiary",
           "followFocusedScreen": false,
-          "groupedBorderOpacity": 1,
-          "hideUnoccupied": false,
-          "iconScale": 0.8,
+          "groupedBorderOpacity": 0,
+          "hideUnoccupied": true,
+          "iconScale": 0.6,
           "id": "Workspace",
-          "labelMode": "index",
-          "occupiedColor": "secondary",
+          "labelMode": "none",
+          "occupiedColor": "primary",
           "reverseScroll": false,
-          "showApplications": false,
+          "showApplications": true,
           "showBadge": true,
           "showLabelsOnlyWhenOccupied": true,
-          "unfocusedIconsOpacity": 1
-        },
-        {
-          "colorizeIcons": false,
-          "hideMode": "hidden",
-          "id": "ActiveWindow",
-          "maxWidth": 145,
-          "scrollingMode": "hover",
-          "showIcon": true,
-          "useFixedWidth": false
+          "unfocusedIconsOpacity": 0.5
         }
       ],
       "center": [
+        {
+          "defaultSettings": {
+            "hideInactive": false,
+            "removeMargins": false
+          },
+          "id": "plugin:privacy-indicator"
+        },
         {
           "customFont": "",
           "formatHorizontal": "HH:mm ddd, MMM dd",
@@ -65,9 +67,7 @@
           "tooltipFormat": "HH:mm ddd, MMM dd",
           "useCustomFont": false,
           "usePrimaryColor": false
-        }
-      ],
-      "right": [
+        },
         {
           "compactMode": true,
           "diskPath": "/",
@@ -85,15 +85,9 @@
           "showSwapUsage": false,
           "useMonospaceFont": true,
           "usePrimaryColor": false
-        },
-        {
-          "displayMode": "onhover",
-          "id": "Network"
-        },
-        {
-          "displayMode": "onhover",
-          "id": "Bluetooth"
-        },
+        }
+      ],
+      "right": [
         {
           "deviceNativePath": "__default__",
           "displayMode": "onhover",
@@ -105,13 +99,21 @@
           "warningThreshold": 30
         },
         {
-          "colorizeDistroLogo": false,
-          "colorizeSystemIcon": "none",
-          "customIconPath": "",
-          "enableColorization": false,
-          "icon": "noctalia",
-          "id": "ControlCenter",
-          "useDistroLogo": false
+          "displayMode": "onhover",
+          "id": "Network"
+        },
+        {
+          "displayMode": "onhover",
+          "id": "Bluetooth"
+        },
+        {
+          "id": "plugin:todo"
+        },
+        {
+          "id": "plugin:timer"
+        },
+        {
+          "id": "plugin:clipper"
         }
       ]
     },
@@ -438,7 +440,12 @@
     "autoHideMs": 2000,
     "overlayLayer": true,
     "backgroundOpacity": 1,
-    "enabledTypes": [0, 1, 2, 3],
+    "enabledTypes": [
+      0,
+      1,
+      2,
+      3
+    ],
     "monitors": []
   },
   "audio": {
