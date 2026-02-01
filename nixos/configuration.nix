@@ -33,6 +33,7 @@
     # ./subsonic.nix
     ./nh.nix
     ./networkmanager.nix
+    ./noctalia.nix
     ./steam.nix
     # ./substituters.nix
     ./xautolock.nix
