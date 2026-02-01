@@ -12,15 +12,15 @@
     ./alacritty.nix
     # ./anyrun.nix
     ./battery/battery-notify.nix
-    ./dunst/dunst.nix
+    # ./dunst/dunst.nix
     ./fuzzel.nix
     ./ghostty.nix
     ./gowall.nix
-    ./i3.nix
+    # ./i3.nix
     ./niri
     ./noctalia
     ./nvim/nixcats.nix
-    ./picom.nix
+    # ./picom.nix
     ./polybar/polybar.nix
     # ./quickshell.nix
     ./rofi.nix
