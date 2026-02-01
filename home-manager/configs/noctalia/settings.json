@@ -138,6 +138,14 @@
           "id": "plugin:timer"
         },
         {
+          "defaultSettings": {
+            "autoStartBreaks": false,
+            "autoStartWork": false,
+            "longBreakDuration": 15,
+            "sessionsBeforeLongBreak": 4,
+            "shortBreakDuration": 5,
+            "workDuration": 25
+          },
           "id": "plugin:pomodoro"
         },
         {
@@ -537,11 +545,11 @@
         "name": "HDMI-A-1",
         "widgets": [
           {
-            "hideMode": "visible",
+            "hideMode": "hidden",
             "id": "MediaPlayer",
             "roundedCorners": true,
             "showAlbumArt": true,
-            "showBackground": true,
+            "showBackground": false,
             "showButtons": true,
             "showVisualizer": true,
             "visualizerType": "linear",
@@ -565,9 +573,10 @@
               "todos": []
             },
             "id": "plugin:todo",
+            "scale": 1,
             "showBackground": true,
             "x": 1600,
-            "y": 220
+            "y": 240
           }
         ]
       },
