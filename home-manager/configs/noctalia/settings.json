@@ -145,7 +145,7 @@
     "avatarImage": "/home/felipe/.face",
     "dimmerOpacity": 0.2,
     "showScreenCorners": true,
-    "forceBlackScreenCorners": true,
+    "forceBlackScreenCorners": false,
     "scaleRatio": 0.8500000000000001,
     "radiusRatio": 0.5,
     "iRadiusRatio": 1,
@@ -216,13 +216,13 @@
     ]
   },
   "wallpaper": {
-    "enabled": true,
+    "enabled": false,
     "overviewEnabled": false,
     "directory": "/home/felipe/nix-config/nixos/wallpapers",
     "monitorDirectories": [],
     "enableMultiMonitorDirectories": false,
     "showHiddenFiles": false,
-    "viewMode": "browse",
+    "viewMode": "recursive",
     "setWallpaperOnAllMonitors": true,
     "fillMode": "crop",
     "fillColor": "#000000",
@@ -235,7 +235,7 @@
     "transitionType": "random",
     "transitionEdgeSmoothness": 0.05,
     "panelPosition": "follow_bar",
-    "hideWallpaperFilenames": false,
+    "hideWallpaperFilenames": true,
     "useWallhaven": false,
     "wallhavenQuery": "",
     "wallhavenSorting": "relevance",
@@ -247,7 +247,7 @@
     "wallhavenResolutionMode": "atleast",
     "wallhavenResolutionWidth": "",
     "wallhavenResolutionHeight": "",
-    "sortOrder": "name"
+    "sortOrder": "date_desc"
   },
   "appLauncher": {
     "enableClipboardHistory": true,
@@ -491,7 +491,7 @@
     "schedulingMode": "off",
     "manualSunrise": "06:30",
     "manualSunset": "18:30",
-    "generationMethod": "tonal-spot",
+    "generationMethod": "faithful",
     "monitorForColors": ""
   },
   "templates": {
