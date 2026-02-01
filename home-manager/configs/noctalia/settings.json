@@ -145,7 +145,7 @@
     "avatarImage": "/home/felipe/.face",
     "dimmerOpacity": 0.2,
     "showScreenCorners": true,
-    "forceBlackScreenCorners": false,
+    "forceBlackScreenCorners": true,
     "scaleRatio": 0.8500000000000001,
     "radiusRatio": 0.5,
     "iRadiusRatio": 1,
