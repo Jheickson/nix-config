@@ -122,23 +122,23 @@
   "general": {
     "avatarImage": "/home/felipe/.face",
     "dimmerOpacity": 0.2,
-    "showScreenCorners": false,
+    "showScreenCorners": true,
     "forceBlackScreenCorners": false,
-    "scaleRatio": 1,
-    "radiusRatio": 1,
+    "scaleRatio": 0.8500000000000001,
+    "radiusRatio": 0.5,
     "iRadiusRatio": 1,
     "boxRadiusRatio": 1,
-    "screenRadiusRatio": 1,
-    "animationSpeed": 1,
+    "screenRadiusRatio": 0.5,
+    "animationSpeed": 2,
     "animationDisabled": false,
     "compactLockScreen": false,
     "lockOnSuspend": true,
     "showSessionButtonsOnLockScreen": true,
     "showHibernateOnLockScreen": false,
     "enableShadows": true,
-    "shadowDirection": "bottom_right",
-    "shadowOffsetX": 2,
-    "shadowOffsetY": 3,
+    "shadowDirection": "right",
+    "shadowOffsetX": 3,
+    "shadowOffsetY": 0,
     "language": "",
     "allowPanelsOnScreenWithoutBar": true,
     "showChangelogOnStartup": true,
@@ -151,7 +151,7 @@
   "ui": {
     "fontDefault": "Hack Nerd Font",
     "fontFixed": "Hack Nerd Font Mono",
-    "fontDefaultScale": 0.85,
+    "fontDefaultScale": 1,
     "fontFixedScale": 1,
     "tooltipsEnabled": true,
     "panelBackgroundOpacity": 1,
@@ -342,15 +342,15 @@
     "displayMode": "auto_hide",
     "backgroundOpacity": 1,
     "floatingRatio": 1,
-    "size": 1,
+    "size": 0.5,
     "onlySameOutput": true,
     "monitors": [],
-    "pinnedApps": [],
-    "colorizeIcons": false,
-    "pinnedStatic": false,
-    "inactiveIndicators": false,
+    "pinnedApps": ["zen-beta", "code"],
+    "colorizeIcons": true,
+    "pinnedStatic": true,
+    "inactiveIndicators": true,
     "deadOpacity": 0.6,
-    "animationSpeed": 1
+    "animationSpeed": 2
   },
   "network": {
     "wifiEnabled": true,
@@ -497,8 +497,53 @@
     "session": ""
   },
   "desktopWidgets": {
-    "enabled": false,
-    "gridSnap": false,
-    "monitorWidgets": []
+    "enabled": true,
+    "gridSnap": true,
+    "monitorWidgets": [
+      {
+        "name": "HDMI-A-1",
+        "widgets": []
+      },
+      {
+        "name": "eDP-1",
+        "widgets": [
+          {
+            "hideMode": "hidden",
+            "id": "MediaPlayer",
+            "roundedCorners": true,
+            "scale": 1,
+            "showAlbumArt": true,
+            "showBackground": false,
+            "showButtons": true,
+            "showVisualizer": true,
+            "visualizerType": "linear",
+            "x": 1500,
+            "y": 980
+          },
+          {
+            "defaultSettings": {
+              "completedCount": 0,
+              "count": 0,
+              "current_page_id": 0,
+              "isExpanded": false,
+              "pages": [
+                {
+                  "id": 0,
+                  "name": "General"
+                }
+              ],
+              "showBackground": true,
+              "showCompleted": true,
+              "todos": []
+            },
+            "id": "plugin:todo",
+            "scale": 1,
+            "showBackground": true,
+            "x": 1600,
+            "y": 240
+          }
+        ]
+      }
+    ]
   }
 }
