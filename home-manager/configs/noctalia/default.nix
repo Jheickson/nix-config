@@ -35,10 +35,9 @@
   };
 
   # Configure wallpapers declaratively (optional)
-  # Using the wallpaper directory from your settings.json
   home.file.".cache/noctalia/wallpapers.json" = {
     text = builtins.toJSON {
-      defaultWallpaper = "${pkgs.nixos-artwork.wallpapers.nineish-dark-gray.gnomeFilePath}";
+      defaultWallpaper = "/home/felipe/nix-config/nixos/wallpapers/wallpaper.png";
       wallpapers = {
         # Add per-monitor wallpapers here
         # "DP-1" = "/path/to/wallpaper.png";
