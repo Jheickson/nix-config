@@ -18,6 +18,7 @@
     ./gowall.nix
     ./i3.nix
     ./niri
+    ./noctalia.nix
     ./nvim/nixcats.nix
     ./picom.nix
     ./polybar/polybar.nix
