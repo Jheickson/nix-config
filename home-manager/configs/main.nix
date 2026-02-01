@@ -9,11 +9,11 @@
 {
 
   imports = [
-    ./alacritty.nix
+    # ./alacritty.nix
     # ./anyrun.nix
     ./battery/battery-notify.nix
     # ./dunst/dunst.nix
-    ./fuzzel.nix
+    # ./fuzzel.nix
     ./ghostty.nix
     ./gowall.nix
     # ./i3.nix
@@ -23,8 +23,8 @@
     # ./picom.nix
     ./polybar/polybar.nix
     # ./quickshell.nix
-    ./rofi.nix
-    ./waybar/waybar.nix
+    # ./rofi.nix
+    # ./waybar/waybar.nix
     ./yazi.nix
     ./zsh.nix
     # ./zen-browser.nix
