@@ -13,49 +13,9 @@
     # Enable systemd service (starts automatically with your session)
     systemd.enable = true;
 
-    # Configure settings - only override what you need
-    # Most defaults work well out of the box
-    settings = {
-      bar = {
-        widgets = {
-          left = [
-            {
-              id = "Launcher";
-            }
-            {
-              id = "Workspace";
-            }
-            {
-              id = "ActiveWindow";
-            }
-          ];
-          
-          center = [
-            {
-              id = "Clock";
-            }
-          ];
-          
-          right = [
-            {
-              id = "SystemMonitor";
-            }
-            {
-              id = "Network";
-            }
-            {
-              id = "Bluetooth";
-            }
-            {
-              id = "Battery";
-            }
-            {
-              id = "ControlCenter";
-            }
-          ];
-        };
-      };
-    };
+    # Use your custom settings from the JSON file
+    # To update: modify the bar through the GUI, then copy settings and update the JSON file
+    settings = ../../../noctalia/settings.json;
 
     # Optional: Configure plugins
     # plugins = {
@@ -74,6 +34,7 @@
   };
 
   # Configure wallpapers declaratively (optional)
+  # Using the wallpaper directory from your settings.json
   home.file.".cache/noctalia/wallpapers.json" = {
     text = builtins.toJSON {
       defaultWallpaper = "${pkgs.nixos-artwork.wallpapers.nineish-dark-gray.gnomeFilePath}";
