@@ -262,7 +262,7 @@ in
       {
         # `niri msg layers` shows the background namespace as "swww-daemon".
         # Match that to place swww's surfaces within the backdrop.
-        matches = [ { namespace = "swww-daemon"; } ];
+        matches = [ { namespace = "swww-daemon"; }  { namespace = "^noctalia-wallpaper*"; } ];
         place-within-backdrop = true;
       }
     ];
