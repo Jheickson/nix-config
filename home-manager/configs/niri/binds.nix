@@ -10,6 +10,9 @@
       set-volume = spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@";
       brightnessctl = spawn "${pkgs.brightnessctl}/bin/brightnessctl";
       playerctl = spawn "${pkgs.playerctl}/bin/playerctl";
+      
+      # Helper function for Noctalia IPC commands
+      noctalia = cmd: [ "noctalia-shell" "ipc" "call" ] ++ (pkgs.lib.splitString " " cmd);
     in
     {
       "XF86AudioMute".action = spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle";
@@ -31,7 +34,13 @@
       };
       # "Mod+Shift+Alt+S".action = screenshot-window;
 
-      "Mod+D".action = spawn "${pkgs.rofi}/bin/rofi" "-show" "drun";
+      # Noctalia keybindings
+      "Mod+D".action.spawn = noctalia "launcher toggle";
+      "Mod+L".action.spawn = noctalia "lockScreen lock";
+      "Mod+Shift+L".action.spawn = noctalia "sessionMenu toggle";
+      "Mod+N".action.spawn = noctalia "notificationCenter toggle";
+      "Mod+C".action.spawn = noctalia "controlCenter toggle";
+      
       "Mod+Return".action = spawn "${pkgs.ghostty}/bin/ghostty";
       "Ctrl+Alt+L".action = spawn "sh -c pgrep hyprlock || hyprlock";
 
