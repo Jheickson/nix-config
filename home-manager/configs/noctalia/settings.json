@@ -24,7 +24,7 @@
       "left": [
         {
           "colorizeDistroLogo": false,
-          "colorizeSystemIcon": "tertiary",
+          "colorizeSystemIcon": "primary",
           "customIconPath": "",
           "enableColorization": true,
           "icon": "noctalia",
@@ -126,16 +126,27 @@
         },
         {
           "defaultSettings": {
+            "position": "Bottom"
+          },
+          "id": "plugin:clipper"
+        },
+        {
+          "defaultSettings": {
             "compactMode": false,
             "defaultDuration": 0
           },
           "id": "plugin:timer"
         },
         {
-          "defaultSettings": {
-            "position": "Bottom"
-          },
-          "id": "plugin:clipper"
+          "id": "plugin:pomodoro"
+        },
+        {
+          "blacklist": [],
+          "colorizeIcons": false,
+          "drawerEnabled": true,
+          "hidePassive": true,
+          "id": "Tray",
+          "pinned": []
         }
       ]
     },
@@ -146,7 +157,7 @@
     "dimmerOpacity": 0.2,
     "showScreenCorners": true,
     "forceBlackScreenCorners": false,
-    "scaleRatio": 0.8500000000000001,
+    "scaleRatio": 0.8,
     "radiusRatio": 0.5,
     "iRadiusRatio": 1,
     "boxRadiusRatio": 1,
