@@ -85,6 +85,13 @@
           "showSwapUsage": false,
           "useMonospaceFont": true,
           "usePrimaryColor": false
+        },
+        {
+          "hideWhenZero": false,
+          "hideWhenZeroUnread": false,
+          "id": "NotificationHistory",
+          "showUnreadBadge": true,
+          "unreadBadgeColor": "primary"
         }
       ],
       "right": [
