@@ -14,10 +14,10 @@ let
   # ============================================================================
 
   # The source wallpaper image
-  wallpaperSource = ./wallpapers/Minimalistic/wallhaven-85z1o1.jpg;
+  wallpaperSource = ./wallpapers/Minimalistic/wallhaven-21y12g.png;
 
   # Theme file - determines the color palette
-  themeFile = "${pkgs.base16-schemes}/share/themes/atlas.yaml";
+  themeFile = "${pkgs.base16-schemes}/share/themes/black-metal-bathory.yaml";
 
   # ============================================================================
   # GOWALL THEME JSON - Generated at build time from the base16 theme
