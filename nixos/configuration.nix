@@ -35,7 +35,8 @@
     ./networkmanager.nix
     ./noctalia.nix
     ./steam.nix
-    # ./substituters.nix
+    ./substituters.nix
+    ./thunderbird.nix
     ./xautolock.nix
     ./vial.nix
     ./niri.nix
@@ -263,6 +264,10 @@
       })
     ];
   };
+
+  # ============================================================================
+  # Documentation & Help
+  documentation.enable = false;
 
   # ============================================================================
   # FIREWALL & SSH
