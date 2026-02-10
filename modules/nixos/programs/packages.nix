@@ -21,204 +21,175 @@ in
   environment.systemPackages =
     with pkgs;
     [
-      # NIX
-      nixfmt # Run `nixfmt file.nix`
-      nixd
-      nixfmt-tree
+      # === NIX TOOLS ===
       nix-search-cli
+      nixd
+      nixfmt # Run `nixfmt file.nix`
+      nixfmt-tree
 
-      # CLI
-      hello
-      cowsay
-      cbonsai
-      fd
-      tldr
-      neofetch
-      scrcpy
-      zenith
-      zsh
+      # === DEVELOPMENT ===
+      bruno
+      gh
+      lazygit
+      nodejs_22
+      nodePackages.eas-cli
+      openssl
+      pipx
+      postman
+      python2
+      python313
+      python313Packages.pip
+      sqlite
+      sqlitebrowser
+      yarn
+      # code-cursor
+      # genymotion
+      # mongodb
+      # mongodb-compass
+      # mongosh
+      # mysql-workbench
+      # qemu
 
-      # Audio tools
-      alsa-utils
-      pavucontrol
-      pipewire
-
-      ncmpcpp
-      feishin
-
-      # DESKTOP APPS
+      # === DESKTOP APPLICATIONS ===
       anki
-
-      chromium
       calibre
+      chromium
       discord
-      libreoffice
       electron-mail
+      libreoffice
+      nautilus
       telegram-desktop
-      # whatsapp-for-linux
       zapzap
       # googleearth-pro
-      nautilus
       # nemo
       # nemo-preview
       # nemo-with-extensions
       # thunar
-    
-      openvpn
-      openvpn3
-      # networkmanager-openvpn
-      pritunl-client
+      # whatsapp-for-linux
 
-      # UTILITIES
-      android-tools
-      gnome-disk-utility
-      zip
-      unzip
-      rar
-      unrar
-      busybox
-      udiskie
-      peazip
-      jq
-      yq
-      # networkmanager
-      networkmanagerapplet
-      baobab
-      testdisk
-      usbutils
-      xeyes
-
-      texlive.combined.scheme-full
-      gnumake
-      ghostscript
-
-      # MEDIA
-      # stremio # Use flatpak version
+      # === MEDIA & ENTERTAINMENT ===
+      feishin
+      heroic
       mediaelch
+      ncmpcpp
       obs-studio
+      picard
       pear-desktop
-      vlc
       qbittorrent
       qbittorrent-enhanced
-      picard
+      vlc
+      # stremio # Use flatpak version
 
-      # GAMES
-      heroic
-
-      # Codecs / Video acceleration
+      # === AUDIO & VIDEO ===
+      alsa-utils
+      ffmpeg-full
+      intel-media-driver # For Intel GPUs
       libva
       libva-utils
-
-      # For Intel GPUs
-      intel-media-driver
       libva-vdpau-driver # For Nvidia/AMD hybrid setups
-      vdpauinfo
       libvdpau-va-gl
-      ffmpeg-full
+      pavucontrol
+      pipewire
+      vdpauinfo
 
-      # DEV
-      lazygit
-      gh
-      yarn
-      nodejs_22
-      nodePackages.eas-cli
-      # genymotion
-      # qemu
-      # mysql-workbench
-      bruno
-      postman
-      # mongosh
-      # mongodb
-      # mongodb-compass
-      openssl
-      sqlite
-      sqlitebrowser
-      # code-cursor
-      python2
-      python313
-      python313Packages.pip
-      pipx
+      # === NETWORKING ===
+      networkmanager
+      networkmanager_dmenu
+      networkmanagerapplet
+      openvpn
+      openvpn3
+      pritunl-client
+      # networkmanager-openvpn
 
-      # SYSTEM
-      libmpdclient
+      # === SYSTEM UTILITIES ===
+      android-tools
+      baobab
       brightnessctl
-      playerctl
+      busybox
+      gnome-disk-utility
+      jq
+      libmpdclient
       libnotify
       pamixer
+      peazip
+      playerctl
+      rar
+      scrcpy
+      testdisk
+      udiskie
+      unrar
+      unzip
+      usbutils
+      xeyes
+      yq
+      zenith
+      zip
 
-      # CUSTOMIZATION
+      # === CLI TOOLS ===
+      cbonsai
+      cowsay
+      fd
+      hello
+      neofetch
+      tldr
+      zsh
+
+      # === DOCUMENT PROCESSING ===
+      ghostscript
+      gnumake
+      texlive.combined.scheme-full
+
+      # === THEMING & CUSTOMIZATION ===
       base16-schemes
       base16-shell-preview
 
-      # FONTS
-      # nerdfonts # Big package. Font is already being set on stylix.nix
-      siji
+      # === FONTS ===
       rounded-mgenplus
+      siji
       termsyn
-
-      # NETWORK
-      networkmanager
-      networkmanagerapplet
-      networkmanager_dmenu
+      # nerdfonts # Big package. Font is already being set on stylix.nix
 
     ]
     ++ (
       if useWayland then
-        # WAYLAND-SPECIFIC PACKAGES
+        # === WAYLAND-SPECIFIC PACKAGES ===
         with pkgs;
         [
-          # Display configuration
-          # Wayland display configuration (replaces arandr)
-          wdisplays
-          kanshi
-
+          # Display & Window System
+          kanshi # Wayland display configuration (replaces arandr)
+          wdisplays # Display configuration GUI
           xwayland
           xwayland-run
           xwayland-satellite
 
-          # File manager
-
-          # pcmanfm-qt # Qt-based file manager for Wayland
-
-          # Screenshot tools
-
-          # Screenshot tool for Wayland
-          grim
+          # Screenshots
+          grim # Screenshot tool for Wayland
           slurp # Region selector for Wayland
-          swappy # Screenshot editor for Wayland
           sway-contrib.grimshot # Screenshot tool for Wayland
+          swappy # Screenshot editor for Wayland
 
-          # Background/wallpaper
-
+          # Additional utilities (commented out)
+          # pcmanfm-qt # Qt-based file manager for Wayland
           # swaybg # Wallpaper setter for Wayland
-
-          # Additional Wayland utilities
-
-          # wl-clipboard # Wayland clipboard utilities
-          # wofi # Application launcher for Wayland
           # swayidle # Idle management for Wayland
+          # wl-clipboard # Wayland clipboard utilities
           # wlopm # Wayland output power manager
+          # wofi # Application launcher for Wayland
         ]
       else
-        # X11-SPECIFIC PACKAGES
+        # === X11-SPECIFIC PACKAGES ===
         with pkgs;
         [
           # Display configuration
-          # X11 RandR GUI tool
-          arandr
+          arandr # X11 RandR GUI tool
           autorandr
 
           # File manager
-
           thunar # XFCE file manager
 
-          # Screenshot tools
-
-          flameshot # Screenshot tool (X11-focused)
-
-          # Image viewer/background
-
+          # Screenshots & wallpapers
           feh # X11 image viewer and wallpaper setter
+          flameshot # Screenshot tool (X11-focused)
         ]
     );
 
