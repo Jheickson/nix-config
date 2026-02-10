@@ -22,9 +22,8 @@ in
     with pkgs;
     [
       # NIX
-      nixfmt-rfc-style # Run `nixfmt file.nix`
+      nixfmt # Run `nixfmt file.nix`
       nixd
-      nixfmt
       nixfmt-tree
       nix-search-cli
 
@@ -66,7 +65,7 @@ in
       nemo
       nemo-preview
       nemo-with-extensions
-      xfce.thunar
+      thunar
       gimp2-with-plugins
       openvpn
       openvpn3
@@ -90,7 +89,7 @@ in
       baobab
       testdisk
       usbutils
-      xorg.xeyes
+      xeyes
 
       pdfgrep
       python313Packages.pdftotext
@@ -104,7 +103,7 @@ in
       # stremio # Use flatpak version
       mediaelch
       obs-studio
-      youtube-music
+      pear-desktop
       vlc
       qbittorrent
       qbittorrent-enhanced
@@ -219,7 +218,7 @@ in
 
           # File manager
 
-          xfce.thunar # XFCE file manager
+          thunar # XFCE file manager
 
           # Screenshot tools
 
