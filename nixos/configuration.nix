@@ -230,7 +230,7 @@
 
   services.mpd = {
     enable = true;  # New: Music player daemon
-    musicDirectory = "/home/felipe/Music";  # Adjust path as needed
+    settings.music_directory = "/home/felipe/Music";  # Adjust path as needed
   };
 
   # ============================================================================
