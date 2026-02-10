@@ -14,6 +14,22 @@
 
 <h2 align="center">NixOS Configuration</h2>
 
+- [❄️ COMPONENTS](#️-components)
+- [📁 STRUCTURE](#-structure)
+- [� INSTALLATION](#-installation)
+  - [Quick Start](#quick-start)
+  - [First Time Setup](#first-time-setup)
+- [🎨 CUSTOMIZATION](#-customization)
+  - [Changing Theme](#changing-theme)
+  - [Adding Packages](#adding-packages)
+  - [Modifying Window Manager](#modifying-window-manager)
+- [💻 SCREENSHOTS](#-screenshots)
+- [✨ FEATURES](#-features)
+- [🎩 ACKNOWLEDGEMENTS](#-acknowledgements)
+- [📝 NOTES](#-notes)
+- [🤝 CONTRIBUTING](#-contributing)
+
+
 ## ❄️ <samp>COMPONENTS</samp>
 
 - **Window Manager** • [Niri](https://niri.app/) - Scrollable tiling Wayland compositor
