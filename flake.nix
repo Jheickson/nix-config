@@ -41,6 +41,8 @@
       url = "github:noctalia-dev/noctalia-shell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
   };
 
   outputs =
@@ -49,6 +51,7 @@
       nixpkgs,
       nixpkgs-stable,
       home-manager,
+      determinate,
       ...
     }@inputs:
 
@@ -74,6 +77,7 @@
         modules = [
           ./nixos/configuration.nix
           inputs.stylix.nixosModules.stylix
+          determinate.nixosModules.default
         ];
       };
 
