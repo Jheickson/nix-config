@@ -37,7 +37,7 @@
   # Configure wallpapers declaratively (optional)
   home.file.".cache/noctalia/wallpapers.json" = {
     text = builtins.toJSON {
-      defaultWallpaper = "/home/felipe/nix-config/nixos/wallpapers/wallpaper.png";
+      defaultWallpaper = "/home/felipe/nix-config/assets/wallpapers/wallpaper.png";
       wallpapers = {
         # Add per-monitor wallpapers here
         # "DP-1" = "/path/to/wallpaper.png";

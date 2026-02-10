@@ -2,8 +2,8 @@
 
 {
   imports = [
-    # Importing the home-manager module for Zsh configuration
-    ./xdg.nix
+    # Importing the xdg portal configuration
+    ../desktop/xdg.nix
   ];
 
   # Add wine to system packages

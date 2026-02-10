@@ -74,7 +74,7 @@
           inherit inputs system;
         };
         modules = [
-          ./nixos/configuration.nix
+          ./hosts/nixos/default.nix
           inputs.stylix.nixosModules.stylix
           determinate.nixosModules.default
         ];

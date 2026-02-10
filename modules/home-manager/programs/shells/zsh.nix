@@ -16,7 +16,7 @@
         flakeDir = "~/nix-config";
         # Apply stylix wallpaper after rebuild using swww
         # Apply stylix wallpaper after rebuild using swww
-        applyWallpaper = "swww img ~/nix-config/nixos/wallpapers/wallpaper.png --resize crop && echo 'Wallpaper applied' || echo 'Failed to apply wallpaper'";
+        applyWallpaper = "swww img ~/nix-config/assets/wallpapers/wallpaper.png --resize crop && echo 'Wallpaper applied' || echo 'Failed to apply wallpaper'";
       in
       {
         # ===== NIXOS SYSTEM MANAGEMENT (nh) =====
