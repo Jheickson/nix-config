@@ -244,7 +244,7 @@
   "wallpaper": {
     "enabled": false,
     "overviewEnabled": false,
-    "directory": "/home/felipe/nix-config/nixos/wallpapers",
+    "directory": "/home/felipe/nix-config/assets/wallpapers",
     "monitorDirectories": [],
     "enableMultiMonitorDirectories": false,
     "showHiddenFiles": false,
