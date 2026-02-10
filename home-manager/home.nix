@@ -3,7 +3,7 @@
 {
 
   imports = [
-    ./configs/main.nix
+    ../modules/home-manager/profiles/desktop.nix
   ];
 
   nixpkgs = {

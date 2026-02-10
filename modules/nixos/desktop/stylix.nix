@@ -14,7 +14,7 @@ let
   # ============================================================================
 
   # The source wallpaper image
-  wallpaperSource = ./wallpapers/Minimalistic/wallhaven-21y12g.png;
+  wallpaperSource = ../../../assets/wallpapers/Minimalistic/wallhaven-yqj53x.png;
 
   # Theme file - determines the color palette
   themeFile = "${pkgs.base16-schemes}/share/themes/black-metal-bathory.yaml";
@@ -64,7 +64,7 @@ in
 
   # Generate themed wallpaper on system activation
   system.activationScripts.gowallWallpaper = ''
-    HOME=/home/felipe ${pkgs.gowall}/bin/gowall convert ${wallpaperSource} -t ${gowallThemeJson} --output /home/felipe/nix-config/nixos/wallpapers/wallpaper.png
+    HOME=/home/felipe ${pkgs.gowall}/bin/gowall convert ${wallpaperSource} -t ${gowallThemeJson} --output /home/felipe/nix-config/assets/wallpapers/wallpaper.png
   '';
 
   stylix = {
@@ -111,11 +111,11 @@ in
 
     base16Scheme = themeFile;
 
-    image = ./wallpapers/wallpaper.png;
+    image = ../../../assets/wallpapers/wallpaper.png;
   };
 
   # Expose the wallpaper path for shell scripts (swww, etc.)
-  environment.sessionVariables.STYLIX_WALLPAPER = "~/nix-config/nixos/wallpapers/wallpaper.png";
+  environment.sessionVariables.STYLIX_WALLPAPER = "~/nix-config/assets/wallpapers/wallpaper.png";
 
   fonts = {
     fontDir.enable = true;

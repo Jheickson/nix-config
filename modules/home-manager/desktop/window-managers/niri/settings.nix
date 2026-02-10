@@ -32,7 +32,6 @@ in
         {
           command = [
             "${./swww-init.sh}"
-            "${config.stylix.image}"
           ];
         }
         (makeCommand "waybar")
