@@ -15,7 +15,7 @@ in
   };
 
   programs.i3lock = {
-    enable = true;
+    enable = false;
   };
 
   environment.systemPackages =
@@ -35,7 +35,6 @@ in
       tldr
       neofetch
       scrcpy
-      superfile
       zenith
       zsh
 
@@ -45,28 +44,26 @@ in
       pipewire
 
       ncmpcpp
-      strawberry
       feishin
 
       # DESKTOP APPS
       anki
-      brave
+
       chromium
       calibre
       discord
-      # drawio
       libreoffice
       electron-mail
       telegram-desktop
       # whatsapp-for-linux
       zapzap
-      googleearth-pro
+      # googleearth-pro
       nautilus
-      nemo
-      nemo-preview
-      nemo-with-extensions
-      thunar
-      gimp2-with-plugins
+      # nemo
+      # nemo-preview
+      # nemo-with-extensions
+      # thunar
+    
       openvpn
       openvpn3
       # networkmanager-openvpn
@@ -91,10 +88,6 @@ in
       usbutils
       xeyes
 
-      pdfgrep
-      python313Packages.pdftotext
-      # xpdf
-
       texlive.combined.scheme-full
       gnumake
       ghostscript
@@ -107,7 +100,6 @@ in
       vlc
       qbittorrent
       qbittorrent-enhanced
-      python313Packages.deemix
       picard
 
       # GAMES
@@ -130,9 +122,9 @@ in
       yarn
       nodejs_22
       nodePackages.eas-cli
-      genymotion
-      qemu
-      mysql-workbench
+      # genymotion
+      # qemu
+      # mysql-workbench
       bruno
       postman
       # mongosh
@@ -141,7 +133,7 @@ in
       openssl
       sqlite
       sqlitebrowser
-      code-cursor
+      # code-cursor
       python2
       python313
       python313Packages.pip
@@ -186,7 +178,7 @@ in
 
           # File manager
 
-          pcmanfm-qt # Qt-based file manager for Wayland
+          # pcmanfm-qt # Qt-based file manager for Wayland
 
           # Screenshot tools
 
@@ -198,14 +190,14 @@ in
 
           # Background/wallpaper
 
-          swaybg # Wallpaper setter for Wayland
+          # swaybg # Wallpaper setter for Wayland
 
           # Additional Wayland utilities
 
-          wl-clipboard # Wayland clipboard utilities
-          wofi # Application launcher for Wayland
-          swayidle # Idle management for Wayland
-          wlopm # Wayland output power manager
+          # wl-clipboard # Wayland clipboard utilities
+          # wofi # Application launcher for Wayland
+          # swayidle # Idle management for Wayland
+          # wlopm # Wayland output power manager
         ]
       else
         # X11-SPECIFIC PACKAGES
