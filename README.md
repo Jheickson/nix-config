@@ -10,7 +10,7 @@
   </a>
 </p>
 
-<p align="center"><img src="assets/screenshots/Screenshot-from-2025-08-02-21-17-24.png" width=1200px></p>
+<p align="center"><img src="assets/screenshots/screenshot-desktop.png" width=1200px></p>
 
 <h2 align="center">NixOS Configuration</h2>
 
@@ -104,12 +104,13 @@ Window manager configurations are in `modules/home-manager/desktop/window-manage
 ## 💻 <samp>SCREENSHOTS</samp>
 
 <p align="center">
-<img src="assets/screenshots/Screenshot-from-2025-08-02-20-24-43.png" width="400">
-<img src="assets/screenshots/Screenshot-from-2025-08-02-20-28-26.png" width="400">
+<!-- <img src="assets/screenshots/Screenshot-from-2025-08-02-20-24-43.png" width="400">
+<img src="assets/screenshots/Screenshot-from-2025-08-02-20-28-26.png" width="400"> -->
+<img src="assets/screenshots/screenshot-desktop.png" width="400">
 </p>
 <p align="center">
-<img src="assets/screenshots/Screenshot-from-2025-08-02-21-17-24.png" width="400">
-<img src="assets/screenshots/Screenshot-from-2025-08-02-20-54-37.png" width="400">
+<!-- <img src="assets/screenshots/Screenshot-from-2025-08-02-21-17-24.png" width="400">
+<img src="assets/screenshots/Screenshot-from-2025-08-02-20-54-37.png" width="400"> -->
 </p>
 
 ## ✨ <samp>FEATURES</samp>
