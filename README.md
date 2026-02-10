@@ -17,13 +17,11 @@
 ## ❄️ <samp>COMPONENTS</samp>
 
 - **Window Manager** • [Niri](https://niri.app/) - Scrollable tiling Wayland compositor
-- **Status Bar** • [Polybar](https://github.com/polybar/polybar) / [Waybar](https://github.com/Alexays/Waybar) - Customizable status bars
+- **Desktop Shell** • [Noctalia](https://github.com/noctalia-dev/noctalia-shell) - Unified status bar, notifications, and app launcher
 - **Terminal** • [Ghostty](https://ghostty.org/) / [Alacritty](https://alacritty.org/) - GPU-accelerated terminal emulators
 - **Shell** • [Zsh](https://www.zsh.org/) with [Oh My Zsh](https://ohmyz.sh/) - Powerful shell framework
-- **Editor** • [Neovim](https://neovim.io/) - Extensible Vim-based text editor
-- **Notifications** • [Dunst](https://github.com/dunst-project/dunst) - Lightweight notification daemon
+- **Editor** • [Neovim](https://neovim.io/) (with [NixCats](https://github.com/BirdeeHub/nixCats-nvim)) / [VSCode](https://code.visualstudio.com/) - Text editors
 - **File Manager** • [Yazi](https://github.com/sxyazi/yazi) - Blazing fast terminal file manager
-- **App Launcher** • [Fuzzel](https://codeberg.org/dnkl/fuzzel) / [Rofi](https://github.com/davatorium/rofi) - Application launchers
 - **Theme** • [Stylix](https://github.com/danth/stylix) - System-wide theming for NixOS
 - **Wallpaper** • [Gowall](https://github.com/flick0/gowall) - Dynamic wallpaper generator
 
