@@ -179,9 +179,9 @@
         "z"
         "zsh-interactive-cd"
       ];
-      theme = "kardan";
+      theme = "minimal";
       # Themes I liked (https://github.com/ohmyzsh/ohmyzsh/wiki/Themes)
-      # lambda, blinks, strug, sammy, refined, peepcode, nicoulaj, kardan, emotty, bureau
+      # lambda, blinks, strug, sammy, refined, peepcode, nicoulaj, kardan, emotty, bureau, minimal
     };
 
     initContent = ''
