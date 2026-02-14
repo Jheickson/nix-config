@@ -28,6 +28,7 @@
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [
+    numlockx # Enable numlock in graphical session
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
     # hello
@@ -82,6 +83,20 @@
   # home.sessionVariables = {
   # EDITOR = "micro";
   # };
+
+  # Enable numlock on graphical session start
+  systemd.user.services.numlock = {
+    Unit = {
+      Description = "Enable numlock";
+      After = [ "graphical-session.target" ];
+    };
+    Service = {
+      Type = "oneshot";
+      ExecStart = "${pkgs.numlockx}/bin/numlockx on";
+      RemainAfterExit = true;
+    };
+    Install.WantedBy = [ "graphical-session.target" ];
+  };
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
