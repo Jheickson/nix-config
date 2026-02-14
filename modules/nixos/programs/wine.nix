@@ -8,7 +8,7 @@
 
   # Add wine to system packages
   environment.systemPackages = with pkgs; [
-    wineWowPackages.full
+    wineWow64Packages.minimal
     winetricks
     (bottles.override { removeWarningPopup = true; })
     lutris
