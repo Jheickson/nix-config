@@ -29,6 +29,7 @@ in
 
       # === DEVELOPMENT ===
       bruno
+      bun
       gh
       lazygit
       nodejs_22
@@ -54,7 +55,7 @@ in
       anki
       calibre
       chromium
-      discord
+      # discord
       electron-mail
       libreoffice
       nautilus
