@@ -74,9 +74,9 @@ in
       input = {
 
         keyboard.xkb = {
-          layout = "us";
-          variant = "colemak_dh_wide";
-          options = "caps:backspace, backspace:caps";
+          layout = "us,us";
+          variant = "colemak_dh_wide,";
+          options = "grp:alt_shift_toggle,caps:backspace,backspace:caps";
         };
 
         touchpad = {
