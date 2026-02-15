@@ -23,7 +23,7 @@ let
   # ============================================================================
 
   # The source wallpaper image
-  wallpaperSource = ../../../assets/wallpapers/Landscape/wall-20260215-154725.png;
+  wallpaperSource = ../../../assets/wallpapers/Landscape/wallhaven-rrljjq.jpg;
 
   # Theme file - determines the color palette (only used when useThemeFile = true)
   themeFile = "${pkgs.base16-schemes}/share/themes/nord.yaml";
@@ -74,7 +74,7 @@ let
 in
 {
 
-  environment.systemPackages = lib.optional useThemeFile pkgs.gowall;
+  environment.systemPackages = (lib.optional useThemeFile pkgs.gowall) ++ [ pkgs.swww ];
 
   # Generate themed wallpaper on system activation (only when useThemeFile = true)
   system.activationScripts.gowallWallpaper = lib.mkIf useThemeFile ''
@@ -123,16 +123,19 @@ in
       size = 16;
     };
 
-    base16Scheme = lib.mkIf useThemeFile themeFile;
-
     image = if useThemeFile then
       ../../../assets/wallpapers/wallpaper.png
     else
       wallpaperSource;
+  } // lib.optionalAttrs useThemeFile {
+    base16Scheme = themeFile;
   };
 
   # Expose the wallpaper path for shell scripts (swww, etc.)
-  environment.sessionVariables.STYLIX_WALLPAPER = "~/nix-config/assets/wallpapers/wallpaper.png";
+  environment.sessionVariables.STYLIX_WALLPAPER = if useThemeFile then
+    "~/nix-config/assets/wallpapers/wallpaper.png"
+  else
+    toString wallpaperSource;
 
   fonts = {
     fontDir.enable = true;
