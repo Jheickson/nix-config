@@ -125,7 +125,10 @@ in
 
     base16Scheme = lib.mkIf useThemeFile themeFile;
 
-    image = ../../../assets/wallpapers/wallpaper.png;
+    image = if useThemeFile then
+      ../../../assets/wallpapers/wallpaper.png
+    else
+      wallpaperSource;
   };
 
   # Expose the wallpaper path for shell scripts (swww, etc.)
