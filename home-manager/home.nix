@@ -84,19 +84,8 @@
   # EDITOR = "micro";
   # };
 
-  # Enable numlock on graphical session start
-  systemd.user.services.numlock = {
-    Unit = {
-      Description = "Enable numlock";
-      After = [ "graphical-session.target" ];
-    };
-    Service = {
-      Type = "oneshot";
-      ExecStart = "${pkgs.numlockx}/bin/numlockx on";
-      RemainAfterExit = true;
-    };
-    Install.WantedBy = [ "graphical-session.target" ];
-  };
+  # Enable NumLock
+  xsession.numlock.enable = true;
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
