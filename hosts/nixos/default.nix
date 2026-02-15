@@ -28,7 +28,7 @@
     ../../modules/nixos/core/substituters.nix
 
     # Desktop environment
-    ../../modules/nixos/desktop/gtk.nix
+    # ../../modules/nixos/desktop/gtk.nix
     ../../modules/nixos/desktop/stylix.nix
     ../../modules/nixos/desktop/niri.nix
     ../../modules/nixos/desktop/xautolock.nix
