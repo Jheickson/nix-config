@@ -251,8 +251,6 @@
     git
     vscode
     inputs.zen-browser.packages."${system}".default
-    numix-icon-theme
-    numix-solarized-gtk-theme
 
     # Portal packages for file dialogs to work in Wayland
     xdg-desktop-portal

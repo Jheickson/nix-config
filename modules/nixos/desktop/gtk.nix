@@ -4,6 +4,8 @@
   # GTK configuration
   environment.systemPackages = with pkgs; [
     gtk-engine-murrine # Required for Numix theme
+    numix-icon-theme
+    numix-solarized-gtk-theme
   ];
 
   # Set GTK theme for all users
