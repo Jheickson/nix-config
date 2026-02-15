@@ -10,60 +10,74 @@
 
 let
   # ============================================================================
+  # CONFIGURATION - Customize theme and wallpaper behavior
+  # ============================================================================
+
+  # Toggle between preset theme-based coloring or Stylix auto-generation
+  # When true (default): Uses a Base16 theme file and gowall to colorize wallpaper
+  # When false: Lets Stylix auto-generate palette from wallpaper directly
+  useThemeFile = false;
+
+  # ============================================================================
   # WALLPAPER CONFIGURATION - Change these values to update your wallpaper
   # ============================================================================
 
   # The source wallpaper image
-  wallpaperSource = ../../../assets/wallpapers/Minimalistic/wallhaven-yqj53x.png;
+  wallpaperSource = ../../../assets/wallpapers/Landscape/wall-20260215-154725.png;
 
-  # Theme file - determines the color palette
-  themeFile = "${pkgs.base16-schemes}/share/themes/black-metal-bathory.yaml";
+  # Theme file - determines the color palette (only used when useThemeFile = true)
+  themeFile = "${pkgs.base16-schemes}/share/themes/nord.yaml";
 
   # ============================================================================
   # GOWALL THEME JSON - Generated at build time from the base16 theme
+  # (Only generated when useThemeFile = true)
   # ============================================================================
 
   # Parse the YAML theme file to get colors
-  themeYaml = builtins.fromJSON (
-    builtins.readFile (
-      pkgs.runCommand "theme-as-json" { } ''
-        ${pkgs.yq-go}/bin/yq -o=json '.' ${themeFile} > $out
-      ''
+  themeYaml = if useThemeFile then
+    builtins.fromJSON (
+      builtins.readFile (
+        pkgs.runCommand "theme-as-json" { } ''
+          ${pkgs.yq-go}/bin/yq -o=json '.' ${themeFile} > $out
+        ''
+      )
     )
-  );
+  else
+    null;
 
   # Generate gowall JSON theme file
-  gowallThemeJson = pkgs.writeText "gowall-theme.json" (builtins.toJSON {
-    name = "stylix";
-    colors = [
-      themeYaml.palette.base00
-      themeYaml.palette.base01
-      themeYaml.palette.base02
-      themeYaml.palette.base03
-      themeYaml.palette.base04
-      themeYaml.palette.base05
-      themeYaml.palette.base06
-      themeYaml.palette.base07
-      themeYaml.palette.base08
-      themeYaml.palette.base09
-      themeYaml.palette.base0A
-      themeYaml.palette.base0B
-      themeYaml.palette.base0C
-      themeYaml.palette.base0D
-      themeYaml.palette.base0E
-      themeYaml.palette.base0F
-    ];
-  });
+  gowallThemeJson = if useThemeFile then
+    pkgs.writeText "gowall-theme.json" (builtins.toJSON {
+      name = "stylix";
+      colors = [
+        themeYaml.palette.base00
+        themeYaml.palette.base01
+        themeYaml.palette.base02
+        themeYaml.palette.base03
+        themeYaml.palette.base04
+        themeYaml.palette.base05
+        themeYaml.palette.base06
+        themeYaml.palette.base07
+        themeYaml.palette.base08
+        themeYaml.palette.base09
+        themeYaml.palette.base0A
+        themeYaml.palette.base0B
+        themeYaml.palette.base0C
+        themeYaml.palette.base0D
+        themeYaml.palette.base0E
+        themeYaml.palette.base0F
+      ];
+    })
+  else
+    null;
 
 in
 {
 
-  environment.systemPackages = [
-    pkgs.gowall
-  ];
+  environment.systemPackages = lib.optional useThemeFile pkgs.gowall;
 
-  # Generate themed wallpaper on system activation
-  system.activationScripts.gowallWallpaper = ''
+  # Generate themed wallpaper on system activation (only when useThemeFile = true)
+  system.activationScripts.gowallWallpaper = lib.mkIf useThemeFile ''
     HOME=/home/felipe ${pkgs.gowall}/bin/gowall convert ${wallpaperSource} -t ${gowallThemeJson} --output /home/felipe/nix-config/assets/wallpapers/wallpaper.png
   '';
 
@@ -109,7 +123,7 @@ in
       size = 16;
     };
 
-    base16Scheme = themeFile;
+    base16Scheme = lib.mkIf useThemeFile themeFile;
 
     image = ../../../assets/wallpapers/wallpaper.png;
   };
