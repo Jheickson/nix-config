@@ -12,7 +12,6 @@ if ! pgrep -x "swww-daemon" > /dev/null; then
     sleep 1
 fi
 
-# Set wallpaper - use argument if provided, otherwise fall back to STYLIX_WALLPAPER
-# WALLPAPER="${1:-$STYLIX_WALLPAPER}"
-# swww img "$WALLPAPER" --resize no
-swww img "~/nix-config/assets/wallpapers/wallpaper.png" --resize no
+# Set wallpaper - use STYLIX_WALLPAPER environment variable if set, otherwise use default
+WALLPAPER="${STYLIX_WALLPAPER:-~/nix-config/assets/wallpapers/wallpaper.png}"
+swww img "$WALLPAPER" --resize stretch
