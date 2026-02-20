@@ -16,17 +16,17 @@ let
   # Toggle between preset theme-based coloring or Stylix auto-generation
   # When true (default): Uses a Base16 theme file and gowall to colorize wallpaper
   # When false: Lets Stylix auto-generate palette from wallpaper directly
-  useThemeFile = false;
+  useThemeFile = true;
 
   # ============================================================================
   # WALLPAPER CONFIGURATION - Change these values to update your wallpaper
   # ============================================================================
 
   # The source wallpaper image
-  wallpaperSource = ../../../assets/wallpapers/Landscape/wallhaven-rrljjq.jpg;
+  wallpaperSource = ../../../assets/wallpapers/Other/wallhaven-qrjq8l.png;
 
   # Theme file - determines the color palette (only used when useThemeFile = true)
-  themeFile = "${pkgs.base16-schemes}/share/themes/nord.yaml";
+  themeFile = "${pkgs.base16-schemes}/share/themes/atelier-sulphurpool.yaml";
 
   # ============================================================================
   # GOWALL THEME JSON - Generated at build time from the base16 theme
