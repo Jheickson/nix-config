@@ -91,7 +91,7 @@ let
         local last_notified_20=0
         local last_notified_10=0
         local last_notified_5=0
-        local last_notified_full=0
+        local has_notified_full=false
         local last_charger_state=""
         local last_charger_notification=0
         
@@ -145,16 +145,19 @@ let
                     last_notified_5=$current_time
                 fi
                 
-                # Reset full notification when discharging
-                last_notified_full=0
+                # Reset full notification flag when discharging
+                has_notified_full=false
                 
             # Full battery notification (only when charging and above 97%)
             elif [[ "$charging_status" == "Charging" ]] || [[ "$charging_status" == "Full" ]]; then
-                if [[ $current_level -ge 97 ]] && \
-                   [[ $((current_time - last_notified_full)) -gt 300 ]]; then
+                # Notify once when battery reaches full, then reset flag when it drops below 95%
+                if [[ $current_level -ge 97 ]] && [[ "$has_notified_full" == "false" ]]; then
                     send_notification "low" "battery-full-charged" \
                         "Battery fully charged at $current_level% - Consider unplugging"
-                    last_notified_full=$current_time
+                    has_notified_full=true
+                elif [[ $current_level -lt 95 ]]; then
+                    # Reset notification flag if battery drops below 95% (e.g., due to power drain)
+                    has_notified_full=false
                 fi
                 
                 # Reset low notifications when charging
