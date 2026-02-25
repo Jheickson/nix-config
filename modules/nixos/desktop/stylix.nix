@@ -23,7 +23,7 @@ let
   # ============================================================================
 
   # The source wallpaper image
-  wallpaperSource = ../../../assets/wallpapers/Other/wallhaven-qrjq8l.png;
+  wallpaperSource = ../../../assets/wallpapers/Minimalistic/wallhaven-je1vgq.png;
 
   # Theme file - determines the color palette (only used when useThemeFile = true)
   themeFile = "${pkgs.base16-schemes}/share/themes/saga.yaml";
