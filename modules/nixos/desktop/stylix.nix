@@ -26,7 +26,7 @@ let
   wallpaperSource = ../../../assets/wallpapers/Other/wallhaven-qrjq8l.png;
 
   # Theme file - determines the color palette (only used when useThemeFile = true)
-  themeFile = "${pkgs.base16-schemes}/share/themes/atelier-sulphurpool.yaml";
+  themeFile = "${pkgs.base16-schemes}/share/themes/saga.yaml";
 
   # ============================================================================
   # GOWALL THEME JSON - Generated at build time from the base16 theme
