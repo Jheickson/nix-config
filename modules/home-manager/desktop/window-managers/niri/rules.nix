@@ -188,6 +188,13 @@ let
       open-floating = true;
     }
     {
+      matches = [
+        { app-id = "com.mitchellh.ghostty"; }
+        { app-id = "ghostty"; }
+      ];
+      open-floating = true;
+    }
+    {
       matches = [ { title = "Progress"; } ];
       open-floating = true;
     }
