@@ -82,6 +82,8 @@
       "Mod+Tab".action = focus-monitor-next;
       # "Mod+Q".action = focus-monitor-previous;
 
+      "Mod+Ctrl+W".action = toggle-column-tabbed-display;
+
       # Window movement with Colemak_dh_wide (matching i3)
       "Mod+Shift+A".action = move-column-left;
       "Mod+Shift+S".action = move-column-right;
