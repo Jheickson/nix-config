@@ -85,10 +85,10 @@
       "Mod+3".action = set-column-width "75%";
       "Mod+4".action = set-column-width "100%";
       # Fine-grained width / height adjustment
-      "Mod+Shift+X".action = set-column-width "-10%";
-      "Mod+Shift+D".action = set-column-width "+10%";
-      "Mod+Shift+T".action = set-window-height "-10%";
-      "Mod+Shift+V".action = set-window-height "+10%";
+      "Mod+Ctrl+X".action = set-column-width "-10%";
+      "Mod+Ctrl+D".action = set-column-width "+10%";
+      "Mod+Ctrl+T".action = set-window-height "-10%";
+      "Mod+Ctrl+V".action = set-window-height "+10%";
       # Maximize / fullscreen
       "Mod+Shift+F".action = maximize-column;
       "Mod+Ctrl+F".action = fullscreen-window;
