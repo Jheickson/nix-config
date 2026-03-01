@@ -86,10 +86,10 @@
       "Mod+Ctrl+W".action = toggle-column-tabbed-display;
 
       # Window movement with Colemak_dh_wide (matching i3)
-      "Mod+Shift+A".action = move-column-left;
-      "Mod+Shift+S".action = move-column-right;
-      "Mod+Shift+W".action = move-column-to-workspace-up;
-      "Mod+Shift+R".action = move-column-to-workspace-down;
+      "Mod+Shift+A".action = consume-or-expel-window-left;
+      "Mod+Shift+S".action = consume-or-expel-window-right;
+      "Mod+Shift+W".action = move-window-up;
+      "Mod+Shift+R".action = move-window-down;
 
       # Workspace/monitor movement with Colemak_dh_wide (matching i3)
       "Mod+Ctrl+Tab".action = move-workspace-to-monitor-next;
