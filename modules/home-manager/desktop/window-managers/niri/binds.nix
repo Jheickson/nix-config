@@ -79,8 +79,9 @@
       "Mod+Right".action = focus-column-right;
       "Mod+Down".action = focus-workspace-down;
       "Mod+Up".action = focus-workspace-up;
+
       "Mod+Tab".action = focus-monitor-next;
-      # "Mod+Q".action = focus-monitor-previous;
+      # "Mod+Shift+Tab".action = focus-monitor-previous;
 
       "Mod+Ctrl+W".action = toggle-column-tabbed-display;
 
