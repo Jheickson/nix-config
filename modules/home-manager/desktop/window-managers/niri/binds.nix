@@ -79,11 +79,16 @@
       "Mod+Shift+R".action = move-window-down;
 
       # ── Column & Layout ───────────────────────────────────────────────────
-      # Width presets
+      # Column width presets
       "Mod+1".action = set-column-width "25%";
       "Mod+2".action = set-column-width "50%";
       "Mod+3".action = set-column-width "75%";
       "Mod+4".action = set-column-width "100%";
+      # Window height presets
+      "Mod+Ctrl+1".action = set-window-height "25%";
+      "Mod+Ctrl+2".action = set-window-height "50%";
+      "Mod+Ctrl+3".action = set-window-height "75%";
+      "Mod+Ctrl+4".action = set-window-height "100%";
       # Fine-grained width / height adjustment
       "Mod+Ctrl+X".action = set-column-width "-10%";
       "Mod+Ctrl+D".action = set-column-width "+10%";
