@@ -2,6 +2,8 @@
 let
   colors = config.lib.stylix.colors;
   windowRules = [
+
+    # ── Global ────────────────────────────────────────────────────────────────
     {
       geometry-corner-radius =
         let
@@ -17,17 +19,13 @@ let
       draw-border-with-background = false;
     }
     {
-      matches = [
-        { is-floating = true; }
-      ];
+      matches = [ { is-floating = true; } ];
       shadow.enable = true;
     }
+
+    # ── Screencast target indicator ───────────────────────────────────────────
     {
-      matches = [
-        {
-          is-window-cast-target = true;
-        }
-      ];
+      matches = [ { is-window-cast-target = true; } ];
       focus-ring = {
         active.color = "#${colors.base08}";
         inactive.color = "#${colors.base09}";
@@ -44,14 +42,8 @@ let
         inactive.color = "#${colors.base09}";
       };
     }
-    {
-      matches = [ { app-id = "org.telegram.desktop"; } ];
-      block-out-from = "screencast";
-    }
-    {
-      matches = [ { app-id = "app.drey.PaperPlane"; } ];
-      block-out-from = "screencast";
-    }
+
+    # ── Browsers ──────────────────────────────────────────────────────────────
     {
       matches = [
         { app-id = "zen"; }
@@ -70,12 +62,13 @@ let
       ];
       open-maximized = true;
     }
+
+    # ── Picture-in-Picture ────────────────────────────────────────────────────
     {
+      # Firefox and Zen share identical PiP settings
       matches = [
-        {
-          app-id = "firefox";
-          title = "Picture-in-Picture";
-        }
+        { app-id = "firefox"; title = "Picture-in-Picture"; }
+        { app-id = "zen";     title = "Picture-in-Picture"; }
       ];
       open-floating = true;
       default-floating-position = {
@@ -83,34 +76,11 @@ let
         y = 32;
         relative-to = "bottom-right";
       };
-      default-column-width = {
-        fixed = 480;
-      };
-      default-window-height = {
-        fixed = 270;
-      };
+      default-column-width.fixed  = 480;
+      default-window-height.fixed = 270;
     }
     {
-      matches = [
-        {
-          app-id = "zen";
-          title = "Picture-in-Picture";
-        }
-      ];
-      open-floating = true;
-      default-floating-position = {
-        x = 32;
-        y = 32;
-        relative-to = "bottom-right";
-      };
-      default-column-width = {
-        fixed = 480;
-      };
-      default-window-height = {
-        fixed = 270;
-      };
-    }
-    {
+      # Generic fallback (e.g. Chromium)
       matches = [ { title = "Picture in picture"; } ];
       open-floating = true;
       default-floating-position = {
@@ -119,6 +89,8 @@ let
         relative-to = "bottom-right";
       };
     }
+
+    # ── Floating popouts (bottom-right) ───────────────────────────────────────
     {
       matches = [ { title = "Discord Popout"; } ];
       open-floating = true;
@@ -128,73 +100,9 @@ let
         relative-to = "bottom-right";
       };
     }
-    {
-      matches = [ { app-id = "pavucontrol"; } ];
-      open-floating = true;
-    }
-    {
-      matches = [ { app-id = "pavucontrol-qt"; } ];
-      open-floating = true;
-    }
-    {
-      matches = [ { app-id = "com.saivert.pwvucontrol"; } ];
-      open-floating = true;
-    }
-    {
-      matches = [ { app-id = "io.github.fsobolev.Cavalier"; } ];
-      open-floating = true;
-    }
-    {
-      matches = [ { app-id = "dialog"; } ];
-      open-floating = true;
-    }
-    {
-      matches = [ { app-id = "popup"; } ];
-      open-floating = true;
-    }
-    {
-      matches = [ { app-id = "task_dialog"; } ];
-      open-floating = true;
-    }
-    {
-      matches = [ { app-id = "gcr-prompter"; } ];
-      open-floating = true;
-    }
-    {
-      matches = [ { app-id = "file-roller"; } ];
-      open-floating = true;
-    }
-    {
-      matches = [ { app-id = "org.gnome.FileRoller"; } ];
-      open-floating = true;
-    }
-    {
-      matches = [
-        { app-id = "org.gnome.Nautilus"; }
-        { app-id = "nautilus"; }
-      ];
-      open-floating = true;
-    }
-    {
-      matches = [ { app-id = "nm-connection-editor"; } ];
-      open-floating = true;
-    }
-    {
-      matches = [ { app-id = "blueman-manager"; } ];
-      open-floating = true;
-    }
-    {
-      matches = [ { app-id = "xdg-desktop-portal-gtk"; } ];
-      open-floating = true;
-    }
-    {
-      matches = [ { app-id = "org.kde.polkit-kde-authentication-agent-1"; } ];
-      open-floating = true;
-    }
-    {
-      matches = [ { app-id = "pinentry"; } ];
-      open-floating = true;
-    }
+
+    # ── Floating utilities ────────────────────────────────────────────────────
+    # Terminals
     {
       matches = [
         { app-id = "com.mitchellh.ghostty"; }
@@ -202,78 +110,95 @@ let
       ];
       open-floating = true;
     }
+    # Audio controls
     {
-      matches = [ { title = "Progress"; } ];
+      matches = [
+        { app-id = "pavucontrol"; }
+        { app-id = "pavucontrol-qt"; }
+        { app-id = "com.saivert.pwvucontrol"; }
+      ];
       open-floating = true;
     }
+    # File managers & archive tools
     {
-      matches = [ { title = "File Operations"; } ];
+      matches = [
+        { app-id = "org.gnome.Nautilus"; }
+        { app-id = "nautilus"; }
+        { app-id = "file-roller"; }
+        { app-id = "org.gnome.FileRoller"; }
+      ];
       open-floating = true;
     }
+    # System / auth dialogs
     {
-      matches = [ { title = "Copying"; } ];
+      matches = [
+        { app-id = "nm-connection-editor"; }
+        { app-id = "blueman-manager"; }
+        { app-id = "xdg-desktop-portal-gtk"; }
+        { app-id = "org.kde.polkit-kde-authentication-agent-1"; }
+        { app-id = "gcr-prompter"; }
+        { app-id = "pinentry"; }
+      ];
       open-floating = true;
     }
+    # Misc utilities
     {
-      matches = [ { title = "Moving"; } ];
+      matches = [
+        { app-id = "io.github.fsobolev.Cavalier"; }
+        { app-id = "dialog"; }
+        { app-id = "popup"; }
+        { app-id = "task_dialog"; }
+      ];
       open-floating = true;
     }
+
+    # ── Floating dialog titles ────────────────────────────────────────────────
+    # File operation progress
     {
-      matches = [ { title = "Properties"; } ];
+      matches = [
+        { title = "Progress"; }
+        { title = "File Operations"; }
+        { title = "Copying"; }
+        { title = "Moving"; }
+        { title = "Properties"; }
+        { title = "Downloads"; }
+        { title = "file progress"; }
+      ];
       open-floating = true;
     }
+    # Confirmation / alert dialogs
     {
-      matches = [ { title = "Downloads"; } ];
+      matches = [
+        { title = "Confirm"; }
+        { title = "Authentication Required"; }
+        { title = "Notice"; }
+        { title = "Warning"; }
+        { title = "Error"; }
+      ];
       open-floating = true;
     }
+
+    # ── Privacy apps (laptop screen, maximized, hidden from screencast) ───────
     {
-      matches = [ { title = "file progress"; } ];
-      open-floating = true;
-    }
-    {
-      matches = [ { title = "Confirm"; } ];
-      open-floating = true;
-    }
-    {
-      matches = [ { title = "Authentication Required"; } ];
-      open-floating = true;
-    }
-    {
-      matches = [ { title = "Notice"; } ];
-      open-floating = true;
-    }
-    {
-      matches = [ { title = "Warning"; } ];
-      open-floating = true;
-    }
-    {
-      matches = [ { title = "Error"; } ];
-      open-floating = true;
-    }
-    {
-      matches = [ { app-id = "wasistlos"; } ];
+      matches = [
+        { app-id = "wasistlos"; }
+        { app-id = "zapzap"; }
+        { app-id = "electron-mail"; }
+        { app-id = "slack"; }
+      ];
       open-on-output = "eDP-1";
       open-maximized = true;
       block-out-from = "screencast";
     }
+    # Messaging apps without output/maximize constraints
     {
-      matches = [ { app-id = "zapzap"; } ];
-      open-on-output = "eDP-1";
-      open-maximized = true;
+      matches = [
+        { app-id = "org.telegram.desktop"; }
+        { app-id = "app.drey.PaperPlane"; }
+      ];
       block-out-from = "screencast";
     }
-    {
-      matches = [ { app-id = "electron-mail"; } ];
-      open-on-output = "eDP-1";
-      open-maximized = true;
-      block-out-from = "screencast";
-    }
-    {
-      matches = [ { app-id = "slack"; } ];
-      open-on-output = "eDP-1";
-      open-maximized = true;
-      block-out-from = "screencast";
-    }
+
   ];
 in
 {
