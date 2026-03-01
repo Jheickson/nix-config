@@ -69,8 +69,12 @@
       # Colemak_dh_wide navigation: a,s,w,r for left,right,up,down (matching i3)
       "Mod+A".action = focus-column-left;
       "Mod+S".action = focus-column-right;
-      "Mod+W".action = focus-workspace-up;
-      "Mod+R".action = focus-workspace-down;
+      "Mod+W".action = focus-window-up;
+      "Mod+R".action = focus-window-down;
+
+      "Mod+P".action = focus-workspace-up;
+      "Mod+T".action = focus-workspace-down;
+
       "Mod+Left".action = focus-column-left;
       "Mod+Right".action = focus-column-right;
       "Mod+Down".action = focus-workspace-down;
