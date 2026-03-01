@@ -90,8 +90,9 @@
       "Mod+Shift+Tab".action = move-column-to-monitor-next;
       # "Mod+Shift+F".action = move-column-to-monitor-right;
 
-      # Additional i3 keybindings
+      # Application launchers
       "Mod+Shift+B".action = spawn "zen-beta";
       "Mod+Shift+C".action = spawn "code";
+      "Mod+Shift+N".action = spawn "nautilus";
     };
 }
