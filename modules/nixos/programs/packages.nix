@@ -59,6 +59,7 @@ in
       electron-mail
       libreoffice
       nautilus
+      slack
       telegram-desktop
       zapzap
       # googleearth-pro
