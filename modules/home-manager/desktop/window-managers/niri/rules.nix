@@ -168,6 +168,13 @@ let
       open-floating = true;
     }
     {
+      matches = [
+        { app-id = "org.gnome.Nautilus"; }
+        { app-id = "nautilus"; }
+      ];
+      open-floating = true;
+    }
+    {
       matches = [ { app-id = "nm-connection-editor"; } ];
       open-floating = true;
     }
