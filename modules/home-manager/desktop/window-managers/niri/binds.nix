@@ -63,8 +63,8 @@
       "Mod+W".action = focus-window-up;
       "Mod+R".action = focus-window-down;
       # Workspace
-      "Mod+P".action = focus-workspace-up;
-      "Mod+T".action = focus-workspace-down;
+      "Mod+T".action = focus-workspace-up;
+      "Mod+V".action = focus-workspace-down;
       "Mod+Up".action = focus-workspace-up;
       "Mod+Down".action = focus-workspace-down;
       # Monitor
