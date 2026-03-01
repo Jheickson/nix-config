@@ -29,18 +29,19 @@ let
         }
       ];
       focus-ring = {
-        active.color = "#${colors.base0D}";
-        inactive.color = "#${colors.base01}";
+        active.color = "#${colors.base08}";
+        inactive.color = "#${colors.base09}";
       };
       border = {
-        inactive.color = "#${colors.base01}";
+        active.color = "#${colors.base08}";
+        inactive.color = "#${colors.base09}";
       };
       shadow = {
-        color = "#${colors.base01}70";
+        color = "#${colors.base08}70";
       };
       tab-indicator = {
-        active.color = "#${colors.base0D}";
-        inactive.color = "#${colors.base01}";
+        active.color = "#${colors.base08}";
+        inactive.color = "#${colors.base09}";
       };
     }
     {
