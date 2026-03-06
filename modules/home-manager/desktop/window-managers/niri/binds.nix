@@ -102,6 +102,11 @@
       # Consume / expel (column-level)
       "Mod+Comma".action = consume-window-into-column;
       "Mod+Period".action = expel-window-from-column;
+      # Workspace movement
+      "Mod+Shift+T".action = move-column-to-workspace-up;
+      "Mod+Shift+V".action = move-column-to-workspace-down;
+      "Mod+Shift+Up".action = move-column-to-workspace-up;
+      "Mod+Shift+Down".action = move-column-to-workspace-down;
       # Tabbed display
       "Mod+Ctrl+W".action = toggle-column-tabbed-display;
 
