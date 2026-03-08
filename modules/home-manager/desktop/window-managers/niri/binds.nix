@@ -12,7 +12,11 @@
       playerctl = spawn "${pkgs.playerctl}/bin/playerctl";
       
       # Helper function for Noctalia IPC commands
-      noctalia = cmd: [ "noctalia-shell" "ipc" "call" ] ++ (pkgs.lib.splitString " " cmd);
+      # Uses --pid to target the running instance regardless of store path after rebuilds
+      noctalia = cmd: let
+        args = pkgs.lib.splitString " " cmd;
+        ipcArgs = pkgs.lib.concatStringsSep " " args;
+      in [ "sh" "-c" "noctalia-shell ipc --pid $(pgrep -fo noctalia-shell) call ${ipcArgs}" ];
     in
     {
       # ── Media ─────────────────────────────────────────────────────────────
@@ -43,7 +47,7 @@
 
       # ── Noctalia UI ───────────────────────────────────────────────────────
       "Mod+D".action.spawn = noctalia "launcher toggle";
-      "Mod+N".action.spawn = noctalia "notificationCenter toggle";
+      "Mod+N".action.spawn = noctalia "notifications toggleHistory";
       "Mod+C".action.spawn = noctalia "controlCenter toggle";
 
       # ── Application Launchers ─────────────────────────────────────────────
