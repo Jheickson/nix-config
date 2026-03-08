@@ -55,10 +55,11 @@ in
       anki
       calibre
       chromium
-      # discord
+      discord
       electron-mail
       libreoffice
       nautilus
+      scanmem
       slack
       telegram-desktop
       zapzap
@@ -130,9 +131,9 @@ in
       # === CLI TOOLS ===
       cbonsai
       cowsay
+      fastfetch
       fd
       hello
-      neofetch
       tldr
       zsh
 
