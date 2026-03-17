@@ -52,8 +52,8 @@ in
             "store"
           ];
         }
-        { command = [ "zapzap" ]; }
-        { command = [ "electron-mail" ]; }
+        { command = [ "ferdium" ]; }
+        # { command = [ "electron-mail" ]; }
         { command = [ "kdeconnect-app" ]; }
         { command = [ "xwayland-satellite" ]; }
         {
