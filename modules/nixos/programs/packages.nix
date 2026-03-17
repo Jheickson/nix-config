@@ -57,18 +57,19 @@ in
       chromium
       discord
       electron-mail
+      ferdium
       libreoffice
       nautilus
       scanmem
       slack
       telegram-desktop
-      zapzap
       # googleearth-pro
       # nemo
       # nemo-preview
       # nemo-with-extensions
       # thunar
       # whatsapp-for-linux
+      # zapzap
 
       # === MEDIA & ENTERTAINMENT ===
       feishin
