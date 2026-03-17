@@ -185,6 +185,9 @@ let
         { app-id = "zapzap"; }
         { app-id = "electron-mail"; }
         { app-id = "slack"; }
+        { app-id = "discord"; }
+        { app-id = "ferdium"; }
+        { app-id = "telegram-desktop"; }
       ];
       open-on-output = "eDP-1";
       open-maximized = true;
