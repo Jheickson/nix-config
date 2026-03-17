@@ -12,11 +12,9 @@
       playerctl = spawn "${pkgs.playerctl}/bin/playerctl";
       
       # Helper function for Noctalia IPC commands
-      # Uses --pid to target the running instance regardless of store path after rebuilds
-      noctalia = cmd: let
-        args = pkgs.lib.splitString " " cmd;
-        ipcArgs = pkgs.lib.concatStringsSep " " args;
-      in [ "sh" "-c" "noctalia-shell ipc --pid $(pgrep -fo noctalia-shell) call ${ipcArgs}" ];
+      # --any-display bypasses Wayland display filtering, which fails when niri
+      # spawns processes without a full display environment
+      noctalia = cmd: [ "noctalia-shell" "ipc" "--any-display" "call" ] ++ (pkgs.lib.splitString " " cmd);
     in
     {
       # ── Media ─────────────────────────────────────────────────────────────
