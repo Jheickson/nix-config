@@ -35,7 +35,7 @@
           "focusedColor": "tertiary",
           "followFocusedScreen": false,
           "fontWeight": "bold",
-          "groupedBorderOpacity": 1,
+          "groupedBorderOpacity": 0,
           "hideUnoccupied": true,
           "iconScale": 0.8,
           "id": "Workspace",
@@ -384,16 +384,13 @@
     "size": 0.8,
     "onlySameOutput": true,
     "monitors": [],
-    "pinnedApps": [
-      "zen-beta",
-      "code"
-    ],
-    "colorizeIcons": true,
+    "pinnedApps": ["zen-beta", "code"],
+    "colorizeIcons": false,
     "showLauncherIcon": false,
-    "launcherPosition": "end",
-    "launcherIconColor": "none",
+    "launcherPosition": "start",
+    "launcherIconColor": "tertiary",
     "pinnedStatic": true,
-    "inactiveIndicators": true,
+    "inactiveIndicators": false,
     "groupApps": false,
     "groupContextMenuMode": "extended",
     "groupClickAction": "cycle",
@@ -403,7 +400,7 @@
     "sitOnFrame": false,
     "showDockIndicator": false,
     "indicatorThickness": 3,
-    "indicatorColor": "primary",
+    "indicatorColor": "tertiary",
     "indicatorOpacity": 0.6
   },
   "network": {
@@ -468,6 +465,20 @@
         "countdownEnabled": true,
         "enabled": true,
         "keybind": "6"
+      },
+      {
+        "action": "userspaceReboot",
+        "command": "",
+        "countdownEnabled": true,
+        "enabled": false,
+        "keybind": ""
+      },
+      {
+        "action": "rebootToUefi",
+        "command": "",
+        "countdownEnabled": true,
+        "enabled": true,
+        "keybind": "7"
       }
     ]
   },
@@ -521,7 +532,7 @@
     "volumeOverdrive": false,
     "spectrumFrameRate": 30,
     "visualizerType": "linear",
-    "mprisBlacklist": [],
+    "mprisBlacklist": ["instagram"],
     "preferredPlayer": "feishin",
     "volumeFeedback": false,
     "volumeFeedbackSoundFile": ""
@@ -570,10 +581,10 @@
     "autoUpdate": false
   },
   "idle": {
-    "enabled": false,
-    "screenOffTimeout": 600,
-    "lockTimeout": 660,
-    "suspendTimeout": 1800,
+    "enabled": true,
+    "screenOffTimeout": 300,
+    "lockTimeout": 360,
+    "suspendTimeout": 600,
     "fadeDuration": 5,
     "screenOffCommand": "",
     "lockCommand": "",
@@ -602,28 +613,6 @@
             "visualizerType": "linear",
             "x": 1500,
             "y": 980
-          },
-          {
-            "defaultSettings": {
-              "completedCount": 0,
-              "count": 0,
-              "current_page_id": 0,
-              "isExpanded": false,
-              "pages": [
-                {
-                  "id": 0,
-                  "name": "General"
-                }
-              ],
-              "showBackground": true,
-              "showCompleted": true,
-              "todos": []
-            },
-            "id": "plugin:todo",
-            "scale": 1,
-            "showBackground": true,
-            "x": 1600,
-            "y": 240
           }
         ]
       },
@@ -642,28 +631,6 @@
             "visualizerType": "linear",
             "x": 1500,
             "y": 980
-          },
-          {
-            "defaultSettings": {
-              "completedCount": 0,
-              "count": 0,
-              "current_page_id": 0,
-              "isExpanded": false,
-              "pages": [
-                {
-                  "id": 0,
-                  "name": "General"
-                }
-              ],
-              "showBackground": true,
-              "showCompleted": true,
-              "todos": []
-            },
-            "id": "plugin:todo",
-            "scale": 1,
-            "showBackground": true,
-            "x": 1600,
-            "y": 240
           }
         ]
       }
