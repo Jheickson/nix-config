@@ -23,10 +23,12 @@ let
   # ============================================================================
 
   # The source wallpaper image
-  wallpaperSource = ../../../assets/wallpapers/Minimalistic/wallhaven-je1vgq.png;
+  wallpaperSource = ../../../assets/wallpapers/Minimalistic/wallhaven-8g5w52.png;
 
   # Theme file - determines the color palette (only used when useThemeFile = true)
-  themeFile = "${pkgs.base16-schemes}/share/themes/saga.yaml";
+  themeFile = "${pkgs.base16-schemes}/share/themes/rose-pine.yaml";
+
+  # Favs: saga, sandcastle, black-metal-bathory, gruvbox-dark-hard, gigavolt, rose-pine
 
   # ============================================================================
   # GOWALL THEME JSON - Generated at build time from the base16 theme
