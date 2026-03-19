@@ -71,6 +71,15 @@
           "showPowerProfiles": true
         },
         {
+          "deviceNativePath": "/org/bluez/hci0/dev_F5_5B_D3_3D_EA_9E",
+          "displayMode": "graphic",
+          "hideIfIdle": true,
+          "hideIfNotDetected": true,
+          "id": "Battery",
+          "showNoctaliaPerformance": false,
+          "showPowerProfiles": false
+        },
+        {
           "displayMode": "onhover",
           "iconColor": "tertiary",
           "id": "Network",
@@ -370,7 +379,10 @@
     "size": 0.8,
     "onlySameOutput": true,
     "monitors": [],
-    "pinnedApps": ["zen-beta", "code"],
+    "pinnedApps": [
+      "zen-beta",
+      "code"
+    ],
     "colorizeIcons": false,
     "showLauncherIcon": false,
     "launcherPosition": "start",
@@ -518,7 +530,9 @@
     "volumeOverdrive": false,
     "spectrumFrameRate": 30,
     "visualizerType": "linear",
-    "mprisBlacklist": ["instagram"],
+    "mprisBlacklist": [
+      "instagram"
+    ],
     "preferredPlayer": "feishin",
     "volumeFeedback": false,
     "volumeFeedbackSoundFile": ""
