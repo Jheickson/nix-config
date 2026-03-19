@@ -28,24 +28,13 @@
     "widgets": {
       "left": [
         {
-          "characterCount": 2,
-          "colorizeIcons": true,
-          "emptyColor": "secondary",
-          "enableScrollWheel": true,
-          "focusedColor": "tertiary",
-          "followFocusedScreen": false,
-          "fontWeight": "bold",
-          "groupedBorderOpacity": 0,
-          "hideUnoccupied": true,
-          "iconScale": 0.8,
-          "id": "Workspace",
-          "labelMode": "none",
-          "occupiedColor": "primary",
-          "pillSize": 0.6,
-          "showApplications": true,
-          "showBadge": true,
-          "showLabelsOnlyWhenOccupied": true,
-          "unfocusedIconsOpacity": 0.5
+          "clockColor": "tertiary",
+          "customFont": "Hack Nerd Font",
+          "formatHorizontal": "HH mm",
+          "formatVertical": "HH mm",
+          "id": "Clock",
+          "tooltipFormat": "HH:mm ddd dd/MM/yyyy",
+          "useCustomFont": false
         }
       ],
       "center": [
@@ -57,13 +46,10 @@
           "id": "plugin:privacy-indicator"
         },
         {
-          "clockColor": "tertiary",
-          "customFont": "Hack Nerd Font",
-          "formatHorizontal": "HH mm",
-          "formatVertical": "HH mm",
-          "id": "Clock",
-          "tooltipFormat": "HH:mm ddd dd/MM/yyyy",
-          "useCustomFont": false
+          "colorName": "tertiary",
+          "hideWhenIdle": true,
+          "id": "AudioVisualizer",
+          "width": 250
         },
         {
           "hideWhenZero": true,
@@ -77,7 +63,7 @@
       "right": [
         {
           "deviceNativePath": "__default__",
-          "displayMode": "icon-always",
+          "displayMode": "graphic",
           "hideIfIdle": true,
           "hideIfNotDetected": true,
           "id": "Battery",
