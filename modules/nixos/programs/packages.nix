@@ -33,16 +33,16 @@ in
       gh
       lazygit
       nodejs_22
-      nodePackages.eas-cli
+      # nodePackages.eas-cli
       openssl
-      pipx
-      postman
-      python2
+      # pipx
+      # postman
+      # python2
       python313
       python313Packages.pip
-      sqlite
-      sqlitebrowser
-      yarn
+      # sqlite
+      # sqlitebrowser
+      # yarn
       # code-cursor
       # genymotion
       # mongodb
@@ -55,14 +55,14 @@ in
       anki
       calibre
       chromium
-      discord
-      electron-mail
+      # discord
+      # electron-mail
       ferdium
       libreoffice
       nautilus
       scanmem
-      slack
-      telegram-desktop
+      # slack
+      # telegram-desktop
       # googleearth-pro
       # nemo
       # nemo-preview
@@ -80,7 +80,7 @@ in
       picard
       pear-desktop
       qbittorrent
-      qbittorrent-enhanced
+      # qbittorrent-enhanced
       vlc
       # stremio # Use flatpak version
 
