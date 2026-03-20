@@ -96,7 +96,7 @@ in
 
         focus-follows-mouse = {
           enable = true;
-          max-scroll-amount = "25%";
+          max-scroll-amount = "1%";
         };
 
         warp-mouse-to-focus.enable = true;
