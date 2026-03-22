@@ -137,12 +137,19 @@ in
         theme = "${pointer.name}";
       };
       layout = {
-        focus-ring.enable = false;
-        border = {
+        focus-ring = {
           enable = true;
-          width = 4;
+          width = 2;
           active.color = "#${config.lib.stylix.colors.base0D}50";
           inactive.color = "#${config.lib.stylix.colors.base03}30";
+          urgent.color = "#${config.lib.stylix.colors.base08}50";
+        };
+        border = {
+          enable = false;
+          width = 2;
+          active.color = "#${config.lib.stylix.colors.base0D}50";
+          inactive.color = "#${config.lib.stylix.colors.base03}30";
+          urgent.color = "#${config.lib.stylix.colors.base08}50";
         };
         shadow = {
           enable = false;
@@ -157,12 +164,12 @@ in
           proportion = 0.5;
         };
 
-        gaps = 6;
+        gaps = 2;
         struts = {
-          left = 0;
-          right = 0;
-          top = 0;
-          bottom = 0;
+          left = 2;
+          right = 2;
+          top = 2;
+          bottom = 2;
         };
 
         tab-indicator = {
@@ -177,7 +184,11 @@ in
           # color = "#${config.lib.stylix.colors.base0D}";
         };
 
-        center-focused-column = "on-overflow";
+        # "never": no special centering, focusing an off-screen column will scroll it to the left or right edge of the screen. This is the default.
+        # "always", the focused column will always be centered.
+        # "on-overflow", focusing a column will center it if it doesn't fit on screen together with the previously focused column.
+        center-focused-column = "never";
+
         empty-workspace-above-first = true;
         always-center-single-column = true;
       };
