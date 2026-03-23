@@ -163,6 +163,14 @@ local function save_explorer_cwd(cwd)
   end
 end
 
+vim.api.nvim_create_autocmd({ 'VimEnter', 'DirChanged' }, {
+  callback = function()
+    vim.schedule(function()
+      save_explorer_cwd(vim.fn.getcwd())
+    end)
+  end,
+})
+
 -- Load saved colorscheme or use default
 local function load_colorscheme()
   local file = io.open(colorscheme_file, 'r')
@@ -211,9 +219,6 @@ require("snacks").setup({
             position = "right",
           },
         },
-        on_close = function(picker)
-          save_explorer_cwd(picker:cwd())
-        end,
       },
     },
   },
