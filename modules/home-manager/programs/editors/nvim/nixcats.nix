@@ -92,11 +92,13 @@ in
             general = with pkgs.vimPlugins; [
               # lazy loading isnt required with a config this small
               # but as a demo, we do it anyway.
+              auto-session
               copilot-vim
               lze
               lzextras
               snacks-nvim
               onedark-nvim
+              vim-rooter
               render-markdown-nvim
               tinted-vim
               vim-sleuth
