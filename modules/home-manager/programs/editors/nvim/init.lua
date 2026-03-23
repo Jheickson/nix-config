@@ -232,6 +232,28 @@ require("snacks").setup({
   gitbrowse = {},
   scope = {},
 })
+
+require('codecompanion').setup({
+  display = {
+    action_palette = {
+      provider = 'snacks',
+    },
+  },
+  interactions = {
+    chat = {
+      adapter = 'copilot',
+    },
+    inline = {
+      adapter = 'copilot',
+    },
+  },
+})
+
+vim.keymap.set({ 'n', 'v' }, '<leader>aa', '<cmd>CodeCompanionActions<CR>', { desc = 'CodeCompanion actions' })
+vim.keymap.set({ 'n', 'v' }, '<leader>ac', '<cmd>CodeCompanionChat Toggle<CR>', { desc = 'Toggle CodeCompanion chat' })
+vim.keymap.set({ 'n', 'v' }, '<leader>ai', '<cmd>CodeCompanion<CR>', { desc = 'Open CodeCompanion inline' })
+vim.cmd([[cab cc CodeCompanion]])
+
 vim.keymap.set("n", "-", function() Snacks.explorer.open() end, { desc = 'Snacks Explorer' })
 vim.keymap.set("n", "<c-\\>", function() Snacks.terminal.open() end, { desc = 'Snacks Terminal' })
 vim.keymap.set("n", "<leader>_", function() Snacks.lazygit.open() end, { desc = 'Snacks LazyGit' })
