@@ -80,9 +80,10 @@
   #
   #  /etc/profiles/per-user/felipe/etc/profile.d/hm-session-vars.sh
   #
-  # home.sessionVariables = {
-  # EDITOR = "micro";
-  # };
+  home.sessionVariables = {
+    EDITOR = "vim";
+    VISUAL = "vim";
+  };
 
   # Enable NumLock
   xsession.numlock.enable = true;
