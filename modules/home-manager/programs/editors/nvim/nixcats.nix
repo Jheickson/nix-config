@@ -94,6 +94,8 @@ in
               # but as a demo, we do it anyway.
               auto-session
               copilot-vim
+              plenary-nvim
+              codecompanion-nvim
               lze
               lzextras
               snacks-nvim
