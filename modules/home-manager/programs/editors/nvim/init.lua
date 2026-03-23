@@ -157,7 +157,17 @@ load_colorscheme()
 
 require("snacks").setup({
   explorer = {},
-  picker = {},
+  picker = {
+    sources = {
+      explorer = {
+        layout = {
+          layout = {
+            position = "right",
+          },
+        },
+      },
+    },
+  },
   bigfile = {},
   image = {},
   lazygit = {},
