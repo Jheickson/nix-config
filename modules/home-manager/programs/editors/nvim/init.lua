@@ -84,6 +84,12 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 
 vim.g.netrw_liststyle=0
 vim.g.netrw_banner=0
+
+-- Keep Neovim rooted at project folders when possible.
+vim.g.rooter_buftypes = { '' }
+vim.g.rooter_patterns = { '.git', 'flake.nix', 'package.json', 'Cargo.toml', 'go.mod', 'pyproject.toml' }
+vim.g.rooter_silent_chdir = 1
+
 -- [[ Basic Keymaps ]]
 
 -- Keymaps for better default experience
@@ -127,6 +133,36 @@ vim.keymap.set("x", "<leader>P", '"_dP', { noremap = true, silent = true, desc =
 -- Save and restore the last used colorscheme
 local colorscheme_file = vim.fn.stdpath('data') .. '/last_colorscheme.txt'
 
+local explorer_cwd_file = vim.fn.stdpath('data') .. '/last_explorer_cwd.txt'
+
+local function load_explorer_cwd()
+  local file = io.open(explorer_cwd_file, 'r')
+  if not file then
+    return nil
+  end
+
+  local cwd = vim.trim(file:read('*line') or '')
+  file:close()
+
+  if cwd ~= '' and vim.fn.isdirectory(cwd) == 1 then
+    return cwd
+  end
+
+  return nil
+end
+
+local function save_explorer_cwd(cwd)
+  if not cwd or cwd == '' or vim.fn.isdirectory(cwd) ~= 1 then
+    return
+  end
+
+  local file = io.open(explorer_cwd_file, 'w')
+  if file then
+    file:write(cwd)
+    file:close()
+  end
+end
+
 -- Load saved colorscheme or use default
 local function load_colorscheme()
   local file = io.open(colorscheme_file, 'r')
@@ -155,16 +191,29 @@ vim.api.nvim_create_autocmd('ColorScheme', {
 
 load_colorscheme()
 
+require('auto-session').setup({
+  auto_restore = true,
+  auto_save = true,
+  lazy_support = true,
+  session_lens = {
+    picker = 'snacks',
+  },
+})
+
 require("snacks").setup({
   explorer = {},
   picker = {
     sources = {
       explorer = {
+        cwd = load_explorer_cwd() or vim.fn.getcwd(),
         layout = {
           layout = {
             position = "right",
           },
         },
+        on_close = function(picker)
+          save_explorer_cwd(picker:cwd())
+        end,
       },
     },
   },
