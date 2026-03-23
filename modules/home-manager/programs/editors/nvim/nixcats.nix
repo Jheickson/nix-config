@@ -97,7 +97,6 @@ in
               lze
               lzextras
               snacks-nvim
-              onedark-nvim
               vim-rooter
               render-markdown-nvim
               tinted-vim
