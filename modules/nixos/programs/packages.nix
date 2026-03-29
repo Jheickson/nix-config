@@ -102,8 +102,8 @@ in
       networkmanager
       networkmanager_dmenu
       networkmanagerapplet
-      openvpn
-      openvpn3
+      # openvpn
+      # openvpn3
       pritunl-client
       # networkmanager-openvpn
 
