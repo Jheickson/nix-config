@@ -194,51 +194,151 @@ in
       };
 
       animations = {
+        workspace-switch = {
+          spring = {
+            damping-ratio = 0.80;
+            stiffness = 523;
+            epsilon = 0.0001;
+          };
+        };
 
-          window-resize.custom-shader = ''
-            vec4 resize_color(vec3 coords_curr_geo, vec3 size_curr_geo) {
-              vec3 coords_next_geo = niri_curr_geo_to_next_geo * coords_curr_geo;
+        window-open = {
+          # duration-ms = 400;
+          # curve = "ease-out-expo";
+          custom-shader = ''
+            vec4 door_rise(vec3 coords_geo, vec3 size_geo) {
+                float progress = niri_clamped_progress;
 
-              vec3 coords_stretch = niri_geo_to_tex_next * coords_curr_geo;
-              vec3 coords_crop = niri_geo_to_tex_next * coords_next_geo;
+                // Tilt from 90 degrees (flat) to 0 degrees (upright)
+                float tilt = (1.0 - progress) * 1.57079632;
 
-              // We can crop if the current window size is smaller than the next window
-              // size. One way to tell is by comparing to 1.0 the X and Y scaling
-              // coefficients in the current-to-next transformation matrix.
-              bool can_crop_by_x = niri_curr_geo_to_next_geo[0][0] <= 1.0;
-              bool can_crop_by_y = niri_curr_geo_to_next_geo[1][1] <= 1.0;
+                // Pivot point at bottom edge
+                vec2 coords = coords_geo.xy * size_geo.xy;
+                coords.y = size_geo.y - coords.y;
 
-              vec3 coords = coords_stretch;
-              if (can_crop_by_x)
-                  coords.x = coords_crop.x;
-              if (can_crop_by_y)
-                  coords.y = coords_crop.y;
+                // Distance from pivot (bottom edge)
+                float dist_from_pivot = coords.y;
 
-              vec4 color = texture2D(niri_tex_next, coords.st);
+                // Calculate 3D position
+                // Negative z_offset so it goes away from viewer (backward)
+                float z_offset = -dist_from_pivot * sin(tilt);
+                float y_compressed = dist_from_pivot * cos(tilt);
 
-              // However, when we crop, we also want to crop out anything outside the
-              // current geometry. This is because the area of the shader is unspecified
-              // and usually bigger than the current geometry, so if we don't fill pixels
-              // outside with transparency, the texture will leak out.
-              //
-              // When stretching, this is not an issue because the area outside will
-              // correspond to client-side decoration shadows, which are already supposed
-              // to be outside.
-              if (can_crop_by_x && (coords_curr_geo.x < 0.0 || 1.0 < coords_curr_geo.x))
-                  color = vec4(0.0);
-              if (can_crop_by_y && (coords_curr_geo.y < 0.0 || 1.0 < coords_curr_geo.y))
-                  color = vec4(0.0);
+                // Apply perspective based on depth
+                float perspective = 600.0;
+                float perspective_scale = perspective / (perspective + z_offset);
 
-              return color;
+                // Scale everything by perspective
+                coords.x = (coords.x - size_geo.x * 0.5) * perspective_scale + size_geo.x * 0.5;
+                coords.y = y_compressed * perspective_scale;
+
+                // Flip Y back to normal coordinates
+                coords.y = size_geo.y - coords.y;
+
+                coords_geo = vec3(coords / size_geo.xy, 1.0);
+
+                vec3 coords_tex = niri_geo_to_tex * coords_geo;
+                vec4 color = texture2D(niri_tex, coords_tex.st);
+
+                // Brighten as it rises
+                float brightness = 0.4 + 0.6 * progress;
+                color.rgb *= brightness;
+
+                return color * progress;
+            }
+
+            vec4 open_color(vec3 coords_geo, vec3 size_geo) {
+                return door_rise(coords_geo, size_geo);
             }
           '';
-
-          window-open = {
-            # duration-ms = 150;
-            # curve = "ease-out-quad";
-          };
-
         };
+
+        window-close = {
+          # duration-ms = 400;
+          # curve = "ease-out-expo";
+          custom-shader = ''
+            vec4 bob_and_slide(vec3 coords_geo, vec3 size_geo) {
+                float progress = niri_clamped_progress;
+
+                float y_offset = 0.0;
+
+                // Bob phase (0.0 to 0.25) - goes up then back to 0
+                if (progress < 0.25) {
+                    float t = progress / 0.25;
+                    // Parabola: goes up to peak at t=0.5, back down to 0 at t=1.0
+                    y_offset = -40.0 * (1.0 - 4.0 * (t - 0.5) * (t - 0.5));
+                }
+                // Slide phase (0.25 to 1.0) - slides down
+                else {
+                    float slide_progress = (progress - 0.25) / 0.75;
+                    y_offset = -slide_progress * (size_geo.y + 100.0);
+                }
+
+                // Apply transformation
+                vec2 coords = coords_geo.xy * size_geo.xy;
+                coords.y = coords.y + y_offset;
+
+                coords_geo = vec3(coords / size_geo.xy, 1.0);
+
+                vec3 coords_tex = niri_geo_to_tex * coords_geo;
+                vec4 color = texture2D(niri_tex, coords_tex.st);
+
+                return color;
+            }
+
+            vec4 close_color(vec3 coords_geo, vec3 size_geo) {
+                return bob_and_slide(coords_geo, size_geo);
+            }
+          '';
+        };
+
+        horizontal-view-movement = {
+          spring = {
+            damping-ratio = 0.65;
+            stiffness = 423;
+            epsilon = 0.0001;
+          };
+        };
+
+        window-movement = {
+          spring = {
+            damping-ratio = 0.65;
+            stiffness = 300;
+            epsilon = 0.0001;
+          };
+        };
+
+        window-resize = {
+          custom-shader = ''
+            vec4 resize_color(vec3 coords_curr_geo, vec3 size_curr_geo) {
+                vec3 coords_next_geo = niri_geo_to_tex_next * coords_curr_geo;
+                vec4 color = texture2D(niri_tex_next, coords_next_geo.st);
+                return color;
+            }
+          '';
+        };
+
+        config-notification-open-close = {
+          spring = {
+            damping-ratio = 0.65;
+            stiffness = 923;
+            epsilon = 0.001;
+          };
+        };
+
+        # screenshot-ui-open = {
+        #   duration-ms = 200;
+        #   curve = "ease-out-quad";
+        # };
+
+        overview-open-close = {
+          spring = {
+            damping-ratio = 0.85;
+            stiffness = 800;
+            epsilon = 0.0001;
+          };
+        };
+      };
 
       prefer-no-csd = true;
       hotkey-overlay.skip-at-startup = true;
