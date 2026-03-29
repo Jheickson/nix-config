@@ -7,7 +7,7 @@ FORBIDDEN_KEYS_BY_BLOCK = {
     "window-open": {"duration-ms", "curve"},
     "window-close": {"duration-ms", "curve"},
     "window-resize": {"duration-ms", "curve"},
-    "screenshot-ui-open": {"curve"},
+    "screenshot-ui-open": {"duration-ms", "curve"},
 }
 
 

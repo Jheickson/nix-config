@@ -896,7 +896,6 @@ return outColor ;
       };
     };
     screenshot-ui-open = {
-      duration-ms = 200;
     };
     overview-open-close = {
       spring = {
@@ -1025,7 +1024,6 @@ return outColor ;
       };
     };
     screenshot-ui-open = {
-      duration-ms = 220;
     };
     overview-open-close = {
       spring = {
@@ -1632,7 +1630,6 @@ vec4 resize_color(vec3 coords_curr_geo, vec3 size_curr_geo) {
       };
     };
     screenshot-ui-open = {
-      duration-ms = 200;
     };
     overview-open-close = {
       spring = {
@@ -2085,7 +2082,6 @@ vec4 resize_color(vec3 coords_curr_geo, vec3 size_curr_geo) {
       };
     };
     screenshot-ui-open = {
-      duration-ms = 200;
     };
     overview-open-close = {
       spring = {
@@ -2249,7 +2245,6 @@ vec4 resize_color(vec3 coords_curr_geo, vec3 size_curr_geo) {
       };
     };
     screenshot-ui-open = {
-      duration-ms = 200;
     };
     overview-open-close = {
       spring = {
