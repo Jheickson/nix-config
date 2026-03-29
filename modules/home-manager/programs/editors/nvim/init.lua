@@ -133,6 +133,22 @@ vim.keymap.set("x", "<leader>P", '"_dP', { noremap = true, silent = true, desc =
 -- Save and restore the last used colorscheme
 local colorscheme_file = vim.fn.stdpath('data') .. '/last_colorscheme.txt'
 
+local function set_rainbow_delimiter_highlights()
+  local highlight_links = {
+    { 'RainbowDelimiterRed', 'DiagnosticError' },
+    { 'RainbowDelimiterYellow', 'DiagnosticWarn' },
+    { 'RainbowDelimiterBlue', 'Function' },
+    { 'RainbowDelimiterOrange', 'String' },
+    { 'RainbowDelimiterGreen', 'Constant' },
+    { 'RainbowDelimiterViolet', 'Identifier' },
+    { 'RainbowDelimiterCyan', 'Type' },
+  }
+
+  for _, highlight_link in ipairs(highlight_links) do
+    vim.api.nvim_set_hl(0, highlight_link[1], { link = highlight_link[2], default = true })
+  end
+end
+
 local explorer_cwd_file = vim.fn.stdpath('data') .. '/last_explorer_cwd.txt'
 
 local function load_explorer_cwd()
@@ -189,6 +205,8 @@ end
 -- Save colorscheme when it changes
 vim.api.nvim_create_autocmd('ColorScheme', {
   callback = function()
+    set_rainbow_delimiter_highlights()
+
     local file = io.open(colorscheme_file, 'w')
     if file then
       file:write(vim.g.colors_name or 'default')
@@ -198,6 +216,7 @@ vim.api.nvim_create_autocmd('ColorScheme', {
 })
 
 load_colorscheme()
+set_rainbow_delimiter_highlights()
 
 require('auto-session').setup({
   auto_restore = true,
