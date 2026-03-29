@@ -3,15 +3,11 @@
 from pathlib import Path
 
 
-FORBIDDEN_BLOCKS = {
-    "window-open",
-    "window-close",
-    "window-resize",
-}
-
-FORBIDDEN_KEYS = {
-    "duration-ms",
-    "curve",
+FORBIDDEN_KEYS_BY_BLOCK = {
+    "window-open": {"duration-ms", "curve"},
+    "window-close": {"duration-ms", "curve"},
+    "window-resize": {"duration-ms", "curve"},
+    "screenshot-ui-open": {"curve"},
 }
 
 
@@ -53,10 +49,11 @@ def main() -> None:
             output_lines.append(raw_line)
             continue
 
-        if current_block in FORBIDDEN_BLOCKS:
+        forbidden_keys = FORBIDDEN_KEYS_BY_BLOCK.get(current_block)
+        if forbidden_keys:
             stripped = line.rstrip(";")
             key = stripped.split("=", 1)[0].strip() if "=" in stripped else None
-            if key in FORBIDDEN_KEYS:
+            if key in forbidden_keys:
                 continue
 
         output_lines.append(raw_line)

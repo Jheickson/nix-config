@@ -1,10 +1,10 @@
 {
   # NOTE FOR FUTURE EDITORS:
   # Niri's Home Manager module does not accept `duration-ms` or `curve`
-  # under `window-open`, `window-close`, or `window-resize` in this generated
-  # preset map. If you add new presets with custom shaders, keep those timing
-  # fields out of those blocks or run `strip-unsupported-options.py` after
-  # regenerating this file.
+  # under `window-open`, `window-close`, `window-resize`, or `screenshot-ui-open`
+  # in this generated preset map. If you add new presets with custom shaders,
+  # keep those timing fields out of those blocks or run
+  # `strip-unsupported-options.py` after regenerating this file.
   bloom = {
     workspace-switch = {
       spring = {
@@ -897,7 +897,6 @@ return outColor ;
     };
     screenshot-ui-open = {
       duration-ms = 200;
-      curve = "ease-out-quad";
     };
     overview-open-close = {
       spring = {
@@ -1027,7 +1026,6 @@ return outColor ;
     };
     screenshot-ui-open = {
       duration-ms = 220;
-      curve = [ "cubic-bezier" 0.22 1.0 0.36 1.0 ];
     };
     overview-open-close = {
       spring = {
@@ -1635,7 +1633,6 @@ vec4 resize_color(vec3 coords_curr_geo, vec3 size_curr_geo) {
     };
     screenshot-ui-open = {
       duration-ms = 200;
-      curve = "ease-out-quad";
     };
     overview-open-close = {
       spring = {
@@ -2089,7 +2086,6 @@ vec4 resize_color(vec3 coords_curr_geo, vec3 size_curr_geo) {
     };
     screenshot-ui-open = {
       duration-ms = 200;
-      curve = "linear";
     };
     overview-open-close = {
       spring = {
@@ -2254,7 +2250,6 @@ vec4 resize_color(vec3 coords_curr_geo, vec3 size_curr_geo) {
     };
     screenshot-ui-open = {
       duration-ms = 200;
-      curve = "ease-out-quad";
     };
     overview-open-close = {
       spring = {
