@@ -23,7 +23,7 @@ let
   # ============================================================================
 
   # The source wallpaper image
-  wallpaperSource = ../../../assets/wallpapers/Minimalistic/wallhaven-8g5w52.png;
+  wallpaperSource = ../../../assets/wallpapers/Minimalistic/wallhaven-9omylw.png;
 
   # Theme file - determines the color palette (only used when useThemeFile = true)
   themeFile = "${pkgs.base16-schemes}/share/themes/rose-pine.yaml";
