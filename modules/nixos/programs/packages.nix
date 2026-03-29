@@ -32,6 +32,7 @@ in
       bun
       gh
       lazygit
+      ngrok
       nodejs_22
       # nodePackages.eas-cli
       openssl
@@ -40,6 +41,7 @@ in
       # python2
       python313
       python313Packages.pip
+      ruby
       # sqlite
       # sqlitebrowser
       # yarn
