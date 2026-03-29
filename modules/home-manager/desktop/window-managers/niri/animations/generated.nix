@@ -1,4 +1,10 @@
 {
+  # NOTE FOR FUTURE EDITORS:
+  # Niri's Home Manager module does not accept `duration-ms` or `curve`
+  # under `window-open`, `window-close`, or `window-resize` in this generated
+  # preset map. If you add new presets with custom shaders, keep those timing
+  # fields out of those blocks or run `strip-unsupported-options.py` after
+  # regenerating this file.
   bloom = {
     workspace-switch = {
       spring = {
@@ -15,8 +21,6 @@
       };
     };
     window-open = {
-      duration-ms = 200;
-      curve = "linear";
       custom-shader = ''
           vec4 open_color(vec3 coords_geo, vec3 size_geo) {
             float p0 = niri_clamped_progress;
@@ -41,8 +45,6 @@
 '';
     };
     window-close = {
-      duration-ms = 300;
-      curve = "linear";
       custom-shader = ''
           vec4 close_color(vec3 coords_geo, vec3 size_geo) {
             float p0 = niri_clamped_progress;
@@ -69,8 +71,6 @@
   };
   blur = {
     window-open = {
-      duration-ms = 150;
-      curve = "linear";
       custom-shader = ''
 vec4 open_color(vec3 coords_geo, vec3 size_geo) {
             
@@ -115,8 +115,6 @@ return (outColor / samples / directions) * p;
 '';
     };
     window-close = {
-      duration-ms = 150;
-      curve = "linear";
       custom-shader = ''
 vec4 close_color(vec3 coords_geo, vec3 size_geo) {
 
@@ -162,8 +160,6 @@ return (outColor / samples / directions) * (1.0 - p);
 '';
     };
     window-resize = {
-      duration-ms = 150;
-      curve = "linear";
       custom-shader = ''
 
 float easeInOutSine(float t) {
@@ -214,8 +210,6 @@ return outColor ;
   };
   dither-glitch = {
     window-open = {
-      duration-ms = 380;
-      curve = "linear";
       custom-shader = ''
             float hash(vec2 p) {
                 return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123);
@@ -298,8 +292,6 @@ return outColor ;
 '';
     };
     window-close = {
-      duration-ms = 140;
-      curve = "linear";
       custom-shader = ''
             float hash(vec2 p) {
                 return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123);
@@ -375,8 +367,6 @@ return outColor ;
   };
   energize_b_niri = {
     window-open = {
-      duration-ms = 380;
-      curve = "linear";
       custom-shader = ''
             const vec3 EFFECT_COLOR = vec3(0.35, 0.85, 1.00);
 
@@ -570,8 +560,6 @@ return outColor ;
 '';
     };
     window-close = {
-      duration-ms = 380;
-      curve = "linear";
       custom-shader = ''
             const vec3 EFFECT_COLOR = vec3(0.35, 0.85, 1.00);
 
@@ -796,8 +784,6 @@ return outColor ;
       };
     };
     window-open = {
-      duration-ms = 400;
-      curve = "ease-out-expo";
       custom-shader = ''
         vec4 door_rise(vec3 coords_geo, vec3 size_geo) {
             float progress = niri_clamped_progress;
@@ -845,8 +831,6 @@ return outColor ;
 '';
     };
     window-close = {
-      duration-ms = 400;
-      curve = "ease-out-expo";
       custom-shader = ''
     vec4 bob_and_slide(vec3 coords_geo, vec3 size_geo) {
         float progress = niri_clamped_progress;
@@ -926,8 +910,6 @@ return outColor ;
   glide = {
     slowdown = 1.5;
     window-open = {
-      duration-ms = 260;
-      curve = [ "cubic-bezier" 0.22 1.0 0.36 1.0 ];
       custom-shader = ''
             vec4 open_color(vec3 coords_geo, vec3 size_geo) {
                 float p = niri_clamped_progress;
@@ -957,8 +939,6 @@ return outColor ;
 '';
     };
     window-close = {
-      duration-ms = 180;
-      curve = [ "cubic-bezier" 0.32 0.0 0.67 0.0 ];
       custom-shader = ''
             vec4 close_color(vec3 coords_geo, vec3 size_geo) {
                 float p = niri_clamped_progress;
@@ -1066,8 +1046,6 @@ return outColor ;
   };
   glitch_00 = {
     window-open = {
-      duration-ms = 400;
-      curve = "linear";
       custom-shader = ''
             vec4 open_color(vec3 coords_geo, vec3 size_geo) {
                 if (coords_geo.x < 0.0 || coords_geo.x > 1.0 || coords_geo.y < 0.0 || coords_geo.y > 1.0) return vec4(0.0);
@@ -1095,8 +1073,6 @@ return outColor ;
 '';
     };
     window-close = {
-      duration-ms = 600;
-      curve = "linear";
       custom-shader = ''
             vec4 close_color(vec3 coords_geo, vec3 size_geo) {
                 if (coords_geo.x < 0.0 || coords_geo.x > 1.0 || coords_geo.y < 0.0 || coords_geo.y > 1.0) return vec4(0.0);
@@ -1126,8 +1102,6 @@ return outColor ;
   glitch_01 = {
     slowdown = 1.5;
     window-open = {
-      duration-ms = 150;
-      curve = "linear";
       custom-shader = ''
         float gh(float n) {
             return fract(sin(n) * 43758.5453);
@@ -1186,8 +1160,6 @@ return outColor ;
 '';
     };
     window-close = {
-      duration-ms = 150;
-      curve = "linear";
       custom-shader = ''
         float gh(float n) {
             return fract(sin(n) * 43758.5453);
@@ -1246,8 +1218,6 @@ return outColor ;
 '';
     };
     window-resize = {
-      duration-ms = 150;
-      curve = "linear";
       custom-shader = ''
         float gh(float n) {
             return fract(sin(n) * 43758.5453);
@@ -1330,8 +1300,6 @@ return outColor ;
       };
     };
     window-open = {
-      duration-ms = 280;
-      curve = "linear";
       custom-shader = ''
 float saturate(float x) {
     return clamp(x, 0.0, 1.0);
@@ -1478,8 +1446,6 @@ vec4 open_color(vec3 coords_geo, vec3 size_geo) {
 '';
     };
     window-close = {
-      duration-ms = 280;
-      curve = "linear";
       custom-shader = ''
 float saturate(float x) {
     return clamp(x, 0.0, 1.0);
@@ -1692,8 +1658,6 @@ vec4 resize_color(vec3 coords_curr_geo, vec3 size_curr_geo) {
       curve = "ease-out-cubic";
     };
     window-open = {
-      duration-ms = 400;
-      curve = "linear";
       custom-shader = ''
       vec4 pixelate_open(vec3 coords_geo, vec3 size_geo) {
           // Discard pixels outside window bounds
@@ -1727,8 +1691,6 @@ vec4 resize_color(vec3 coords_curr_geo, vec3 size_curr_geo) {
 '';
     };
     window-close = {
-      duration-ms = 400;
-      curve = "linear";
       custom-shader = ''
       vec4 pixelate_close(vec3 coords_geo, vec3 size_geo) {
           // Discard pixels outside window bounds
@@ -1778,8 +1740,6 @@ vec4 resize_color(vec3 coords_curr_geo, vec3 size_curr_geo) {
       };
     };
     window-open = {
-      duration-ms = 175;
-      curve = "ease-out-quad";
       custom-shader = ''
         vec4 zoom_in(vec3 coords_geo, vec3 size_geo) {
           float progress = niri_clamped_progress;
@@ -1799,8 +1759,6 @@ vec4 resize_color(vec3 coords_curr_geo, vec3 size_curr_geo) {
 '';
     };
     window-close = {
-      duration-ms = 200;
-      curve = "linear";
       custom-shader = ''
         vec4 fall_and_rotate(vec3 coords_geo, vec3 size_geo) {
           float progress = niri_clamped_progress * niri_clamped_progress;
@@ -1835,8 +1793,6 @@ vec4 resize_color(vec3 coords_curr_geo, vec3 size_curr_geo) {
       };
     };
     window-open = {
-      duration-ms = 280;
-      curve = "linear";
       custom-shader = ''
 
 // Exponential Easing
@@ -1931,8 +1887,6 @@ vec4 open_color(vec3 coords_geo, vec3 size_geo) {
 '';
     };
     window-close = {
-      duration-ms = 180;
-      curve = "linear";
       custom-shader = ''
 // Exponential Easing
 float easeInExpo(float t) {
@@ -2161,8 +2115,6 @@ vec4 resize_color(vec3 coords_curr_geo, vec3 size_curr_geo) {
       };
     };
     window-open = {
-      duration-ms = 600;
-      curve = "ease-out-quad";
       custom-shader = ''
     vec4 open_color(vec3 coords_geo, vec3 size_geo) {
         float progress = niri_clamped_progress;
@@ -2217,8 +2169,6 @@ vec4 resize_color(vec3 coords_curr_geo, vec3 size_curr_geo) {
 '';
     };
     window-close = {
-      duration-ms = 800;
-      curve = "ease-out-quad";
       custom-shader = ''
     vec4 close_color(vec3 coords_geo, vec3 size_geo) {
         float progress = niri_clamped_progress;
@@ -2323,8 +2273,6 @@ vec4 resize_color(vec3 coords_curr_geo, vec3 size_curr_geo) {
       };
     };
     window-open = {
-      duration-ms = 1000;
-      curve = "ease-out-expo";
       custom-shader = ''
 vec4 fall_from_top(vec3 coords_geo, vec3 size_geo) {
             float progress = niri_clamped_progress * niri_clamped_progress;
@@ -2344,8 +2292,6 @@ vec4 fall_from_top(vec3 coords_geo, vec3 size_geo) {
 '';
     };
     window-close = {
-      duration-ms = 1000;
-      curve = "linear";
       custom-shader = ''
 vec4 fall_to_bottom(vec3 coords_geo, vec3 size_geo) {
             float progress = niri_clamped_progress * niri_clamped_progress;
@@ -2367,8 +2313,6 @@ vec4 fall_to_bottom(vec3 coords_geo, vec3 size_geo) {
   };
   smoke = {
     window-open = {
-      duration-ms = 150;
-      curve = "linear";
       custom-shader = ''
         float hash(vec2 p) {
             return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453);
@@ -2439,8 +2383,6 @@ vec4 fall_to_bottom(vec3 coords_geo, vec3 size_geo) {
 '';
     };
     window-close = {
-      duration-ms = 150;
-      curve = "linear";
       custom-shader = ''
         float hash(vec2 p) {
             return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453);
@@ -2512,8 +2454,6 @@ vec4 fall_to_bottom(vec3 coords_geo, vec3 size_geo) {
 '';
     };
     window-resize = {
-      duration-ms = 150;
-      curve = "linear";
       custom-shader = ''
         float hash(vec2 p) {
             return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453);
@@ -2583,8 +2523,6 @@ vec4 fall_to_bottom(vec3 coords_geo, vec3 size_geo) {
   tv_crt = {
     slowdown = 1.0;
     window-open = {
-      duration-ms = 260;
-      curve = "linear";
       custom-shader = ''
 // =========================
 // Exponential
@@ -2717,8 +2655,6 @@ vec4 open_color(vec3 coords_geo, vec3 size_geo) {
 '';
     };
     window-close = {
-      duration-ms = 180;
-      curve = "linear";
       custom-shader = ''
 // =========================
 // Exponential
@@ -2855,8 +2791,6 @@ vec4 close_color(vec3 coords_geo, vec3 size_geo) {
 '';
     };
     window-resize = {
-      duration-ms = 160;
-      curve = "linear";
       custom-shader = ''
 const float PI = 3.141592653589793;
 
