@@ -193,6 +193,7 @@ in
         always-center-single-column = true;
       };
 
+      # Taken from "https://github.com/jgarza9788/niri-animation-collection"
       animations = {
         workspace-switch = {
           spring = {
