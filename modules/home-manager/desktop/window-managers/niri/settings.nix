@@ -8,7 +8,7 @@ let
   makeCommand = command: {
     command = [ command ];
   };
-  selectedAnimation = "tv_crt";
+  selectedAnimation = "fold-window";
   animationPresets = import ./animations/generated.nix;
 in
 {
