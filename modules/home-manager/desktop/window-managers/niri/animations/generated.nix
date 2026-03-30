@@ -1990,11 +1990,11 @@ vec4 close_color(vec3 coords_geo, vec3 size_geo) {
       };
     };
     window-resize = {
-      spring = {
-        damping-ratio = 1.0;
-        stiffness = 800;
-        epsilon = 0.0001;
-      };
+    #   spring = {
+    #     damping-ratio = 1.0;
+    #     stiffness = 800;
+    #     epsilon = 0.0001;
+    #   };
       custom-shader = ''
 
 // Exponential Easing
@@ -2090,13 +2090,13 @@ vec4 resize_color(vec3 coords_curr_geo, vec3 size_curr_geo) {
         epsilon = 0.0001;
       };
     };
-    recent-windows-close = {
-      spring = {
-        damping-ratio = 1.0;
-        stiffness = 800;
-        epsilon = 0.001;
-      };
-    };
+    # recent-windows-close = {
+    #   spring = {
+    #     damping-ratio = 1.0;
+    #     stiffness = 800;
+    #     epsilon = 0.001;
+    #   };
+    # };
   };
   ribbons = {
     workspace-switch = {
