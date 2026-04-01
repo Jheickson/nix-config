@@ -224,77 +224,17 @@ require('auto-session').setup({
   lazy_support = true,
   bypass_save_filetypes = { 'snacks_dashboard', 'terminal' },
   close_filetypes_on_save = { 'terminal' },
-  post_restore_cmds = {
-    function()
-      for _, buf in ipairs(vim.api.nvim_list_bufs()) do
-        if vim.api.nvim_buf_is_valid(buf) then
-          local name = vim.api.nvim_buf_get_name(buf):lower()
-          local buftype = vim.bo[buf].buftype
-          local filetype = vim.bo[buf].filetype
-          if
-            (buftype == 'terminal' or filetype == 'terminal' or filetype == 'opencode' or name:find('opencode', 1, true))
-            and name ~= ''
-          then
-            pcall(vim.api.nvim_buf_delete, buf, { force = true })
-          end
-        end
-      end
-    end,
-  },
   session_lens = {
     picker = 'snacks',
   },
 })
 
-local function close_opencode_terminal_buffers()
-  for _, buf in ipairs(vim.api.nvim_list_bufs()) do
-    if vim.api.nvim_buf_is_valid(buf) then
-      local name = vim.api.nvim_buf_get_name(buf):lower()
-      local buftype = vim.bo[buf].buftype
-      local filetype = vim.bo[buf].filetype
-      if
-        (buftype == 'terminal' or filetype == 'terminal' or filetype == 'opencode' or name:find('opencode', 1, true))
-        and name ~= ''
-      then
-        pcall(vim.api.nvim_buf_delete, buf, { force = true })
-      end
-    end
-  end
-end
-
 require("snacks").setup({
   explorer = {},
-  input = {},
   dashboard = {
     enabled = true,
     preset = {
       keys = {
-        {
-          icon = " ",
-          key = "s",
-          desc = "Recent Sessions",
-          action = function()
-            close_opencode_terminal_buffers()
-            require("opencode").command("session.select")
-          end,
-        },
-        {
-          icon = " ",
-          key = "n",
-          desc = "New Session",
-          action = function()
-            close_opencode_terminal_buffers()
-            require("opencode").command("session.new")
-          end,
-        },
-        {
-          icon = " ",
-          key = "a",
-          desc = "Ask opencode",
-          action = function()
-            require("opencode").ask('@this: ', { submit = true })
-          end,
-        },
         { icon = " ", key = "f", desc = "Find File", action = ":lua Snacks.dashboard.pick('files')" },
         { icon = " ", key = "q", desc = "Quit", action = ":qa" },
       },
@@ -315,18 +255,6 @@ require("snacks").setup({
     },
   },
   picker = {
-    actions = {
-      opencode_send = function(...)
-        return require("opencode").snacks_picker_send(...)
-      end,
-    },
-    win = {
-      input = {
-        keys = {
-          ["<a-a>"] = { "opencode_send", mode = { "n", "i" } },
-        },
-      },
-    },
     sources = {
       explorer = {
         cwd = load_explorer_cwd() or vim.fn.getcwd(),
@@ -349,12 +277,6 @@ require("snacks").setup({
   scope = {},
 })
 
-vim.g.opencode_opts = {
-  server = {
-    port = 4096,
-  },
-}
-
 vim.api.nvim_create_autocmd('VimEnter', {
   once = true,
   callback = function()
@@ -365,28 +287,6 @@ vim.api.nvim_create_autocmd('VimEnter', {
 })
 
 vim.o.autoread = true
-
-vim.keymap.set({ 'n', 'x' }, '<C-a>', function()
-  require('opencode').ask('@this: ', { submit = true })
-end, { desc = 'Ask opencode' })
-vim.keymap.set({ 'n', 'x' }, '<C-x>', function()
-  require('opencode').select()
-end, { desc = 'Execute opencode action' })
-vim.keymap.set({ 'n', 't' }, '<C-.>', function()
-  require('opencode').toggle()
-end, { desc = 'Toggle opencode' })
-vim.keymap.set({ 'n', 'x' }, 'go', function()
-  return require('opencode').operator('@this ')
-end, { desc = 'Add range to opencode', expr = true })
-vim.keymap.set('n', 'goo', function()
-  return require('opencode').operator('@this ') .. '_'
-end, { desc = 'Add line to opencode', expr = true })
-vim.keymap.set('n', '<S-C-u>', function()
-  require('opencode').command('session.half.page.up')
-end, { desc = 'Scroll opencode up' })
-vim.keymap.set('n', '<S-C-d>', function()
-  require('opencode').command('session.half.page.down')
-end, { desc = 'Scroll opencode down' })
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
 vim.keymap.set("n", "-", function() Snacks.explorer.open() end, { desc = 'Snacks Explorer' })

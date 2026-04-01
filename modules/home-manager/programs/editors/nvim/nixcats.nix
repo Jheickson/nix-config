@@ -55,7 +55,6 @@ in
           # this includes LSPs
           lspsAndRuntimeDeps = {
             general = with pkgs; [
-              opencode
               lazygit
               nodePackages.typescript-language-server  # New: LSP for TypeScript
               rust-analyzer  # New: LSP for Rust
@@ -96,7 +95,6 @@ in
               auto-session
               copilot-vim
               plenary-nvim
-              opencode-nvim
               lze
               lzextras
               snacks-nvim
