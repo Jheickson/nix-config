@@ -6,7 +6,6 @@
 
 {
   inputs,
-  config,
   pkgs,
   ...
 }:
@@ -18,6 +17,9 @@
   imports = [
     # Hardware configuration
     ./hardware-configuration.nix
+
+    # Shared theme configuration
+    ../../modules/shared/stylix.nix
 
     # Home Manager integration
     inputs.home-manager.nixosModules.home-manager

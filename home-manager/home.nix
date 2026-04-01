@@ -1,8 +1,9 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
 
   imports = [
+    ../modules/shared/stylix.nix
     ../modules/home-manager/profiles/desktop.nix
   ];
 

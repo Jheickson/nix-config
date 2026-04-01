@@ -1,12 +1,8 @@
 {
   pkgs,
-  config,
   lib,
   ...
 }:
-
-# https://github.com/vimjoyer/stylix-video
-# https://nix-community.github.io/stylix/tricks.html
 
 let
   # ============================================================================
@@ -82,56 +78,6 @@ in
   system.activationScripts.gowallWallpaper = lib.mkIf useThemeFile ''
     HOME=/home/felipe ${pkgs.gowall}/bin/gowall convert ${wallpaperSource} -t ${gowallThemeJson} --output /home/felipe/nix-config/assets/wallpapers/wallpaper.png
   '';
-
-  stylix = {
-
-    enable = true;
-    autoEnable = true;
-
-    polarity = "dark";
-
-    targets = {
-
-      # vscode.enable = true; # Doesn't exist
-
-    };
-
-    opacity = {
-      terminal = 0.75;
-    };
-
-    fonts = with pkgs; rec {
-      monospace = {
-        package = nerd-fonts.hack;
-        name = "HackNerdFontMono";
-      };
-      sansSerif = monospace;
-      serif = monospace;
-    };
-
-    cursor = {
-      package = pkgs.phinger-cursors;
-      name = "phinger-cursors-light";
-
-      # package = pkgs.xcursor-pro;
-      # name = "XCursor-Pro-Light";
-
-      # package = pkgs.bibata-cursors;
-      # name = "Bibata-Modern-Ice";
-
-    #   package = pkgs.qogir-icon-theme;
-    #   name = "Qogir Cursors";
-
-      size = 16;
-    };
-
-    image = if useThemeFile then
-      ../../../assets/wallpapers/wallpaper.png
-    else
-      wallpaperSource;
-  } // lib.optionalAttrs useThemeFile {
-    base16Scheme = themeFile;
-  };
 
   # Expose the wallpaper path for shell scripts (swww, etc.)
   environment.sessionVariables.STYLIX_WALLPAPER = if useThemeFile then
