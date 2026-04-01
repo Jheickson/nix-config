@@ -35,6 +35,7 @@ in
       ngrok
       nodejs_22
       # nodePackages.eas-cli
+      opencode
       openssl
       # pipx
       # postman
