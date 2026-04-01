@@ -265,7 +265,30 @@ require("snacks").setup({
   scope = {},
 })
 
-vim.g.opencode_opts = {}
+local opencode_cmd = 'opencode --port'
+local opencode_terminal_opts = {
+  win = {
+    position = 'left',
+    enter = false,
+    on_win = function(win)
+      require('opencode.terminal').setup(win.win)
+    end,
+  },
+}
+
+vim.g.opencode_opts = {
+  server = {
+    start = function()
+      require('snacks.terminal').open(opencode_cmd, opencode_terminal_opts)
+    end,
+    stop = function()
+      require('snacks.terminal').get(opencode_cmd, opencode_terminal_opts):close()
+    end,
+    toggle = function()
+      require('snacks.terminal').toggle(opencode_cmd, opencode_terminal_opts)
+    end,
+  },
+}
 
 vim.o.autoread = true
 
