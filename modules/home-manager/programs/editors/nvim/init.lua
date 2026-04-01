@@ -230,6 +230,18 @@ require('auto-session').setup({
 require("snacks").setup({
   explorer = {},
   picker = {
+    actions = {
+      opencode_send = function(...)
+        return require("opencode").snacks_picker_send(...)
+      end,
+    },
+    win = {
+      input = {
+        keys = {
+          ["<a-a>"] = { "opencode_send", mode = { "n", "i" } },
+        },
+      },
+    },
     sources = {
       explorer = {
         cwd = load_explorer_cwd() or vim.fn.getcwd(),
@@ -265,6 +277,12 @@ end, { desc = 'Open opencode actions' })
 vim.keymap.set({ 'n', 't' }, '<leader>ai', function()
   require('opencode').toggle()
 end, { desc = 'Toggle opencode' })
+vim.keymap.set({ 'n', 'x' }, 'go', function()
+  return require('opencode').operator('@this ')
+end, { desc = 'Add range to opencode', expr = true })
+vim.keymap.set('n', 'goo', function()
+  return require('opencode').operator('@this ') .. '_'
+end, { desc = 'Add line to opencode', expr = true })
 
 vim.keymap.set("n", "-", function() Snacks.explorer.open() end, { desc = 'Snacks Explorer' })
 vim.keymap.set("n", "<c-\\>", function() Snacks.terminal.open() end, { desc = 'Snacks Terminal' })
