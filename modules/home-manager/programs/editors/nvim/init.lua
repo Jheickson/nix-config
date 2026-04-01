@@ -222,10 +222,45 @@ require('auto-session').setup({
   auto_restore = true,
   auto_save = true,
   lazy_support = true,
+  bypass_save_filetypes = { 'snacks_dashboard', 'terminal' },
+  close_filetypes_on_save = { 'terminal' },
+  post_restore_cmds = {
+    function()
+      for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+        if vim.api.nvim_buf_is_valid(buf) then
+          local name = vim.api.nvim_buf_get_name(buf):lower()
+          local buftype = vim.bo[buf].buftype
+          local filetype = vim.bo[buf].filetype
+          if
+            (buftype == 'terminal' or filetype == 'terminal' or filetype == 'opencode' or name:find('opencode', 1, true))
+            and name ~= ''
+          then
+            pcall(vim.api.nvim_buf_delete, buf, { force = true })
+          end
+        end
+      end
+    end,
+  },
   session_lens = {
     picker = 'snacks',
   },
 })
+
+local function close_opencode_terminal_buffers()
+  for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+    if vim.api.nvim_buf_is_valid(buf) then
+      local name = vim.api.nvim_buf_get_name(buf):lower()
+      local buftype = vim.bo[buf].buftype
+      local filetype = vim.bo[buf].filetype
+      if
+        (buftype == 'terminal' or filetype == 'terminal' or filetype == 'opencode' or name:find('opencode', 1, true))
+        and name ~= ''
+      then
+        pcall(vim.api.nvim_buf_delete, buf, { force = true })
+      end
+    end
+  end
+end
 
 require("snacks").setup({
   explorer = {},
@@ -239,6 +274,7 @@ require("snacks").setup({
           key = "s",
           desc = "Recent Sessions",
           action = function()
+            close_opencode_terminal_buffers()
             require("opencode").command("session.select")
           end,
         },
@@ -247,6 +283,7 @@ require("snacks").setup({
           key = "n",
           desc = "New Session",
           action = function()
+            close_opencode_terminal_buffers()
             require("opencode").command("session.new")
           end,
         },
