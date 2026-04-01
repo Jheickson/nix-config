@@ -364,6 +364,7 @@ end, { desc = 'Scroll opencode up' })
 vim.keymap.set('n', '<S-C-d>', function()
   require('opencode').command('session.half.page.down')
 end, { desc = 'Scroll opencode down' })
+vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
 vim.keymap.set("n", "-", function() Snacks.explorer.open() end, { desc = 'Snacks Explorer' })
 vim.keymap.set("n", "<c-\\>", function() Snacks.terminal.open() end, { desc = 'Snacks Terminal' })
