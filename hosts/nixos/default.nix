@@ -6,6 +6,7 @@
 
 {
   inputs,
+  stylixConfig,
   pkgs,
   ...
 }:
@@ -31,7 +32,7 @@
 
     # Desktop environment
     # ../../modules/nixos/desktop/gtk.nix
-    ../../modules/nixos/desktop/stylix.nix
+    ../../modules/nixos/desktop/stylix-wallpaper.nix
     ../../modules/nixos/desktop/niri.nix
     ../../modules/nixos/desktop/xautolock.nix
     ../../modules/nixos/desktop/xdg.nix
@@ -60,7 +61,7 @@
   # HOME MANAGER
   # ============================================================================
   home-manager = {
-    extraSpecialArgs = { inherit inputs; };
+    extraSpecialArgs = { inherit inputs stylixConfig; };
     backupFileExtension = "hm-backup"; # Prevents Stylix conflicts
     users.felipe = import ../../home-manager/home.nix;
   };

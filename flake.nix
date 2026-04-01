@@ -57,6 +57,7 @@
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
+      stylixConfig = import ./modules/shared/stylix-settings.nix { inherit pkgs; };
     in
     {
 
@@ -71,7 +72,7 @@
             inherit inputs system;
             config.allowUnfree = true;
           };
-          inherit inputs system;
+          inherit inputs system stylixConfig;
         };
         modules = [
           ./hosts/nixos/default.nix
@@ -86,7 +87,7 @@
           ./home-manager/home.nix
           inputs.stylix.homeModules.stylix
         ];
-        extraSpecialArgs = { inherit inputs; };
+        extraSpecialArgs = { inherit inputs stylixConfig; };
       };
 
     };
