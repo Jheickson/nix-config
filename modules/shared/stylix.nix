@@ -1,14 +1,9 @@
-{ pkgs, lib, ... }:
+{ pkgs, lib, stylixConfig, ... }:
 
-let
-  useThemeFile = true;
-  wallpaperSource = ../../assets/wallpapers/Minimalistic/wallhaven-9omylw.png;
-  themeFile = "${pkgs.base16-schemes}/share/themes/rose-pine.yaml";
-in
 {
   stylix = {
-    enable = true;
-    autoEnable = true;
+    enable = stylixConfig.enable;
+    autoEnable = stylixConfig.enable;
 
     polarity = "dark";
 
@@ -31,11 +26,11 @@ in
       size = 16;
     };
 
-    image = if useThemeFile then
-      ../../assets/wallpapers/wallpaper.png
+    image = if stylixConfig.useThemeFile then
+      stylixConfig.wallpaperImage
     else
-      wallpaperSource;
-  } // lib.optionalAttrs useThemeFile {
-    base16Scheme = themeFile;
+      stylixConfig.wallpaperSource;
+  } // lib.optionalAttrs stylixConfig.useThemeFile {
+    base16Scheme = stylixConfig.themeFile;
   };
 }
