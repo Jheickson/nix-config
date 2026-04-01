@@ -315,39 +315,6 @@ require("snacks").setup({
 vim.g.opencode_opts = {
   server = {
     port = 4096,
-    start = function()
-      require('snacks.terminal').open('opencode --port 4096', {
-        win = {
-          position = 'left',
-          enter = false,
-          on_win = function(win)
-            require('opencode.terminal').setup(win.win)
-          end,
-        },
-      })
-    end,
-    stop = function()
-      require('snacks.terminal').get('opencode --port 4096', {
-        win = {
-          position = 'left',
-          enter = false,
-          on_win = function(win)
-            require('opencode.terminal').setup(win.win)
-          end,
-        },
-      }):close()
-    end,
-    toggle = function()
-      require('snacks.terminal').toggle('opencode --port 4096', {
-        win = {
-          position = 'left',
-          enter = false,
-          on_win = function(win)
-            require('opencode.terminal').setup(win.win)
-          end,
-        },
-      })
-    end,
   },
 }
 
