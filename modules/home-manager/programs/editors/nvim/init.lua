@@ -252,26 +252,19 @@ require("snacks").setup({
   scope = {},
 })
 
-require('codecompanion').setup({
-  display = {
-    action_palette = {
-      provider = 'snacks',
-    },
-  },
-  interactions = {
-    chat = {
-      adapter = 'copilot',
-    },
-    inline = {
-      adapter = 'copilot',
-    },
-  },
-})
+vim.g.opencode_opts = {}
 
-vim.keymap.set({ 'n', 'v' }, '<leader>aa', '<cmd>CodeCompanionActions<CR>', { desc = 'CodeCompanion actions' })
-vim.keymap.set({ 'n', 'v' }, '<leader>ac', '<cmd>CodeCompanionChat Toggle<CR>', { desc = 'Toggle CodeCompanion chat' })
-vim.keymap.set({ 'n', 'v' }, '<leader>ai', '<cmd>CodeCompanion<CR>', { desc = 'Open CodeCompanion inline' })
-vim.cmd([[cab cc CodeCompanion]])
+vim.o.autoread = true
+
+vim.keymap.set({ 'n', 'x' }, '<leader>aa', function()
+  require('opencode').ask('@this: ', { submit = true })
+end, { desc = 'Ask opencode' })
+vim.keymap.set({ 'n', 'x' }, '<leader>ac', function()
+  require('opencode').select()
+end, { desc = 'Open opencode actions' })
+vim.keymap.set({ 'n', 't' }, '<leader>ai', function()
+  require('opencode').toggle()
+end, { desc = 'Toggle opencode' })
 
 vim.keymap.set("n", "-", function() Snacks.explorer.open() end, { desc = 'Snacks Explorer' })
 vim.keymap.set("n", "<c-\\>", function() Snacks.terminal.open() end, { desc = 'Snacks Terminal' })
