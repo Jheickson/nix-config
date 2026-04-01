@@ -230,6 +230,53 @@ require('auto-session').setup({
 require("snacks").setup({
   explorer = {},
   input = {},
+  dashboard = {
+    enabled = true,
+    preset = {
+      keys = {
+        {
+          icon = " ",
+          key = "s",
+          desc = "Recent Sessions",
+          action = function()
+            require("opencode").command("session.select")
+          end,
+        },
+        {
+          icon = " ",
+          key = "n",
+          desc = "New Session",
+          action = function()
+            require("opencode").command("session.new")
+          end,
+        },
+        {
+          icon = " ",
+          key = "a",
+          desc = "Ask opencode",
+          action = function()
+            require("opencode").ask('@this: ', { submit = true })
+          end,
+        },
+        { icon = " ", key = "f", desc = "Find File", action = ":lua Snacks.dashboard.pick('files')" },
+        { icon = " ", key = "q", desc = "Quit", action = ":qa" },
+      },
+    },
+    sections = {
+      {
+        section = "header",
+        header = [[
+███╗   ██╗██╗   ██╗██╗███╗   ███╗
+████╗  ██║██║   ██║██║████╗ ████║
+██╔██╗ ██║██║   ██║██║██╔████╔██║
+██║╚██╗██║██║   ██║██║██║╚██╔╝██║
+██║ ╚████║╚██████╔╝██║██║ ╚═╝ ██║
+╚═╝  ╚═══╝ ╚═════╝ ╚═╝╚═╝     ╚═╝]],
+      },
+      { section = "keys", gap = 1, padding = 1 },
+      { icon = " ", title = "Recent Files", section = "recent_files", indent = 2, padding = 1 },
+    },
+  },
   picker = {
     actions = {
       opencode_send = function(...)
@@ -265,30 +312,34 @@ require("snacks").setup({
   scope = {},
 })
 
-local opencode_cmd = 'opencode --port'
-local opencode_terminal_opts = {
-  win = {
-    position = 'left',
-    enter = false,
-    on_win = function(win)
-      require('opencode.terminal').setup(win.win)
-    end,
-  },
-}
+vim.g.opencode_opts = {}
 
-vim.g.opencode_opts = {
-  server = {
-    start = function()
-      require('snacks.terminal').open(opencode_cmd, opencode_terminal_opts)
-    end,
-    stop = function()
-      require('snacks.terminal').get(opencode_cmd, opencode_terminal_opts):close()
-    end,
-    toggle = function()
-      require('snacks.terminal').toggle(opencode_cmd, opencode_terminal_opts)
-    end,
-  },
-}
+local opencode_server_job_id = nil
+
+local function ensure_opencode_server()
+  if opencode_server_job_id and vim.fn.jobwait({ opencode_server_job_id }, 0)[1] == -1 then
+    return
+  end
+
+  if vim.fn.executable('opencode') ~= 1 then
+    return
+  end
+
+  opencode_server_job_id = vim.fn.jobstart({ 'opencode', '--port' }, {
+    detach = true,
+  })
+end
+
+vim.api.nvim_create_autocmd('VimEnter', {
+  once = true,
+  callback = function()
+    ensure_opencode_server()
+
+    if vim.fn.argc() == 0 then
+      Snacks.dashboard.open()
+    end
+  end,
+})
 
 vim.o.autoread = true
 
