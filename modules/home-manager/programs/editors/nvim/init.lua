@@ -312,29 +312,48 @@ require("snacks").setup({
   scope = {},
 })
 
-vim.g.opencode_opts = {}
-
-local opencode_server_job_id = nil
-
-local function ensure_opencode_server()
-  if opencode_server_job_id and vim.fn.jobwait({ opencode_server_job_id }, 0)[1] == -1 then
-    return
-  end
-
-  if vim.fn.executable('opencode') ~= 1 then
-    return
-  end
-
-  opencode_server_job_id = vim.fn.jobstart({ 'opencode', '--port' }, {
-    detach = true,
-  })
-end
+vim.g.opencode_opts = {
+  server = {
+    port = 4096,
+    start = function()
+      require('snacks.terminal').open('opencode --port 4096', {
+        win = {
+          position = 'left',
+          enter = false,
+          on_win = function(win)
+            require('opencode.terminal').setup(win.win)
+          end,
+        },
+      })
+    end,
+    stop = function()
+      require('snacks.terminal').get('opencode --port 4096', {
+        win = {
+          position = 'left',
+          enter = false,
+          on_win = function(win)
+            require('opencode.terminal').setup(win.win)
+          end,
+        },
+      }):close()
+    end,
+    toggle = function()
+      require('snacks.terminal').toggle('opencode --port 4096', {
+        win = {
+          position = 'left',
+          enter = false,
+          on_win = function(win)
+            require('opencode.terminal').setup(win.win)
+          end,
+        },
+      })
+    end,
+  },
+}
 
 vim.api.nvim_create_autocmd('VimEnter', {
   once = true,
   callback = function()
-    ensure_opencode_server()
-
     if vim.fn.argc() == 0 then
       Snacks.dashboard.open()
     end
