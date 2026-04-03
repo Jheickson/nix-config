@@ -1,0 +1,1 @@
+[ "bloom" "blur" "chromatic_edge" "dither-glitch" "energize_b_niri" "fold-window" "glide" "glitch_00" "glitch_01" "incinerate" "mushroom" "pixel-sort" "pixelate" "pop-drop" "prism_fold" "ribbons" "roll-drop" "smoke" "tv_crt" ]
