@@ -13,6 +13,7 @@ FORBIDDEN_KEYS_BY_BLOCK = {
     "window-close": {"duration-ms", "curve"},
     "window-resize": {"duration-ms", "curve"},
     "screenshot-ui-open": {"duration-ms", "curve"},
+    "workspace-switch": {"duration-ms", "curve"},
 }
 
 
