@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  lib,
   ...
 }:
 let
@@ -8,10 +9,16 @@ let
   makeCommand = command: {
     command = [ command ];
   };
-  selectedAnimation = "fold-window";
-  animationPresets = import ./animations/generated.nix;
+  selectedAnimation = config.programs.niri.animationPreset;
+  animationPresetNames = import ./animations/preset-names.nix;
 in
 {
+  options.programs.niri.animationPreset = lib.mkOption {
+    type = lib.types.enum animationPresetNames;
+    default = "fold-window";
+    description = "Select which generated Niri animation preset to use.";
+  };
+
   programs.niri = {
     enable = true;
     package = pkgs.niri;
@@ -196,11 +203,9 @@ in
       };
 
       # Taken from "https://github.com/jgarza9788/niri-animation-collection"
-      # Change this selector to switch the active preset.
-      # Available presets: bloom, blur, dither-glitch, energize_b_niri, fold-window,
-      # glide, glitch_00, glitch_01, incinerate, pixelate, pop-drop, prism_fold,
-      # ribbons, roll-drop, smoke, tv_crt
-      animations = animationPresets.${selectedAnimation};
+      # Select a preset via `programs.niri.animationPreset`; the available
+      # values are generated automatically and should appear in IDE completion.
+      animations = import ./animations/presets/${selectedAnimation}.nix;
 
       prefer-no-csd = true;
       hotkey-overlay.skip-at-startup = true;
