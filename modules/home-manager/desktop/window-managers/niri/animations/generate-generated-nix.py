@@ -193,6 +193,7 @@ def main() -> int:
     script_dir = Path(__file__).resolve().parent
     source_repo = script_dir / "niri-animation-collection"
     output_path = script_dir / "generated.nix"
+    presets_dir = script_dir / "presets"
 
     ensure_source_repo(source_repo)
 
@@ -202,19 +203,34 @@ def main() -> int:
     for path in animation_files:
         entries.append((path.stem, parse_file(path)))
 
+    presets_dir.mkdir(parents=True, exist_ok=True)
+    for existing_file in presets_dir.glob("*.nix"):
+        existing_file.unlink()
+
+    for name, parsed in entries:
+        (presets_dir / f"{name}.nix").write_text(render_value(parsed, 0) + "\n")
+
+    preset_names_path = script_dir / "preset-names.nix"
+    preset_names_path.write_text(
+        "[ " + " ".join(f'"{name}"' for name, _ in entries) + " ]\n"
+    )
+
     output_lines = [
         "{",
         "  # NOTE FOR FUTURE EDITORS:",
         "  # Generated automatically from the vendored niri-animation-collection repo.",
-        "  # Niri's Home Manager module does not accept `duration-ms` or `curve`",
-        "  # under `window-open`, `window-close`, `window-resize`, or `screenshot-ui-open`",
-        "  # in this generated preset map. If you add new presets with custom shaders,",
-        "  # keep those timing fields out of those blocks or rerun this script after",
-        "  # syncing upstream changes.",
+        "  # This file is only a loader for the per-preset files in ./presets/.",
+        "  # The generated presets themselves are written one file per animation so",
+        "  # `programs.niri.animationPreset` can use an enum and the IDE can suggest",
+        "  # the available values.",
+        "  # If you add new presets with custom shaders, keep unsupported timing",
+        "  # fields out of `window-open`, `window-close`, `window-resize`, and",
+        "  # `screenshot-ui-open` blocks or rerun this script after syncing upstream",
+        "  # changes.",
     ]
 
     for name, parsed in entries:
-        output_lines.append(f"  {name} = {render_value(parsed, 2)};")
+        output_lines.append(f"  {name} = import ./presets/{name}.nix;")
 
     output_lines.append("}")
     output_path.write_text("\n".join(output_lines) + "\n")
