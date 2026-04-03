@@ -10,11 +10,19 @@
       set-volume = spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@";
       brightnessctl = spawn "${pkgs.brightnessctl}/bin/brightnessctl";
       playerctl = spawn "${pkgs.playerctl}/bin/playerctl";
-      
+
       # Helper function for Noctalia IPC commands
       # --any-display bypasses Wayland display filtering, which fails when niri
       # spawns processes without a full display environment
-      noctalia = cmd: [ "noctalia-shell" "ipc" "--any-display" "call" ] ++ (pkgs.lib.splitString " " cmd);
+      noctalia =
+        cmd:
+        [
+          "noctalia-shell"
+          "ipc"
+          "--any-display"
+          "call"
+        ]
+        ++ (pkgs.lib.splitString " " cmd);
     in
     {
       # ── Media ─────────────────────────────────────────────────────────────
@@ -52,7 +60,7 @@
       "Mod+Return".action = spawn "${pkgs.ghostty}/bin/ghostty";
       "Mod+Shift+B".action = spawn "zen-beta";
       "Mod+Shift+C".action = spawn "code";
-      "Mod+Shift+N".action = spawn "nautilus";
+      "Mod+Shift+N".action = spawn "${pkgs.ghostty}/bin/ghostty" "-e" "vim";
       "Mod+U".action = spawn "env XDG_CURRENT_DESKTOP=gnome gnome-control-center";
 
       # ── Focus / Navigation ────────────────────────────────────────────────
