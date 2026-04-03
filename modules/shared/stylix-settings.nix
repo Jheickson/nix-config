@@ -4,11 +4,11 @@
   enable = true;
   useThemeFile = true;
 
-  wallpaperSource = ../../assets/wallpapers/Minimalistic/wallhaven-9omylw.png;
+  wallpaperSource = ../../assets/wallpapers/Minimalistic/wallhaven-288w19.png;
   wallpaperImage = ../../assets/wallpapers/wallpaper.png;
   wallpaperOutputPath = "/home/felipe/nix-config/assets/wallpapers/wallpaper.png";
 
-  themeFile = "${pkgs.base16-schemes}/share/themes/rose-pine.yaml";
+  themeFile = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
 }
 
 /* 
