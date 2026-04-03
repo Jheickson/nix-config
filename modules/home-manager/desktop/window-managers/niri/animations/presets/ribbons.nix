@@ -1,6 +1,6 @@
 {
   workspace-switch = {
-    spring = {
+    kind.spring = {
       damping-ratio = 0.80;
       stiffness = 523;
       epsilon = 0.0001;
@@ -115,14 +115,14 @@
 '';
   };
   horizontal-view-movement = {
-    spring = {
+    kind.spring = {
       damping-ratio = 0.85;
       stiffness = 423;
       epsilon = 0.0001;
     };
   };
   window-movement = {
-    spring = {
+    kind.spring = {
       damping-ratio = 0.75;
       stiffness = 323;
       epsilon = 0.0001;
@@ -138,7 +138,7 @@
 '';
   };
   config-notification-open-close = {
-    spring = {
+    kind.spring = {
       damping-ratio = 0.65;
       stiffness = 923;
       epsilon = 0.001;
@@ -147,7 +147,7 @@
   screenshot-ui-open = {
   };
   overview-open-close = {
-    spring = {
+    kind.spring = {
       damping-ratio = 0.85;
       stiffness = 800;
       epsilon = 0.0001;

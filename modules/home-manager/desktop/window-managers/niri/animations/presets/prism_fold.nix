@@ -1,7 +1,7 @@
 {
   slowdown = 1.5;
   workspace-switch = {
-    spring = {
+    kind.spring = {
       damping-ratio = 1.0;
       stiffness = 1000;
       epsilon = 0.0001;
@@ -197,21 +197,21 @@ vec4 close_color(vec3 coords_geo, vec3 size_geo) {
 '';
   };
   horizontal-view-movement = {
-    spring = {
+    kind.spring = {
       damping-ratio = 1.0;
       stiffness = 800;
       epsilon = 0.0001;
     };
   };
   window-movement = {
-    spring = {
+    kind.spring = {
       damping-ratio = 1.0;
       stiffness = 800;
       epsilon = 0.0001;
     };
   };
   window-resize = {
-    spring = {
+    kind.spring = {
       damping-ratio = 1.0;
       stiffness = 800;
       epsilon = 0.0001;
@@ -289,14 +289,14 @@ vec4 resize_color(vec3 coords_curr_geo, vec3 size_curr_geo) {
 '';
   };
   config-notification-open-close = {
-    spring = {
+    kind.spring = {
       damping-ratio = 0.6;
       stiffness = 1000;
       epsilon = 0.001;
     };
   };
   exit-confirmation-open-close = {
-    spring = {
+    kind.spring = {
       damping-ratio = 0.6;
       stiffness = 500;
       epsilon = 0.01;
@@ -305,17 +305,10 @@ vec4 resize_color(vec3 coords_curr_geo, vec3 size_curr_geo) {
   screenshot-ui-open = {
   };
   overview-open-close = {
-    spring = {
+    kind.spring = {
       damping-ratio = 1.0;
       stiffness = 800;
       epsilon = 0.0001;
-    };
-  };
-  recent-windows-close = {
-    spring = {
-      damping-ratio = 1.0;
-      stiffness = 800;
-      epsilon = 0.001;
     };
   };
 }

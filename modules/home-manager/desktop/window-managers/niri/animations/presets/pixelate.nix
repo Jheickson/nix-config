@@ -1,7 +1,5 @@
 {
   workspace-switch = {
-    duration-ms = 300;
-    curve = "ease-out-cubic";
   };
   window-open = {
     custom-shader = ''
