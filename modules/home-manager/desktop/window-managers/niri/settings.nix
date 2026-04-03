@@ -19,10 +19,11 @@ in
     description = "Select which generated Niri animation preset to use.";
   };
 
-  programs.niri = {
-    enable = true;
-    package = pkgs.niri;
-    settings = {
+  config = {
+    programs.niri = {
+      enable = true;
+      package = pkgs.niri;
+      settings = {
       environment = {
         CLUTTER_BACKEND = "wayland";
         DISPLAY = ":0";
@@ -209,7 +210,7 @@ in
 
       prefer-no-csd = true;
       hotkey-overlay.skip-at-startup = true;
-
+      };
     };
   };
 }

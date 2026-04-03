@@ -119,7 +119,6 @@
     };
   };
   screenshot-ui-open = {
-    duration-ms = 200;
   };
   overview-open-close = {
     spring = {
