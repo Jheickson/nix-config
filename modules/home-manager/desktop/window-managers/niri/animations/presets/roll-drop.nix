@@ -1,6 +1,6 @@
 {
   workspace-switch = {
-    spring = {
+    kind.spring = {
       damping-ratio = 0.80;
       stiffness = 523;
       epsilon = 0.0001;

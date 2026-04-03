@@ -380,28 +380,28 @@
 '';
   };
   horizontal-view-movement = {
-    spring = {
+    kind.spring = {
       damping-ratio = 1.0;
       stiffness = 800;
       epsilon = 0.0001;
     };
   };
   window-movement = {
-    spring = {
+    kind.spring = {
       damping-ratio = 1.0;
       stiffness = 800;
       epsilon = 0.0001;
     };
   };
   window-resize = {
-    spring = {
+    kind.spring = {
       damping-ratio = 1.0;
       stiffness = 800;
       epsilon = 0.0001;
     };
   };
   workspace-switch = {
-    spring = {
+    kind.spring = {
       damping-ratio = 1.0;
       stiffness = 1000;
       epsilon = 0.0001;

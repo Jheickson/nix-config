@@ -1,13 +1,13 @@
 {
   workspace-switch = {
-    spring = {
+    kind.spring = {
       damping-ratio = 0.85;
       stiffness = 700;
       epsilon = 0.0001;
     };
   };
   horizontal-view-movement = {
-    spring = {
+    kind.spring = {
       damping-ratio = 0.85;
       stiffness = 700;
       epsilon = 0.0001;
