@@ -15,7 +15,7 @@ in
 {
   options.programs.niri.animationPreset = lib.mkOption {
     type = lib.types.enum animationPresetNames;
-    default = "fold-window";
+    default = "glitch_00";
     description = "Select which generated Niri animation preset to use.";
   };
 
