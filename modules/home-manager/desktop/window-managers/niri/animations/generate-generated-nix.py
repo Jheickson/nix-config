@@ -8,9 +8,8 @@ from pathlib import Path
 
 
 UPSTREAM_REPO = "https://github.com/jgarza9788/niri-animation-collection.git"
-SKIP_BLOCKS = {"recent-windows-close"}
+SKIP_BLOCKS = {}
 FORBIDDEN_KEYS_BY_BLOCK = {
-    "recent-windows-close": {"spring"},
 }
 
 
