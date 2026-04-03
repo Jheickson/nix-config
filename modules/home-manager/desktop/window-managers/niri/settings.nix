@@ -15,7 +15,7 @@ in
 {
   options.programs.niri.animationPreset = lib.mkOption {
     type = lib.types.enum animationPresetNames;
-    default = "glitch_00";
+    default = "glitch_01";
     description = "Select which generated Niri animation preset to use.";
   };
 
