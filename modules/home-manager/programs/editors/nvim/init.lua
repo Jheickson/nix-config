@@ -277,6 +277,27 @@ require("snacks").setup({
   scope = {},
 })
 
+require('codecompanion').setup({
+  display = {
+    action_palette = {
+      provider = 'snacks',
+    },
+  },
+  interactions = {
+    chat = {
+      adapter = 'copilot',
+    },
+    inline = {
+      adapter = 'copilot',
+    },
+  },
+})
+
+vim.keymap.set({ 'n', 'v' }, '<leader>aa', '<cmd>CodeCompanionActions<CR>', { desc = 'CodeCompanion actions' })
+vim.keymap.set({ 'n', 'v' }, '<leader>ac', '<cmd>CodeCompanionChat Toggle<CR>', { desc = 'Toggle CodeCompanion chat' })
+vim.keymap.set({ 'n', 'v' }, '<leader>ai', '<cmd>CodeCompanion<CR>', { desc = 'Open CodeCompanion inline' })
+vim.cmd([[cab cc CodeCompanion]])
+
 vim.api.nvim_create_autocmd('VimEnter', {
   once = true,
   callback = function()
