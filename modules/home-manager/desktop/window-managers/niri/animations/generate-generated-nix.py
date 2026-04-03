@@ -10,11 +10,6 @@ from pathlib import Path
 UPSTREAM_REPO = "https://github.com/jgarza9788/niri-animation-collection.git"
 SKIP_BLOCKS = {"recent-windows-close"}
 FORBIDDEN_KEYS_BY_BLOCK = {
-    "window-open": {"duration-ms", "curve"},
-    "window-close": {"duration-ms", "curve"},
-    "window-resize": {"duration-ms", "curve"},
-    "screenshot-ui-open": {"duration-ms", "curve"},
-    "workspace-switch": {"duration-ms", "curve"},
     "recent-windows-close": {"spring"},
 }
 
@@ -119,6 +114,7 @@ def skip_block(lines: list[str], start_index: int) -> int:
 
 def parse_block(lines: list[str], start_index: int, block_name: str | None = None):
     items = []
+    easing_items = []
     index = start_index
     in_block_comment = False
 
@@ -176,6 +172,15 @@ def parse_block(lines: list[str], start_index: int, block_name: str | None = Non
                 continue
 
             tokens = re.findall(r'"[^"]*"|\S+', rest)
+            if key in {"duration-ms", "curve"}:
+                if len(tokens) == 1:
+                    value = atom(tokens[0])
+                else:
+                    value = ("list", [atom(token) for token in tokens])
+                easing_items.append((key, value))
+                index += 1
+                continue
+
             if key == "spring" and any("=" in token for token in tokens):
                 spring_items = []
                 for token in tokens:
@@ -183,7 +188,7 @@ def parse_block(lines: list[str], start_index: int, block_name: str | None = Non
                         continue
                     spring_key, spring_value = token.split("=", 1)
                     spring_items.append((spring_key, atom(spring_value)))
-                items.append((key, ("attrset", spring_items)))
+                items.append(("kind.spring", ("attrset", spring_items)))
             else:
                 if len(tokens) == 1:
                     value = atom(tokens[0])
@@ -194,6 +199,9 @@ def parse_block(lines: list[str], start_index: int, block_name: str | None = Non
             continue
 
         raise ValueError(f"Cannot parse line {index}: {raw_line!r}")
+
+    if easing_items:
+        items.append(("kind.easing", ("attrset", easing_items)))
 
     return ("attrset", items), index
 
