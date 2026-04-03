@@ -8,12 +8,14 @@ from pathlib import Path
 
 
 UPSTREAM_REPO = "https://github.com/jgarza9788/niri-animation-collection.git"
+SKIP_BLOCKS = {"recent-windows-close"}
 FORBIDDEN_KEYS_BY_BLOCK = {
     "window-open": {"duration-ms", "curve"},
     "window-close": {"duration-ms", "curve"},
     "window-resize": {"duration-ms", "curve"},
     "screenshot-ui-open": {"duration-ms", "curve"},
     "workspace-switch": {"duration-ms", "curve"},
+    "recent-windows-close": {"spring"},
 }
 
 
@@ -100,6 +102,21 @@ def parse_shader(lines: list[str], start_index: int):
     return ("raw", "\n".join(shader_lines).rstrip("\n")), index
 
 
+def skip_block(lines: list[str], start_index: int) -> int:
+    depth = 1
+    index = start_index
+
+    while index < len(lines):
+        line = lines[index]
+        depth += line.count("{")
+        depth -= line.count("}")
+        index += 1
+        if depth <= 0:
+            return index
+
+    raise ValueError("Unterminated block while skipping unsupported animation block")
+
+
 def parse_block(lines: list[str], start_index: int, block_name: str | None = None):
     items = []
     index = start_index
@@ -140,8 +157,14 @@ def parse_block(lines: list[str], start_index: int, block_name: str | None = Non
         nested_block = re.match(r"([A-Za-z0-9_-]+)\s*\{$", line)
         if nested_block:
             key = nested_block.group(1)
+            if key in SKIP_BLOCKS:
+                index = skip_block(lines, index + 1)
+                continue
             child, index = parse_block(lines, index + 1, key)
-            items.append((key, child))
+            if key in {"spring", "easing"} and block_name is not None:
+                items.append((f"kind.{key}", child))
+            else:
+                items.append((key, child))
             continue
 
         property_match = re.match(r"([A-Za-z0-9_-]+)\s+(.*)$", line)
