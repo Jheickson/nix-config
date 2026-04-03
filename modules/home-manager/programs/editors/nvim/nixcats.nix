@@ -95,6 +95,7 @@ in
               auto-session
               copilot-vim
               plenary-nvim
+              codecompanion-nvim
               lze
               lzextras
               snacks-nvim
