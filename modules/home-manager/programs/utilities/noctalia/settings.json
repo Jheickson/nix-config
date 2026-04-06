@@ -12,9 +12,9 @@
     "widgetSpacing": 6,
     "contentPadding": 2,
     "fontScale": 1,
+    "enableExclusionZoneInset": true,
     "backgroundOpacity": 0,
     "useSeparateOpacity": true,
-    "floating": false,
     "marginVertical": 4,
     "marginHorizontal": 4,
     "frameThickness": 8,
@@ -151,30 +151,16 @@
     "lockScreenBlur": 0,
     "lockScreenTint": 0,
     "keybinds": {
-      "keyUp": [
-        "Up"
-      ],
-      "keyDown": [
-        "Down"
-      ],
-      "keyLeft": [
-        "Left"
-      ],
-      "keyRight": [
-        "Right"
-      ],
-      "keyEnter": [
-        "Return",
-        "Enter"
-      ],
-      "keyEscape": [
-        "Esc"
-      ],
-      "keyRemove": [
-        "Del"
-      ]
+      "keyUp": ["Up"],
+      "keyDown": ["Down"],
+      "keyLeft": ["Left"],
+      "keyRight": ["Right"],
+      "keyEnter": ["Return", "Enter"],
+      "keyEscape": ["Esc"],
+      "keyRemove": ["Del"]
     },
-    "reverseScroll": false
+    "reverseScroll": false,
+    "smoothScrollEnabled": true
   },
   "ui": {
     "fontDefault": "Hack Nerd Font",
@@ -182,8 +168,10 @@
     "fontDefaultScale": 1,
     "fontFixedScale": 1,
     "tooltipsEnabled": true,
+    "scrollbarAlwaysVisible": true,
     "boxBorderEnabled": false,
     "panelBackgroundOpacity": 0.93,
+    "translucentWidgets": false,
     "panelsAttachedToBar": false,
     "settingsPanelMode": "window",
     "settingsPanelSideBarCardStyle": false
@@ -221,12 +209,13 @@
   "wallpaper": {
     "enabled": false,
     "overviewEnabled": false,
-    "directory": "/home/felipe/nix-config/assets/wallpapers",
+    "directory": "/home/felipe/Pictures/Wallpapers",
     "monitorDirectories": [],
     "enableMultiMonitorDirectories": false,
     "showHiddenFiles": false,
     "viewMode": "recursive",
     "setWallpaperOnAllMonitors": true,
+    "linkLightAndDarkWallpapers": true,
     "fillMode": "crop",
     "fillColor": "#000000",
     "useSolidColor": false,
@@ -235,11 +224,12 @@
     "wallpaperChangeMode": "random",
     "randomIntervalSec": 300,
     "transitionDuration": 1500,
-    "transitionType": "random",
+    "transitionType": ["random"],
     "skipStartupTransition": false,
     "transitionEdgeSmoothness": 0.05,
     "panelPosition": "follow_bar",
     "hideWallpaperFilenames": true,
+    "useOriginalImages": false,
     "overviewBlur": 0.4,
     "overviewTint": 0.6,
     "useWallhaven": false,
@@ -261,11 +251,12 @@
     "autoPasteClipboard": false,
     "enableClipPreview": true,
     "clipboardWrapText": true,
+    "enableClipboardSmartIcons": true,
+    "enableClipboardChips": true,
     "clipboardWatchTextCommand": "wl-paste --type text --watch cliphist store",
     "clipboardWatchImageCommand": "wl-paste --type image --watch cliphist store",
     "position": "center",
     "pinnedApps": [],
-    "useApp2Unit": false,
     "sortByMostUsed": true,
     "terminalCommand": "ghostty -e",
     "customLaunchPrefixEnabled": false,
@@ -379,13 +370,12 @@
     "size": 0.8,
     "onlySameOutput": true,
     "monitors": [],
-    "pinnedApps": [
-      "zen-beta",
-      "code"
-    ],
+    "pinnedApps": ["zen-beta", "code"],
     "colorizeIcons": false,
     "showLauncherIcon": false,
     "launcherPosition": "start",
+    "launcherUseDistroLogo": false,
+    "launcherIcon": "",
     "launcherIconColor": "tertiary",
     "pinnedStatic": true,
     "inactiveIndicators": false,
@@ -402,7 +392,6 @@
     "indicatorOpacity": 0.6
   },
   "network": {
-    "wifiEnabled": true,
     "airplaneModeEnabled": false,
     "bluetoothRssiPollingEnabled": false,
     "bluetoothRssiPollIntervalMs": 10000,
@@ -517,12 +506,7 @@
     "autoHideMs": 2000,
     "overlayLayer": true,
     "backgroundOpacity": 1,
-    "enabledTypes": [
-      0,
-      1,
-      2,
-      3
-    ],
+    "enabledTypes": [0, 1, 2, 3],
     "monitors": []
   },
   "audio": {
@@ -530,9 +514,8 @@
     "volumeOverdrive": false,
     "spectrumFrameRate": 30,
     "visualizerType": "linear",
-    "mprisBlacklist": [
-      "instagram"
-    ],
+    "spectrumMirrored": true,
+    "mprisBlacklist": ["instagram"],
     "preferredPlayer": "feishin",
     "volumeFeedback": false,
     "volumeFeedbackSoundFile": ""
@@ -540,7 +523,7 @@
   "brightness": {
     "brightnessStep": 5,
     "enforceMinimum": true,
-    "enableDdcSupport": false,
+    "enableDdcSupport": true,
     "backlightDeviceMappings": []
   },
   "colorSchemes": {
@@ -551,7 +534,8 @@
     "manualSunrise": "06:30",
     "manualSunset": "18:30",
     "generationMethod": "faithful",
-    "monitorForColors": ""
+    "monitorForColors": "",
+    "syncGsettings": true
   },
   "templates": {
     "activeTemplates": [],
@@ -575,17 +559,19 @@
     "performanceModeEnabled": "",
     "performanceModeDisabled": "",
     "startup": "",
-    "session": ""
+    "session": "",
+    "colorGeneration": ""
   },
   "plugins": {
-    "autoUpdate": false
+    "autoUpdate": false,
+    "notifyUpdates": false
   },
   "idle": {
     "enabled": true,
     "screenOffTimeout": 300,
     "lockTimeout": 360,
-    "suspendTimeout": 600,
-    "fadeDuration": 5,
+    "suspendTimeout": 900,
+    "fadeDuration": 10,
     "screenOffCommand": "",
     "lockCommand": "",
     "suspendCommand": "",
@@ -598,6 +584,7 @@
     "enabled": true,
     "overviewEnabled": true,
     "gridSnap": true,
+    "gridSnapScale": false,
     "monitorWidgets": [
       {
         "name": "HDMI-A-1",
