@@ -7,7 +7,11 @@ in
 
   nixpkgs.config = {
     allowUnfreePredicate = pkg: true;
-    permittedInsecurePackages = [ "googleearth-pro-7.3.6.10201" "xpdf-4.05" "python-2.7.18.12" ];
+    permittedInsecurePackages = [
+      "googleearth-pro-7.3.6.10201"
+      "xpdf-4.05"
+      "python-2.7.18.12"
+    ];
   };
 
   programs.kdeconnect = {
@@ -36,6 +40,7 @@ in
       nodejs_22
       # nodePackages.eas-cli
       opencode
+      claude-code
       openssl
       # pipx
       # postman
