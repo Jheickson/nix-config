@@ -26,7 +26,7 @@
     inputs.home-manager.nixosModules.home-manager
 
     # Core system modules
-    ../../modules/nixos/core/networkmanager.nix
+    # ../../modules/nixos/core/networkmanager.nix
     ../../modules/nixos/core/nh.nix
     ../../modules/nixos/core/substituters.nix
 
@@ -34,11 +34,11 @@
     # ../../modules/nixos/desktop/gtk.nix
     ../../modules/nixos/desktop/stylix-wallpaper.nix
     ../../modules/nixos/desktop/niri.nix
-    ../../modules/nixos/desktop/xautolock.nix
+    # ../../modules/nixos/desktop/xautolock.nix
     ../../modules/nixos/desktop/xdg.nix
 
     # Hardware
-    ../../modules/nixos/hardware/upower.nix
+    # ../../modules/nixos/hardware/upower.nix
     ../../modules/nixos/hardware/vial.nix
 
     # Services
@@ -48,12 +48,13 @@
     # ../../modules/nixos/services/subsonic.nix
 
     # Programs
+    ../../modules/nixos/programs/nix-ld.nix
     ../../modules/nixos/programs/packages.nix
     ../../modules/nixos/programs/flutter.nix
     ../../modules/nixos/programs/noctalia.nix
     ../../modules/nixos/programs/steam.nix
-    ../../modules/nixos/programs/thunderbird.nix
-    ../../modules/nixos/programs/wine.nix
+    # ../../modules/nixos/programs/thunderbird.nix
+    # ../../modules/nixos/programs/wine.nix
     ../../modules/nixos/programs/nicotine-plus.nix
   ];
 
