@@ -317,12 +317,12 @@ clue.setup({
 -- Startup screen (opens when nvim started with no file args)
 require('mini.starter').setup({
   header = table.concat({
-    '  ███╗   ██╗██╗██╗   ██╗██╗███╗   ███╗',
-    '  ████╗  ██║██║██║   ██║██║████╗ ████║',
-    '  ██╔██╗ ██║██║██║   ██║██║██╔████╔██║',
-    '  ██║╚██╗██║██║╚██╗ ██╔╝██║██║╚██╔╝██║',
-    '  ██║ ╚████║██║ ╚████╔╝ ██║██║ ╚═╝ ██║',
-    '  ╚═╝  ╚═══╝╚═╝  ╚═══╝  ╚═╝╚═╝     ╚═╝',
+    '  ███╗   ██╗██╗   ██╗██╗███╗   ███╗',
+    '  ████╗  ██║██║   ██║██║████╗ ████║',
+    '  ██╔██╗ ██║██║   ██║██║██╔████╔██║',
+    '  ██║╚██╗██║╚██╗ ██╔╝██║██║╚██╔╝██║',
+    '  ██║ ╚████║ ╚████╔╝ ██║██║ ╚═╝ ██║',
+    '  ╚═╝  ╚═══╝  ╚═══╝  ╚═╝╚═╝     ╚═╝',
   }, '\n'),
   items = {
     require('mini.starter').sections.recent_files(5, false),
@@ -342,11 +342,17 @@ local function setup_treesitter()
   })
 end
 
--- Handle first-time async install
+-- Handle first-time async installs
 vim.api.nvim_create_autocmd('PackChanged', {
   callback = function(ev)
-    if ev.data.spec.name == 'nvim-treesitter' and ev.data.kind == 'install' then
+    if ev.data.kind ~= 'install' then return end
+    local name = ev.data.spec.name
+    if name == 'nvim-treesitter' then
       setup_treesitter()
+    elseif name == 'render-markdown.nvim' then
+      pcall(function() require('render-markdown').setup() end)
+    elseif name == 'rainbow-delimiters.nvim' then
+      pcall(function() require('rainbow-delimiters.setup').setup() end)
     end
   end,
 })
@@ -354,9 +360,14 @@ vim.api.nvim_create_autocmd('PackChanged', {
 vim.api.nvim_create_autocmd('VimEnter', {
   once = true,
   callback = function()
-    vim.pack.add({ 'https://github.com/nvim-treesitter/nvim-treesitter' })
-    if pcall(require, 'nvim-treesitter.configs') then
-      setup_treesitter()
-    end
+    vim.pack.add({
+      'https://github.com/nvim-treesitter/nvim-treesitter',
+      'https://github.com/MeanderingProgrammer/render-markdown.nvim',
+      'https://github.com/hiphish/rainbow-delimiters.nvim',
+      'https://github.com/wakatime/vim-wakatime',
+    })
+    if pcall(require, 'nvim-treesitter.configs') then setup_treesitter() end
+    if pcall(require, 'render-markdown') then require('render-markdown').setup() end
+    if pcall(require, 'rainbow-delimiters.setup') then require('rainbow-delimiters.setup').setup() end
   end,
 })
