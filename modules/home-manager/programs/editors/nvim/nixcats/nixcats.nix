@@ -56,7 +56,7 @@ in
           lspsAndRuntimeDeps = {
             general = with pkgs; [
               lazygit
-              nodePackages.typescript-language-server  # New: LSP for TypeScript
+              # nodePackages.typescript-language-server  # New: LSP for TypeScript
               rust-analyzer  # New: LSP for Rust
             ];
             lua = with pkgs; [
@@ -81,8 +81,8 @@ in
               flutter
             ];
             react = with pkgs; [
-              nodePackages.eslint
-              nodePackages.prettier
+              # nodePackages.eslint
+              # nodePackages.prettier
               tailwindcss-language-server
             ];
           };
