@@ -33,8 +33,9 @@
     # Programs
     ../programs/terminals/ghostty.nix
     # ../programs/terminals/alacritty.nix
-    ../programs/editors/nvim/nixcats/nixcats.nix
+    # ../programs/editors/nvim/nixcats/nixcats.nix
     # ../programs/editors/nvim/nixvim/nixvim.nix
+    ../programs/editors/nvim/vanilla/vanilla.nix
     
     ../programs/editors/vscode.nix
     ../programs/shells/zsh.nix
