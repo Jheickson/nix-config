@@ -53,7 +53,7 @@
     wl-clipboard
 
     # wallpaper daemon
-    swww
+    awww
   ];
 
   home.sessionVariables = {

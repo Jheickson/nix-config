@@ -41,7 +41,7 @@ in
         (makeCommand "hyprlock")
         {
           command = [
-            "${./swww-init.sh}"
+            "${./awww-init.sh}"
           ];
         }
         (makeCommand "waybar")

@@ -45,14 +45,14 @@ let
     null;
 in
 {
-  environment.systemPackages = (lib.optional stylixConfig.useThemeFile pkgs.gowall) ++ [ pkgs.swww ];
+  environment.systemPackages = (lib.optional stylixConfig.useThemeFile pkgs.gowall) ++ [ pkgs.awww ];
 
   # Generate themed wallpaper on system activation (only when stylixConfig.useThemeFile = true)
   system.activationScripts.gowallWallpaper = lib.mkIf stylixConfig.useThemeFile ''
     HOME=/home/felipe ${pkgs.gowall}/bin/gowall convert ${stylixConfig.wallpaperSource} -t ${gowallThemeJson} --output ${stylixConfig.wallpaperOutputPath}
   '';
 
-  # Expose the wallpaper path for shell scripts (swww, etc.)
+  # Expose the wallpaper path for shell scripts (awww, etc.)
   environment.sessionVariables.STYLIX_WALLPAPER = if stylixConfig.useThemeFile then
     stylixConfig.wallpaperOutputPath
   else
