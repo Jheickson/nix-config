@@ -157,27 +157,40 @@ vim.pack.add({
 require('mini.misc').setup()
 MiniMisc.setup_auto_root({ '.git', 'flake.nix', 'Cargo.toml', 'package.json', 'pyproject.toml' })
 
--- Colorscheme: Catppuccin Mocha palette via mini.base16
-require('mini.base16').setup({
-  palette = {
-    base00 = '#1e1e2e', -- background
-    base01 = '#181825',
-    base02 = '#313244',
-    base03 = '#45475a',
-    base04 = '#585b70',
-    base05 = '#cdd6f4', -- foreground
-    base06 = '#f5e0dc',
-    base07 = '#b4befe',
-    base08 = '#f38ba8', -- red
-    base09 = '#fab387', -- orange/peach
-    base0A = '#f9e2af', -- yellow
-    base0B = '#a6e3a1', -- green
-    base0C = '#94e2d5', -- teal
-    base0D = '#89b4fa', -- blue
-    base0E = '#cba4f7', -- purple/mauve
-    base0F = '#f2cdcd', -- pink
-  },
+-- Colorscheme persistence — remembers last :colorscheme across sessions
+local colorscheme_file = vim.fn.stdpath('data') .. '/last-colorscheme'
+
+vim.api.nvim_create_autocmd('ColorScheme', {
+  callback = function()
+    local f = io.open(colorscheme_file, 'w')
+    if f then f:write(vim.g.colors_name or '') f:close() end
+  end,
 })
+
+local function restore_colorscheme()
+  local f = io.open(colorscheme_file, 'r')
+  if f then
+    local name = f:read('*l') f:close()
+    if name and name ~= '' then
+      pcall(vim.cmd.colorscheme, name)
+      return
+    end
+  end
+  pcall(vim.cmd.colorscheme, 'base16-ocean') -- default on first run
+end
+
+-- base16-vim: switch themes with :colorscheme base16-<name>
+-- e.g. base16-ocean, base16-monokai, base16-tomorrow-night, base16-gruvbox-dark-hard
+vim.api.nvim_create_autocmd('PackChanged', {
+  callback = function(ev)
+    if ev.data.spec.name == 'base16-vim' and ev.data.kind == 'install' then
+      restore_colorscheme()
+    end
+  end,
+})
+
+vim.pack.add({ 'https://github.com/chriskempson/base16-vim' })
+restore_colorscheme() -- no-op on first install (PackChanged handles it)
 
 -- Icons (used by statusline, tabline, etc.)
 require('mini.icons').setup()
@@ -215,14 +228,15 @@ require('mini.statusline').setup()
 require('mini.cursorword').setup({ delay = 200 })
 
 -- Minimap (like VSCode's scrollbar overview on the right)
-require('mini.map').setup({
+local map_mod = require('mini.map')
+map_mod.setup({
   integrations = {
-    MiniMap.gen_integration.builtin_search(),   -- show / search matches
-    MiniMap.gen_integration.diagnostic(),       -- show LSP errors/warnings
-    MiniMap.gen_integration.diff(),             -- show git changes
+    map_mod.gen_integration.builtin_search(),   -- show / search matches
+    map_mod.gen_integration.diagnostic(),       -- show LSP errors/warnings
+    map_mod.gen_integration.diff(),             -- show git changes
   },
   symbols = {
-    encode = MiniMap.gen_encode_symbols.dot('4x2'), -- resolution
+    encode = map_mod.gen_encode_symbols.dot('4x2'), -- resolution
     scroll_line = '▶',
     scroll_view = '┃',
   },
@@ -274,6 +288,10 @@ vim.keymap.set('n', '-', MiniFiles.open, { desc = 'File explorer' })
 -- Like VSCode's keyboard shortcut tooltips
 local clue = require('mini.clue')
 clue.setup({
+  window = {
+    delay = 0,
+    config = { width = 50 },
+  },
   triggers = {
     { mode = 'n', keys = '<leader>' },
     { mode = 'n', keys = 'g' },
