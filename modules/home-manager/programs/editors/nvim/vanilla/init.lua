@@ -212,7 +212,37 @@ require('mini.tabline').setup()
 require('mini.statusline').setup()
 
 -- Highlight the word under cursor across the file (like VSCode)
-require('mini.cursorword').setup()
+require('mini.cursorword').setup({ delay = 200 })
+
+-- Minimap (like VSCode's scrollbar overview on the right)
+require('mini.map').setup({
+  integrations = {
+    MiniMap.gen_integration.builtin_search(),   -- show / search matches
+    MiniMap.gen_integration.diagnostic(),       -- show LSP errors/warnings
+    MiniMap.gen_integration.diff(),             -- show git changes
+  },
+  symbols = {
+    encode = MiniMap.gen_encode_symbols.dot('4x2'), -- resolution
+    scroll_line = '▶',
+    scroll_view = '┃',
+  },
+  window = {
+    side = 'right',
+    width = 15,
+    winblend = 15, -- slight transparency
+  },
+})
+-- Auto-open map for normal files, toggle with <leader>m
+vim.api.nvim_create_autocmd('BufEnter', {
+  callback = function()
+    local ft = vim.bo.filetype
+    local excluded = { 'help', 'minifiles', 'minimap', 'notify', '' }
+    if not vim.tbl_contains(excluded, ft) then
+      MiniMap.open()
+    end
+  end,
+})
+vim.keymap.set('n', '<leader>m', MiniMap.toggle, { desc = 'Toggle minimap' })
 
 -- Indent scope indicator (the animated vertical line in the current block)
 require('mini.indentscope').setup()
