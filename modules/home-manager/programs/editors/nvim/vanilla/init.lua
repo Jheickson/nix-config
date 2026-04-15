@@ -152,6 +152,11 @@ vim.pack.add({
   'https://github.com/nvim-mini/mini.nvim',
 })
 
+-- Project root detection (auto-cd when opening a file)
+-- Makes find-files and file explorer always work from the project root
+require('mini.misc').setup()
+MiniMisc.setup_auto_root({ '.git', 'flake.nix', 'Cargo.toml', 'package.json', 'pyproject.toml' })
+
 -- Colorscheme: Catppuccin Mocha palette via mini.base16
 require('mini.base16').setup({
   palette = {
