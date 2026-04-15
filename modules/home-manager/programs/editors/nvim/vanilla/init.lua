@@ -176,20 +176,20 @@ local function restore_colorscheme()
       return
     end
   end
-  pcall(vim.cmd.colorscheme, 'base16-ocean') -- default on first run
+  pcall(vim.cmd.colorscheme, 'base16-ayu-dark') -- default on first run
 end
 
--- base16-vim: switch themes with :colorscheme base16-<name>
--- e.g. base16-ocean, base16-monokai, base16-tomorrow-night, base16-gruvbox-dark-hard
+-- tinted-vim: switch themes with :colorscheme base16-<name>
+-- e.g. base16-ayu-dark, base16-onedark, base16-horizon-dark, base16-gruvbox-dark-hard
 vim.api.nvim_create_autocmd('PackChanged', {
   callback = function(ev)
-    if ev.data.spec.name == 'base16-vim' and ev.data.kind == 'install' then
+    if ev.data.spec.name == 'tinted-vim' and ev.data.kind == 'install' then
       restore_colorscheme()
     end
   end,
 })
 
-vim.pack.add({ 'https://github.com/chriskempson/base16-vim' })
+vim.pack.add({ 'https://github.com/tinted-theming/tinted-vim' })
 restore_colorscheme() -- no-op on first install (PackChanged handles it)
 
 -- Icons (used by statusline, tabline, etc.)
@@ -312,6 +312,23 @@ clue.setup({
     { mode = 'n', keys = '<leader>f', desc = '+find' },
     { mode = 'n', keys = '<leader>g', desc = '+git' },
   },
+})
+
+-- Startup screen (opens when nvim started with no file args)
+require('mini.starter').setup({
+  header = table.concat({
+    '  ███╗   ██╗██╗██╗   ██╗██╗███╗   ███╗',
+    '  ████╗  ██║██║██║   ██║██║████╗ ████║',
+    '  ██╔██╗ ██║██║██║   ██║██║██╔████╔██║',
+    '  ██║╚██╗██║██║╚██╗ ██╔╝██║██║╚██╔╝██║',
+    '  ██║ ╚████║██║ ╚████╔╝ ██║██║ ╚═╝ ██║',
+    '  ╚═╝  ╚═══╝╚═╝  ╚═══╝  ╚═╝╚═╝     ╚═╝',
+  }, '\n'),
+  items = {
+    require('mini.starter').sections.recent_files(5, false),
+    require('mini.starter').sections.builtin_actions(),
+  },
+  footer = '',
 })
 
 -- =============================================================================
