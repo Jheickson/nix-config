@@ -81,6 +81,7 @@ in
 
       # === MEDIA & ENTERTAINMENT ===
       feishin
+      tauon
       heroic
       mediaelch
       ncmpcpp
