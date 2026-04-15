@@ -229,7 +229,15 @@ vim.keymap.set('n', '<leader>fd', function()
 end, { desc = 'Find diagnostics' })
 
 -- File explorer (like VSCode sidebar, open with -)
-require('mini.files').setup()
+require('mini.files').setup({
+  mappings = {
+    go_in       = '<Right>', -- enter dir / open file (keep explorer open)
+    go_in_plus  = '<CR>',    -- open file AND close explorer
+    go_out      = '<Left>',  -- go to parent dir
+    go_out_plus = '<BS>',    -- go to parent and close right pane
+    close       = 'q',
+  },
+})
 vim.keymap.set('n', '-', MiniFiles.open, { desc = 'File explorer' })
 
 -- Keybinding hints popup (shows what keys do after you press <leader>)
