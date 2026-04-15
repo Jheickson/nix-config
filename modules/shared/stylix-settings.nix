@@ -4,7 +4,7 @@
   enable = true;
   useThemeFile = true;
 
-  wallpaperSource = ../../assets/wallpapers/Minimalistic/wallhaven-288w19.png;
+  wallpaperSource = ../../assets/wallpapers/Minimalistic/wallhaven-7j3xm3.png;
   wallpaperImage = ../../assets/wallpapers/wallpaper.png;
   wallpaperOutputPath = "/home/felipe/nix-config/assets/wallpapers/wallpaper.png";
 
