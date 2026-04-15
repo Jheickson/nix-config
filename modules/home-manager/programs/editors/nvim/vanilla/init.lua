@@ -104,6 +104,15 @@ vim.lsp.config('rust_analyzer', {
   root_markers = { 'Cargo.toml', 'Cargo.lock', '.git' },
 })
 
+vim.lsp.config('ts_ls', {
+  cmd = { 'typescript-language-server', '--stdio' },
+  filetypes = {
+    'javascript', 'javascriptreact',
+    'typescript', 'typescriptreact',
+  },
+  root_markers = { 'tsconfig.json', 'jsconfig.json', 'package.json', '.git' },
+})
+
 vim.lsp.config('tailwindcss', {
   cmd = { 'tailwindcss-language-server', '--stdio' },
   filetypes = {
@@ -115,7 +124,7 @@ vim.lsp.config('tailwindcss', {
   root_markers = { 'tailwind.config.js', 'tailwind.config.ts', 'package.json', '.git' },
 })
 
-vim.lsp.enable({ 'lua_ls', 'nixd', 'rust_analyzer', 'tailwindcss' })
+vim.lsp.enable({ 'lua_ls', 'nixd', 'rust_analyzer', 'ts_ls', 'tailwindcss' })
 
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('lsp-attach', { clear = true }),

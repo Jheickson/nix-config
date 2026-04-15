@@ -11,6 +11,7 @@
     stylua
     rust-analyzer
     tailwindcss-language-server
+    typescript-language-server
     lazygit
     nodejs
   ];
