@@ -14,7 +14,7 @@
     shellAliases =
       let
         flakeDir = "~/nix-config";
-        # Apply stylix wallpaper after rebuild using swww
+        # Apply stylix wallpaper after rebuild using awww
         # Uses STYLIX_WALLPAPER environment variable set by stylix.nix
         applyWallpaper = ''
           source /etc/set-environment 2>/dev/null
@@ -33,7 +33,7 @@
           echo "[DEBUG] File exists check: $([ -f "$WALLPAPER" ] && echo YES || echo NO)" >&2
           echo "========================================" >&2
           
-          swww img "$WALLPAPER" --resize crop && echo 'Wallpaper applied successfully' || echo 'Failed to apply wallpaper'
+          awww img "$WALLPAPER" --resize crop && echo 'Wallpaper applied successfully' || echo 'Failed to apply wallpaper'
         '';
       in
       {

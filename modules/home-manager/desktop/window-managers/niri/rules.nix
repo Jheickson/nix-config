@@ -209,14 +209,14 @@ in
     window-rules = windowRules;
     layer-rules = [
       {
-        # `niri msg layers` shows the background namespace as "swww-daemon".
-        # Match that to place swww's surfaces within the backdrop.
-        matches = [ { namespace = "swww-daemon"; }  { namespace = "^noctalia-wallpaper*"; } ];
+        # `niri msg layers` shows the background namespace as "awww-daemon".
+        # Match that to place awww's surfaces within the backdrop.
+        matches = [ { namespace = "awww-daemon"; }  { namespace = "^noctalia-wallpaper*"; } ];
         place-within-backdrop = true;
       }
     ];
     # Make the workspace background transparent so wallpapers placed within
-    # the backdrop (e.g. swww) remain stationary and don't move with workspaces.
+    # the backdrop (e.g. awww) remain stationary and don't move with workspaces.
     layout = {
       background-color = "transparent";
     };
