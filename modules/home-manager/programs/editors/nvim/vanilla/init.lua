@@ -360,11 +360,22 @@ vim.api.nvim_create_autocmd('PackChanged', {
       setup_treesitter()
     elseif name == 'render-markdown.nvim' then
       pcall(function() require('render-markdown').setup() end)
-    elseif name == 'rainbow-delimiters.nvim' then
-      pcall(function() require('rainbow-delimiters.setup').setup() end)
     end
   end,
 })
+
+-- rainbow-delimiters config (must be set before the plugin loads)
+vim.g.rainbow_delimiters = {
+  highlight = {
+    'RainbowDelimiterRed',
+    'RainbowDelimiterYellow',
+    'RainbowDelimiterBlue',
+    'RainbowDelimiterOrange',
+    'RainbowDelimiterGreen',
+    'RainbowDelimiterViolet',
+    'RainbowDelimiterCyan',
+  },
+}
 
 vim.api.nvim_create_autocmd('VimEnter', {
   once = true,
@@ -377,6 +388,5 @@ vim.api.nvim_create_autocmd('VimEnter', {
     })
     if pcall(require, 'nvim-treesitter.configs') then setup_treesitter() end
     if pcall(require, 'render-markdown') then require('render-markdown').setup() end
-    if pcall(require, 'rainbow-delimiters.setup') then require('rainbow-delimiters.setup').setup() end
   end,
 })
