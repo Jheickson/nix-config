@@ -38,7 +38,7 @@
     ../../modules/nixos/desktop/xdg.nix
 
     # Hardware
-    # ../../modules/nixos/hardware/upower.nix
+    ../../modules/nixos/hardware/upower.nix
     ../../modules/nixos/hardware/vial.nix
 
     # Services
