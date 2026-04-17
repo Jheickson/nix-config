@@ -41,6 +41,7 @@ in
         (makeCommand "hyprlock")
         {
           command = [
+            "${pkgs.bash}/bin/bash"
             "${./awww-init.sh}"
           ];
         }
