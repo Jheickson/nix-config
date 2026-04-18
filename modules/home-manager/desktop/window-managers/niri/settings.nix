@@ -41,8 +41,7 @@ in
         (makeCommand "hyprlock")
         {
           command = [
-            "${pkgs.bash}/bin/bash"
-            "${./awww-init.sh}"
+            "${pkgs.writeShellScript "awww-init" (builtins.readFile ./awww-init.sh)}"
           ];
         }
         (makeCommand "waybar")
