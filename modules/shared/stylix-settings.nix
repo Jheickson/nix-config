@@ -4,11 +4,11 @@
   enable = true;
   useThemeFile = true;
 
-  wallpaperSource = ../../assets/wallpapers/Minimalistic/wallhaven-7j3xm3.png;
+  wallpaperSource = ../../assets/wallpapers/Landscape/wallhaven-o5p9wl.png;
   wallpaperImage = ../../assets/wallpapers/wallpaper.png;
   wallpaperOutputPath = "/home/felipe/nix-config/assets/wallpapers/wallpaper.png";
 
-  themeFile = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
+  themeFile = "${pkgs.base16-schemes}/share/themes/tokyo-night-dark.yaml";
 }
 
 /* 
