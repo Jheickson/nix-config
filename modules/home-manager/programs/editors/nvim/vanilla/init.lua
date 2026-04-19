@@ -462,7 +462,7 @@ local function sessions_section()
   end)
   for i, path in ipairs(files) do
     if i > 5 then break end
-    local name = vim.fn.fnamemodify(path, ':t:r'):gsub('%%', '/')
+    local name = vim.fn.fnamemodify(path, ':t:r'):gsub('%%2F', '/')
     table.insert(items, {
       name = name,
       action = 'SessionRestore ' .. vim.fn.fnameescape(name),
