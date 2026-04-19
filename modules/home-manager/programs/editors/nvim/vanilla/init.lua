@@ -150,6 +150,27 @@ vim.api.nvim_create_autocmd('LspAttach', {
     if client and client:supports_method('textDocument/completion') then
       vim.lsp.completion.enable(true, client.id, event.buf, { autotrigger = true })
     end
+
+    -- Inlay hints
+    if client and client:supports_method('textDocument/inlayHint') then
+      vim.lsp.inlay_hint.enable(true, { bufnr = event.buf })
+    end
+    map('<leader>th', function()
+      vim.lsp.inlay_hint.enable(
+        not vim.lsp.inlay_hint.is_enabled({ bufnr = event.buf }),
+        { bufnr = event.buf }
+      )
+    end, 'Toggle inlay hints')
+
+    -- Format on save
+    if client and client:supports_method('textDocument/formatting') then
+      vim.api.nvim_create_autocmd('BufWritePre', {
+        buffer = event.buf,
+        callback = function()
+          vim.lsp.buf.format({ bufnr = event.buf, id = client.id })
+        end,
+      })
+    end
   end,
 })
 
@@ -223,6 +244,10 @@ vim.keymap.set('v', '<C-/>', 'gc', { remap = true, desc = 'Toggle comment' })
 require('mini.diff').setup()
 vim.keymap.set('n', '<leader>gd', MiniDiff.toggle_overlay, { desc = 'Git diff overlay' })
 
+-- Git operations (blame, log, show commit at cursor)
+require('mini.git').setup()
+vim.keymap.set({ 'n', 'v' }, '<leader>gs', MiniGit.show_at_cursor, { desc = 'Git show at cursor' })
+
 -- Notifications (replaces the default bottom-right echo messages)
 require('mini.notify').setup()
 vim.notify = MiniNotify.make_notify()
@@ -281,6 +306,20 @@ vim.keymap.set('n', '<leader>fd', function()
   MiniPick.builtin.diagnostic({ scope = 'all' })
 end, { desc = 'Find diagnostics' })
 
+-- Extra pickers: LSP symbols, git commits/branches, treesitter, etc.
+require('mini.extra').setup()
+vim.keymap.set('n', '<leader>fs', function()
+  MiniExtra.pickers.lsp({ scope = 'document_symbol' })
+end, { desc = 'LSP symbols' })
+vim.keymap.set('n', '<leader>fS', function()
+  MiniExtra.pickers.lsp({ scope = 'workspace_symbol' })
+end, { desc = 'LSP workspace symbols' })
+vim.keymap.set('n', '<leader>gc', MiniExtra.pickers.git_commits, { desc = 'Git commits' })
+vim.keymap.set('n', '<leader>gb', MiniExtra.pickers.git_branches, { desc = 'Git branches' })
+
+-- 2-char jump anywhere on screen (like hop.nvim / flash.nvim)
+require('mini.jump2d').setup({ mappings = { start_jumping = '<leader><leader>' } })
+
 -- File explorer (like VSCode sidebar, open with -)
 require('mini.files').setup({
   mappings = {
@@ -320,6 +359,7 @@ clue.setup({
     { mode = 'n', keys = '<leader>b', desc = '+buffer' },
     { mode = 'n', keys = '<leader>f', desc = '+find' },
     { mode = 'n', keys = '<leader>g', desc = '+git' },
+    { mode = 'n', keys = '<leader>t', desc = '+toggle' },
   },
 })
 
