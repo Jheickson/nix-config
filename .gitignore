@@ -1,1 +1,3 @@
 result
+modules/nixos/services/navidrome/lastfm-api-key
+modules/nixos/services/navidrome/lastfm-secret
