@@ -466,6 +466,7 @@ pcall(function()
         name = 'Sessions',
         choose = function(item)
           vim.schedule(function()
+            vim.cmd('%bdelete!')
             vim.cmd('source ' .. vim.fn.fnameescape(item._path))
           end)
         end,
