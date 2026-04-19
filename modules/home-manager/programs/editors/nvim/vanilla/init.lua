@@ -112,6 +112,15 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   callback = function() vim.highlight.on_yank() end,
 })
 
+-- mini.pick current item highlight (must reapply after colorscheme changes)
+vim.api.nvim_create_autocmd('ColorScheme', {
+  group = vim.api.nvim_create_augroup('mini-pick-hl', { clear = true }),
+  callback = function()
+    vim.api.nvim_set_hl(0, 'MiniPickMatchCurrent', { link = 'PmenuSel', force = true })
+  end,
+})
+vim.api.nvim_set_hl(0, 'MiniPickMatchCurrent', { link = 'PmenuSel', force = true })
+
 -- =============================================================================
 -- LSP (built-in 0.12 API — no lspconfig needed)
 -- =============================================================================
@@ -215,7 +224,12 @@ pcall(function()
   require('blink.cmp').setup({
     keymap = { preset = 'default' },
     appearance = { use_nvim_cmp_as_default = false },
-    sources = { default = { 'lsp', 'path', 'snippets', 'buffer' } },
+    sources = {
+      default = { 'lsp', 'path', 'snippets' },
+      providers = {
+        buffer = { min_keyword_length = 4 },
+      },
+    },
     completion = {
       documentation = { auto_show = true, auto_show_delay_ms = 200 },
     },
@@ -337,7 +351,25 @@ vim.keymap.set('n', '<leader>m', MiniMap.toggle, { desc = 'Toggle minimap' })
 require('mini.indentscope').setup()
 
 -- Fuzzy finder (like Ctrl+P / Ctrl+Shift+F in VSCode)
-require('mini.pick').setup()
+require('mini.pick').setup({
+  mappings = {
+    move_down  = '<C-n>',
+    move_up    = '<C-p>',
+    arrow_down = { char = '<Down>', func = function()
+      local k = vim.api.nvim_replace_termcodes('<C-n>', true, true, true)
+      vim.api.nvim_feedkeys(k, 'n', false)
+    end },
+    arrow_up   = { char = '<Up>', func = function()
+      local k = vim.api.nvim_replace_termcodes('<C-p>', true, true, true)
+      vim.api.nvim_feedkeys(k, 'n', false)
+    end },
+  },
+  window = {
+    config = { border = 'rounded' },
+    prompt_cursor = '▎',
+    prompt_prefix = ' ',
+  },
+})
 vim.keymap.set('n', '<C-p>', MiniPick.builtin.files, { desc = 'Find files' })
 vim.keymap.set('n', '<C-f>', MiniPick.builtin.grep_live, { desc = 'Search in project' })
 vim.keymap.set('n', '<leader>ff', MiniPick.builtin.files, { desc = 'Find files' })
