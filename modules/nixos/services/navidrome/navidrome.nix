@@ -7,8 +7,13 @@
     openFirewall = true;
     user = "felipe";
     settings = {
-      MusicFolder = "/home/felipe/Music";
+      MusicFolder = "/var/music";
       Port = 4533;
+      LastFM.Enabled = true;
+    };
+    credentialFiles = {
+      "LastFM.ApiKey" = ./lastfm-api-key;
+      "LastFM.Secret" = ./lastfm-secret;
     };
   };
 
