@@ -44,6 +44,7 @@
     # Services
     ../../modules/nixos/services/docker.nix
     ../../modules/nixos/services/jellyfin.nix
+    ../../modules/nixos/services/navidrome.nix
     # ../../modules/nixos/services/mysql.nix
     # ../../modules/nixos/services/subsonic.nix
 
