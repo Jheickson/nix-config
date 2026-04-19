@@ -75,6 +75,35 @@ vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show error
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Next error' })
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Prev error' })
 
+-- Close window / quit
+vim.keymap.set('n', '<leader>q', '<cmd>q<CR>', { desc = 'Close window' })
+vim.keymap.set('n', '<leader>Q', '<cmd>qa<CR>', { desc = 'Quit all' })
+
+-- Format now (manual trigger on top of format-on-save)
+vim.keymap.set('n', '<leader>lf', function()
+  vim.lsp.buf.format({ async = true })
+end, { desc = 'Format file' })
+
+-- Toggle terminal (like Ctrl+` in VSCode)
+local term_buf = nil
+local term_win = nil
+vim.keymap.set({ 'n', 't' }, '<C-`>', function()
+  if term_win and vim.api.nvim_win_is_valid(term_win) then
+    vim.api.nvim_win_hide(term_win)
+    term_win = nil
+  elseif term_buf and vim.api.nvim_buf_is_valid(term_buf) then
+    vim.cmd('botright 15split')
+    term_win = vim.api.nvim_get_current_win()
+    vim.api.nvim_win_set_buf(term_win, term_buf)
+    vim.cmd('startinsert')
+  else
+    vim.cmd('botright 15split | terminal')
+    term_buf = vim.api.nvim_get_current_buf()
+    term_win = vim.api.nvim_get_current_win()
+    vim.cmd('startinsert')
+  end
+end, { desc = 'Toggle terminal' })
+
 -- =============================================================================
 -- AUTOCMDS
 -- =============================================================================
@@ -301,6 +330,7 @@ require('mini.indentscope').setup()
 -- Fuzzy finder (like Ctrl+P / Ctrl+Shift+F in VSCode)
 require('mini.pick').setup()
 vim.keymap.set('n', '<C-p>', MiniPick.builtin.files, { desc = 'Find files' })
+vim.keymap.set('n', '<C-f>', MiniPick.builtin.grep_live, { desc = 'Search in project' })
 vim.keymap.set('n', '<leader>ff', MiniPick.builtin.files, { desc = 'Find files' })
 vim.keymap.set('n', '<leader>fg', MiniPick.builtin.grep_live, { desc = 'Search in project' })
 vim.keymap.set('n', '<leader>fb', MiniPick.builtin.buffers, { desc = 'Open buffers' })
@@ -363,6 +393,7 @@ clue.setup({
     { mode = 'n', keys = '<leader>f', desc = '+find' },
     { mode = 'n', keys = '<leader>g', desc = '+git' },
     { mode = 'n', keys = '<leader>t', desc = '+toggle' },
+    { mode = 'n', keys = '<leader>l', desc = '+lsp' },
   },
 })
 
