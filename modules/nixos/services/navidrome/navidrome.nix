@@ -11,10 +11,7 @@
       Port = 4533;
       LastFM.Enabled = true;
     };
-    credentialFiles = {
-      "LastFM.ApiKey" = ./lastfm-api-key;
-      "LastFM.Secret" = ./lastfm-secret;
-    };
+    environmentFile = "/etc/navidrome/secrets.env";
   };
 
   environment.systemPackages = [

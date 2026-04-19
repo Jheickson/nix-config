@@ -1,3 +1,2 @@
 result
-modules/nixos/services/navidrome/lastfm-api-key
-modules/nixos/services/navidrome/lastfm-secret
+modules/nixos/services/navidrome/secrets.env
