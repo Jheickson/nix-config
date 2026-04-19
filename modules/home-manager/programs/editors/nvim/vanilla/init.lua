@@ -177,13 +177,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
     map('<leader>ca', vim.lsp.buf.code_action, 'Code action')
     map('<leader>D', vim.lsp.buf.type_definition, 'Type definition')
 
-    -- Built-in LSP completion (Neovim 0.11+)
-    local client = vim.lsp.get_client_by_id(event.data.client_id)
-    if client and client:supports_method('textDocument/completion') then
-      vim.lsp.completion.enable(true, client.id, event.buf, { autotrigger = true })
-    end
-
     -- Inlay hints
+    local client = vim.lsp.get_client_by_id(event.data.client_id)
     if client and client:supports_method('textDocument/inlayHint') then
       vim.lsp.inlay_hint.enable(true, { bufnr = event.buf })
     end
@@ -213,6 +208,22 @@ vim.api.nvim_create_autocmd('LspAttach', {
 vim.pack.add({
   'https://github.com/nvim-mini/mini.nvim',
 })
+
+-- =============================================================================
+-- COMPLETION (blink.cmp — fuzzy, snippets, multi-source)
+-- =============================================================================
+vim.pack.add({ 'https://github.com/Saghen/blink.cmp' })
+
+pcall(function()
+  require('blink.cmp').setup({
+    keymap = { preset = 'default' },
+    appearance = { use_nvim_cmp_as_default = false },
+    sources = { default = { 'lsp', 'path', 'snippets', 'buffer' } },
+    completion = {
+      documentation = { auto_show = true, auto_show_delay_ms = 200 },
+    },
+  })
+end)
 
 -- Project root detection (auto-cd when opening a file)
 -- Makes find-files and file explorer always work from the project root
