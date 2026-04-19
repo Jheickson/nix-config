@@ -404,7 +404,16 @@ require('mini.files').setup({
     close       = 'q',
   },
 })
-vim.keymap.set('n', '-', MiniFiles.open, { desc = 'File explorer' })
+vim.keymap.set('n', '-', function()
+  if not MiniFiles.close() then MiniFiles.open() end
+end, { desc = 'Toggle file explorer' })
+
+vim.api.nvim_create_autocmd('User', {
+  pattern = 'MiniFilesBufferCreate',
+  callback = function(ev)
+    vim.keymap.set('n', '<Esc>', MiniFiles.close, { buffer = ev.data.buf_id, desc = 'Close explorer' })
+  end,
+})
 
 -- Keybinding hints popup (shows what keys do after you press <leader>)
 -- Like VSCode's keyboard shortcut tooltips
