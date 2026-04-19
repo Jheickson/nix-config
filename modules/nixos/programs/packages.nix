@@ -128,6 +128,7 @@ in
       playerctl
       rar
       scrcpy
+      qtscrcpy
       testdisk
       udiskie
       unrar
