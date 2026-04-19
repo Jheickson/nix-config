@@ -81,6 +81,7 @@ in
 
       # === MEDIA & ENTERTAINMENT ===
       feishin
+      supersonic-wayland
       tauon
       heroic
       mediaelch
