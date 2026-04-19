@@ -207,12 +207,9 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
 vim.pack.add({
   'https://github.com/nvim-mini/mini.nvim',
+  'https://github.com/Saghen/blink.cmp',
+  'https://github.com/rmagatti/auto-session',
 })
-
--- =============================================================================
--- COMPLETION (blink.cmp — fuzzy, snippets, multi-source)
--- =============================================================================
-vim.pack.add({ 'https://github.com/Saghen/blink.cmp' })
 
 pcall(function()
   require('blink.cmp').setup({
@@ -222,6 +219,7 @@ pcall(function()
     completion = {
       documentation = { auto_show = true, auto_show_delay_ms = 200 },
     },
+    fuzzy = { implementation = 'lua' },
   })
 end)
 
@@ -405,8 +403,42 @@ clue.setup({
     { mode = 'n', keys = '<leader>g', desc = '+git' },
     { mode = 'n', keys = '<leader>t', desc = '+toggle' },
     { mode = 'n', keys = '<leader>l', desc = '+lsp' },
+    { mode = 'n', keys = '<leader>s', desc = '+session' },
   },
 })
+
+-- =============================================================================
+-- SESSIONS (auto-session — save/restore per cwd like VSCode workspaces)
+-- =============================================================================
+pcall(function()
+  require('auto-session').setup({
+    auto_save = true,
+    auto_restore = true,
+    suppressed_dirs = { '~/', '~/Downloads', '/' },
+  })
+  vim.keymap.set('n', '<leader>ss', '<cmd>SessionSearch<CR>', { desc = 'Search sessions' })
+  vim.keymap.set('n', '<leader>sd', '<cmd>Autosession delete<CR>', { desc = 'Delete session' })
+end)
+
+-- Sessions section for mini.starter
+local function sessions_section()
+  local sessions_dir = vim.fn.stdpath('data') .. '/sessions/'
+  local items = {}
+  local files = vim.fn.glob(sessions_dir .. '*.vim', false, true)
+  table.sort(files, function(a, b)
+    return vim.fn.getftime(a) > vim.fn.getftime(b)
+  end)
+  for i, path in ipairs(files) do
+    if i > 5 then break end
+    local name = vim.fn.fnamemodify(path, ':t:r'):gsub('%%', '/')
+    table.insert(items, {
+      name = name,
+      action = 'SessionRestore ' .. vim.fn.fnameescape(name),
+      section = 'Sessions',
+    })
+  end
+  return items
+end
 
 -- Startup screen (opens when nvim started with no file args)
 require('mini.starter').setup({
@@ -419,6 +451,7 @@ require('mini.starter').setup({
   --   '  ╚═╝  ╚═══╝  ╚═══╝  ╚═╝╚═╝     ╚═╝',
   -- }, '\n'),
   items = {
+    sessions_section,
     require('mini.starter').sections.recent_files(5, false),
     require('mini.starter').sections.builtin_actions(),
   },
