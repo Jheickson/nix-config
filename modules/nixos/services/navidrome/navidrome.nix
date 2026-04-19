@@ -9,6 +9,7 @@
     settings = {
       MusicFolder = "/var/music";
       Port = 4533;
+      Address = "0.0.0.0";
       LastFM.Enabled = true;
     };
     environmentFile = "/etc/navidrome/secrets.env";
