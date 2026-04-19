@@ -448,8 +448,50 @@ pcall(function()
     auto_restore = true,
     suppressed_dirs = { '~/', '~/Downloads', '/' },
   })
-  vim.keymap.set('n', '<leader>ss', '<cmd>SessionSearch<CR>', { desc = 'Search sessions' })
-  vim.keymap.set('n', '<leader>sd', '<cmd>Autosession delete<CR>', { desc = 'Delete session' })
+  local function session_dir()
+    return require('auto-session').get_root_dir()
+  end
+
+  vim.keymap.set('n', '<leader>ss', function()
+    local dir = session_dir()
+    local files = vim.fn.glob(dir .. '*.vim', false, true)
+    local items = {}
+    for _, path in ipairs(files) do
+      local name = vim.fn.fnamemodify(path, ':t:r'):gsub('%%2F', '/')
+      table.insert(items, { text = name, _path = path })
+    end
+    MiniPick.start({
+      source = {
+        items = items,
+        name = 'Sessions',
+        choose = function(item)
+          vim.schedule(function()
+            vim.cmd('source ' .. vim.fn.fnameescape(item._path))
+          end)
+        end,
+      },
+    })
+  end, { desc = 'Search sessions' })
+
+  vim.keymap.set('n', '<leader>sd', function()
+    local dir = session_dir()
+    local files = vim.fn.glob(dir .. '*.vim', false, true)
+    local items = {}
+    for _, path in ipairs(files) do
+      local name = vim.fn.fnamemodify(path, ':t:r'):gsub('%%2F', '/')
+      table.insert(items, { text = name, _path = path })
+    end
+    MiniPick.start({
+      source = {
+        items = items,
+        name = 'Delete Session',
+        choose = function(item)
+          vim.fn.delete(item._path)
+          vim.notify('Deleted session: ' .. item.text)
+        end,
+      },
+    })
+  end, { desc = 'Delete session' })
 end)
 
 -- Sessions section for mini.starter
