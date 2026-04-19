@@ -39,11 +39,14 @@ vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal' })
 -- Save with Ctrl+S (VSCode muscle memory)
 vim.keymap.set({ 'n', 'i', 'v' }, '<C-s>', '<cmd>w<CR><Esc>', { desc = 'Save file' })
 
--- Close buffer (like closing a tab in VSCode)
+-- Close buffer (like Ctrl+W in VSCode) — <C-w> prefix shadowed intentionally, splits use <C-h/j/k/l>
+vim.keymap.set('n', '<C-w>', '<cmd>bd<CR>', { desc = 'Close buffer' })
 vim.keymap.set('n', '<leader>bd', '<cmd>bd<CR>', { desc = 'Close buffer' })
 vim.keymap.set('n', '<leader>bD', '<cmd>bd!<CR>', { desc = 'Force close buffer' })
 
--- Switch buffers (like Alt+Left/Right in VSCode)
+-- Switch buffers (Ctrl+Tab like VSCode)
+vim.keymap.set('n', '<C-Tab>', '<cmd>bnext<CR>', { desc = 'Next buffer' })
+vim.keymap.set('n', '<C-S-Tab>', '<cmd>bprev<CR>', { desc = 'Previous buffer' })
 vim.keymap.set('n', '<S-h>', '<cmd>bprev<CR>', { desc = 'Previous buffer' })
 vim.keymap.set('n', '<S-l>', '<cmd>bnext<CR>', { desc = 'Next buffer' })
 
