@@ -157,9 +157,9 @@ in
         border = {
           enable = false;
           width = 2;
-          active.color = "#${config.lib.stylix.colors.base0D}50";
+          active.color = "#${config.lib.stylix.colors.base0E}";
           inactive.color = "#${config.lib.stylix.colors.base03}30";
-          urgent.color = "#${config.lib.stylix.colors.base08}50";
+          urgent.color = "#${config.lib.stylix.colors.base08}";
         };
         shadow = {
           enable = false;
