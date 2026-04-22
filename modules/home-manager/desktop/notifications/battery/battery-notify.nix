@@ -1,63 +1,37 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 let
   batteryScript = pkgs.writeShellScriptBin "battery-monitor" ''
     #!/usr/bin/env bash
     set -euo pipefail
 
-    # Battery monitoring script with priority notifications and charger event detection
-    # Monitors battery level and sends notifications at specific thresholds
-    # Also detects charger connection/disconnection events
+    # Battery monitor: event-driven via upower, with threshold + charger session notifications.
 
-    # Configuration
-    readonly NOTIFICATION_ICON_PREFIX="battery"
     readonly NOTIFICATION_TIMEOUT=10000
-    readonly CHECK_INTERVAL=30
-    readonly DEBOUNCE_THRESHOLD=5  # Minimum time between similar notifications (seconds)
-    readonly BATTERY_THRESHOLDS=(20 10 5)  # Warn at 20%, 10%, 5%
+    readonly POLL_INTERVAL=60            # fallback poll when upower unavailable
+    readonly SAFETY_POLL_INTERVAL=120    # re-check even while upower is quiet
+    readonly DEBOUNCE_THRESHOLD=5
+    readonly THRESHOLD_COOLDOWN=300
 
-    # Get battery info
-    get_battery_info() {
-        local battery_path="/sys/class/power_supply/BAT0"
-        [[ -d "$battery_path" ]] || battery_path="/sys/class/power_supply/BAT1"
-        
-        if [[ ! -d "$battery_path" ]]; then
-            echo "No battery found" >&2
-            return 1
-        fi
-        
-        echo "$battery_path"
+    STATE_FILE="''${XDG_RUNTIME_DIR:-/tmp}/battery-monitor.state"
+
+    # --- battery path discovery (globbed) ---
+    get_battery_path() {
+        local p
+        for p in /sys/class/power_supply/BAT*; do
+            [[ -d "$p" ]] || continue
+            echo "$p"
+            return 0
+        done
+        return 1
     }
 
-    # Get current battery percentage (with whitespace trimming)
-    get_battery_percentage() {
-        local battery_path="$1"
-        cat "$battery_path/capacity" 2>/dev/null | tr -d ' \n' || echo "0"
-    }
+    read_file() { cat "$1" 2>/dev/null | tr -d ' \n' || echo ""; }
 
-    # Get charging status
-    get_charging_status() {
-        local battery_path="$1"
-        cat "$battery_path/status" 2>/dev/null | tr -d ' \n' || echo "Unknown"
-    }
-
-    # Send notification with appropriate urgency
-    send_notification() {
-        local urgency="$1"
-        local icon="$2"
-        local message="$3"
-        
-        ${pkgs.libnotify}/bin/notify-send \
-            -u "$urgency" \
-            -i "$icon" \
-            "Battery Alert" \
-            "$message" \
-            -t "$NOTIFICATION_TIMEOUT"
-    }
-
-    # Format seconds as "Xh Ym" (or "Ym Ss" under 1m)
+    # --- duration formatter ---
     format_duration() {
         local seconds="$1"
+        (( seconds < 0 )) && seconds=0
         if (( seconds < 60 )); then
             echo "''${seconds}s"
         elif (( seconds < 3600 )); then
@@ -67,172 +41,232 @@ let
         fi
     }
 
-    # Send charger-specific notification
+    # --- ETA from energy/power sysfs ---
+    get_eta() {
+        local path="$1" status="$2"
+        local now_v full_v rate_v
+        now_v=$(read_file "$path/energy_now")
+        full_v=$(read_file "$path/energy_full")
+        rate_v=$(read_file "$path/power_now")
+        if [[ -z "$now_v" || -z "$rate_v" ]]; then
+            now_v=$(read_file "$path/charge_now")
+            full_v=$(read_file "$path/charge_full")
+            rate_v=$(read_file "$path/current_now")
+        fi
+        [[ "$now_v" =~ ^[0-9]+$ && "$rate_v" =~ ^[0-9]+$ && "$full_v" =~ ^[0-9]+$ ]] || { echo ""; return; }
+        (( rate_v > 0 )) || { echo ""; return; }
+        local seconds
+        case "$status" in
+            Charging)     seconds=$(( (full_v - now_v) * 3600 / rate_v )) ;;
+            Discharging)  seconds=$(( now_v * 3600 / rate_v )) ;;
+            *) echo ""; return ;;
+        esac
+        (( seconds > 30 )) || { echo ""; return; }
+        format_duration "$seconds"
+    }
+
+    # --- level-aware icon ---
+    get_battery_icon() {
+        local level="$1" status="$2"
+        local bucket=$(( (level / 10) * 10 ))
+        (( bucket > 100 )) && bucket=100
+        if [[ "$status" == "Full" ]] || (( level >= 100 )); then
+            echo "battery-level-100-charged-symbolic"
+        elif [[ "$status" == "Charging" ]]; then
+            echo "battery-level-''${bucket}-charging-symbolic"
+        else
+            echo "battery-level-''${bucket}-symbolic"
+        fi
+    }
+
+    # --- notification sender ---
+    # Args: category urgency icon level title message [timeout]
+    # category groups notifications for replace-in-place via synchronous hint.
+    send_notification() {
+        local category="$1" urgency="$2" icon="$3" level="$4" title="$5" message="$6"
+        local timeout="''${7:-$NOTIFICATION_TIMEOUT}"
+        ${pkgs.libnotify}/bin/notify-send \
+            -u "$urgency" \
+            -i "$icon" \
+            -h "string:x-canonical-private-synchronous:$category" \
+            -h "int:value:$level" \
+            -t "$timeout" \
+            "$title" "$message"
+    }
+
+    # --- state persistence ---
+    load_state() {
+        DISCHARGE_START=0
+        CHARGE_START=0
+        TIME_TO_FULL=""
+        LAST_CHARGER_STATE=""
+        LAST_CHARGER_NOTIFICATION=0
+        LAST_NOTIFIED_20=0
+        LAST_NOTIFIED_10=0
+        LAST_NOTIFIED_5=0
+        HAS_NOTIFIED_FULL=false
+        # shellcheck disable=SC1090
+        [[ -f "$STATE_FILE" ]] && source "$STATE_FILE" || true
+    }
+
+    save_state() {
+        local tmp="$STATE_FILE.tmp"
+        {
+            echo "DISCHARGE_START=$DISCHARGE_START"
+            echo "CHARGE_START=$CHARGE_START"
+            echo "TIME_TO_FULL=\"$TIME_TO_FULL\""
+            echo "LAST_CHARGER_STATE=\"$LAST_CHARGER_STATE\""
+            echo "LAST_CHARGER_NOTIFICATION=$LAST_CHARGER_NOTIFICATION"
+            echo "LAST_NOTIFIED_20=$LAST_NOTIFIED_20"
+            echo "LAST_NOTIFIED_10=$LAST_NOTIFIED_10"
+            echo "LAST_NOTIFIED_5=$LAST_NOTIFIED_5"
+            echo "HAS_NOTIFIED_FULL=$HAS_NOTIFIED_FULL"
+        } > "$tmp"
+        mv -f "$tmp" "$STATE_FILE"
+    }
+
+    # --- charger event notification ---
     send_charger_notification() {
-        local event="$1"
-        local battery_level="$2"
-        local extra="$3"
-
-        local icon=""
-        local message=""
-        local urgency="low"
-
+        local event="$1" level="$2" extra="$3" eta="$4"
+        local icon message urgency="low" timeout="$NOTIFICATION_TIMEOUT"
+        icon=$(get_battery_icon "$level" "$event")
         case "$event" in
             Charging)
-                icon="battery-full-charged"
-                message="Charger connected - Battery charging at $battery_level%"
-                [[ -n "$extra" ]] && message="$message"$'\n'"Went $extra without a charge"
+                message="Charger connected - Battery at ''${level}%"
+                [[ -n "$extra" ]] && message+=$'\n'"Went $extra without a charge"
+                [[ -n "$eta"   ]] && message+=$'\n'"~$eta until full"
                 ;;
             Discharging)
-                icon="battery-caution"
-                message="Charger disconnected - Battery discharging at $battery_level%"
                 urgency="normal"
-                [[ -n "$extra" ]] && message="$message"$'\n'"Took $extra to reach 100%"
+                message="Charger disconnected - Battery at ''${level}%"
+                [[ -n "$extra" ]] && message+=$'\n'"Took $extra to reach 100%"
+                [[ -n "$eta"   ]] && message+=$'\n'"~$eta remaining"
                 ;;
-            *)
-                return 0
-                ;;
+            *) return 0 ;;
         esac
-
-        send_notification "$urgency" "$icon" "$message"
+        send_notification "battery-charger" "$urgency" "$icon" "$level" "Battery" "$message" "$timeout"
     }
 
-    # Main monitoring function
-    monitor_battery() {
-        local battery_path
-        battery_path=$(get_battery_info) || return 1
-        
-        # Tracking last notification times
-        local last_notified_20=0
-        local last_notified_10=0
-        local last_notified_5=0
-        local has_notified_full=false
-        local last_charger_state=""
-        local last_charger_notification=0
+    # --- main check, idempotent; safe to call on every event ---
+    check_battery() {
+        local path level status now eta
+        path=$(get_battery_path) || return 0
+        level=$(read_file "$path/capacity")
+        status=$(read_file "$path/status")
+        now=$(date +%s)
+        [[ "$level" =~ ^[0-9]+$ ]] || return 0
 
-        # Charger session timing
-        local discharge_start=0
-        local charge_start=0
-        local time_to_full=""   # formatted duration, empty until 100% reached this cycle
-
-        # Seed initial state so first connect/disconnect has a reference
-        local initial_status
-        initial_status=$(get_charging_status "$battery_path")
-        local now_init
-        now_init=$(date +%s)
-        if [[ "$initial_status" == "Discharging" ]]; then
-            discharge_start=$now_init
-        elif [[ "$initial_status" == "Charging" || "$initial_status" == "Full" ]]; then
-            charge_start=$now_init
+        # charger state transition
+        if [[ -n "$status" && "$status" != "$LAST_CHARGER_STATE" ]]; then
+            if (( now - LAST_CHARGER_NOTIFICATION > DEBOUNCE_THRESHOLD )); then
+                local extra=""
+                case "$status" in
+                    Charging)
+                        (( DISCHARGE_START > 0 )) && extra=$(format_duration $((now - DISCHARGE_START)))
+                        CHARGE_START=$now
+                        TIME_TO_FULL=""
+                        ;;
+                    Discharging)
+                        extra="$TIME_TO_FULL"
+                        DISCHARGE_START=$now
+                        CHARGE_START=0
+                        ;;
+                esac
+                eta=$(get_eta "$path" "$status")
+                send_charger_notification "$status" "$level" "$extra" "$eta"
+                LAST_CHARGER_NOTIFICATION=$now
+                LAST_CHARGER_STATE="$status"
+            fi
         fi
-        last_charger_state="$initial_status"
 
-        while true; do
-            local current_level
-            local charging_status
-            local current_time
-            
-            current_level=$(get_battery_percentage "$battery_path")
-            charging_status=$(get_charging_status "$battery_path")
-            current_time=$(date +%s)
-            
-            # Validate battery level is numeric
-            if ! [[ "$current_level" =~ ^[0-9]+$ ]]; then
-                sleep "$CHECK_INTERVAL"
-                continue
+        # record time-to-full on first hit this charge cycle
+        if [[ "$status" == "Charging" || "$status" == "Full" ]]; then
+            if (( level >= 100 )) && [[ -z "$TIME_TO_FULL" ]] && (( CHARGE_START > 0 )); then
+                TIME_TO_FULL=$(format_duration $((now - CHARGE_START)))
             fi
-            
-            # Monitor charger state changes with debouncing
-            if [[ "$charging_status" != "$last_charger_state" ]]; then
-                if [[ $((current_time - last_charger_notification)) -gt "$DEBOUNCE_THRESHOLD" ]]; then
-                    local extra=""
-                    case "$charging_status" in
-                        Charging)
-                            if (( discharge_start > 0 )); then
-                                extra=$(format_duration $((current_time - discharge_start)))
-                            fi
-                            charge_start=$current_time
-                            time_to_full=""
-                            ;;
-                        Discharging)
-                            extra="$time_to_full"
-                            discharge_start=$current_time
-                            charge_start=0
-                            ;;
-                    esac
-                    send_charger_notification "$charging_status" "$current_level" "$extra"
-                    last_charger_notification=$current_time
-                    last_charger_state="$charging_status"
-                fi
-            fi
+        fi
 
-            # Record time-to-full when 100% first reached during this charge cycle
-            if [[ "$charging_status" == "Charging" || "$charging_status" == "Full" ]]; then
-                if (( current_level >= 100 )) && [[ -z "$time_to_full" ]] && (( charge_start > 0 )); then
-                    time_to_full=$(format_duration $((current_time - charge_start)))
-                fi
+        # threshold notifications
+        local icon
+        if [[ "$status" == "Discharging" ]]; then
+            icon=$(get_battery_icon "$level" "$status")
+
+            if (( level <= 5 )) && (( now - LAST_NOTIFIED_5 > THRESHOLD_COOLDOWN )); then
+                send_notification "battery-threshold" "critical" "$icon" "$level" \
+                    "Battery Critical" "Battery at ''${level}% - Plug in now!" 0
+                LAST_NOTIFIED_5=$now
+            elif (( level <= 10 )) && (( level > 5 )) && (( now - LAST_NOTIFIED_10 > THRESHOLD_COOLDOWN )); then
+                send_notification "battery-threshold" "critical" "$icon" "$level" \
+                    "Battery Low" "Battery at ''${level}% - Plug in immediately" 0
+                LAST_NOTIFIED_10=$now
+            elif (( level <= 20 )) && (( level > 10 )) && (( now - LAST_NOTIFIED_20 > THRESHOLD_COOLDOWN )); then
+                send_notification "battery-threshold" "normal" "$icon" "$level" \
+                    "Battery Low" "Battery at ''${level}% - Consider plugging in"
+                LAST_NOTIFIED_20=$now
             fi
-            
-            # Low battery notifications (only when discharging)
-            if [[ "$charging_status" == "Discharging" ]]; then
-                # 20% warning
-                if [[ $current_level -le 20 && $current_level -gt 10 ]] && \
-                   [[ $((current_time - last_notified_20)) -gt 300 ]]; then
-                    send_notification "normal" "battery-low" \
-                        "Battery at $current_level% - Consider plugging in charger"
-                    last_notified_20=$current_time
-                fi
-                
-                # 10% warning
-                if [[ $current_level -le 10 && $current_level -gt 5 ]] && \
-                   [[ $((current_time - last_notified_10)) -gt 300 ]]; then
-                    send_notification "critical" "battery-caution" \
-                        "Battery at $current_level% - Plug in charger immediately!"
-                    last_notified_10=$current_time
-                fi
-                
-                # 5% critical
-                if [[ $current_level -le 5 ]] && \
-                   [[ $((current_time - last_notified_5)) -gt 300 ]]; then
-                    send_notification "critical" "battery-empty" \
-                        "Battery at $current_level% - Critical! Plug in now!"
-                    last_notified_5=$current_time
-                fi
-                
-                # Reset full notification flag when discharging
-                has_notified_full=false
-                
-            # Full battery notification (only when charging and above 97%)
-            elif [[ "$charging_status" == "Charging" ]] || [[ "$charging_status" == "Full" ]]; then
-                # Notify once when battery reaches full, then reset flag when it drops below 95%
-                if [[ $current_level -ge 97 ]] && [[ "$has_notified_full" == "false" ]]; then
-                    send_notification "low" "battery-full-charged" \
-                        "Battery fully charged at $current_level% - Consider unplugging"
-                    has_notified_full=true
-                elif [[ $current_level -lt 95 ]]; then
-                    # Reset notification flag if battery drops below 95% (e.g., due to power drain)
-                    has_notified_full=false
-                fi
-                
-                # Reset low notifications when charging
-                last_notified_20=0
-                last_notified_10=0
-                last_notified_5=0
+            HAS_NOTIFIED_FULL=false
+
+        elif [[ "$status" == "Charging" || "$status" == "Full" ]]; then
+            if (( level >= 97 )) && [[ "$HAS_NOTIFIED_FULL" == "false" ]]; then
+                icon=$(get_battery_icon "$level" "Full")
+                send_notification "battery-threshold" "low" "$icon" "$level" \
+                    "Battery Charged" "Battery at ''${level}% - Consider unplugging"
+                HAS_NOTIFIED_FULL=true
+            elif (( level < 95 )); then
+                HAS_NOTIFIED_FULL=false
             fi
-            
-            sleep "$CHECK_INTERVAL"
-        done
+            LAST_NOTIFIED_20=0
+            LAST_NOTIFIED_10=0
+            LAST_NOTIFIED_5=0
+        fi
+
+        save_state
     }
 
-    # Start monitoring
+    # --- main ---
+    monitor_battery() {
+        load_state
+
+        # seed on first run
+        if [[ -z "$LAST_CHARGER_STATE" ]]; then
+            local p
+            p=$(get_battery_path) || { echo "No battery found" >&2; return 1; }
+            LAST_CHARGER_STATE=$(read_file "$p/status")
+            local now; now=$(date +%s)
+            case "$LAST_CHARGER_STATE" in
+                Discharging)    DISCHARGE_START=$now ;;
+                Charging|Full)  CHARGE_START=$now ;;
+            esac
+            save_state
+        fi
+
+        check_battery
+
+        if command -v ${pkgs.upower}/bin/upower >/dev/null 2>&1; then
+            # Event loop: upower emits a line on any power-state change.
+            # Add a safety timeout so we re-poll even when events are quiet.
+            while true; do
+                if ! timeout "$SAFETY_POLL_INTERVAL" ${pkgs.upower}/bin/upower --monitor 2>/dev/null | while read -r _; do
+                    check_battery
+                done; then
+                    : # timeout expired, re-enter loop
+                fi
+                check_battery
+            done
+        else
+            while true; do
+                sleep "$POLL_INTERVAL"
+                check_battery
+            done
+        fi
+    }
+
     monitor_battery
   '';
 in
 {
-  # Install the battery monitoring script
-  home.packages = [ batteryScript ];
+  home.packages = [ batteryScript pkgs.upower ];
 
-  # Create systemd user service for battery monitoring
   systemd.user.services.battery-monitor = {
     Unit = {
       Description = "Battery Level Monitor with Notifications";
@@ -252,6 +286,5 @@ in
     };
   };
 
-  # Ensure the service starts with the graphical session
   systemd.user.startServices = true;
 }
