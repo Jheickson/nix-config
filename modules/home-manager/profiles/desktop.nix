@@ -14,7 +14,7 @@
     ../desktop/window-managers/niri
     
     # Window manager additions
-    ../desktop/bars/polybar/polybar.nix
+    # ../desktop/bars/polybar/polybar.nix
     # ../desktop/bars/waybar/waybar.nix
     
     # Launchers
