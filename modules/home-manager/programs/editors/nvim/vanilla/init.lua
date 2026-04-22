@@ -39,16 +39,34 @@ vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal' })
 -- Save with Ctrl+S (VSCode muscle memory)
 vim.keymap.set({ 'n', 'i', 'v' }, '<C-s>', '<cmd>w<CR><Esc>', { desc = 'Save file' })
 
--- Close buffer (like Ctrl+W in VSCode) — <C-w> prefix shadowed intentionally, splits use <C-h/j/k/l>
-vim.keymap.set('n', '<C-w>', '<cmd>bd<CR>', { desc = 'Close buffer' })
-vim.keymap.set('n', '<leader>bd', '<cmd>bd<CR>', { desc = 'Close buffer' })
-vim.keymap.set('n', '<leader>bD', '<cmd>bd!<CR>', { desc = 'Force close buffer' })
+-- Close buffer (VSCode <C-w>) — keeps window, jumps to prev buffer first
+local function close_buffer(force)
+  local cur = vim.api.nvim_get_current_buf()
+  local listed = vim.tbl_filter(function(b)
+    return vim.api.nvim_buf_is_valid(b) and vim.bo[b].buflisted
+  end, vim.api.nvim_list_bufs())
+  -- Terminal buffers have running jobs — always force
+  local bang = (force or vim.bo[cur].buftype == 'terminal') and '!' or ''
+  if #listed > 1 then vim.cmd('bprevious') end
+  vim.cmd('bdelete' .. bang .. ' ' .. cur)
+end
+vim.keymap.set('n', '<C-w>', function() close_buffer(false) end, { desc = 'Close buffer' })
+vim.keymap.set('n', '<leader>bd', function() close_buffer(false) end, { desc = 'Close buffer' })
+vim.keymap.set('n', '<leader>bD', function() close_buffer(true)  end, { desc = 'Force close buffer' })
 
--- Switch buffers (Ctrl+Tab like VSCode)
-vim.keymap.set('n', '<C-Tab>', '<cmd>bnext<CR>', { desc = 'Next buffer' })
-vim.keymap.set('n', '<C-S-Tab>', '<cmd>bprev<CR>', { desc = 'Previous buffer' })
-vim.keymap.set('n', '<S-h>', '<cmd>bprev<CR>', { desc = 'Previous buffer' })
-vim.keymap.set('n', '<S-l>', '<cmd>bnext<CR>', { desc = 'Next buffer' })
+-- Window management (since <C-w> is now close-buffer)
+vim.keymap.set('n', '<leader>-',  '<cmd>split<CR>',  { desc = 'Split horizontal' })
+vim.keymap.set('n', '<leader>\\', '<cmd>vsplit<CR>', { desc = 'Split vertical' })
+vim.keymap.set('n', '<leader>wq', '<C-w>q',          { desc = 'Close window' })
+vim.keymap.set('n', '<leader>wo', '<C-w>o',          { desc = 'Only this window' })
+vim.keymap.set('n', '<leader>w=', '<C-w>=',          { desc = 'Equalize windows' })
+vim.keymap.set('n', '<leader>wr', '<C-w>r',          { desc = 'Rotate windows' })
+
+-- Switch buffers (Tab cycles; <S-h>/<S-l> as vim-native alt)
+vim.keymap.set('n', '<Tab>',   '<cmd>bnext<CR>', { desc = 'Next buffer' })
+vim.keymap.set('n', '<S-Tab>', '<cmd>bprev<CR>', { desc = 'Previous buffer' })
+vim.keymap.set('n', '<S-h>',   '<cmd>bprev<CR>', { desc = 'Previous buffer' })
+vim.keymap.set('n', '<S-l>',   '<cmd>bnext<CR>', { desc = 'Next buffer' })
 
 -- Window navigation (panes, like Ctrl+1/2/3 in VSCode)
 vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move to left window' })
@@ -81,7 +99,7 @@ vim.keymap.set('n', '<leader>Q', '<cmd>qa<CR>', { desc = 'Quit all' })
 
 -- Format now (manual trigger on top of format-on-save)
 vim.keymap.set('n', '<leader>lf', function()
-  vim.lsp.buf.format({ async = true })
+  require('conform').format({ async = true, lsp_format = 'fallback' })
 end, { desc = 'Format file' })
 
 -- Toggle terminal (like Ctrl+` in VSCode)
@@ -180,7 +198,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
     map('gI', vim.lsp.buf.implementation, 'Implementation')
     -- Info (like hovering in VSCode)
     map('K', vim.lsp.buf.hover, 'Hover docs')
-    map('<C-k>', vim.lsp.buf.signature_help, 'Signature help')
+    vim.keymap.set('i', '<C-s>', vim.lsp.buf.signature_help,
+      { buffer = event.buf, desc = 'LSP: Signature help' })
     -- Actions (like right-click menu in VSCode)
     map('<leader>rn', vim.lsp.buf.rename, 'Rename symbol')
     map('<leader>ca', vim.lsp.buf.code_action, 'Code action')
@@ -198,15 +217,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
       )
     end, 'Toggle inlay hints')
 
-    -- Format on save
-    if client and client:supports_method('textDocument/formatting') then
-      vim.api.nvim_create_autocmd('BufWritePre', {
-        buffer = event.buf,
-        callback = function()
-          vim.lsp.buf.format({ bufnr = event.buf, id = client.id })
-        end,
-      })
-    end
   end,
 })
 
@@ -218,7 +228,39 @@ vim.pack.add({
   'https://github.com/nvim-mini/mini.nvim',
   'https://github.com/Saghen/blink.cmp',
   'https://github.com/rmagatti/auto-session',
+  'https://github.com/stevearc/conform.nvim',
 })
+
+-- Format on save via conform.nvim — explicit formatter per filetype,
+-- bypass via :FormatDisable (buffer: !), re-enable via :FormatEnable
+require('conform').setup({
+  formatters_by_ft = {
+    lua = { 'stylua' },
+    nix = { 'alejandra' },
+    rust = { 'rustfmt' },
+    javascript      = { 'prettierd', 'prettier', stop_after_first = true },
+    javascriptreact = { 'prettierd', 'prettier', stop_after_first = true },
+    typescript      = { 'prettierd', 'prettier', stop_after_first = true },
+    typescriptreact = { 'prettierd', 'prettier', stop_after_first = true },
+    json     = { 'prettierd', 'prettier', stop_after_first = true },
+    jsonc    = { 'prettierd', 'prettier', stop_after_first = true },
+    css      = { 'prettierd', 'prettier', stop_after_first = true },
+    html     = { 'prettierd', 'prettier', stop_after_first = true },
+    markdown = { 'prettierd', 'prettier', stop_after_first = true },
+    yaml     = { 'prettierd', 'prettier', stop_after_first = true },
+  },
+  format_on_save = function(bufnr)
+    if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then return end
+    return { timeout_ms = 2000, lsp_format = 'fallback' }
+  end,
+})
+vim.api.nvim_create_user_command('FormatDisable', function(args)
+  if args.bang then vim.b.disable_autoformat = true else vim.g.disable_autoformat = true end
+end, { bang = true, desc = 'Disable autoformat (! = buffer-local)' })
+vim.api.nvim_create_user_command('FormatEnable', function()
+  vim.b.disable_autoformat = false
+  vim.g.disable_autoformat = false
+end, { desc = 'Re-enable autoformat' })
 
 pcall(function()
   require('blink.cmp').setup({
@@ -445,6 +487,7 @@ clue.setup({
     { mode = 'n', keys = '<leader>t', desc = '+toggle' },
     { mode = 'n', keys = '<leader>l', desc = '+lsp' },
     { mode = 'n', keys = '<leader>s', desc = '+session' },
+    { mode = 'n', keys = '<leader>w', desc = '+window' },
   },
 })
 
@@ -454,7 +497,7 @@ clue.setup({
 pcall(function()
   require('auto-session').setup({
     auto_save = true,
-    auto_restore = true,
+    auto_restore = false, -- starter screen picks session; see <leader>ss
     suppressed_dirs = { '~/', '~/Downloads', '/' },
   })
   local function session_dir()

@@ -14,6 +14,17 @@
     typescript-language-server
     lazygit
     nodejs
+
+    # Formatters (used by conform.nvim)
+    prettierd
+
+    # Treesitter auto_install deps (CLI + C compiler for parser builds)
+    tree-sitter
+    gcc
+
+    # System clipboard providers (Wayland + X11 fallback)
+    wl-clipboard
+    xclip
   ];
 
   home.shellAliases = {
