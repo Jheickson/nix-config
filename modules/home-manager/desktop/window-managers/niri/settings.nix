@@ -150,9 +150,9 @@ in
         focus-ring = {
           enable = true;
           width = 2;
-          active.color = "#${config.lib.stylix.colors.base0D}50";
+          active.color = "#${config.lib.stylix.colors.base0E}";
           inactive.color = "#${config.lib.stylix.colors.base03}30";
-          urgent.color = "#${config.lib.stylix.colors.base08}50";
+          urgent.color = "#${config.lib.stylix.colors.base08}";
         };
         border = {
           enable = false;
