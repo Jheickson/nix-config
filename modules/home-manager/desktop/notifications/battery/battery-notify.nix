@@ -55,30 +55,45 @@ let
             -t "$NOTIFICATION_TIMEOUT"
     }
 
+    # Format seconds as "Xh Ym" (or "Ym Ss" under 1m)
+    format_duration() {
+        local seconds="$1"
+        if (( seconds < 60 )); then
+            echo "''${seconds}s"
+        elif (( seconds < 3600 )); then
+            printf '%dm %ds' $((seconds / 60)) $((seconds % 60))
+        else
+            printf '%dh %dm' $((seconds / 3600)) $(((seconds % 3600) / 60))
+        fi
+    }
+
     # Send charger-specific notification
     send_charger_notification() {
         local event="$1"
         local battery_level="$2"
-        
+        local extra="$3"
+
         local icon=""
         local message=""
         local urgency="low"
-        
+
         case "$event" in
             Charging)
                 icon="battery-full-charged"
                 message="Charger connected - Battery charging at $battery_level%"
+                [[ -n "$extra" ]] && message="$message"$'\n'"Went $extra without a charge"
                 ;;
             Discharging)
                 icon="battery-caution"
                 message="Charger disconnected - Battery discharging at $battery_level%"
                 urgency="normal"
+                [[ -n "$extra" ]] && message="$message"$'\n'"Took $extra to reach 100%"
                 ;;
             *)
                 return 0
                 ;;
         esac
-        
+
         send_notification "$urgency" "$icon" "$message"
     }
 
@@ -94,7 +109,24 @@ let
         local has_notified_full=false
         local last_charger_state=""
         local last_charger_notification=0
-        
+
+        # Charger session timing
+        local discharge_start=0
+        local charge_start=0
+        local time_to_full=""   # formatted duration, empty until 100% reached this cycle
+
+        # Seed initial state so first connect/disconnect has a reference
+        local initial_status
+        initial_status=$(get_charging_status "$battery_path")
+        local now_init
+        now_init=$(date +%s)
+        if [[ "$initial_status" == "Discharging" ]]; then
+            discharge_start=$now_init
+        elif [[ "$initial_status" == "Charging" || "$initial_status" == "Full" ]]; then
+            charge_start=$now_init
+        fi
+        last_charger_state="$initial_status"
+
         while true; do
             local current_level
             local charging_status
@@ -113,9 +145,31 @@ let
             # Monitor charger state changes with debouncing
             if [[ "$charging_status" != "$last_charger_state" ]]; then
                 if [[ $((current_time - last_charger_notification)) -gt "$DEBOUNCE_THRESHOLD" ]]; then
-                    send_charger_notification "$charging_status" "$current_level"
+                    local extra=""
+                    case "$charging_status" in
+                        Charging)
+                            if (( discharge_start > 0 )); then
+                                extra=$(format_duration $((current_time - discharge_start)))
+                            fi
+                            charge_start=$current_time
+                            time_to_full=""
+                            ;;
+                        Discharging)
+                            extra="$time_to_full"
+                            discharge_start=$current_time
+                            charge_start=0
+                            ;;
+                    esac
+                    send_charger_notification "$charging_status" "$current_level" "$extra"
                     last_charger_notification=$current_time
                     last_charger_state="$charging_status"
+                fi
+            fi
+
+            # Record time-to-full when 100% first reached during this charge cycle
+            if [[ "$charging_status" == "Charging" || "$charging_status" == "Full" ]]; then
+                if (( current_level >= 100 )) && [[ -z "$time_to_full" ]] && (( charge_start > 0 )); then
+                    time_to_full=$(format_duration $((current_time - charge_start)))
                 fi
             fi
             
