@@ -65,6 +65,7 @@ in
       chromium
       # discord
       # electron-mail
+      evince
       ferdium
       libreoffice
       nautilus
