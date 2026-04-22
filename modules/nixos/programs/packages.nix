@@ -48,6 +48,7 @@ in
       python313
       python313Packages.pip
       ruby
+      supabase-cli
       # sqlite
       # sqlitebrowser
       # yarn
