@@ -117,6 +117,9 @@
         # Show nix system information
         nix-info = "nh os info";
 
+        # Inspect nix store / system bloat (top packages by size)
+        nbloat = "${flakeDir}/scripts/nix-bloat.sh";
+
         # ===== GIT COMMANDS =====
         # Quick status
         gst = "git status";
