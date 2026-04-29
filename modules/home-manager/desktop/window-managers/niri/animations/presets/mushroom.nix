@@ -38,7 +38,7 @@
                 scale = 0.5;
             }
 
-            vec2 uv = scaleUV(coords_geo.xy, vec2(0.5), vec2(scale));
+            vec2 uv = scaleUV( (niri_geo_to_tex * coords_geo).xy , vec2(0.5), vec2(scale));
 
             //return color 
             return texture2D(niri_tex, uv);
@@ -85,7 +85,7 @@
                 scale = 0.5;
             }
 
-            vec2 uv = scaleUV(coords_geo.xy, vec2(0.5), vec2(scale));
+            vec2 uv = scaleUV( (niri_geo_to_tex * coords_geo).xy , vec2(0.5), vec2(scale));
 
             //return color 
             return texture2D(niri_tex, uv);

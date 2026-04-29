@@ -87,7 +87,8 @@ float centerGradient(float x) {
 }
 
 vec4 open_color(vec3 coords_geo, vec3 size_geo) {
-    vec2 uv = coords_geo.xy;
+    
+    vec2 uv = (niri_geo_to_tex * coords_geo).xy;
 
     if (uv.x < 0.0 || uv.x > 1.0 || uv.y < 0.0 || uv.y > 1.0) {
         return vec4(0.0);
@@ -224,7 +225,7 @@ vec4 close_color(vec3 coords_geo, vec3 size_geo) {
         return vec4(0.0);
     }
 
-    vec2 uv = coords_geo.xy;
+    vec2 uv = (niri_geo_to_tex * coords_geo).xy;
 
     if (uv.x < 0.0 || uv.x > 1.0 || uv.y < 0.0 || uv.y > 1.0) {
         return vec4(0.0);
@@ -348,7 +349,8 @@ vec4 resize_color(vec3 coords_geo, vec3 size_geo) {
 
     float alpha = length(color) * 1.2;
 
-    vec4 wColor = texture2D(niri_tex_next, (coords_geo * niri_geo_to_tex_next).st );
+    vec3 coords_tex_next = niri_geo_to_tex_next * coords_geo;
+    vec4 wColor = texture2D(niri_tex_next, coords_tex_next.st );
 
     return mix(wColor, color, pulse * 0.5);
 

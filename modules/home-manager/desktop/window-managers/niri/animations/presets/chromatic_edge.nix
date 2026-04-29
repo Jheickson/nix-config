@@ -81,7 +81,8 @@ vec4 open_color(vec3 coords_geo, vec3 size_geo) {
     uv = mix(tuv, uv, easeOutExpo(progress) * uAspectMix);
 
     // Base window texture
-    vec4 oColor = texture2D(niri_tex, coords_geo.st);
+    vec3 coords_tex = niri_geo_to_tex * coords_geo;
+    vec4 oColor = texture2D(niri_tex, coords_tex.st);
 
     // Distance from center (diamond shape)
     vec2 centerUV = abs(uv * 2.0 - vec2(1.0));
@@ -213,7 +214,8 @@ vec4 close_color(vec3 coords_geo, vec3 size_geo) {
     uv = mix(tuv, uv, easeOutExpo(progress) * uAspectMix);
 
     // Base window texture
-    vec4 oColor = texture2D(niri_tex, coords_geo.st);
+    vec3 coords_tex = niri_geo_to_tex * coords_geo;
+    vec4 oColor = texture2D(niri_tex, coords_tex.st);
 
     // Distance from center (diamond shape)
     vec2 centerUV = abs(uv * 2.0 - vec2(1.0));
@@ -356,7 +358,8 @@ vec4 resize_color(vec3 coords_geo, vec3 size_geo) {
     vec2 uv = coords_geo.xy;
 
     // Base window texture
-    vec4 oColor = texture2D(niri_tex_next, coords_geo.st );
+    vec3 coords_tex_next = niri_geo_to_tex_next * coords_geo;
+    vec4 oColor = texture2D(niri_tex_next, coords_tex_next.st );
 
 
     // ==============================
