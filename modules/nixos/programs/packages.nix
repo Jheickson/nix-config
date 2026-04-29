@@ -147,6 +147,7 @@ in
       # === CLI TOOLS ===
       cbonsai
       cowsay
+      drift
       fastfetch
       fd
       hello
