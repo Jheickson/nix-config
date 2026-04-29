@@ -93,7 +93,7 @@
       "Mod+1".action = set-column-width "25%";
       "Mod+2".action = set-column-width "50%";
       "Mod+3".action = set-column-width "75%";
-      "Mod+4".action = set-column-width "100%";
+      "Mod+4".action = set-column-width "90%";
       # Window height presets
       "Mod+Ctrl+1".action = set-window-height "25%";
       "Mod+Ctrl+2".action = set-window-height "50%";
