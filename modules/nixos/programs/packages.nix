@@ -63,12 +63,14 @@ in
       # === DESKTOP APPLICATIONS ===
       anki
       calibre
-      chromium
+      # chromium
       # discord
       # electron-mail
       evince
       ferdium
-      libreoffice
+      # libreoffice
+      gnumeric
+      abiword
       nautilus
       scanmem
       # slack
@@ -83,9 +85,9 @@ in
 
       # === MEDIA & ENTERTAINMENT ===
       feishin
-      supersonic-wayland
-      tauon
-      heroic
+      # supersonic-wayland
+      # tauon
+      # heroic
       mediaelch
       ncmpcpp
       obs-studio
