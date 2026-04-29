@@ -22,6 +22,8 @@ const float tau = 6.28318530718;
 // Number of directions for sampling around the circle.
 const float directions = 11.0;
 
+vec3 coords_tex = niri_geo_to_tex * coords_geo;
+
 // Outer loop iterates over multiple directions evenly spaced around a circle.
 for (float d = 0.0; d < tau; d += tau / directions) {
     // Inner loop samples along each direction, with decreasing intensity.
@@ -31,7 +33,7 @@ for (float d = 0.0; d < tau; d += tau / directions) {
         vec2 offset = vec2(cos(d), sin(d)) * radius * (1.0 - s) / coords_geo.xy;
 
         // Add the sampled color at the offset position to the accumulator.
-        outColor += texture2D(niri_tex, coords_geo.st + offset);
+        outColor += texture2D(niri_tex, coords_tex.st + offset);
     }
 }
 
@@ -66,6 +68,8 @@ const float tau = 6.28318530718;
 // Number of directions for sampling around the circle.
 const float directions = 11.0;
 
+vec3 coords_tex = niri_geo_to_tex * coords_geo;
+
 // Outer loop iterates over multiple directions evenly spaced around a circle.
 for (float d = 0.0; d < tau; d += tau / directions) {
     // Inner loop samples along each direction, with decreasing intensity.
@@ -75,7 +79,7 @@ for (float d = 0.0; d < tau; d += tau / directions) {
         vec2 offset = vec2(cos(d), sin(d)) * radius * (1.0 - s) / coords_geo.xy;
 
         // Add the sampled color at the offset position to the accumulator.
-        outColor += texture2D(niri_tex, coords_geo.st + offset);
+        outColor += texture2D(niri_tex, coords_tex.st + offset);
     }
 }
 
@@ -115,6 +119,8 @@ const float tau = 6.28318530718;
 
 // Number of directions for sampling around the circle.
 const float directions = 11.0;
+
+
 
 // Outer loop iterates over multiple directions evenly spaced around a circle.
 for (float d = 0.0; d < tau; d += tau / directions) {
