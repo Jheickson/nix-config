@@ -197,7 +197,7 @@ in
         # "never": no special centering, focusing an off-screen column will scroll it to the left or right edge of the screen. This is the default.
         # "always", the focused column will always be centered.
         # "on-overflow", focusing a column will center it if it doesn't fit on screen together with the previously focused column.
-        center-focused-column = "never";
+        center-focused-column = "always";
 
         empty-workspace-above-first = true;
         always-center-single-column = true;
