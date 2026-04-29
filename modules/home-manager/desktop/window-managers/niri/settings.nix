@@ -148,7 +148,7 @@ in
       };
       layout = {
         focus-ring = {
-          enable = false;
+          enable = true;
           width = 2;
           active.color = "#${config.lib.stylix.colors.base0E}";
           inactive.color = "#${config.lib.stylix.colors.base03}30";
