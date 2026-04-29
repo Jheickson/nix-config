@@ -18,6 +18,17 @@ let
             xray false
         }
     }
+
+    // Noctalia bar/dock/launcher: force regular blur instead of default xray.
+    // Noctalia opts into blur via ext-background-effect; we just override xray.
+    // https://docs.noctalia.dev/v4/getting-started/compositor-settings/niri/
+    layer-rule {
+        match namespace="^noctalia-(background|launcher-overlay|dock)-.*$"
+
+        background-effect {
+            xray false
+        }
+    }
   '';
 in
 {
