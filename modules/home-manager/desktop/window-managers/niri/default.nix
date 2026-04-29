@@ -9,6 +9,7 @@
     ./settings.nix
     ./binds.nix
     ./rules.nix
+    ./blur.nix
     #./swayidle.nix
   ];
 
