@@ -4,23 +4,27 @@ let
   windowRules = [
 
     # ── Global ────────────────────────────────────────────────────────────────
+    # {
+    #   geometry-corner-radius =
+    #     let
+    #       radius = 8.0;
+    #     in
+    #     {
+    #       bottom-left = radius;
+    #       bottom-right = radius;
+    #       top-left = radius;
+    #       top-right = radius;
+    #     };
+    #   clip-to-geometry = true;
+    #   draw-border-with-background = false;
+    # }
+    # {
+    #   matches = [ { is-floating = true; } ];
+    #   shadow.enable = true;
+    # }
     {
-      geometry-corner-radius =
-        let
-          radius = 8.0;
-        in
-        {
-          bottom-left = radius;
-          bottom-right = radius;
-          top-left = radius;
-          top-right = radius;
-        };
       clip-to-geometry = true;
       draw-border-with-background = false;
-    }
-    {
-      matches = [ { is-floating = true; } ];
-      shadow.enable = true;
     }
 
     # ── Screencast target indicator ───────────────────────────────────────────

@@ -148,7 +148,7 @@ in
       };
       layout = {
         focus-ring = {
-          enable = true;
+          enable = false;
           width = 2;
           active.color = "#${config.lib.stylix.colors.base0E}";
           inactive.color = "#${config.lib.stylix.colors.base03}30";
@@ -186,7 +186,7 @@ in
           hide-when-single-tab = true;
           place-within-column = true;
           position = "left";
-          corner-radius = 20.0;
+          corner-radius = 0.0;
           gap = -12.0;
           gaps-between-tabs = 10.0;
           width = 4.0;
