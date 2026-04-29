@@ -106,10 +106,13 @@
 
         # ===== MAINTENANCE & CLEANUP (nh) =====
         # Garbage collect unused nix store paths
-        ngc = "nh clean";
+        ngc = "nh clean all";
 
         # Garbage collect with dry-run (show what would be deleted)
-        ngcd = "nh clean --dry-run";
+        ngcd = "nh clean all --dry";
+
+        # Garbage collect current user's profiles only
+        ngcu = "nh clean user";
 
         # Check flake for issues
         flake-check = "nh check";
