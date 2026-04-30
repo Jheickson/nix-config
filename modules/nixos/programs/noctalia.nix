@@ -6,13 +6,9 @@
     inputs.noctalia.nixosModules.default
   ];
 
-  # Enable Noctalia shell systemd service
-  services.noctalia-shell = {
-    enable = true;
-    # For Niri, graphical-session.target works out of the box
-    # Uncomment and customize if using a different compositor:
-    # target = "my-hyprland-session.target";
-  };
+  # Noctalia systemd startup is deprecated upstream (delayed shell + flaky IPC).
+  # Spawn happens via niri `spawn-at-startup` in home-manager instead.
+  services.noctalia-shell.enable = false;
 
   # Enable required services for Noctalia features
   hardware.bluetooth = {

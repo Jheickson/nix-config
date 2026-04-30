@@ -10,8 +10,8 @@
   programs.noctalia-shell = {
     enable = true;
     
-    # Enable systemd service (starts automatically with your session)
-    systemd.enable = true;
+    # Systemd startup is deprecated upstream; spawn via niri spawn-at-startup instead.
+    systemd.enable = false;
 
     # Use your custom settings from the JSON file
     # To update: modify the bar through the GUI, then copy settings and update the JSON file
