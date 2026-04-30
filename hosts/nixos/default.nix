@@ -280,6 +280,9 @@
   # ============================================================================
   # Documentation & Help
   documentation.enable = false;
+  # Skip building NixOS option docs (options.json). Avoids the upstream
+  # "builtins.derivation ... without a proper context" warning and saves eval time.
+  documentation.nixos.enable = false;
 
   # ============================================================================
   # FIREWALL & SSH

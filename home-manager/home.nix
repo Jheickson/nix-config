@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 
 {
 
@@ -10,6 +10,14 @@
   nixpkgs = {
     config.allowUnfreePredicate = pkg: true;
   };
+
+  # Preserve legacy GTK4 theme behavior (default flipped to null in HM 26.05).
+  # Stylix manages config.gtk.theme; mirror it for GTK4 explicitly.
+  gtk.gtk4.theme = config.gtk.theme;
+
+  # Skip building HM option manpages. Avoids the upstream
+  # "builtins.derivation ... without a proper context" warning on options.json.
+  manual.manpages.enable = false;
 
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
