@@ -1,16 +1,9 @@
-{ pkgs, inputs, ... }:
+{ ... }:
 
 {
-  # Import the Noctalia NixOS module
-  imports = [
-    inputs.noctalia.nixosModules.default
-  ];
+  # Noctalia is managed entirely in home-manager (programs.noctalia-shell)
+  # so `hms` reloads it. Only system-level deps live here.
 
-  # Noctalia systemd startup is deprecated upstream (delayed shell + flaky IPC).
-  # Spawn happens via niri `spawn-at-startup` in home-manager instead.
-  services.noctalia-shell.enable = false;
-
-  # Enable required services for Noctalia features
   hardware.bluetooth = {
     enable = true;
     powerOnBoot = true;
