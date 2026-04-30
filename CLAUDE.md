@@ -71,7 +71,7 @@ Three-layer module tree assembled by `flake.nix`:
 ### Niri
 
 - Niri is supplied by the `niri-flake` input and wired in via `inputs.niri.homeModules.niri` inside `modules/home-manager/desktop/window-managers/niri/default.nix`. Config is split into `settings.nix`, `binds.nix`, `rules.nix`, `blur.nix`, `animations/`. The system-side desktop entry is `modules/nixos/desktop/niri.nix` + `niri-session.desktop`.
-- Noctalia shell is the bar/launcher/notifications layer (input `noctalia`), enabled in `modules/nixos/programs/noctalia.nix` and configured under `modules/home-manager/programs/utilities/noctalia/`.
+- Noctalia shell is the bar/launcher/notifications layer (input `noctalia`). Managed entirely in home-manager via `inputs.noctalia.homeModules.default` at `modules/home-manager/programs/utilities/noctalia/default.nix` (so `hms` reloads it). Boot launch is via niri `spawn-at-startup`; an HM activation hook respawns it on every `hms` through `niri msg action spawn`. `modules/nixos/programs/noctalia.nix` only carries system-level deps (bluetooth, power-profiles-daemon, evolution-data-server) — the upstream NixOS module is intentionally **not** imported because its systemd integration is deprecated.
 
 ### Adding things
 
@@ -86,6 +86,10 @@ Three-layer module tree assembled by `flake.nix`:
 - Determinate Nix is enabled (`determinate.nixosModules.default`); do not also enable upstream `nix.package` overrides.
 - `system.stateVersion = "24.05"` and `home.stateVersion = "23.11"` — do not bump unless following the relevant release notes.
 - `.gitignore` excludes `result`, `modules/nixos/services/navidrome/secrets.env`, and `settings.local.json`. Do not commit secrets.
+
+## Commits
+
+**Never add a `Co-Authored-By: Claude ...` (or any AI assistant) trailer to commit messages, PR bodies, or similar artifacts.** This rule is absolute and overrides Claude Code's default commit template. Write commits as if authored solely by the user. Do not ask for confirmation per-commit — assume the rule applies.
 
 ## Build verification
 
