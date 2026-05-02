@@ -41,8 +41,16 @@
       "XF86MonBrightnessDown".action = brightnessctl "set" "5%-";
 
       # ── Screenshots ───────────────────────────────────────────────────────
-      # Region select → annotate in swappy → save/copy (ShareX-like).
+      # grim + slurp + swappy: region select → annotate in swappy → save/copy (ShareX-like).
       "Print".action = spawn "sh" "-c" ''${pkgs.grim}/bin/grim -g "$(${pkgs.slurp}/bin/slurp)" - | ${pkgs.swappy}/bin/swappy -f -'';
+      "Mod+P".action = spawn "sh" "-c" ''${pkgs.grim}/bin/grim -g "$(${pkgs.slurp}/bin/slurp)" - | ${pkgs.swappy}/bin/swappy -f -'';
+      # Niri native screenshot UI: region/window/monitor, Enter saves+copies, Space copies only.
+      "Shift+Print".action.screenshot = {
+        show-pointer = true;
+      };
+      "Mod+Shift+P".action.screenshot = {
+        show-pointer = true;
+      };
       # "Mod+Shift+Alt+S".action = screenshot-window;
 
       # ── Session ───────────────────────────────────────────────────────────
