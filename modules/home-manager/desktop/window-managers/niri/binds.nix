@@ -41,9 +41,8 @@
       "XF86MonBrightnessDown".action = brightnessctl "set" "5%-";
 
       # ── Screenshots ───────────────────────────────────────────────────────
-      "Print".action.screenshot-screen = {
-        write-to-disk = true;
-      };
+      # Region select → annotate in swappy → save/copy (ShareX-like).
+      "Print".action = spawn "sh" "-c" ''${pkgs.grim}/bin/grim -g "$(${pkgs.slurp}/bin/slurp)" - | ${pkgs.swappy}/bin/swappy -f -'';
       # "Mod+Shift+Alt+S".action = screenshot-window;
 
       # ── Session ───────────────────────────────────────────────────────────
