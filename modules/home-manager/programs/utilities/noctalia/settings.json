@@ -2,7 +2,7 @@
   "settingsVersion": 57,
   "bar": {
     "barType": "simple",
-    "position": "top",
+    "position": "bottom",
     "monitors": [],
     "density": "mini",
     "showOutline": false,
@@ -68,7 +68,7 @@
           "showAlbumArt": true,
           "showArtistFirst": false,
           "showProgressRing": true,
-          "showVisualizer": true,
+          "showVisualizer": false,
           "textColor": "tertiary",
           "useFixedWidth": false,
           "visualizerType": "linear"
@@ -390,7 +390,7 @@
         "id": "weather-card"
       },
       {
-        "enabled": true,
+        "enabled": false,
         "id": "media-sysmon-card"
       }
     ]
@@ -642,7 +642,7 @@
     "customCommands": "[]"
   },
   "desktopWidgets": {
-    "enabled": true,
+    "enabled": false,
     "overviewEnabled": true,
     "gridSnap": true,
     "gridSnapScale": false,
