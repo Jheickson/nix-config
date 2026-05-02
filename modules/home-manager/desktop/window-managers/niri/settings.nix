@@ -84,10 +84,13 @@ in
       ];
       input = {
 
-        keyboard.xkb = {
-          layout = "us,us";
-          variant = "colemak_dh_wide,";
-          options = "grp:alt_shift_toggle,caps:backspace,backspace:caps";
+        keyboard = {
+          numlock = true;
+          xkb = {
+            layout = "us,us";
+            variant = "colemak_dh_wide,";
+            options = "grp:alt_shift_toggle,caps:backspace,backspace:caps";
+          };
         };
 
         touchpad = {
