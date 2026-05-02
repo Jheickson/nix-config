@@ -35,6 +35,25 @@
           "id": "Clock",
           "tooltipFormat": "HH:mm ddd dd/MM/yyyy",
           "useCustomFont": false
+        },
+        {
+          "defaultSettings": {
+            "colorHistory": [],
+            "detectedCompositor": "",
+            "detectedRecorder": "",
+            "filenameFormat": "",
+            "installedLangs": ["eng"],
+            "paletteColors": [],
+            "screenshotPath": "",
+            "selectedOcrLang": "eng",
+            "transAvailable": false,
+            "videoPath": ""
+          },
+          "id": "plugin:screen-toolkit"
+        },
+        {
+          "defaultSettings": {},
+          "id": "plugin:kde-connect"
         }
       ],
       "center": [
@@ -72,6 +91,18 @@
       ],
       "right": [
         {
+          "defaultSettings": {
+            "adaptScrollSpeed": true,
+            "fontSize": 10,
+            "hideWhenEmpty": true,
+            "scrollMode": "always",
+            "scrollSpeed": 70,
+            "verticalRotationDirection": "auto",
+            "widgetWidth": 300
+          },
+          "id": "plugin:lyrics-fetch"
+        },
+        {
           "deviceNativePath": "__default__",
           "displayMode": "graphic",
           "hideIfIdle": true,
@@ -88,6 +119,18 @@
           "id": "Battery",
           "showNoctaliaPerformance": false,
           "showPowerProfiles": false
+        },
+        {
+          "defaultSettings": {
+            "autoMount": false,
+            "fileBrowser": "yazi",
+            "hideWhenEmpty": false,
+            "iconColor": "none",
+            "showBadge": false,
+            "showNotifications": true,
+            "terminalCommand": "kitty"
+          },
+          "id": "plugin:usb-drive-manager"
         },
         {
           "displayMode": "onhover",
