@@ -38,22 +38,15 @@
         },
         {
           "defaultSettings": {
-            "colorHistory": [],
-            "detectedCompositor": "",
-            "detectedRecorder": "",
-            "filenameFormat": "",
-            "installedLangs": ["eng"],
-            "paletteColors": [],
-            "screenshotPath": "",
-            "selectedOcrLang": "eng",
-            "transAvailable": false,
-            "videoPath": ""
+            "adaptScrollSpeed": true,
+            "fontSize": 10,
+            "hideWhenEmpty": true,
+            "scrollMode": "always",
+            "scrollSpeed": 70,
+            "verticalRotationDirection": "auto",
+            "widgetWidth": 300
           },
-          "id": "plugin:screen-toolkit"
-        },
-        {
-          "defaultSettings": {},
-          "id": "plugin:kde-connect"
+          "id": "plugin:lyrics-fetch"
         }
       ],
       "center": [
@@ -90,18 +83,6 @@
         }
       ],
       "right": [
-        {
-          "defaultSettings": {
-            "adaptScrollSpeed": true,
-            "fontSize": 10,
-            "hideWhenEmpty": true,
-            "scrollMode": "always",
-            "scrollSpeed": 70,
-            "verticalRotationDirection": "auto",
-            "widgetWidth": 300
-          },
-          "id": "plugin:lyrics-fetch"
-        },
         {
           "deviceNativePath": "__default__",
           "displayMode": "graphic",
@@ -351,6 +332,10 @@
         },
         {
           "id": "NoctaliaPerformance"
+        },
+        {
+          "defaultSettings": {},
+          "id": "plugin:kde-connect"
         }
       ],
       "right": [
@@ -365,6 +350,21 @@
         },
         {
           "id": "NightLight"
+        },
+        {
+          "defaultSettings": {
+            "colorHistory": [],
+            "detectedCompositor": "",
+            "detectedRecorder": "",
+            "filenameFormat": "",
+            "installedLangs": ["eng"],
+            "paletteColors": [],
+            "screenshotPath": "",
+            "selectedOcrLang": "eng",
+            "transAvailable": false,
+            "videoPath": ""
+          },
+          "id": "plugin:screen-toolkit"
         }
       ]
     },
