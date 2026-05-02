@@ -46,18 +46,28 @@
           "id": "plugin:privacy-indicator"
         },
         {
-          "colorName": "tertiary",
-          "hideWhenIdle": true,
-          "id": "AudioVisualizer",
-          "width": 250
+          "compactMode": false,
+          "hideMode": "hidden",
+          "hideWhenIdle": false,
+          "id": "MediaMini",
+          "maxWidth": 300,
+          "panelShowAlbumArt": true,
+          "scrollingMode": "always",
+          "showAlbumArt": true,
+          "showArtistFirst": false,
+          "showProgressRing": true,
+          "showVisualizer": true,
+          "textColor": "tertiary",
+          "useFixedWidth": false,
+          "visualizerType": "linear"
         },
         {
           "hideWhenZero": true,
-          "hideWhenZeroUnread": true,
+          "hideWhenZeroUnread": false,
           "iconColor": "tertiary",
           "id": "NotificationHistory",
           "showUnreadBadge": true,
-          "unreadBadgeColor": "tertiary"
+          "unreadBadgeColor": "primary"
         }
       ],
       "right": [
@@ -89,6 +99,13 @@
           "displayMode": "onhover",
           "iconColor": "tertiary",
           "id": "Bluetooth",
+          "textColor": "tertiary"
+        },
+        {
+          "displayMode": "onhover",
+          "iconColor": "tertiary",
+          "id": "Volume",
+          "middleClickCommand": "pwvucontrol || pavucontrol",
           "textColor": "tertiary"
         },
         {
@@ -170,8 +187,8 @@
     "tooltipsEnabled": true,
     "scrollbarAlwaysVisible": true,
     "boxBorderEnabled": false,
-    "panelBackgroundOpacity": 0.93,
-    "translucentWidgets": false,
+    "panelBackgroundOpacity": 0.3,
+    "translucentWidgets": true,
     "panelsAttachedToBar": true,
     "settingsPanelMode": "window",
     "settingsPanelSideBarCardStyle": false
@@ -367,7 +384,7 @@
     "position": "bottom",
     "displayMode": "auto_hide",
     "dockType": "attached",
-    "backgroundOpacity": 1,
+    "backgroundOpacity": 0.3,
     "floatingRatio": 1.5,
     "size": 0.8,
     "onlySameOutput": true,
