@@ -19,13 +19,15 @@ let
         }
     }
 
-    // Noctalia bar/dock/launcher: force regular blur instead of default xray.
-    // Noctalia opts into blur via ext-background-effect; we just override xray.
+    // Noctalia surfaces: force regular blur (non-xray) on bar, popovers, menus.
+    // Explicit `blur true` so it applies even when Noctalia hasn't opted in
+    // via ext-background-effect for that surface.
     // https://docs.noctalia.dev/v4/getting-started/compositor-settings/niri/
     layer-rule {
-        match namespace="^noctalia-(background|launcher-overlay|dock)-.*$"
+        match namespace="^noctalia-(background|bar-content|launcher-overlay|dock|notification|control-center|session-menu|sidebar)-.*$"
 
         background-effect {
+            blur true
             xray false
         }
     }
