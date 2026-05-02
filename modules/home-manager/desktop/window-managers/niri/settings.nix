@@ -104,6 +104,7 @@ in
           middle-emulation = true;
           accel-profile = "flat";
           accel-speed = 0.75;
+          disabled-on-external-mouse = false;
         };
 
         # mouse configuration will be handled via libinput
@@ -149,6 +150,7 @@ in
       cursor = {
         size = 12;
         theme = "${pointer.name}";
+        hide-when-typing = true;
       };
       layout = {
         focus-ring = {
