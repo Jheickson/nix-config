@@ -151,6 +151,7 @@ in
       fastfetch
       fd
       hello
+      sshs
       tldr
       zsh
 
