@@ -50,7 +50,7 @@ let
     # ── Browsers ──────────────────────────────────────────────────────────────
     {
       matches = [
-        { app-id = "zen"; }
+        { app-id = "zen-beta"; }
         { app-id = "firefox"; }
         { app-id = "chromium-browser"; }
         { app-id = "xdg-desktop-portal-gtk"; }
@@ -59,11 +59,12 @@ let
     }
     {
       matches = [
-        { app-id = "zen"; }
+        { app-id = "zen-beta"; }
         { app-id = "firefox"; }
         { app-id = "chromium-browser"; }
         { app-id = "edge"; }
       ];
+      open-on-workspace = "1-browsing";
       open-maximized = true;
     }
 
@@ -71,8 +72,8 @@ let
     {
       # Firefox and Zen share identical PiP settings
       matches = [
-        { app-id = "firefox"; title = "Picture-in-Picture"; }
-        { app-id = "zen";     title = "Picture-in-Picture"; }
+        { app-id = "firefox";  title = "Picture-in-Picture"; }
+        { app-id = "zen-beta"; title = "Picture-in-Picture"; }
       ];
       open-floating = true;
       default-floating-position = {
@@ -105,15 +106,20 @@ let
       };
     }
 
-    # ── Floating utilities ────────────────────────────────────────────────────
-    # Terminals
+    # ── Coding workspace ──────────────────────────────────────────────────────
+    # VSCode, Bruno, Ghostty terminal — tiled at 50% width on workspace 3.
+    # Bruno reports app-id "electron" (generic), so match by title to scope.
     {
       matches = [
+        { app-id = "code"; }
         { app-id = "com.mitchellh.ghostty"; }
-        { app-id = "ghostty"; }
+        { app-id = "electron"; title = "^Bruno"; }
       ];
-      open-floating = true;
+      open-on-workspace = "3-coding";
+      default-column-width.proportion = 0.5;
     }
+
+    # ── Floating utilities ────────────────────────────────────────────────────
     # Audio controls
     {
       matches = [
@@ -182,6 +188,19 @@ let
       open-floating = true;
     }
 
+    # ── Social workspace ──────────────────────────────────────────────────────
+    # Ferdium (chat) + music player at 50/50 on workspace 2, both blocked from screencast.
+    {
+      matches = [
+        { app-id = "ferdium"; }
+        { app-id = "feishin"; }
+        { app-id = "com.github.th_ch.youtube_music"; }
+      ];
+      open-on-workspace = "2-social";
+      default-column-width.proportion = 0.5;
+      block-out-from = "screencast";
+    }
+
     # ── Privacy apps (laptop screen, maximized, hidden from screencast) ───────
     {
       matches = [
@@ -190,7 +209,6 @@ let
         { app-id = "electron-mail"; }
         { app-id = "slack"; }
         { app-id = "discord"; }
-        { app-id = "ferdium"; }
         { app-id = "telegram-desktop"; }
       ];
       open-on-output = "eDP-1";
