@@ -65,7 +65,7 @@ in
         }
         { command = [ "ferdium" ]; }
         # { command = [ "electron-mail" ]; }
-        { command = [ "kdeconnect-app" ]; }
+        # kdeconnect-app intentionally not auto-spawned (kdeconnectd daemon still runs)
         { command = [ "xwayland-satellite" ]; }
         {
           command = [
@@ -118,6 +118,17 @@ in
         workspace-auto-back-and-forth = true;
       };
       screenshot-path = "~/Pictures/Screenshots/Screenshot-from-%Y-%m-%d-%H-%M-%S.png";
+
+      # Named workspaces. Order = key order. Browsing pinned to external monitor;
+      # niri auto-places it on the focused output if HDMI-A-1 is absent.
+      workspaces = {
+        "1-browsing" = {
+          open-on-output = "HDMI-A-1";
+        };
+        "2-social" = { };
+        "3-coding" = { };
+      };
+
       outputs = {
         "eDP-1" = {
           scale = 1.0;
