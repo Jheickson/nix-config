@@ -122,10 +122,10 @@ in
       # Named workspaces. Order = key order. Browsing pinned to external monitor;
       # niri auto-places it on the focused output if HDMI-A-1 is absent.
       workspaces = {
-        "1-browsing" = {
+        "1-social" = { };
+        "2-browsing" = {
           open-on-output = "HDMI-A-1";
         };
-        "2-social" = { };
         "3-coding" = { };
       };
 

@@ -64,7 +64,7 @@ let
         { app-id = "chromium-browser"; }
         { app-id = "edge"; }
       ];
-      open-on-workspace = "1-browsing";
+      open-on-workspace = "2-browsing";
       open-maximized = true;
     }
 
@@ -196,7 +196,7 @@ let
         { app-id = "feishin"; }
         { app-id = "com.github.th_ch.youtube_music"; }
       ];
-      open-on-workspace = "2-social";
+      open-on-workspace = "1-social";
       default-column-width.proportion = 0.5;
       block-out-from = "screencast";
     }
