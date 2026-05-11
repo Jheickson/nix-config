@@ -30,7 +30,7 @@
         {
           "clockColor": "tertiary",
           "customFont": "Hack Nerd Font",
-          "formatHorizontal": "HH mm",
+          "formatHorizontal": "yy MM dd HH mm",
           "formatVertical": "HH mm",
           "id": "Clock",
           "tooltipFormat": "HH:mm ddd dd/MM/yyyy",
