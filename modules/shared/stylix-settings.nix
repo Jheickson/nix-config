@@ -4,11 +4,11 @@
   enable = true;
   useThemeFile = true;
 
-  wallpaperSource = ../../assets/wallpapers/Landscape/wallhaven-ml3jm8.jpg;
+  wallpaperSource = ../../assets/wallpapers/Landscape/wallhaven-ml2zwy.png;
   wallpaperImage = ../../assets/wallpapers/wallpaper.png;
   wallpaperOutputPath = "/home/felipe/nix-config/assets/wallpapers/wallpaper.png";
 
-  themeFile = "${pkgs.base16-schemes}/share/themes/horizon-dark.yaml";
+  themeFile = "${pkgs.base16-schemes}/share/themes/saga.yaml";
 }
 
 /* 
