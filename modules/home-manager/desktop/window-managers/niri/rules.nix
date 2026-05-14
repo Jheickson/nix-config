@@ -107,12 +107,14 @@ let
     }
 
     # ── Coding workspace ──────────────────────────────────────────────────────
-    # VSCode, Bruno, Ghostty terminal — tiled at 50% width on workspace 3.
+    # VSCode, Bruno, dedicated nvim terminal — tiled at 50% width on workspace 3.
     # Bruno reports app-id "electron" (generic), so match by title to scope.
+    # nvim ghostty launched via Mod+Shift+N with `--class=ghostty-nvim`; generic
+    # ghostty windows keep default placement.
     {
       matches = [
         { app-id = "code"; }
-        { app-id = "com.mitchellh.ghostty"; }
+        { app-id = "ghostty-nvim"; }
         { app-id = "electron"; title = "^Bruno"; }
       ];
       open-on-workspace = "3-coding";
