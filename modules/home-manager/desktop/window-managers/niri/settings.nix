@@ -167,7 +167,14 @@ in
         focus-ring = {
           enable = true;
           width = 2;
-          active.color = "#${config.lib.stylix.colors.base0E}";
+          # Gradient across stylix base0D (blue) → base0E (magenta) for the
+          # focused column; high contrast against most base16 backgrounds.
+          active.gradient = {
+            from = "#${config.lib.stylix.colors.base0D}";
+            to = "#${config.lib.stylix.colors.base0E}";
+            angle = 45;
+            relative-to = "workspace-view";
+          };
           inactive.color = "#${config.lib.stylix.colors.base03}30";
           urgent.color = "#${config.lib.stylix.colors.base08}";
         };
