@@ -24,217 +24,236 @@ in
       enable = true;
       package = pkgs.niri;
       settings = {
-      environment = {
-        CLUTTER_BACKEND = "wayland";
-        DISPLAY = ":0";
-        GDK_BACKEND = "wayland,x11";
-        GTK_USE_PORTAL = "1";
-        MOZ_ENABLE_WAYLAND = "1";
-        NIXOS_OZONE_WL = "1";
-        QT_QPA_PLATFORM = "wayland;xcb";
-        QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
-        SDL_VIDEODRIVER = "wayland";
-        XDG_CURRENT_DESKTOP = "niri";
-        XDG_SESSION_TYPE = "wayland";
-      };
-      spawn-at-startup = [
-        (makeCommand "noctalia-shell")
-        (makeCommand "hyprlock")
-        {
-          command = [
-            "${pkgs.writeShellScript "awww-init" (builtins.readFile ./awww-init.sh)}"
-          ];
-        }
-        (makeCommand "waybar")
-        {
-          command = [
-            "wl-paste"
-            "--watch"
-            "cliphist"
-            "store"
-          ];
-        }
-        {
-          command = [
-            "wl-paste"
-            "--type text"
-            "--watch"
-            "cliphist"
-            "store"
-          ];
-        }
-        { command = [ "ferdium" ]; }
-        # { command = [ "electron-mail" ]; }
-        # kdeconnect-app intentionally not auto-spawned (kdeconnectd daemon still runs)
-        { command = [ "xwayland-satellite" ]; }
-        {
-          command = [
-            "${pkgs.jellyfin}/bin/jellyfin"
-            "--service"
-          ];
-        }
-
-        {
-          command = [
-            "udiskie"
-            "-a"
-            "-s"
-          ];
-        }
-      ];
-      input = {
-
-        keyboard = {
-          numlock = true;
-          xkb = {
-            layout = "us,us";
-            variant = "colemak_dh_wide,";
-            options = "grp:alt_shift_toggle,caps:backspace,backspace:caps";
-          };
+        environment = {
+          CLUTTER_BACKEND = "wayland";
+          DISPLAY = ":0";
+          GDK_BACKEND = "wayland,x11";
+          GTK_USE_PORTAL = "1";
+          MOZ_ENABLE_WAYLAND = "1";
+          NIXOS_OZONE_WL = "1";
+          QT_QPA_PLATFORM = "wayland;xcb";
+          QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
+          SDL_VIDEODRIVER = "wayland";
+          XDG_CURRENT_DESKTOP = "niri";
+          XDG_SESSION_TYPE = "wayland";
         };
+        spawn-at-startup = [
+          (makeCommand "noctalia-shell")
+          (makeCommand "hyprlock")
+          {
+            command = [
+              "${pkgs.writeShellScript "awww-init" (builtins.readFile ./awww-init.sh)}"
+            ];
+          }
+          (makeCommand "waybar")
+          {
+            command = [
+              "wl-paste"
+              "--watch"
+              "cliphist"
+              "store"
+            ];
+          }
+          {
+            command = [
+              "wl-paste"
+              "--type text"
+              "--watch"
+              "cliphist"
+              "store"
+            ];
+          }
+          { command = [ "ferdium" ]; }
+          # { command = [ "electron-mail" ]; }
+          # kdeconnect-app intentionally not auto-spawned (kdeconnectd daemon still runs)
+          { command = [ "xwayland-satellite" ]; }
+          {
+            command = [
+              "${pkgs.jellyfin}/bin/jellyfin"
+              "--service"
+            ];
+          }
 
-        touchpad = {
-          click-method = "button-areas";
-          dwt = true;
-          dwtp = true;
-          natural-scroll = true;
-          scroll-method = "two-finger";
-          tap = true;
-          tap-button-map = "left-right-middle";
-          middle-emulation = true;
-          accel-profile = "flat";
-          accel-speed = 0.75;
-          disabled-on-external-mouse = false;
-        };
-
-        # mouse configuration will be handled via libinput
-
-        focus-follows-mouse = {
-          enable = true;
-          max-scroll-amount = "1%";
-        };
-
-        warp-mouse-to-focus.enable = true;
-        workspace-auto-back-and-forth = true;
-      };
-      screenshot-path = "~/Pictures/Screenshots/Screenshot-from-%Y-%m-%d-%H-%M-%S.png";
-
-      # Named workspaces. Order = key order. Browsing pinned to external monitor;
-      # niri auto-places it on the focused output if HDMI-A-1 is absent.
-      workspaces = {
-        "1-social" = { };
-        "2-browsing" = {
-          open-on-output = "HDMI-A-1";
-        };
-        "3-coding" = { };
-      };
-
-      outputs = {
-        "eDP-1" = {
-          scale = 1.0;
-          position = {
-            x = 1920;
-            y = 900;
-          };
-        };
-        "HDMI-A-1" = {
-          mode = {
-            width = 1920;
-            height = 1080;
-            refresh = 144.00;
-          };
-          scale = 1.0;
-          position = {
-            x = 0;
-            y = 0;
-          };
-        };
-      };
-
-      overview = {
-        workspace-shadow.enable = false;
-        backdrop-color = "transparent";
-      };
-      gestures = {
-        hot-corners.enable = true;
-      };
-      cursor = {
-        size = 12;
-        theme = "${pointer.name}";
-        hide-when-typing = true;
-      };
-      layout = {
-        focus-ring = {
-          enable = true;
-          width = 2;
-          # Gradient across stylix base0D (blue) → base0E (magenta) for the
-          # focused column; high contrast against most base16 backgrounds.
-          active.gradient = {
-            from = "#${config.lib.stylix.colors.base0D}";
-            to = "#${config.lib.stylix.colors.base0E}";
-            angle = 45;
-            relative-to = "workspace-view";
-          };
-          inactive.color = "#${config.lib.stylix.colors.base03}30";
-          urgent.color = "#${config.lib.stylix.colors.base08}";
-        };
-        border = {
-          enable = false;
-          width = 2;
-          active.color = "#${config.lib.stylix.colors.base0E}";
-          inactive.color = "#${config.lib.stylix.colors.base03}30";
-          urgent.color = "#${config.lib.stylix.colors.base08}";
-        };
-        shadow = {
-          enable = false;
-        };
-        preset-column-widths = [
-          { proportion = 0.25; }
-          { proportion = 0.5; }
-          { proportion = 0.75; }
-          { proportion = 1.0; }
+          {
+            command = [
+              "udiskie"
+              "-a"
+              "-s"
+            ];
+          }
         ];
-        default-column-width = {
-          proportion = 0.5;
+        input = {
+
+          keyboard = {
+            numlock = true;
+            xkb = {
+              layout = "us,us";
+              variant = "colemak_dh_wide,";
+              options = "grp:alt_shift_toggle,caps:backspace,backspace:caps";
+            };
+          };
+
+          touchpad = {
+            click-method = "button-areas";
+            dwt = true;
+            dwtp = true;
+            natural-scroll = true;
+            scroll-method = "two-finger";
+            tap = true;
+            tap-button-map = "left-right-middle";
+            middle-emulation = true;
+            accel-profile = "flat";
+            accel-speed = 0.75;
+            disabled-on-external-mouse = false;
+          };
+
+          # mouse configuration will be handled via libinput
+
+          focus-follows-mouse = {
+            enable = true;
+            max-scroll-amount = "1%";
+          };
+
+          warp-mouse-to-focus.enable = true;
+          workspace-auto-back-and-forth = true;
         };
-        default-column-display = "tabbed";
+        screenshot-path = "~/Pictures/Screenshots/Screenshot-from-%Y-%m-%d-%H-%M-%S.png";
 
-        gaps = 2;
-        struts = {
-          left = 2;
-          right = 2;
-          top = 2;
-          bottom = 2;
+        # Named workspaces. Order = key order. Browsing pinned to external monitor;
+        # niri auto-places it on the focused output if HDMI-A-1 is absent.
+        workspaces = {
+          "1-social" = { };
+          "2-browsing" = {
+            open-on-output = "HDMI-A-1";
+          };
+          "3-coding" = { };
         };
 
-        tab-indicator = {
-          hide-when-single-tab = true;
-          place-within-column = true;
-          position = "left";
-          corner-radius = 0.0;
-          gap = -12.0;
-          gaps-between-tabs = 10.0;
-          width = 4.0;
-          length.total-proportion = 0.1;
-          # color = "#${config.lib.stylix.colors.base0D}";
+        outputs = {
+          "eDP-1" = {
+            scale = 1.0;
+            position = {
+              x = 1920;
+              y = 900;
+            };
+          };
+          "HDMI-A-1" = {
+            mode = {
+              width = 1920;
+              height = 1080;
+              refresh = 144.00;
+            };
+            scale = 1.0;
+            position = {
+              x = 0;
+              y = 0;
+            };
+          };
         };
 
-        # "never": no special centering, focusing an off-screen column will scroll it to the left or right edge of the screen. This is the default.
-        # "always", the focused column will always be centered.
-        # "on-overflow", focusing a column will center it if it doesn't fit on screen together with the previously focused column.
-        center-focused-column = "on-overflow";
+        overview = {
+          workspace-shadow.enable = false;
+          backdrop-color = "transparent";
+        };
+        gestures = {
+          hot-corners.enable = true;
+        };
+        cursor = {
+          size = 12;
+          theme = "${pointer.name}";
+          hide-when-typing = true;
+        };
+        layout = {
+          focus-ring = {
+            enable = true;
+            width = 2;
+            # Gradient across stylix base0D (blue) → base0E (magenta) for the
+            # focused column; high contrast against most base16 backgrounds.
+            active.gradient = {
+              from = "#${config.lib.stylix.colors.base0D}";
+              to = "#${config.lib.stylix.colors.base0E}";
+              angle = 45;
+              relative-to = "workspace-view";
+            };
+            inactive.color = "#${config.lib.stylix.colors.base03}30";
+            urgent.color = "#${config.lib.stylix.colors.base08}";
+          };
+          border = {
+            enable = false;
+            width = 2;
+            active.color = "#${config.lib.stylix.colors.base0E}";
+            inactive.color = "#${config.lib.stylix.colors.base03}30";
+            urgent.color = "#${config.lib.stylix.colors.base08}";
+          };
+          shadow = {
+            enable = false;
+          };
+          preset-column-widths = [
+            { proportion = 0.25; }
+            { proportion = 0.5; }
+            { proportion = 0.75; }
+            { proportion = 1.0; }
+          ];
+          default-column-width = {
+            proportion = 0.5;
+          };
+          default-column-display = "tabbed";
 
-        empty-workspace-above-first = true;
-        always-center-single-column = true;
-      };
+          gaps = 2;
+          struts = {
+            left = 2;
+            right = 2;
+            top = 2;
+            bottom = 2;
+          };
 
-      # Taken from "https://github.com/jgarza9788/niri-animation-collection"
-      # Select a preset via `programs.niri.animationPreset`; the available
-      # values are generated automatically and should appear in IDE completion.
-      animations = import ./animations/presets/${selectedAnimation}.nix;
+          tab-indicator = {
+            hide-when-single-tab = true;
+            place-within-column = true;
+            position = "left";
+            corner-radius = 0.0;
+            gap = -12.0;
+            gaps-between-tabs = 10.0;
+            width = 4.0;
+            length.total-proportion = 0.1;
+            # color = "#${config.lib.stylix.colors.base0D}";
+          };
 
-      prefer-no-csd = true;
-      hotkey-overlay.skip-at-startup = true;
+          # "never": no special centering, focusing an off-screen column will scroll it to the left or right edge of the screen. This is the default.
+          # "always", the focused column will always be centered.
+          # "on-overflow", focusing a column will center it if it doesn't fit on screen together with the previously focused column.
+          center-focused-column = "on-overflow";
+
+          empty-workspace-above-first = true;
+          always-center-single-column = true;
+        };
+
+        # Taken from "https://github.com/jgarza9788/niri-animation-collection"
+        # Select a preset via `programs.niri.animationPreset`; the available
+        # values are generated automatically and should appear in IDE completion.
+        #
+        # The preset is merged with a global workspace-switch override so the
+        # transition is snappy with a slight overshoot, regardless of preset.
+        # Spring with damping-ratio < 1 produces the overshoot; stiffness tunes speed.
+        animations = (import ./animations/presets/${selectedAnimation}.nix) // {
+          workspace-switch = {
+            kind.spring = {
+              damping-ratio = 0.80;
+              stiffness = 500;
+              epsilon = 0.0001;
+            };
+          };
+          horizontal-view-movement = {
+            spring = {
+              damping-ratio = 0.80;
+              stiffness = 500;
+              epsilon = 0.0001;
+            };
+          };
+        };
+
+        prefer-no-csd = true;
+        hotkey-overlay.skip-at-startup = true;
       };
     };
   };
