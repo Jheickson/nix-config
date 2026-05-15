@@ -190,6 +190,7 @@ in
         default-column-width = {
           proportion = 0.5;
         };
+        default-column-display = "tabbed";
 
         gaps = 2;
         struts = {
