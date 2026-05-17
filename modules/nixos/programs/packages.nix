@@ -148,6 +148,7 @@ in
       cbonsai
       cowsay
       drift
+      f3
       fastfetch
       fd
       hello
