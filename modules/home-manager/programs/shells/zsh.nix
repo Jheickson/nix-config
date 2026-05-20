@@ -18,21 +18,21 @@
         # Uses STYLIX_WALLPAPER environment variable set by stylix.nix
         applyWallpaper = ''
           source /etc/set-environment 2>/dev/null
-          
+
           echo "========================================" >&2
           echo "[DEBUG] Starting wallpaper application..." >&2
           echo "[DEBUG] STYLIX_WALLPAPER env var: $STYLIX_WALLPAPER" >&2
-          
+
           if [ -n "$STYLIX_WALLPAPER" ]; then
             WALLPAPER=$(eval echo "$STYLIX_WALLPAPER")
           else
             WALLPAPER="$HOME/nix-config/assets/wallpapers/wallpaper.png"
           fi
-          
+
           echo "[DEBUG] Resolved wallpaper path: $WALLPAPER" >&2
           echo "[DEBUG] File exists check: $([ -f "$WALLPAPER" ] && echo YES || echo NO)" >&2
           echo "========================================" >&2
-          
+
           awww img "$WALLPAPER" --resize crop && echo 'Wallpaper applied successfully' || echo 'Failed to apply wallpaper'
         '';
       in
@@ -176,6 +176,9 @@
 
         # Zoxide directory jumping
         z = "__zoxide_z";
+
+        # Bitwarden Secrets Manager CLI (docker wrapper)
+        bws = "/home/felipe/bws/bws";
       };
 
     history.size = 10000;
@@ -217,6 +220,13 @@
 
       # Optional: disable AI suggestions
       # export _PR_AI_DISABLE=1
+
+      # Auto-load Bitwarden Secrets Manager token (file is gitignored, chmod 600)
+      if [ -r "$HOME/.config/bws/token.env" ]; then
+        set -a
+        source "$HOME/.config/bws/token.env"
+        set +a
+      fi
     '';
 
   };

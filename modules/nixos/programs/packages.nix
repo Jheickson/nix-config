@@ -145,6 +145,7 @@ in
       zip
 
       # === CLI TOOLS ===
+      bitwarden-cli
       cbonsai
       cowsay
       drift
