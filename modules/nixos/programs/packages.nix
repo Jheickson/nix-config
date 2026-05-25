@@ -17,6 +17,7 @@ in
     with pkgs;
     [
       # === NIX TOOLS ===
+      home-manager
       nix-search-cli
       nixd
       nixfmt # Run `nixfmt file.nix`
@@ -26,7 +27,9 @@ in
       bruno
       bun
       gh
+      git
       lazygit
+      micro
       ngrok
       nodejs_22
       pnpm

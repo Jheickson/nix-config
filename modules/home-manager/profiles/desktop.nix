@@ -20,7 +20,7 @@
     ../programs/editors/nvim/vanilla/vanilla.nix
     ../programs/editors/vscode.nix
     ../programs/shells/zsh.nix
-    # ../programs/browsers/zen-browser.nix
+    # ../programs/browsers/zen-browser.nix  # broken wrapProgram upstream; raw pkg in home.packages instead
     ../programs/utilities/yazi.nix
     ../programs/utilities/gowall.nix
     ../programs/utilities/noctalia
