@@ -45,17 +45,11 @@
     ../../modules/nixos/services/docker.nix
     ../../modules/nixos/services/jellyfin.nix
     ../../modules/nixos/services/navidrome/navidrome.nix
-    # ../../modules/nixos/services/mysql.nix
-    # ../../modules/nixos/services/subsonic.nix
 
     # Programs
     ../../modules/nixos/programs/nix-ld.nix
     ../../modules/nixos/programs/packages.nix
-    # ../../modules/nixos/programs/flutter.nix
     ../../modules/nixos/programs/noctalia.nix
-    # ../../modules/nixos/programs/steam.nix
-    # ../../modules/nixos/programs/thunderbird.nix
-    # ../../modules/nixos/programs/wine.nix
     ../../modules/nixos/programs/nicotine-plus.nix
   ];
 
@@ -222,7 +216,7 @@
       "nix-command"
       "flakes"
     ];
-    settings.auto-optimise-store = true;  # New: Deduplicate store for faster builds
+    settings.auto-optimise-store = true; # New: Deduplicate store for faster builds
 
     # Set nixpkgs path
     nixPath = [ "nixpkgs = ${inputs.nixpkgs}" ];
@@ -238,13 +232,13 @@
   };
 
   programs.direnv = {
-    enable = true;  # New: Auto-load project environments
+    enable = true; # New: Auto-load project environments
     enableZshIntegration = true;
   };
 
   services.mpd = {
-    enable = true;  # New: Music player daemon
-    settings.music_directory = "/home/felipe/Music";  # Adjust path as needed
+    enable = true; # New: Music player daemon
+    settings.music_directory = "/home/felipe/Music"; # Adjust path as needed
   };
 
   # ============================================================================
