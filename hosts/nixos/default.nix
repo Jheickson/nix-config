@@ -187,10 +187,7 @@
         "audio" # Required for microphone access
         "video" # Required for graphics access
       ];
-      packages = with pkgs; [
-        kdePackages.kate
-        # thunderbird  # Disabled - uncomment to enable
-      ];
+      packages = [ ];
     };
   };
   # ============================================================================
@@ -243,22 +240,6 @@
     enable = true; # New: Music player daemon
     settings.music_directory = "/home/felipe/Music"; # Adjust path as needed
   };
-
-  # ============================================================================
-  # SYSTEM PACKAGES
-  # ============================================================================
-  environment.systemPackages = with pkgs; [
-    home-manager
-    micro
-    git
-    vscode
-    inputs.zen-browser.packages."${system}".default
-
-    # Portal packages for file dialogs to work in Wayland
-    xdg-desktop-portal
-    xdg-desktop-portal-gtk
-    xdg-desktop-portal-wlr
-  ];
 
   # ============================================================================
   # Documentation & Help
