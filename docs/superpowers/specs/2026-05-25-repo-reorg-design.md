@@ -88,13 +88,14 @@ Kept-as-dirs (≥2 files, justified): `niri/`, `nvim/vanilla/`, `services/navidr
 | # | Phase | Risk | Verifies |
 |---|---|---|---|
 | 1 | Archive dead modules | low | flake check + builds |
-| 2 | Flatten single-file dirs | low | flake check + builds |
-| 3 | Central `nixpkgs-config.nix` | med | both builds, `pkgs.nvchad` still resolves |
-| 4 | Consolidate `systemPackages` | med | both builds + portal sanity |
-| 5 | Split host file | high | both builds, host file ≤80 lines |
-| 6 | Move `home.nix` | med | both builds, `nix flake show` lists `homeConfigurations.felipe` |
+| 2 | Central `nixpkgs-config.nix` | med | both builds, `pkgs.nvchad` still resolves |
+| 3 | Consolidate `systemPackages` | med | both builds + portal sanity |
+| 4 | Split host file | high | both builds, host file ≤80 lines |
+| 5 | Move `home.nix` | med | both builds, `nix flake show` lists `homeConfigurations.felipe` |
 
-Each phase: own commit. Branch `refactor/repo-reorg`. Final activation (`nh os switch` / `nh home switch`) only after all six phases merge cleanly.
+Each phase: own commit. Branch `refactor/repo-reorg`. Final activation (`nh os switch` / `nh home switch`) only after all five phases merge cleanly.
+
+**Flatten phase dropped:** Audit of the two original candidates (`notifications/battery/`, `programs/utilities/noctalia/`) found both have sibling non-`.nix` files (`battery-notify-test.sh` and `settings.json` respectively). They meet the ≥2-files-justify-a-dir rule. No work to do.
 
 ---
 
@@ -123,23 +124,7 @@ Each phase: own commit. Branch `refactor/repo-reorg`. Final activation (`nh os s
 
 ---
 
-## Phase 2 — Flatten single-file dirs
-
-**Move:**
-- `modules/home-manager/desktop/notifications/battery/battery-notify.nix` → `modules/home-manager/desktop/notifications/battery.nix`
-- `modules/home-manager/programs/utilities/noctalia/default.nix` → `modules/home-manager/programs/utilities/noctalia.nix`
-
-**Edit:** `modules/home-manager/profiles/desktop.nix`
-- import path → `../desktop/notifications/battery.nix`
-- import path → `../programs/utilities/noctalia.nix`
-
-**Verify:** `nix flake check` + both builds. Confirm noctalia HM activation hook still resolves (script lives inside the moved module — path-relative changes inside the file itself must be re-checked).
-
-**Commit:** `refactor(flatten): collapse single-file directories`
-
----
-
-## Phase 3 — Central `nixpkgs-config.nix`
+## Phase 2 — Central `nixpkgs-config.nix`
 
 **Create** `modules/shared/nixpkgs-config.nix`:
 ```nix
@@ -181,7 +166,7 @@ Decide which path during verification.
 
 ---
 
-## Phase 4 — Consolidate `systemPackages`
+## Phase 3 — Consolidate `systemPackages`
 
 **Audit `hosts/nixos/default.nix:253-264`:**
 
@@ -205,7 +190,7 @@ Decide which path during verification.
 
 ---
 
-## Phase 5 — Split host file
+## Phase 4 — Split host file
 
 **Create modules** (each is `{ pkgs, ... }: { ... }`). Content refs are **by block**, not by line number — phases 3-4 will have shifted the host file by the time phase 5 runs.
 
@@ -291,7 +276,7 @@ Decide which path during verification.
 
 ---
 
-## Phase 6 — Move `home.nix`
+## Phase 5 — Move `home.nix`
 
 **Move:** `home-manager/home.nix` → `hosts/nixos/home.nix`.
 
@@ -303,7 +288,7 @@ Decide which path during verification.
 **Edit `flake.nix`** `homeConfigurations.felipe`:
 - Change `modules = [ ./home-manager/home.nix ];` → `modules = [ ./hosts/nixos/home.nix ];`
 
-**Edit `hosts/nixos/default.nix`** (post-phase-5):
+**Edit `hosts/nixos/default.nix`** (post-phase-4):
 - `users.felipe = import ../../home-manager/home.nix;` → `users.felipe = import ./home.nix;`
 
 **Delete:** empty `home-manager/` dir.
@@ -329,7 +314,7 @@ Green = commit. Red = revert WIP, diagnose, retry.
 
 **Branching:** single feature branch `refactor/repo-reorg`, one commit per phase. If a phase regresses, `git revert <sha>` cleanly drops just that phase.
 
-**Final smoke test** (only after all six phases merged, apply `switch` exactly once):
+**Final smoke test** (only after all five phases merged, apply `switch` exactly once):
 
 ```bash
 nh os switch
