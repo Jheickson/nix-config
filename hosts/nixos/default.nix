@@ -65,7 +65,7 @@
   home-manager = {
     extraSpecialArgs = { inherit inputs stylixConfig; };
     backupFileExtension = "hm-backup"; # Prevents Stylix conflicts
-    users.felipe = import ../../home-manager/home.nix;
+    users.felipe = import ./home.nix;
   };
 
   # Host-unique

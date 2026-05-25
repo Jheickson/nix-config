@@ -37,9 +37,9 @@
     };
 
     nixvim = {
-        url = "github:nix-community/nixvim";
-        # If using a stable channel you can use `url = "github:nix-community/nixvim/nixos-<version>"`
-      };
+      url = "github:nix-community/nixvim";
+      # If using a stable channel you can use `url = "github:nix-community/nixvim/nixos-<version>"`
+    };
 
     noctalia = {
       url = "github:noctalia-dev/noctalia-shell";
@@ -89,7 +89,7 @@
       homeConfigurations.felipe = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.${system};
         modules = [
-          ./home-manager/home.nix
+          ./hosts/nixos/home.nix
           inputs.stylix.homeModules.stylix
         ];
         extraSpecialArgs = { inherit inputs stylixConfig; };
