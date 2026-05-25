@@ -10,33 +10,14 @@
 
   imports = [
     # Desktop environment
-    # ../desktop/window-managers/i3.nix
     ../desktop/window-managers/niri
-    
-    # Window manager additions
-    # ../desktop/bars/polybar/polybar.nix
-    # ../desktop/bars/waybar/waybar.nix
-    
-    # Launchers
-    # ../desktop/launchers/anyrun.nix
-    # ../desktop/launchers/fuzzel.nix
-    # ../desktop/launchers/rofi.nix
-    
+
     # Notifications
     ../desktop/notifications/battery/battery-notify.nix
-    # ../desktop/notifications/dunst/dunst.nix
-    
-    # Compositors
-    # ../desktop/compositors/picom.nix
-    # ../desktop/compositors/quickshell.nix
-    
+
     # Programs
     ../programs/terminals/ghostty.nix
-    # ../programs/terminals/alacritty.nix
-    # ../programs/editors/nvim/nixcats/nixcats.nix
-    # ../programs/editors/nvim/nixvim/nixvim.nix
     ../programs/editors/nvim/vanilla/vanilla.nix
-    
     ../programs/editors/vscode.nix
     ../programs/shells/zsh.nix
     # ../programs/browsers/zen-browser.nix
