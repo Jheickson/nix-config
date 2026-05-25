@@ -1,39 +1,39 @@
 # NixOS System Configuration
-# This file defines the system-wide configuration for NixOS.
-# For detailed documentation, see:
-# - configuration.nix(5) man page
-# - NixOS manual (run 'nixos-help')
+# Composition only — system-wide config split across focused modules
+# under modules/nixos/. Host-unique settings (hostName, stateVersion)
+# stay inline below.
 
 {
   inputs,
   stylixConfig,
-  pkgs,
   ...
 }:
 
 {
-  # ============================================================================
-  # IMPORTS
-  # ============================================================================
   imports = [
-    # Hardware configuration
+    # Hardware (host-local, not committed-clean — adapt before reusing)
     ./hardware-configuration.nix
 
-    # Shared theme configuration
+    # Shared
     ../../modules/shared/stylix.nix
-
-    # Centralized nixpkgs config (unfree / insecure / overlays)
     ../../modules/shared/nixpkgs-config.nix
 
-    # Home Manager integration
+    # Home Manager
     inputs.home-manager.nixosModules.home-manager
 
-    # Core system modules
-    # ../../modules/nixos/core/networkmanager.nix
+    # Core
+    ../../modules/nixos/core/boot.nix
+    ../../modules/nixos/core/networking.nix
+    ../../modules/nixos/core/locale.nix
+    ../../modules/nixos/core/audio.nix
+    ../../modules/nixos/core/users.nix
+    ../../modules/nixos/core/nix.nix
     ../../modules/nixos/core/nh.nix
     ../../modules/nixos/core/substituters.nix
+    ../../modules/nixos/core/documentation.nix
+    # ../../modules/nixos/core/networkmanager.nix
 
-    # Desktop environment
+    # Desktop
     # ../../modules/nixos/desktop/gtk.nix
     ../../modules/nixos/desktop/stylix-wallpaper.nix
     ../../modules/nixos/desktop/niri.nix
@@ -48,221 +48,27 @@
     ../../modules/nixos/services/docker.nix
     ../../modules/nixos/services/jellyfin.nix
     ../../modules/nixos/services/navidrome/navidrome.nix
+    ../../modules/nixos/services/printing.nix
+    ../../modules/nixos/services/flatpak.nix
+    ../../modules/nixos/services/udisks2.nix
+    ../../modules/nixos/services/mpd.nix
 
     # Programs
     ../../modules/nixos/programs/nix-ld.nix
     ../../modules/nixos/programs/packages.nix
     ../../modules/nixos/programs/noctalia.nix
     ../../modules/nixos/programs/nicotine-plus.nix
+    ../../modules/nixos/programs/base.nix
+    ../../modules/nixos/programs/direnv.nix
   ];
 
-  # ============================================================================
-  # HOME MANAGER
-  # ============================================================================
   home-manager = {
     extraSpecialArgs = { inherit inputs stylixConfig; };
     backupFileExtension = "hm-backup"; # Prevents Stylix conflicts
     users.felipe = import ../../home-manager/home.nix;
   };
 
-  # ============================================================================
-  # BOOT & LOADER
-  # ============================================================================
-  boot = {
-    loader = {
-      systemd-boot.enable = true;
-      efi.canTouchEfiVariables = true;
-    };
-  };
-
-  # ============================================================================
-  # NETWORKING
-  # ============================================================================
-  networking = {
-    hostName = "nixos";
-    networkmanager.enable = true;
-
-    # Wireless support (uncomment if needed)
-    # wireless.enable = true;
-
-    # Proxy configuration (uncomment and configure if needed)
-    # proxy.default = "http://user:password@proxy:port/";
-    # proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-  };
-
-  # ============================================================================
-  # LOCALIZATION
-  # ============================================================================
-  time.timeZone = "America/Santarem";
-
-  i18n = {
-    defaultLocale = "en_US.UTF-8";
-
-    extraLocaleSettings = {
-      LC_ADDRESS = "pt_BR.UTF-8";
-      LC_IDENTIFICATION = "pt_BR.UTF-8";
-      LC_MEASUREMENT = "pt_BR.UTF-8";
-      LC_MONETARY = "pt_BR.UTF-8";
-      LC_NAME = "pt_BR.UTF-8";
-      LC_NUMERIC = "pt_BR.UTF-8";
-      LC_PAPER = "pt_BR.UTF-8";
-      LC_TELEPHONE = "pt_BR.UTF-8";
-      LC_TIME = "pt_BR.UTF-8";
-    };
-  };
-
-  # ============================================================================
-  # DISPLAY & WINDOW MANAGEMENT
-  # ============================================================================
-  # services = {
-  #   # X11 configuration
-  #   xserver = {
-  #     enable = true;
-
-  #     # Window manager
-  #     windowManager.i3.enable = true;
-
-  #     # Keyboard layout
-  #     xkb = {
-  #       layout = "us";
-  #       variant = "colemak_dh_wide";
-  #       options = "caps:backspace, backspace:caps";
-  #     };
-  #   };
-
-  #   # Display manager
-  #   displayManager.defaultSession = "none+i3";
-
-  #   # Input devices
-  #   libinput = {
-  #     mouse = {
-  #       accelProfile = "flat";
-  #       transformationMatrix = "1 0 0 0 2 0 0 0 1"; # 2x vertical speed
-  #     };
-  #   };
-  # };
-
-  # ============================================================================
-  # SERVICES
-  # ============================================================================
-  services = {
-    # Printing
-    printing.enable = true;
-
-    # Audio - PipeWire configuration
-    pipewire = {
-      enable = true;
-      alsa = {
-        enable = true;
-        support32Bit = true;
-      };
-      pulse.enable = true;
-      jack.enable = true;
-    };
-
-    # Disk management
-    udisks2.enable = true;
-
-    # Flatpak support
-    flatpak.enable = true;
-  };
-
-  # ============================================================================
-  # SECURITY
-  # ============================================================================
-  security.rtkit.enable = true;
-
-  # ============================================================================
-  # USER ACCOUNTS
-  # ============================================================================
-  users = {
-    defaultUserShell = pkgs.zsh;
-    users.felipe = {
-      isNormalUser = true;
-      description = "felipe";
-      extraGroups = [
-        "networkmanager"
-        "wheel"
-        "docker"
-        "audio" # Required for microphone access
-        "video" # Required for graphics access
-      ];
-      packages = [ ];
-    };
-  };
-  # ============================================================================
-  # PROGRAMS
-  # ============================================================================
-  programs = {
-    firefox.enable = true;
-    zsh.enable = true;
-
-    # GPG agent (uncomment if needed)
-    # gnupg.agent = {
-    #   enable = true;
-    #   enableSSHSupport = true;
-    # };
-
-    # MTR network diagnostic tool (uncomment if needed)
-    # mtr.enable = true;
-  };
-
-  # ============================================================================
-  # NIX CONFIGURATION
-  # ============================================================================
-  nix = {
-    # Enable flakes
-    settings.experimental-features = [
-      "nix-command"
-      "flakes"
-    ];
-    settings.auto-optimise-store = true; # New: Deduplicate store for faster builds
-
-    # Set nixpkgs path
-    nixPath = [ "nixpkgs = ${inputs.nixpkgs}" ];
-
-    # Automatic garbage collection
-    /*
-      gc = {
-        automatic = true;
-        dates = "weekly";
-        options = "--delete-older-than 30d";
-      };
-    */
-  };
-
-  programs.direnv = {
-    enable = true; # New: Auto-load project environments
-    enableZshIntegration = true;
-  };
-
-  services.mpd = {
-    enable = true; # New: Music player daemon
-    settings.music_directory = "/home/felipe/Music"; # Adjust path as needed
-  };
-
-  # ============================================================================
-  # Documentation & Help
-  documentation.enable = false;
-  # Skip building NixOS option docs (options.json). Avoids the upstream
-  # "builtins.derivation ... without a proper context" warning and saves eval time.
-  documentation.nixos.enable = false;
-
-  # ============================================================================
-  # FIREWALL & SSH
-  # ============================================================================
-  # SSH daemon (uncomment to enable)
-  # services.openssh.enable = true;
-
-  # Firewall configuration (uncomment and configure as needed)
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # networking.firewall.enable = false;
-
-  # ============================================================================
-  # SYSTEM STATE
-  # ============================================================================
-  # This determines the NixOS release for stateful data compatibility.
-  # Only change after reading the documentation.
+  # Host-unique
+  networking.hostName = "nixos";
   system.stateVersion = "24.05";
 }
