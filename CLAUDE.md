@@ -81,8 +81,8 @@ Three-layer module tree assembled by `flake.nix`:
 
 ## Conventions / gotchas
 
-- `allowUnfreePredicate = pkg: true` is set in both `flake.nix` (for `pkgs-stable`), `hosts/nixos/default.nix`, and `home-manager/home.nix`. Keep them in sync if narrowing.
-- `permittedInsecurePackages` is duplicated in `hosts/nixos/default.nix` and `modules/nixos/programs/packages.nix` — update both when changing.
+- `allowUnfreePredicate` for the main NixOS + HM nixpkgs is centralized in `modules/shared/nixpkgs-config.nix`. `flake.nix` keeps its own `config.allowUnfreePredicate` for `pkgs-stable` (separate `import` instance, not affected by the shared module). Keep the `pkgs-stable` line in sync if narrowing.
+- `permittedInsecurePackages` lives in `modules/shared/nixpkgs-config.nix` (the single source).
 - Determinate Nix is enabled (`determinate.nixosModules.default`); do not also enable upstream `nix.package` overrides.
 - `system.stateVersion = "24.05"` and `home.stateVersion = "23.11"` — do not bump unless following the relevant release notes.
 - `.gitignore` excludes `result`, `modules/nixos/services/navidrome/secrets.env`, and `settings.local.json`. Do not commit secrets.

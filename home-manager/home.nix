@@ -5,11 +5,8 @@
   imports = [
     ../modules/shared/stylix.nix
     ../modules/home-manager/profiles/desktop.nix
+    ../modules/shared/nixpkgs-config.nix
   ];
-
-  nixpkgs = {
-    config.allowUnfreePredicate = pkg: true;
-  };
 
   # Preserve legacy GTK4 theme behavior (default flipped to null in HM 26.05).
   # Stylix manages config.gtk.theme; mirror it for GTK4 explicitly.
