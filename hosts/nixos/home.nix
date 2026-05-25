@@ -8,9 +8,9 @@
 {
 
   imports = [
-    ../modules/shared/stylix.nix
-    ../modules/home-manager/profiles/desktop.nix
-    ../modules/shared/nixpkgs-config.nix
+    ../../modules/shared/stylix.nix
+    ../../modules/home-manager/profiles/desktop.nix
+    ../../modules/shared/nixpkgs-config.nix
   ];
 
   # Preserve legacy GTK4 theme behavior (default flipped to null in HM 26.05).
