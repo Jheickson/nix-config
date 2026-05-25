@@ -38,6 +38,7 @@ in
       lazygit
       ngrok
       nodejs_22
+      pnpm
       # nodePackages.eas-cli
       opencode
       claude-code
