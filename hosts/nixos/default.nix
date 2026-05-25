@@ -22,6 +22,9 @@
     # Shared theme configuration
     ../../modules/shared/stylix.nix
 
+    # Centralized nixpkgs config (unfree / insecure / overlays)
+    ../../modules/shared/nixpkgs-config.nix
+
     # Home Manager integration
     inputs.home-manager.nixosModules.home-manager
 
@@ -256,20 +259,6 @@
     xdg-desktop-portal-gtk
     xdg-desktop-portal-wlr
   ];
-
-  nixpkgs = {
-    config.allowUnfreePredicate = pkg: true;
-    config.permittedInsecurePackages = [
-      "googleearth-pro-7.3.6.10201"
-      "xpdf-4.05"
-      "python-2.7.18.12"
-    ];
-    overlays = [
-      (final: prev: {
-        nvchad = inputs.nix4nvchad.packages."${pkgs.system}".nvchad;
-      })
-    ];
-  };
 
   # ============================================================================
   # Documentation & Help
