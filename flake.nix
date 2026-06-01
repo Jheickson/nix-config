@@ -15,12 +15,17 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Pin HM and Stylix to release branches matching nixpkgs's current cycle
+    # (nixos-unstable currently reports lib.version 26.05). When nixpkgs unstable
+    # bumps to the next cycle, update these refs to match — `release-XX.YY`.
     home-manager = {
-      url = "github:nix-community/home-manager";
+      url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    stylix.url = "github:danth/stylix";
+    # Stylix release-26.05 branch does not exist yet; release-25.11 is the
+    # closest available. Bump to release-26.05 once upstream cuts it.
+    stylix.url = "github:danth/stylix/release-25.11";
 
     niri = {
       url = "github:sodiboo/niri-flake";

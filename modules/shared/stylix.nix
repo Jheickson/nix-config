@@ -5,6 +5,11 @@
     enable = stylixConfig.enable;
     autoEnable = stylixConfig.enable;
 
+    # Stylix has no release-26.05 branch yet; we pin to release-25.11 (closest
+    # available) while HM/nixpkgs are on the 26.05 cycle. Remove this once a
+    # matching Stylix release branch exists.
+    enableReleaseChecks = false;
+
     polarity = "dark";
 
     opacity = {
