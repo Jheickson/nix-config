@@ -12,7 +12,7 @@
     };
     overlays = [
       (final: prev: {
-        nvchad = inputs.nix4nvchad.packages.${pkgs.system}.nvchad;
+        nvchad = inputs.nix4nvchad.packages.${pkgs.stdenv.hostPlatform.system}.nvchad;
       })
     ];
   };
