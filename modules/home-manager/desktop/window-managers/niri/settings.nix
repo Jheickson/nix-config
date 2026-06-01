@@ -244,7 +244,7 @@ in
             };
           };
           horizontal-view-movement = {
-            spring = {
+            kind.spring = {
               damping-ratio = 0.80;
               stiffness = 500;
               epsilon = 0.0001;
