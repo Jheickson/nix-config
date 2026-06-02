@@ -284,40 +284,30 @@ end)
 require('mini.misc').setup()
 MiniMisc.setup_auto_root({ '.git', 'flake.nix', 'Cargo.toml', 'package.json', 'pyproject.toml' })
 
--- Colorscheme persistence — remembers last :colorscheme across sessions
-local colorscheme_file = vim.fn.stdpath('data') .. '/last-colorscheme'
+-- =============================================================================
+-- COLORSCHEME (matugen-driven, FS-watched for live reload)
+-- =============================================================================
+-- ~/.config/nvim/colors/matugen.lua is a home-manager symlink to a /nix/store
+-- path produced by modules/shared/matugen.nix. The symlink target changes on
+-- every nh switch when the matugen palette is regenerated; we watch the path
+-- and re-source :colorscheme matugen so live nvim instances pick up the new
+-- colors without a restart.
+local colors_file = vim.fn.expand('~/.config/nvim/colors/matugen.lua')
 
-vim.api.nvim_create_autocmd('ColorScheme', {
-  callback = function()
-    local f = io.open(colorscheme_file, 'w')
-    if f then f:write(vim.g.colors_name or '') f:close() end
-  end,
-})
-
-local function restore_colorscheme()
-  local f = io.open(colorscheme_file, 'r')
-  if f then
-    local name = f:read('*l') f:close()
-    if name and name ~= '' then
-      pcall(vim.cmd.colorscheme, name)
-      return
-    end
-  end
-  pcall(vim.cmd.colorscheme, 'base16-ayu-dark') -- default on first run
+local function reload_colorscheme()
+  vim.schedule(function()
+    pcall(vim.cmd.colorscheme, 'matugen')
+  end)
 end
 
--- tinted-vim: switch themes with :colorscheme base16-<name>
--- e.g. base16-ayu-dark, base16-onedark, base16-horizon-dark, base16-gruvbox-dark-hard
-vim.api.nvim_create_autocmd('PackChanged', {
-  callback = function(ev)
-    if ev.data.spec.name == 'tinted-vim' and ev.data.kind == 'install' then
-      restore_colorscheme()
-    end
-  end,
-})
+local watcher = vim.uv.new_fs_event()
+if watcher then
+  watcher:start(colors_file, {}, function(err)
+    if not err then reload_colorscheme() end
+  end)
+end
 
-vim.pack.add({ 'https://github.com/tinted-theming/tinted-vim' })
-restore_colorscheme() -- no-op on first install (PackChanged handles it)
+pcall(vim.cmd.colorscheme, 'matugen')
 
 -- Icons (used by statusline, tabline, etc.)
 require('mini.icons').setup()

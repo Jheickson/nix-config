@@ -1,5 +1,8 @@
-{ pkgs, ... }:
+{ pkgs, stylixConfig, ... }:
 
+let
+  matugen = import ../../../../../shared/matugen.nix { inherit pkgs stylixConfig; };
+in
 {
   home.packages = with pkgs; [
     neovim # 0.12.1 from nixos-unstable
@@ -34,4 +37,9 @@
   };
 
   xdg.configFile."nvim/init.lua".source = ./init.lua;
+
+  # Matugen-derived colorscheme. Regenerated on every nh switch when the
+  # wallpaper or palette inputs change. nvim FS-watches this file (see
+  # init.lua) and re-sources :colorscheme matugen on write.
+  xdg.configFile."nvim/colors/matugen.lua".source = matugen.matugenNvim;
 }
