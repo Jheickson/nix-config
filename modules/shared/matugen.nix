@@ -5,9 +5,9 @@
 # --type <SCHEME>          How the source color seeds the rest of the palette.
 #   scheme-tonal-spot      [DEFAULT] Stock Material 3. Balanced, vibrant accents.
 #   scheme-content         Preserves source hue + chroma. Wallpaper-faithful.
-#   scheme-fidelity        Like content, stronger fidelity. [current pick]
+#   scheme-fidelity        Like content, stronger fidelity.
 #   scheme-expressive      Rotates hue for punchy accents far from source.
-#   scheme-vibrant         High chroma everywhere.
+#   scheme-vibrant         High chroma everywhere. [current pick]
 #   scheme-neutral         Low chroma, muted/washed.
 #   scheme-monochrome      Greyscale only. No accents.
 #   scheme-fruit-salad     Multi-hue, accents from far rotations. Playful.
@@ -44,7 +44,8 @@ let
         output_path = './matugen.lua'
         EOF
         matugen image ${stylixConfig.wallpaperSource} \
-          --type scheme-fidelity \
+          --type scheme-vibrant \
+          --contrast 0.3 \
           --source-color-index 1 \
           --mode ${stylixConfig.polarity} \
           --config ./config.toml

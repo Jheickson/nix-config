@@ -2,17 +2,26 @@
 vim.g.colors_name = "matugen"
 vim.opt.background = "{{ mode }}"
 
+-- Palette favors *_fixed_dim roles for max saturation on dark bg.
+-- In Material You dark mode:
+--   *_fixed       = lightest tone of role (T90), pastel-leaning
+--   *_fixed_dim   = slightly less light (T80), MORE saturated -> punchy fg
+--   inverse_*     = dark tone for use on light bg; avoid as fg on dark bg
 local p = {
   bg        = "{{ colors.surface.default.hex }}",
   bg_alt    = "{{ colors.surface_container.default.hex }}",
   bg_high   = "{{ colors.surface_container_high.default.hex }}",
   fg        = "{{ colors.on_surface.default.hex }}",
   fg_dim    = "{{ colors.on_surface_variant.default.hex }}",
-  primary   = "{{ colors.primary.default.hex }}",
-  secondary = "{{ colors.secondary.default.hex }}",
-  tertiary  = "{{ colors.tertiary.default.hex }}",
-  error     = "{{ colors.error.default.hex }}",
-  outline   = "{{ colors.outline.default.hex }}",
+
+  -- Saturated accents.
+  primary       = "{{ colors.primary_fixed_dim.default.hex }}",
+  primary_alt   = "{{ colors.primary_container.default.hex }}",
+  primary_on    = "{{ colors.on_primary_container.default.hex }}",
+  secondary     = "{{ colors.secondary_fixed_dim.default.hex }}",
+  tertiary      = "{{ colors.tertiary_fixed_dim.default.hex }}",
+  error         = "{{ colors.error.default.hex }}",
+  outline       = "{{ colors.outline.default.hex }}",
 }
 
 local hl = function(g, o) vim.api.nvim_set_hl(0, g, o) end
@@ -22,22 +31,22 @@ hl("NormalFloat",  { fg = p.fg,  bg = p.bg_alt })
 hl("CursorLine",   { bg = p.bg_alt })
 hl("LineNr",       { fg = p.fg_dim })
 hl("CursorLineNr", { fg = p.primary, bold = true })
-hl("Visual",       { bg = p.bg_high })
+hl("Visual",       { bg = p.primary_alt, fg = p.primary_on })
 hl("StatusLine",   { fg = p.fg,  bg = p.bg_alt })
 hl("Pmenu",        { fg = p.fg,  bg = p.bg_alt })
 hl("PmenuSel",     { fg = p.bg,  bg = p.primary })
 hl("WinSeparator", { fg = p.outline })
 hl("FloatBorder",  { fg = p.outline, bg = p.bg_alt })
 
-hl("Comment",    { fg = p.fg_dim, italic = true })
+hl("Comment",    { fg = p.outline, italic = true })
 hl("Constant",   { fg = p.tertiary })
-hl("String",     { fg = p.secondary })
+hl("String",     { fg = p.tertiary })
 hl("Identifier", { fg = p.fg })
 hl("Function",   { fg = p.primary })
-hl("Statement",  { fg = p.primary, bold = true })
-hl("Keyword",    { fg = p.primary, bold = true })
+hl("Statement",  { fg = p.secondary, bold = true })
+hl("Keyword",    { fg = p.secondary, bold = true })
 hl("Type",       { fg = p.tertiary })
-hl("Special",    { fg = p.secondary })
+hl("Special",    { fg = p.primary })
 
 hl("DiagnosticError", { fg = p.error })
 hl("DiagnosticWarn",  { fg = p.tertiary })
