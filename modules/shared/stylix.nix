@@ -42,6 +42,7 @@ in
     image =
       if stylixConfig.useThemeFile then stylixConfig.wallpaperImage else stylixConfig.wallpaperSource;
 
-    base16Scheme = if stylixConfig.useThemeFile then stylixConfig.themeFile else matugen.matugenScheme;
+    base16Scheme =
+      if stylixConfig.useThemeFile then stylixConfig.themeFile else "${matugen.matugenScheme}";
   };
 }
