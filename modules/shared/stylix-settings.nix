@@ -2,7 +2,7 @@
 
 {
   enable = true;
-  useThemeFile = true;
+  useThemeFile = false;
   polarity = "dark";
 
   wallpaperSource = ../../assets/wallpapers/Landscape/wallhaven-ml2zwy.png;
