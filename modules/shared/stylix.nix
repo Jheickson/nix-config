@@ -1,5 +1,13 @@
-{ pkgs, lib, stylixConfig, ... }:
+{
+  pkgs,
+  lib,
+  stylixConfig,
+  ...
+}:
 
+let
+  matugen = import ./matugen.nix { inherit pkgs stylixConfig; };
+in
 {
   stylix = {
     enable = stylixConfig.enable;
@@ -10,7 +18,7 @@
     # matching Stylix release branch exists.
     enableReleaseChecks = false;
 
-    polarity = "dark";
+    polarity = stylixConfig.polarity;
 
     opacity = {
       terminal = 0.75;
@@ -31,11 +39,9 @@
       size = 16;
     };
 
-    image = if stylixConfig.useThemeFile then
-      stylixConfig.wallpaperImage
-    else
-      stylixConfig.wallpaperSource;
-  } // lib.optionalAttrs stylixConfig.useThemeFile {
-    base16Scheme = stylixConfig.themeFile;
+    image =
+      if stylixConfig.useThemeFile then stylixConfig.wallpaperImage else stylixConfig.wallpaperSource;
+
+    base16Scheme = if stylixConfig.useThemeFile then stylixConfig.themeFile else matugen.matugenScheme;
   };
 }
