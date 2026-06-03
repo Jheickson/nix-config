@@ -7,7 +7,7 @@
 #   scheme-content         Preserves source hue + chroma. Wallpaper-faithful.
 #   scheme-fidelity        Like content, stronger fidelity.
 #   scheme-expressive      Rotates hue for punchy accents far from source.
-#   scheme-vibrant         High chroma everywhere. [current pick]
+#   scheme-vibrant         High chroma everywhere.
 #   scheme-neutral         Low chroma, muted/washed.
 #   scheme-monochrome      Greyscale only. No accents.
 #   scheme-fruit-salad     Multi-hue, accents from far rotations. Playful.
@@ -43,10 +43,20 @@ let
         input_path  = '${./matugen-templates/nvim.lua}'
         output_path = './matugen.lua'
         EOF
+        # Try source-color-index 1 first (often punchier than 0 for landscape
+        # photos where 0 is dominated by sky/ground). Fall back to 0 when an
+        # image only extracts a single dominant color, otherwise matugen
+        # errors with "Source color index 1 is out of bounds (0-0)".
         matugen image ${stylixConfig.wallpaperSource} \
           --type scheme-vibrant \
-          --contrast 0.3 \
+          --contrast 0.5 \
           --source-color-index 1 \
+          --mode ${stylixConfig.polarity} \
+          --config ./config.toml \
+        || matugen image ${stylixConfig.wallpaperSource} \
+          --type scheme-vibrant \
+          --contrast 0.5 \
+          --source-color-index 0 \
           --mode ${stylixConfig.polarity} \
           --config ./config.toml
         cp base16.yaml $out/
