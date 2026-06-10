@@ -1,38 +1,12 @@
-{ pkgs, inputs, lib, ... }:
+{ pkgs, lib, ... }:
 
 {
-  # Import the home manager module
-  imports = [
-    inputs.noctalia.homeModules.default
-  ];
+  # Use pkgs.noctalia-shell from nixpkgs (v4) instead of the upstream flake's
+  # HM module — v5 is still rough and the build was slow. Config is the legacy
+  # JSON format dropped at ~/.config/noctalia/settings.json.
+  home.packages = [ pkgs.noctalia-shell ];
 
-  # Configure Noctalia shell
-  programs.noctalia-shell = {
-    enable = true;
-    
-    # Systemd startup is deprecated upstream; spawn via niri spawn-at-startup instead.
-    systemd.enable = false;
-
-    # Use your custom settings from the JSON file
-    # To update: modify the bar through the GUI, then copy settings and update the JSON file
-    # mkForce is needed to override the module's default settings
-    settings = lib.mkForce (builtins.fromJSON (builtins.readFile ./settings.json));
-
-    # Optional: Configure plugins
-    # plugins = {
-    #   sources = [
-    #     {
-    #       enabled = true;
-    #       name = "Official Noctalia Plugins";
-    #       url = "https://github.com/noctalia-dev/noctalia-plugins";
-    #     }
-    #   ];
-    #   states = {
-    #     # Add plugin states here
-    #   };
-    #   version = 1;
-    # };
-  };
+  xdg.configFile."noctalia/settings.json".source = ./settings.json;
 
   # Reload noctalia-shell on `hms`. Kill if running, then ask niri to spawn
   # a fresh instance via IPC so the process is parented by the niri session.
