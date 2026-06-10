@@ -1,2 +1,3 @@
 result
 modules/nixos/services/navidrome/secrets.env
+.claude/scheduled_tasks.lock
