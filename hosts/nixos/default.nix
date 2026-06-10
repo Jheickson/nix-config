@@ -71,4 +71,9 @@
   # Host-unique
   networking.hostName = "nixos";
   system.stateVersion = "24.05";
+
+  # Stylix release-25.11's kmscon target still sets the removed
+  # `services.kmscon.extraConfig` / `services.kmscon.fonts` options on
+  # nixos-unstable. Disable until stylix tracks `services.kmscon.config`.
+  stylix.targets.kmscon.enable = false;
 }
