@@ -26,17 +26,21 @@ local p = {
 
 local hl = function(g, o) vim.api.nvim_set_hl(0, g, o) end
 
-hl("Normal",       { fg = p.fg,  bg = p.bg })
-hl("NormalFloat",  { fg = p.fg,  bg = p.bg_alt })
+-- bg = "NONE" lets ghostty's blurred/translucent surface show through.
+hl("Normal",       { fg = p.fg,  bg = "NONE" })
+hl("NormalNC",     { fg = p.fg,  bg = "NONE" })
+hl("NormalFloat",  { fg = p.fg,  bg = "NONE" })
+hl("SignColumn",   { bg = "NONE" })
+hl("EndOfBuffer",  { bg = "NONE" })
+hl("LineNr",       { fg = p.fg_dim, bg = "NONE" })
 hl("CursorLine",   { bg = p.bg_alt })
-hl("LineNr",       { fg = p.fg_dim })
-hl("CursorLineNr", { fg = p.primary, bold = true })
+hl("CursorLineNr", { fg = p.primary, bold = true, bg = "NONE" })
 hl("Visual",       { bg = p.primary_alt, fg = p.primary_on })
 hl("StatusLine",   { fg = p.fg,  bg = p.bg_alt })
 hl("Pmenu",        { fg = p.fg,  bg = p.bg_alt })
 hl("PmenuSel",     { fg = p.bg,  bg = p.primary })
-hl("WinSeparator", { fg = p.outline })
-hl("FloatBorder",  { fg = p.outline, bg = p.bg_alt })
+hl("WinSeparator", { fg = p.outline, bg = "NONE" })
+hl("FloatBorder",  { fg = p.outline, bg = "NONE" })
 
 hl("Comment",    { fg = p.outline, italic = true })
 hl("Constant",   { fg = p.tertiary })
