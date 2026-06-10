@@ -2,14 +2,14 @@
 
 {
   enable = true;
-  useThemeFile = false;
+  useThemeFile = true;
   polarity = "dark";
 
-  wallpaperSource = ../../assets/wallpapers/Landscape/wallhaven-ml2zwy.png;
+  wallpaperSource = ../../assets/wallpapers/Minimalistic/wallhaven-e8w2jk.png;
   wallpaperImage = ../../assets/wallpapers/wallpaper.png;
   wallpaperOutputPath = "/home/felipe/nix-config/assets/wallpapers/wallpaper.png";
 
-  themeFile = "${pkgs.base16-schemes}/share/themes/saga.yaml";
+  themeFile = "${pkgs.base16-schemes}/share/themes/xcode-dusk.yaml";
 }
 
 /*
