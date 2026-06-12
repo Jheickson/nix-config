@@ -11,18 +11,12 @@
       brightnessctl = spawn "${pkgs.brightnessctl}/bin/brightnessctl";
       playerctl = spawn "${pkgs.playerctl}/bin/playerctl";
 
-      # Helper function for Noctalia IPC commands
-      # --any-display bypasses Wayland display filtering, which fails when niri
-      # spawns processes without a full display environment
-      noctalia =
-        cmd:
-        [
-          "noctalia"
-          "ipc"
-          "--any-display"
-          "call"
-        ]
-        ++ (pkgs.lib.splitString " " cmd);
+      # Helper for Noctalia IPC commands. v5 reworked the CLI: the v4 form
+      # `noctalia-shell ipc --any-display call <ns> <action>` is now
+      # `noctalia msg <command> [args]` (panels via `panel-toggle <id>`,
+      # session actions via `session <action>`). msg talks to the running
+      # instance over a socket, so the old --any-display flag is gone.
+      noctalia = cmd: [ "noctalia" "msg" ] ++ (pkgs.lib.splitString " " cmd);
     in
     {
       # ── Media ─────────────────────────────────────────────────────────────
@@ -54,14 +48,14 @@
       # "Mod+Shift+Alt+S".action = screenshot-window;
 
       # ── Session ───────────────────────────────────────────────────────────
-      "Mod+L".action.spawn = noctalia "lockScreen lock";
-      "Mod+Shift+L".action.spawn = noctalia "sessionMenu toggle";
+      "Mod+L".action.spawn = noctalia "session lock";
+      "Mod+Shift+L".action.spawn = noctalia "panel-toggle session-panel";
       "Ctrl+Alt+L".action = spawn "sh -c pgrep hyprlock || hyprlock";
 
       # ── Noctalia UI ───────────────────────────────────────────────────────
-      "Mod+D".action.spawn = noctalia "launcher toggle";
-      "Mod+N".action.spawn = noctalia "notifications toggleHistory";
-      "Mod+C".action.spawn = noctalia "controlCenter toggle";
+      "Mod+D".action.spawn = noctalia "panel-toggle launcher";
+      "Mod+N".action.spawn = noctalia "panel-toggle notification-history";
+      "Mod+C".action.spawn = noctalia "panel-toggle control-center";
 
       # ── Application Launchers ─────────────────────────────────────────────
       "Mod+Return".action = spawn "${pkgs.ghostty}/bin/ghostty";
