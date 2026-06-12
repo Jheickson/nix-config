@@ -16,9 +16,9 @@
     # Systemd startup is deprecated upstream; spawn via niri spawn-at-startup instead.
     systemd.enable = false;
 
-    # Settings will be authored manually at ~/.config/noctalia/config.toml.
-    # When ready to track them declaratively again, set `settings = builtins.fromJSON ...`
-    # or point to a .toml file.
+    # v5 settings as a TOML file; module copies it to ~/.config/noctalia/config.toml.
+    # Note: runtime GUI edits still write back to that file — re-export here to keep declarative.
+    settings = ./noctalia-config.toml;
   };
 
   # Reload noctalia on `hms`. Kill if running, then ask niri to spawn a fresh
