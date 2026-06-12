@@ -33,9 +33,15 @@ in
       serif = monospace;
     };
 
+    # cursor = {
+    #   package = pkgs.phinger-cursors;
+    #   name = "phinger-cursors-light";
+    #   size = 16;
+    # };
+    
     cursor = {
-      package = pkgs.phinger-cursors;
-      name = "phinger-cursors-light";
+      package = pkgs.rose-pine-cursor;
+      name = "BreezeX-RosePine-Linux";
       size = 16;
     };
 
