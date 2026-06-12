@@ -1,14 +1,16 @@
 { config, pkgs, ... }:
 
 {
-  # Enable greetd as the display manager
+  # Enable greetd as the display manager.
+  # Keep `command` as a single-line string: nixpkgs greetd module now
+  # serialises multi-line Nix strings as TOML triple-quoted strings, which
+  # greetd's parser rejects ("expected equals sign on line, but found none"),
+  # leaving the system stuck after "Reached target Graphical Interface".
   services.greetd = {
     enable = true;
     settings = {
       default_session = {
-        command = ''
-          ${pkgs.niri}/bin/niri-session
-        '';
+        command = "${pkgs.niri}/bin/niri-session";
         user = "felipe";
       };
     };
