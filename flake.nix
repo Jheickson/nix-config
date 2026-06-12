@@ -15,11 +15,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Pin HM and Stylix to release branches matching nixpkgs's current cycle
-    # (nixos-unstable currently reports lib.version 26.05). When nixpkgs unstable
-    # bumps to the next cycle, update these refs to match — `release-XX.YY`.
+    # Track HM master to match nixpkgs nixos-unstable. The latest cut
+    # release branch (release-26.05) trails unstable (now 26.11pre-git) and
+    # triggers HM's nixpkgs-release mismatch warning.
     home-manager = {
-      url = "github:nix-community/home-manager/release-26.05";
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
