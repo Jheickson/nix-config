@@ -1,0 +1,85 @@
+[audio]
+enable_overdrive = true
+enable_sounds = true
+
+[bar.default]
+background_opacity = 0.4999999888241291
+color = "tertiary"
+font_weight = 400
+
+[dock]
+active_monitor_only = true
+enabled = true
+icon_size = 24
+
+[location]
+auto_locate = true
+
+[lockscreen_widgets]
+schema_version = 2
+widget_order = [ "lockscreen-login-box@HDMI-A-1", "lockscreen-login-box@eDP-1" ]
+
+    [lockscreen_widgets.grid]
+    cell_size = 16
+    major_interval = 4
+    visible = true
+
+    [lockscreen_widgets.widget."lockscreen-login-box@HDMI-A-1"]
+    box_height = 0.0
+    box_width = 0.0
+    cx = 960.0
+    cy = 957.0
+    output = "HDMI-A-1"
+    rotation = 0.0
+    type = "login_box"
+
+    [lockscreen_widgets.widget."lockscreen-login-box@eDP-1"]
+    box_height = 0.0
+    box_width = 0.0
+    cx = 960.0
+    cy = 957.0
+    output = "eDP-1"
+    rotation = 0.0
+    type = "login_box"
+
+[osd]
+orientation = "vertical"
+position = "bottom_right"
+
+[shell]
+corner_radius_scale = 1.4500000216066837
+settings_show_advanced = true
+ui_scale = 0.85000000521540642
+
+    [shell.panel]
+    launcher_compact = true
+    open_near_click_control_center = true
+    transparency_mode = "glass"
+
+    [shell.screen_corners]
+    enabled = true
+
+[theme]
+builtin = "Rosé Pine"
+community_palette = "Rose Pine Moon"
+mode = "light"
+
+    [theme.templates]
+    enable_builtin_templates = false
+    enable_community_templates = false
+
+[wallpaper]
+directory = "/home/felipe/nix-config/assets/wallpapers"
+fill_mode = "center"
+
+    [wallpaper.default]
+    path = "/home/felipe/nix-config/assets/wallpapers/Themed/RosePine/Sif.png"
+
+    [wallpaper.last]
+    path = "/home/felipe/nix-config/assets/wallpapers/Themed/RosePine/Sif.png"
+
+    [wallpaper.monitors.HDMI-A-1]
+    path = "/home/felipe/nix-config/assets/wallpapers/Themed/RosePine/Sif.png"
+
+    [wallpaper.monitors.eDP-1]
+    path = "/home/felipe/nix-config/assets/wallpapers/Themed/RosePine/Sif.png"
