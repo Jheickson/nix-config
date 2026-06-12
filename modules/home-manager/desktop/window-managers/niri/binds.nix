@@ -17,7 +17,7 @@
       noctalia =
         cmd:
         [
-          "noctalia-shell"
+          "noctalia"
           "ipc"
           "--any-display"
           "call"
