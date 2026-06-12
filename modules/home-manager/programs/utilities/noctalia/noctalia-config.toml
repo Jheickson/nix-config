@@ -492,10 +492,10 @@ swap_pct_critical_threshold = 80.0
 [theme]
 builtin = "Rosé Pine"
 community_palette = "Rose Pine Moon"
-custom_palette = ""
+custom_palette = "sif-mc"
 mode = "light"
 source = "builtin"
-wallpaper_scheme = "faithful"
+wallpaper_scheme = "m3-content"
 
     [theme.templates]
     builtin_ids = []
@@ -555,7 +555,7 @@ show_label = false
 type = "battery"
 
 [widget.bluetooth]
-hide_when_no_connected_device = true
+hide_when_no_connected_device = false
 type = "bluetooth"
 
 [widget.bongocat]
