@@ -149,7 +149,7 @@ pre_action_fade_seconds = 2.0
     [idle.behavior.lock]
     action = "lock"
     command = ""
-    enabled = false
+    enabled = true
     resume_command = ""
     timeout = 600
 
@@ -183,7 +183,7 @@ sunset = ""
 
 [lockscreen]
 blur_intensity = 0.5
-blurred_desktop = false
+blurred_desktop = true
 monitors = []
 tint_intensity = 0.30000001192092896
 wallpaper = ""
@@ -191,10 +191,17 @@ wallpaper = ""
 [lockscreen_widgets]
 enabled = false
 schema_version = 2
-widget_order = [ "lockscreen-login-box@HDMI-A-1", "lockscreen-login-box@eDP-1" ]
+widget_order = [
+    "lockscreen-login-box@HDMI-A-1",
+    "lockscreen-login-box@eDP-1",
+    "lockscreen-widget-0000000000000001",
+    "lockscreen-widget-0000000000000003",
+    "lockscreen-widget-0000000000000004",
+    "lockscreen-widget-0000000000000005"
+]
 
     [lockscreen_widgets.grid]
-    cell_size = 16
+    cell_size = 64
     major_interval = 4
     visible = true
 
@@ -221,6 +228,80 @@ widget_order = [ "lockscreen-login-box@HDMI-A-1", "lockscreen-login-box@eDP-1" ]
     type = "login_box"
 
         [lockscreen_widgets.widget."lockscreen-login-box@eDP-1".settings]
+
+    [lockscreen_widgets.widget.lockscreen-widget-0000000000000001]
+    box_height = 464.0
+    box_width = 496.0
+    cx = 960.0
+    cy = 540.0
+    enabled = true
+    output = "HDMI-A-1"
+    rotation = 0.0
+    type = "fancy_audio_visualizer"
+
+        [lockscreen_widgets.widget.lockscreen-widget-0000000000000001.settings]
+        background = false
+        bar_width = 0.69999999999999996
+        bloom_intensity = 0.30000000000000004
+        fade_when_idle = true
+        inner_diameter = 0.25
+        ring_opacity = 0.60000000000000009
+        rotation_speed = 0.30000000000000004
+        sensitivity = 2.4000000000000004
+        visualization_mode = "bars_rings"
+
+    [lockscreen_widgets.widget.lockscreen-widget-0000000000000003]
+    box_height = 320.0
+    box_width = 256.0
+    cx = 1760.0
+    cy = 188.0
+    enabled = true
+    output = "HDMI-A-1"
+    rotation = 0.0
+    type = "media_player"
+
+        [lockscreen_widgets.widget.lockscreen-widget-0000000000000003.settings]
+        background = true
+        background_color = "surface"
+        background_opacity = 0.40000000000000002
+        background_padding = 0.0
+        background_radius = 9.0
+        color = "primary"
+        hide_when_no_media = true
+        layout = "vertical"
+
+    [lockscreen_widgets.widget.lockscreen-widget-0000000000000004]
+    box_height = 128.0
+    box_width = 512.0
+    cx = 960.0
+    cy = 220.0
+    enabled = true
+    output = "HDMI-A-1"
+    rotation = 0.0
+    type = "clock"
+
+        [lockscreen_widgets.widget.lockscreen-widget-0000000000000004.settings]
+        background = true
+        background_opacity = 0.75
+        background_padding = 4.0
+        background_radius = 9.0
+        circle = true
+        clock_style = "digital"
+        format = "{:%Y/%m/%d}"
+        shadow = false
+
+    [lockscreen_widgets.widget.lockscreen-widget-0000000000000005]
+    box_height = 128.0
+    box_width = 256.0
+    cx = 960.0
+    cy = 372.0
+    enabled = true
+    output = "HDMI-A-1"
+    rotation = 0.0
+    type = "clock"
+
+        [lockscreen_widgets.widget.lockscreen-widget-0000000000000005.settings]
+        shadow = false
 
 [nightlight]
 enabled = false
@@ -282,8 +363,8 @@ launch_apps_as_systemd_services = false
 middle_click_opens_widget_settings = true
 niri_overview_type_to_launch_enabled = false
 offline_mode = false
-password_style = "default"
-polkit_agent = false
+password_style = "random"
+polkit_agent = true
 screen_time_enabled = false
 settings_show_advanced = true
 setup_wizard_enabled = true
