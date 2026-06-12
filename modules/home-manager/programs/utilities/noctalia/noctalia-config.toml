@@ -567,7 +567,7 @@ type = "scripted"
 use_mpris_filter = true
 
 [widget.clock]
-format = "{:%Y/%m/%d %H:%M:%S}"
+format = "{:%Y/%m/%d %H:%M}"
 type = "clock"
 
 [widget.cpu]
