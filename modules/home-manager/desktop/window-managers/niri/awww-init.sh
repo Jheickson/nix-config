@@ -70,7 +70,7 @@ fi
 # Retry the img call: daemon may accept query but not be fully ready to
 # render on the very first attempt after cold boot.
 for attempt in $(seq 1 10); do
-    if "$AWWW_BIN" img "$WALLPAPER" --resize crop; then
+    if "$AWWW_BIN" img "$WALLPAPER" --resize no; then
         echo "Wallpaper applied on attempt $attempt"
         exit 0
     fi
