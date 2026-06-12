@@ -23,23 +23,11 @@ order = [ "default" ]
     capsule_group = []
     capsule_opacity = 1.0
     capsule_padding = 6.0
-    center = [ "clock" ]
+    center = [ "media", "notifications" ]
     color = "tertiary"
     contact_shadow = false
     enabled = true
-    end = [
-        "media",
-        "tray",
-        "notifications",
-        "clipboard",
-        "network",
-        "bluetooth",
-        "volume",
-        "brightness",
-        "battery",
-        "control-center",
-        "session"
-    ]
+    end = [ "battery_1", "network", "bluetooth", "battery_2", "volume", "tray" ]
     font_weight = 400
     layer = "top"
     margin_edge = 10
@@ -55,7 +43,7 @@ order = [ "default" ]
     reserve_space = true
     scale = 1.0
     shadow = true
-    start = [ "launcher", "wallpaper", "workspaces" ]
+    start = [ "clock" ]
     thickness = 34
     widget_spacing = 6
 
@@ -105,7 +93,7 @@ schema_version = 2
 active_monitor_only = true
 active_opacity = 1.0
 active_scale = 1.0
-auto_hide = false
+auto_hide = true
 background_opacity = 0.87999999523162842
 cross_axis_padding = 8
 enabled = true
@@ -466,6 +454,41 @@ min_length = 80.0
 title_scroll = "none"
 type = "active_window"
 
+[widget.battery]
+device = "/org/freedesktop/UPower/devices/headset_dev_F5_5B_D3_3D_EA_9E"
+display_mode = "graphic"
+show_label = false
+type = "battery"
+
+[widget.battery_1]
+device = "/org/freedesktop/UPower/devices/battery_BAT0"
+display_mode = "graphic"
+hide_when_full = true
+show_label = false
+type = "battery"
+
+[widget.battery_2]
+device = "/org/freedesktop/UPower/devices/headset_dev_F5_5B_D3_3D_EA_9E"
+display_mode = "graphic"
+show_label = false
+type = "battery"
+
+[widget.bluetooth]
+hide_when_no_connected_device = true
+type = "bluetooth"
+
+[widget.bongocat]
+audio_spectrum = true
+rave_mode = true
+script = "scripts/bongocat.lua"
+tappy_mode = true
+type = "scripted"
+use_mpris_filter = true
+
+[widget.clock]
+format = "{:%Y/%m/%d %H:%M:%S}"
+type = "clock"
+
 [widget.cpu]
 stat = "cpu_usage"
 type = "sysmon"
@@ -493,10 +516,15 @@ type = "lock_keys"
 
 [widget.media]
 art_size = 16.0
-max_length = 220.0
+hide_when_no_media = true
+max_length = 500
 min_length = 80.0
-title_scroll = "none"
+title_scroll = "always"
 type = "media"
+
+[widget.network]
+show_label = false
+type = "network"
 
 [widget.network_rx]
 stat = "net_rx"
@@ -505,6 +533,10 @@ type = "sysmon"
 [widget.network_tx]
 stat = "net_tx"
 type = "sysmon"
+
+[widget.notifications]
+hide_when_no_unread = true
+type = "notifications"
 
 [widget.output_volume]
 device = "output"
@@ -520,6 +552,14 @@ type = "spacer"
 [widget.temp]
 stat = "cpu_temp"
 type = "sysmon"
+
+[widget.tray]
+drawer = true
+type = "tray"
+
+[widget.volume]
+show_label = false
+type = "volume"
 
 [widget.workspaces]
 display = "none"
