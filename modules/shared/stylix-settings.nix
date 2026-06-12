@@ -5,8 +5,9 @@
   useThemeFile = true;
   polarity = "light";
 
-  wallpaperSource = ../../assets/wallpapers/Minimalistic/wallhaven-e8w2jk.png;
-  wallpaperImage = ../../assets/wallpapers/wallpaper.png;
+  wallpaperSource = ../../assets/wallpapers/Themed/RosePine/Sif.png;
+  # wallpaperImage = ../../assets/wallpapers/wallpaper.png;
+  wallpaperImage = ../../assets/wallpapers/Themed/RosePine/Sif.png;
   wallpaperOutputPath = "/home/felipe/nix-config/assets/wallpapers/wallpaper.png";
 
   themeFile = "${pkgs.base16-schemes}/share/themes/rose-pine-dawn.yaml";
