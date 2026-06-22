@@ -14,24 +14,24 @@
 
 <h2 align="center">NixOS Configuration</h2>
 
-- [❄️ COMPONENTS](#️-components)
-- [📁 STRUCTURE](#-structure)
-- [� INSTALLATION](#-installation)
+- [COMPONENTS](#components)
+- [STRUCTURE](#structure)
+- [INSTALLATION](#installation)
   - [Quick Start](#quick-start)
   - [First Time Setup](#first-time-setup)
-- [🎨 CUSTOMIZATION](#-customization)
+- [CUSTOMIZATION](#customization)
   - [Changing Theme](#changing-theme)
   - [Adding Packages](#adding-packages)
   - [Modifying Window Manager](#modifying-window-manager)
-- [💻 SCREENSHOTS](#-screenshots)
-- [✨ FEATURES](#-features)
-- [🎩 ACKNOWLEDGEMENTS](#-acknowledgements)
-- [🔥 COLORSCHEME GENERATION](#-colorscheme-generation)
-- [📝 NOTES](#-notes)
-- [🤝 CONTRIBUTING](#-contributing)
+- [SCREENSHOTS](#screenshots)
+- [FEATURES](#features)
+- [ACKNOWLEDGEMENTS](#acknowledgements)
+- [COLORSCHEME GENERATION](#colorscheme-generation)
+- [NOTES](#notes)
+- [CONTRIBUTING](#contributing)
 
 
-## ❄️ <samp>COMPONENTS</samp>
+## COMPONENTS
 
 - **Window Manager** • [Niri](https://niri.app/) - Scrollable tiling Wayland compositor
 - **Desktop Shell** • [Noctalia](https://github.com/noctalia-dev/noctalia-shell) - Unified status bar, notifications, and app launcher
@@ -43,7 +43,7 @@
 - **Color Generator** • [Matugen](https://github.com/InioX/matugen) / [Iris](https://github.com/Harman1307/iris) - Wallpaper-based palette extraction
 - **Wallpaper** • [Gowall](https://github.com/flick0/gowall) - Dynamic wallpaper recolor (optional)
 
-## 📁 <samp>STRUCTURE</samp>
+## STRUCTURE
 
 ```
 nix-config/
@@ -80,7 +80,7 @@ nix-config/
     └── home.nix          # Home-manager entry point
 ```
 
-## � <samp>INSTALLATION</samp>
+## INSTALLATION
 
 ### Quick Start
 
@@ -104,7 +104,7 @@ home-manager switch --flake .#felipe
 4. Modify `hosts/nixos/default.nix` to suit your needs
 5. Run the installation command
 
-## 🎨 <samp>CUSTOMIZATION</samp>
+## CUSTOMIZATION
 
 ### Changing Theme
 Edit `modules/shared/stylix-settings.nix`:
@@ -133,7 +133,7 @@ Edit `modules/nixos/programs/packages.nix` to add system packages or create new 
 ### Modifying Window Manager
 Window manager configurations are in `modules/home-manager/desktop/window-managers/`.
 
-## 💻 <samp>SCREENSHOTS</samp>
+## SCREENSHOTS
 
 <p align="center">
 <!-- <img src="assets/screenshots/Screenshot-from-2025-08-02-20-24-43.png" width="400">
@@ -145,18 +145,18 @@ Window manager configurations are in `modules/home-manager/desktop/window-manage
 <img src="assets/screenshots/Screenshot-from-2025-08-02-20-54-37.png" width="400"> -->
 </p>
 
-## ✨ <samp>FEATURES</samp>
+## FEATURES
 
-- 🎯 **Modular Structure** - Organized by function for easy navigation and maintenance
-- 🔧 **Flakes Support** - Reproducible builds with Nix flakes
-- 🎨 **Beautiful Theming** - System-wide theming with Stylix
-- 🚀 **Optimized** - Fastboot times and responsive system
-- 📱 **Wayland Native** - Full Wayland support with Niri compositor
-- 🔒 **Declarative** - Everything configured in code
-- 🏠 **Home Manager** - User environment management
-- 🎮 **Gaming Ready** - Steam, Wine, and gaming tools included
+- **Modular Structure** - Organized by function for easy navigation and maintenance
+- **Flakes Support** - Reproducible builds with Nix flakes
+- **Beautiful Theming** - System-wide theming with Stylix
+- **Optimized** - Fastboot times and responsive system
+- **Wayland Native** - Full Wayland support with Niri compositor
+- **Declarative** - Everything configured in code
+- **Home Manager** - User environment management
+- **Gaming Ready** - Steam, Wine, and gaming tools included
 
-## 🎩 <samp>ACKNOWLEDGEMENTS</samp>
+## ACKNOWLEDGEMENTS
 
 This configuration was inspired by and built with knowledge from:
 
@@ -167,7 +167,7 @@ This configuration was inspired by and built with knowledge from:
 - The amazing NixOS community on GitHub, Reddit, and Discord
 - Various dotfiles repositories that showed what's possible
 
-## 🔥 <samp>COLORSCHEME GENERATION</samp>
+## COLORSCHEME GENERATION
 
 Colors are extracted from a wallpaper image and piped through the Nix build
 system to produce a consistent palette across the entire desktop.
@@ -211,14 +211,14 @@ terminal palette under `terminal.normal` and `terminal.bright`.
 The Noctalia TOML config then points `source = "custom"` and
 `custom_palette = "stylix"` to use this file.
 
-## 📝 <samp>NOTES</samp>
+## NOTES
 
 - This configuration is tailored for my specific setup but can be easily adapted
 - Wallpapers are included in `assets/wallpapers/` organized by category
 - The configuration is organized for multi-machine support (add new hosts easily)
 - Most commented-out packages in `packages.nix` have been tested and work
 
-## 🤝 <samp>CONTRIBUTING</samp>
+## CONTRIBUTING
 
 Feel free to open issues or PRs if you find bugs or have suggestions for improvements!
 
