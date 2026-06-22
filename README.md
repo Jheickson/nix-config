@@ -26,6 +26,7 @@
 - [💻 SCREENSHOTS](#-screenshots)
 - [✨ FEATURES](#-features)
 - [🎩 ACKNOWLEDGEMENTS](#-acknowledgements)
+- [🔥 COLORSCHEME GENERATION](#-colorscheme-generation)
 - [📝 NOTES](#-notes)
 - [🤝 CONTRIBUTING](#-contributing)
 
@@ -39,7 +40,8 @@
 - **Editor** • [Neovim](https://neovim.io/) (with [NixCats](https://github.com/BirdeeHub/nixCats-nvim)) / [VSCode](https://code.visualstudio.com/) - Text editors
 - **File Manager** • [Yazi](https://github.com/sxyazi/yazi) - Blazing fast terminal file manager
 - **Theme** • [Stylix](https://github.com/danth/stylix) - System-wide theming for NixOS
-- **Wallpaper** • [Gowall](https://github.com/flick0/gowall) - Dynamic wallpaper generator
+- **Color Generator** • [Matugen](https://github.com/InioX/matugen) / [Iris](https://github.com/Harman1307/iris) - Wallpaper-based palette extraction
+- **Wallpaper** • [Gowall](https://github.com/flick0/gowall) - Dynamic wallpaper recolor (optional)
 
 ## 📁 <samp>STRUCTURE</samp>
 
@@ -105,11 +107,25 @@ home-manager switch --flake .#felipe
 ## 🎨 <samp>CUSTOMIZATION</samp>
 
 ### Changing Theme
-Edit `modules/nixos/desktop/stylix.nix`:
+Edit `modules/shared/stylix-settings.nix`:
+
 ```nix
-wallpaperSource = ../../../assets/wallpapers/YourCategory/wallpaper.png;
-themeFile = "${pkgs.base16-schemes}/share/themes/your-theme.yaml";
+{
+  useThemeFile = true;          # true = fixed base16 scheme, false = generator from wallpaper
+  generator = "matugen";        # "matugen" or "iris" — only used when useThemeFile = false
+  polarity = "light";           # "light" or "dark"
+
+  wallpaperSource = ../../assets/wallpapers/YourCategory/wallpaper.png;
+  themeFile = "${pkgs.base16-schemes}/share/themes/your-theme.yaml";
+}
 ```
+
+Three modes:
+| Mode | `useThemeFile` | `generator` | Source |
+|---|---|---|---|
+| Fixed scheme | `true` | ignored | `themeFile` from base16-schemes |
+| Dynamic (Matugen) | `false` | `"matugen"` | Material You palette from wallpaper |
+| Dynamic (Iris) | `false` | `"iris"` | Semantic palette from wallpaper |
 
 ### Adding Packages
 Edit `modules/nixos/programs/packages.nix` to add system packages or create new module files in the appropriate category.
@@ -150,6 +166,50 @@ This configuration was inspired by and built with knowledge from:
 - [Niri](https://niri.app/) - Scrollable-tiling Wayland compositor
 - The amazing NixOS community on GitHub, Reddit, and Discord
 - Various dotfiles repositories that showed what's possible
+
+## 🔥 <samp>COLORSCHEME GENERATION</samp>
+
+Colors are extracted from a wallpaper image and piped through the Nix build
+system to produce a consistent palette across the entire desktop.
+
+### Pipeline
+
+```
+wallpaper → generator → base16 YAML → Stylix → apps (GTK, nvim, ghostty, noctalia, …)
+                                                   ├── theme variables
+                                                   └── Noctalia palette JSON
+```
+
+### Generators
+
+**[Matugen](https://github.com/InioX/matugen)** — Material You color extraction
+from the wallpaper, mapping the result to base16 slots. See
+`modules/shared/matugen.nix`.
+
+**[Iris](https://github.com/Harman1307/iris)** — Semantic color extraction with
+a simpler greyscale. The iris template at
+`modules/shared/iris-templates/base16.yaml` maps iris semantic colors to base16
+slots for Stylix consumption. Built as a flake input in `flake.nix`.
+
+Switch between them in `modules/shared/stylix-settings.nix`:
+
+```nix
+generator = "iris";   # or "matugen"
+```
+
+Thanks to [Harman1307](https://github.com/Harman1307) for creating Iris.
+
+### Noctalia Palette
+
+When `useThemeFile = false`, the home-manager module at
+`modules/home-manager/programs/utilities/noctalia/default.nix` generates
+`~/.config/noctalia/palettes/stylix.json` from
+`config.lib.stylix.colors`, mapping base16 slots to Material You 3 color
+roles (`mPrimary`, `mSurface`, `mOnSurface`, etc.) plus a complete ANSI
+terminal palette under `terminal.normal` and `terminal.bright`.
+
+The Noctalia TOML config then points `source = "custom"` and
+`custom_palette = "stylix"` to use this file.
 
 ## 📝 <samp>NOTES</samp>
 
