@@ -214,14 +214,20 @@
     initContent = ''
       # Notify after rebuild commands (critical priority, persists until dismissed)
       nixre() {
-        local label="$1" ec
+        local label="$1" ec pretty
         shift
+        SECONDS=0
         "$@"
         ec=$?
-        if [ $ec -eq 0 ]; then
-          ${pkgs.libnotify}/bin/notify-send -a Nix -u critical "✓ $label" "Completed successfully"
+        if [ $SECONDS -ge 60 ]; then
+          pretty="$((SECONDS / 60))m $((SECONDS % 60))s"
         else
-          ${pkgs.libnotify}/bin/notify-send -a Nix -u critical "✗ $label" "Exit code: $ec — $(date '+%H:%M:%S')"
+          pretty="''${SECONDS}s"
+        fi
+        if [ $ec -eq 0 ]; then
+          ${pkgs.libnotify}/bin/notify-send -a Nix -u critical "✓ $label" "Done — ''${pretty}"
+        else
+          ${pkgs.libnotify}/bin/notify-send -a Nix -u critical "✗ $label" "Failed ($ec) — ''${pretty}"
         fi
         return $ec
       }
