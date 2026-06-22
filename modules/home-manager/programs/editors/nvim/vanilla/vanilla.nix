@@ -1,7 +1,12 @@
-{ pkgs, stylixConfig, ... }:
+{ pkgs, stylixConfig, inputs, ... }:
 
 let
   matugen = import ../../../../../shared/matugen.nix { inherit pkgs stylixConfig; };
+  iris = import ../../../../../shared/iris.nix { inherit pkgs stylixConfig inputs; };
+  nvimColorscheme =
+    if stylixConfig.generator == "iris"
+    then iris.irisNvim
+    else matugen.matugenNvim;
 in
 {
   home.packages = with pkgs; [
@@ -38,8 +43,8 @@ in
 
   xdg.configFile."nvim/init.lua".source = ./init.lua;
 
-  # Matugen-derived colorscheme. Regenerated on every nh switch when the
-  # wallpaper or palette inputs change. nvim FS-watches this file (see
-  # init.lua) and re-sources :colorscheme matugen on write.
-  xdg.configFile."nvim/colors/matugen.lua".source = matugen.matugenNvim;
+  # Generator-derived colorscheme (matugen or iris). Regenerated on every nh
+  # switch when the wallpaper or palette inputs change. nvim FS-watches this
+  # file (see init.lua) and re-sources :colorscheme matugen on write.
+  xdg.configFile."nvim/colors/matugen.lua".source = nvimColorscheme;
 }

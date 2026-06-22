@@ -2,11 +2,15 @@
   pkgs,
   lib,
   stylixConfig,
+  inputs,
   ...
 }:
 
 let
-  matugen = import ./matugen.nix { inherit pkgs stylixConfig; };
+  generatorDrv =
+    if stylixConfig.generator == "iris"
+    then import ./iris.nix { inherit pkgs stylixConfig inputs; }
+    else import ./matugen.nix { inherit pkgs stylixConfig; };
 in
 {
   stylix = {
@@ -49,6 +53,6 @@ in
       if stylixConfig.useThemeFile then stylixConfig.wallpaperImage else stylixConfig.wallpaperSource;
 
     base16Scheme =
-      if stylixConfig.useThemeFile then stylixConfig.themeFile else matugen.matugenScheme;
+      if stylixConfig.useThemeFile then stylixConfig.themeFile else generatorDrv.${if stylixConfig.generator == "iris" then "irisScheme" else "matugenScheme"};
   };
 }
