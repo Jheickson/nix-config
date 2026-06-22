@@ -28,7 +28,7 @@
     if ${pkgs.procps}/bin/pgrep -x niri >/dev/null 2>&1; then
       ${pkgs.procps}/bin/pkill -x noctalia || true
       sleep 0.3
-      ${pkgs.niri}/bin/niri msg action spawn -- noctalia || true
+      ${pkgs.niri}/bin/niri msg action spawn -- ${inputs.noctalia.packages.${pkgs.system}.default}/bin/noctalia || true
     fi
   '';
 
