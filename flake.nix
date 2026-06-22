@@ -52,6 +52,11 @@
     };
 
     determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
+
+    iris = {
+      url = "github:Harman1307/iris";
+      flake = false;
+    };
   };
 
   outputs =

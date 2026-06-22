@@ -322,6 +322,22 @@
         "type": "github"
       }
     },
+    "iris": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1781940866,
+        "narHash": "sha256-bgci6rMHjP+JtRtQTcaGpinElv6O/XMySxy/3PcwE1Q=",
+        "owner": "Harman1307",
+        "repo": "iris",
+        "rev": "82bb8be505eebacea245544c50fae3ec017e03f3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Harman1307",
+        "repo": "iris",
+        "type": "github"
+      }
+    },
     "niri": {
       "inputs": {
         "niri-stable": "niri-stable",
@@ -625,6 +641,7 @@
       "inputs": {
         "determinate": "determinate",
         "home-manager": "home-manager",
+        "iris": "iris",
         "niri": "niri",
         "nixCats": "nixCats",
         "nixpkgs": "nixpkgs_3",

@@ -3,6 +3,7 @@
 {
   enable = true;
   useThemeFile = true;
+  generator = "matugen";
   polarity = "light";
 
   wallpaperSource = ../../assets/wallpapers/Themed/RosePine/Sif.png;
