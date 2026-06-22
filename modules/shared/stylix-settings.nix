@@ -6,9 +6,9 @@
   generator = "iris"; # "iris" or "matugen"
   polarity = "light";
 
-  wallpaperSource = ../../assets/wallpapers/Other/wallhaven-rqywow.jpg;
+  wallpaperSource = ../../assets/wallpapers/Landscape/wallhaven-rqp3r7.jpg;
   # wallpaperImage = ../../assets/wallpapers/wallpaper.png;
-  wallpaperImage = ../../assets/wallpapers/Other/wallhaven-rqywow.jpg;
+  wallpaperImage = ../../assets/wallpapers/Landscape/wallhaven-rqp3r7.jpg;
   wallpaperOutputPath = "/home/felipe/nix-config/assets/wallpapers/wallpaper.png";
 
   themeFile = "${pkgs.base16-schemes}/share/themes/rose-pine-dawn.yaml";
