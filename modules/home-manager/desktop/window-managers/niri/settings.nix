@@ -38,7 +38,6 @@ in
           XDG_SESSION_TYPE = "wayland";
         };
         spawn-at-startup = [
-          (makeCommand "noctalia")
           (makeCommand "hyprlock")
           {
             command = [
