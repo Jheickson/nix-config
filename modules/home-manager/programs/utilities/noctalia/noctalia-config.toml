@@ -490,12 +490,9 @@ swap_pct_activity_threshold = 20.0
 swap_pct_critical_threshold = 80.0
 
 [theme]
-builtin = "Rosé Pine"
-community_palette = "Rose Pine Moon"
-custom_palette = "sif-mc"
+custom_palette = "stylix"
 mode = "light"
-source = "builtin"
-wallpaper_scheme = "m3-content"
+source = "custom"
 
     [theme.templates]
     builtin_ids = []
