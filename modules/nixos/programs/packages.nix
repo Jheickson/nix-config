@@ -1,10 +1,11 @@
-{ pkgs, config, ... }:
-let
+{
+  pkgs,
+  config,
+  ...
+}: let
   # Set this to true for Wayland, false for X11
   useWayland = true;
-in
-{
-
+in {
   programs.kdeconnect = {
     enable = true;
   };
@@ -13,8 +14,7 @@ in
     enable = false;
   };
 
-  environment.systemPackages =
-    with pkgs;
+  environment.systemPackages = with pkgs;
     [
       # === NIX TOOLS ===
       home-manager
@@ -153,6 +153,9 @@ in
       tldr
       zsh
 
+      # === GAMES ===
+      benhsm-minesweeper
+
       # === DOCUMENT PROCESSING ===
       ghostscript
       gnumake
@@ -167,13 +170,12 @@ in
       siji
       termsyn
       # nerdfonts # Big package. Font is already being set on stylix.nix
-
     ]
     ++ (
-      if useWayland then
+      if useWayland
+      then
         # === WAYLAND-SPECIFIC PACKAGES ===
-        with pkgs;
-        [
+        with pkgs; [
           # Display & Window System
           kanshi # Wayland display configuration (replaces arandr)
           wdisplays # Display configuration GUI
@@ -197,8 +199,7 @@ in
         ]
       else
         # === X11-SPECIFIC PACKAGES ===
-        with pkgs;
-        [
+        with pkgs; [
           # Display configuration
           arandr # X11 RandR GUI tool
           autorandr
@@ -264,5 +265,4 @@ in
 
   # connection signifies that we're managing a network connection
   # delete specifies that we're deleting a connection, which is t-450 in this case
-
 }
