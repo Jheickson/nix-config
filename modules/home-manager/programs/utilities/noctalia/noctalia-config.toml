@@ -24,7 +24,7 @@ order = [ "default" ]
     capsule_opacity = 1.0
     capsule_padding = 6.0
     center = [ "media", "notifications" ]
-    color = "tertiary"
+    color = "surface"
     contact_shadow = false
     enabled = true
     end = [ "battery_1", "network", "bluetooth", "battery_2", "volume", "tray" ]
@@ -490,9 +490,12 @@ swap_pct_activity_threshold = 20.0
 swap_pct_critical_threshold = 80.0
 
 [theme]
+builtin = "Rosé Pine"
+community_palette = "Rose Pine Moon"
 custom_palette = "stylix"
 mode = "light"
 source = "custom"
+wallpaper_scheme = "m3-tonal-spot"
 
     [theme.templates]
     builtin_ids = []
