@@ -2,13 +2,13 @@
 
 {
   enable = true;
-  useThemeFile = true;
-  generator = "matugen";
+  useThemeFile = false;
+  generator = "iris"; # "iris" or "matugen"
   polarity = "light";
 
-  wallpaperSource = ../../assets/wallpapers/Themed/RosePine/Sif.png;
+  wallpaperSource = ../../assets/wallpapers/Other/wallhaven-rqywow.jpg;
   # wallpaperImage = ../../assets/wallpapers/wallpaper.png;
-  wallpaperImage = ../../assets/wallpapers/Themed/RosePine/Sif.png;
+  wallpaperImage = ../../assets/wallpapers/Other/wallhaven-rqywow.jpg;
   wallpaperOutputPath = "/home/felipe/nix-config/assets/wallpapers/wallpaper.png";
 
   themeFile = "${pkgs.base16-schemes}/share/themes/rose-pine-dawn.yaml";
