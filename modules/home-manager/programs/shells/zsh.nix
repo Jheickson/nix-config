@@ -33,35 +33,35 @@
           echo "[DEBUG] File exists check: $([ -f "$WALLPAPER" ] && echo YES || echo NO)" >&2
           echo "========================================" >&2
 
-          awww img "$WALLPAPER" --resize crop && echo 'Wallpaper applied successfully' || echo 'Failed to apply wallpaper'
+          awww img "$WALLPAPER" --resize no && echo 'Wallpaper applied successfully' || echo 'Failed to apply wallpaper'
         '';
       in
       {
         # ===== NIXOS SYSTEM MANAGEMENT (nh) =====
         # Rebuild and switch to new NixOS configuration (also applies wallpaper)
-        rb = "nh os switch ${flakeDir} && ${applyWallpaper}";
+        rb = "nixre 'os switch' nh os switch ${flakeDir} && ${applyWallpaper}";
 
         # Rebuild and switch NixOS configuration offline
-        rbo = "nh os switch ${flakeDir} --offline && ${applyWallpaper}";
+        rbo = "nixre 'os switch' nh os switch ${flakeDir} --offline && ${applyWallpaper}";
 
         # Rebuild and switch NixOS configuration using nixos-rebuild
-        rbn = "sudo nixos-rebuild switch --flake ${flakeDir} && ${applyWallpaper}";
+        rbn = "nixre 'os switch' sudo nixos-rebuild switch --flake ${flakeDir} && ${applyWallpaper}";
 
         # Rebuild and switch NixOS configuration offline using nixos-rebuild
-        rbno = "sudo nixos-rebuild switch --flake ${flakeDir} --offline && ${applyWallpaper}";
+        rbno = "nixre 'os switch' sudo nixos-rebuild switch --flake ${flakeDir} --offline && ${applyWallpaper}";
 
         # Update flake.lock with latest versions from inputs
-        upd = "nh os switch ${flakeDir} -u";
+        upd = "nixre 'update' nh os switch ${flakeDir} -u";
 
         # Update flake.lock file using nix flake update
         updn = "sudo nix flake update";
 
         # ===== HOME-MANAGER CONFIGURATION (nh) =====
         # Apply home-manager configuration
-        hms = "nh home switch ${flakeDir}";
+        hms = "nixre 'home switch' nh home switch ${flakeDir}";
 
         # Apply home-manager with backup of previous generation
-        hmsb = "nh home switch ${flakeDir} -b backup";
+        hmsb = "nixre 'home switch' nh home switch ${flakeDir} -b backup";
 
         # ===== CONFIGURATION EDITING =====
         # Edit main NixOS configuration file
@@ -73,16 +73,16 @@
 
         # ===== NIX BUILD TESTING (nh) =====
         # Build NixOS configuration without switching (test build)
-        nbt = "nh os build ${flakeDir}";
+        nbt = "nixre 'os build' nh os build ${flakeDir}";
 
         # Dry run - show what would change without applying
-        ndr = "sudo nixos-rebuild dry-run --flake ${flakeDir}";
+        ndr = "nixre 'dry-run' sudo nixos-rebuild dry-run --flake ${flakeDir}";
 
         # Build current system configuration
-        nbc = "sudo nix build ${flakeDir}#nixosConfigurations.$(hostname).config.system.build.toplevel";
+        nbc = "nixre 'build' sudo nix build ${flakeDir}#nixosConfigurations.$(hostname).config.system.build.toplevel";
 
         # Build home-manager configuration
-        nbh = "nh home build";
+        nbh = "nixre 'home build' nh home build";
 
         # ===== DEVELOPMENT ENVIRONMENTS (nh) =====
         # Enter development shell for current directory
@@ -115,7 +115,7 @@
         ngcu = "nh clean user";
 
         # Check flake for issues
-        flake-check = "nh check";
+        flake-check = "nixre 'flake check' nh check";
 
         # Show nix system information
         nix-info = "nh os info";
@@ -212,7 +212,21 @@
     };
 
     initContent = ''
-      # hook “F” (or a custom alias) to pay-respects
+      # Notify after rebuild commands (critical priority, persists until dismissed)
+      nixre() {
+        local label="$1" ec
+        shift
+        "$@"
+        ec=$?
+        if [ $ec -eq 0 ]; then
+          ${pkgs.libnotify}/bin/notify-send -a Nix -u critical "✓ $label" "Completed successfully"
+        else
+          ${pkgs.libnotify}/bin/notify-send -a Nix -u critical "✗ $label" "Exit code: $ec — $(date '+%H:%M:%S')"
+        fi
+        return $ec
+      }
+
+      # hook "F" (or a custom alias) to pay-respects
       eval "$(pay-respects zsh --alias)"
 
       # If you use oh-my-zsh command-not-found, skip its hook here to avoid duplicates:
