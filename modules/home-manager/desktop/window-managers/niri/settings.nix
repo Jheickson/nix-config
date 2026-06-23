@@ -2,6 +2,7 @@
   config,
   pkgs,
   lib,
+  stylixConfig,
   ...
 }:
 let
@@ -11,6 +12,22 @@ let
   };
   selectedAnimation = config.programs.niri.animationPreset;
   animationPresetNames = import ./animations/preset-names.nix;
+
+  # Resolve wallpaper path: gowall output when useThemeFile, else source JPEG
+  wallpaperPath =
+    if stylixConfig.useThemeFile
+    then stylixConfig.wallpaperOutputPath
+    else toString stylixConfig.wallpaperSource;
+
+  # Self-contained awww-init script with build-time injected store paths,
+  # eliminating runtime PATH / environment dependencies that fail on cold boot.
+  awwwInit = pkgs.writeShellScript "awww-init" ''
+    AWWW_BIN="${pkgs.awww}/bin/awww"
+    AWWW_DAEMON_BIN="${pkgs.awww}/bin/awww-daemon"
+    STYLIX_WALLPAPER="${wallpaperPath}"
+
+    ${builtins.readFile ./awww-init.sh}
+  '';
 in
 {
   options.programs.niri.animationPreset = lib.mkOption {
@@ -34,15 +51,14 @@ in
           QT_QPA_PLATFORM = "wayland;xcb";
           QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
           SDL_VIDEODRIVER = "wayland";
+          STYLIX_WALLPAPER = wallpaperPath;
           XDG_CURRENT_DESKTOP = "niri";
           XDG_SESSION_TYPE = "wayland";
         };
         spawn-at-startup = [
           (makeCommand "hyprlock")
           {
-            command = [
-              "${pkgs.writeShellScript "awww-init" (builtins.readFile ./awww-init.sh)}"
-            ];
+            command = [ "${awwwInit}" ];
           }
           (makeCommand "waybar")
           {

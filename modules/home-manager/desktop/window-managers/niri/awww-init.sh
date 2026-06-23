@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
-# Cold-boot resilient wallpaper init for niri. Was failing silently on reboot
-# because the 1s sleep wasn't enough for awww-daemon to bind its IPC socket.
-# Now polls the daemon until ready and retries `awww img` on failure.
+# AWWW_BIN, AWWW_DAEMON_BIN and STYLIX_WALLPAPER are injected at build time by
+# settings.nix. No runtime PATH / environment discovery needed.
+# Retry loops handle daemon readiness after cold boot.
 # Diagnostics go to ~/.cache/awww-init.log for postmortem.
 
 set -uo pipefail
@@ -18,15 +18,6 @@ for _ in $(seq 1 60); do
     fi
     sleep 0.25
 done
-
-AWWW_BIN="${AWWW_BIN:-$(command -v awww || true)}"
-AWWW_DAEMON_BIN="${AWWW_DAEMON_BIN:-$(command -v awww-daemon || true)}"
-
-if [ -z "$AWWW_BIN" ] || [ -z "$AWWW_DAEMON_BIN" ]; then
-    echo "ERROR: awww or awww-daemon not found in PATH"
-    echo "PATH=$PATH"
-    exit 1
-fi
 
 # Drop any swaybg from a previous run.
 pkill swaybg 2>/dev/null || true
@@ -51,15 +42,7 @@ if [ "$DAEMON_READY" -ne 1 ]; then
     exit 1
 fi
 
-# Load /etc/set-environment so STYLIX_WALLPAPER from
-# environment.sessionVariables is visible (niri spawn-at-startup commands do
-# not source the NixOS-specific env file by themselves).
-if [ -f /etc/set-environment ]; then
-    # shellcheck disable=SC1091
-    source /etc/set-environment
-fi
-
-WALLPAPER="${STYLIX_WALLPAPER:-$HOME/nix-config/assets/wallpapers/wallpaper.png}"
+WALLPAPER="${STYLIX_WALLPAPER:-$HOME/nix-config/assets/wallpapers/Landscape/wallhaven-rqp3r7.jpg}"
 echo "Wallpaper: $WALLPAPER"
 
 if [ ! -f "$WALLPAPER" ]; then
