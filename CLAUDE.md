@@ -97,6 +97,12 @@ After any non-trivial Nix edit, before claiming success:
 
 ```bash
 nix flake check                                       # evaluates all outputs
-sudo nixos-rebuild build --flake .#nixos              # build without switching
-home-manager build --flake .#felipe                   # HM build only
 ```
+
+## Permission rule
+
+**Never run build commands without asking.** This includes: `sudo nixos-rebuild build`, `sudo nixos-rebuild switch`, `home-manager build`, `home-manager switch`, `nh os *`, `nh home *`, `nix build`, `nix store *`.
+
+Also never update flake inputs (`nix flake update`) or run `nixfmt` / `nixfmt-tree` without asking.
+
+Dry-run evaluations (`nix flake check`) are OK without asking — they evaluate but produce no store paths.
