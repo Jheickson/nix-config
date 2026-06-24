@@ -9,6 +9,13 @@
   wallpaperSource = ../../assets/wallpapers/Other/wallhaven-2yqpdx.png;
   wallpaperImage = ../../assets/wallpapers/wallpaper.png;
   # wallpaperImage = ../../assets/wallpapers/Aesthetic/wallhaven-w5q8px.jpg;
+  # Wallpaper resize mode for awww:
+  #   no      — No resizing, center image, pad with fill color
+  #   crop    — Fill screen, crop excess (awww default)
+  #   fit     — Fit inside screen, preserve aspect ratio
+  #   stretch — Fill screen, ignore aspect ratio
+  wallpaperResize = "crop";
+
   wallpaperOutputPath = "/home/felipe/nix-config/assets/wallpapers/wallpaper.png";
 
   themeFile = "${pkgs.base16-schemes}/share/themes/horizon-light.yaml";

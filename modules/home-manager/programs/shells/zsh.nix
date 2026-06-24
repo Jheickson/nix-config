@@ -2,6 +2,7 @@
   config,
   pkgs,
   lib,
+  stylixConfig,
   ...
 }:
 {
@@ -33,7 +34,7 @@
           echo "[DEBUG] File exists check: $([ -f "$WALLPAPER" ] && echo YES || echo NO)" >&2
           echo "========================================" >&2
 
-          awww img "$WALLPAPER" --resize no && echo 'Wallpaper applied successfully' || echo 'Failed to apply wallpaper'
+          awww img "$WALLPAPER" --resize ${stylixConfig.wallpaperResize} && echo 'Wallpaper applied successfully' || echo 'Failed to apply wallpaper'
         '';
       in
       {

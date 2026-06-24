@@ -25,6 +25,7 @@ let
     AWWW_BIN="${pkgs.awww}/bin/awww"
     AWWW_DAEMON_BIN="${pkgs.awww}/bin/awww-daemon"
     STYLIX_WALLPAPER="${wallpaperPath}"
+    AWWW_RESIZE="${stylixConfig.wallpaperResize}"
 
     ${builtins.readFile ./awww-init.sh}
   '';
