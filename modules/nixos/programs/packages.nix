@@ -145,7 +145,6 @@ in {
       cowsay
       drift
       f3
-      fastfetch
       fd
       hello
       sshs
