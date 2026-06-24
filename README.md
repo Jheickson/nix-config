@@ -27,6 +27,10 @@
 - [FEATURES](#features)
 - [ACKNOWLEDGEMENTS](#acknowledgements)
 - [COLORSCHEME GENERATION](#colorscheme-generation)
+  - [Pipeline](#pipeline)
+  - [Generators](#generators)
+  - [Noctalia Palette](#noctalia-palette)
+- [NOCTALIA v5](#noctalia-v5)
 - [NOTES](#notes)
 - [CONTRIBUTING](#contributing)
 
@@ -34,7 +38,7 @@
 ## COMPONENTS
 
 - **Window Manager** • [Niri](https://niri.app/) - Scrollable tiling Wayland compositor
-- **Desktop Shell** • [Noctalia](https://github.com/noctalia-dev/noctalia-shell) - Unified status bar, notifications, and app launcher
+- **Desktop Shell** • [Noctalia v5](https://github.com/noctalia-dev/noctalia-shell) - Unified bar, notifications, app launcher, lock screen, OSD, wallpaper, and tray
 - **Terminal** • [Ghostty](https://ghostty.org/) / [Alacritty](https://alacritty.org/) - GPU-accelerated terminal emulators
 - **Shell** • [Zsh](https://www.zsh.org/) with [Oh My Zsh](https://ohmyz.sh/) - Powerful shell framework
 - **Editor** • [Neovim](https://neovim.io/) (with [NixCats](https://github.com/BirdeeHub/nixCats-nvim)) / [VSCode](https://code.visualstudio.com/) - Text editors
@@ -210,6 +214,24 @@ terminal palette under `terminal.normal` and `terminal.bright`.
 
 The Noctalia TOML config then points `source = "custom"` and
 `custom_palette = "stylix"` to use this file.
+
+## NOCTALIA v5
+
+[Noctalia v5](https://github.com/noctalia-dev/noctalia-shell) is the desktop
+shell — bar, notifications, app launcher, lock screen, OSD, wallpaper daemon,
+and system tray.
+
+| Aspect | Location |
+|---|---|
+| HM module (upstream) | `inputs.noctalia.homeModules.default` |
+| HM module (local) | `modules/home-manager/programs/utilities/noctalia/default.nix` |
+| TOML config | `modules/home-manager/programs/utilities/noctalia/noctalia-config.toml` |
+| System deps | `modules/nixos/programs/noctalia.nix` (bluetooth, power-profiles-daemon, evolution-data-server) |
+| Palette | Stylix-driven via `source = "custom"` / `custom_palette = "stylix"` — see [Noctalia Palette](#noctalia-palette) |
+
+The systemd user service is enabled so Noctalia starts on login and restarts on
+every `hms` rebuild, picking up config/palette changes automatically. Boot
+launch via Niri `spawn-at-startup`.
 
 ## NOTES
 
