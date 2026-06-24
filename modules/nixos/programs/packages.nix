@@ -128,7 +128,6 @@ in {
       playerctl
       rar
       scrcpy
-      qutebrowser
       qtscrcpy
       testdisk
       udiskie
