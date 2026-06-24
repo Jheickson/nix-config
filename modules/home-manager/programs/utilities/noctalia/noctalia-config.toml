@@ -83,11 +83,14 @@ sidebar_section = "compact"
 [desktop_widgets]
 enabled = true
 schema_version = 2
+widget_order = []
 
     [desktop_widgets.grid]
     cell_size = 16
     major_interval = 4
     visible = true
+
+    [desktop_widgets.widget]
 
 [dock]
 active_monitor_only = true
@@ -332,6 +335,7 @@ offset_x = 20
 offset_y = 8
 orientation = "vertical"
 position = "bottom_right"
+position_vertical = "bottom_right"
 scale = 1.0
 
     [osd.kinds]
@@ -346,6 +350,9 @@ scale = 1.0
     volume_input = true
     volume_output = true
     wifi = true
+
+[plugins]
+enabled = []
 
 [shell]
 app_icon_colorize = false
@@ -372,7 +379,7 @@ shared_gl_context = true
 show_location = true
 telemetry_enabled = false
 time_format = "{:%H:%M}"
-ui_scale = 0.85000002384185791
+ui_scale = 0.85000000521540642
 
     [shell.animation]
     enabled = true
@@ -522,6 +529,24 @@ transition_on_startup = false
     order = "random"
     recursive = true
 
+    [wallpaper.default]
+    path = "/home/felipe/nix-config/assets/wallpapers/Landscape/wallhaven-rqp3r7.jpg"
+
+    [wallpaper.last]
+    path = "/home/felipe/nix-config/assets/wallpapers/Landscape/wallhaven-rqp3r7.jpg"
+
+    [wallpaper.monitors.HDMI-A-1]
+    path = "/home/felipe/nix-config/assets/wallpapers/Landscape/wallhaven-rqp3r7.jpg"
+
+    [wallpaper.monitors.eDP-1]
+    path = "/home/felipe/nix-config/assets/wallpapers/Landscape/wallhaven-rqp3r7.jpg"
+
+    [[wallpaper.favorite]]
+    palette_source = "wallpaper"
+    path = "/home/felipe/nix-config/assets/wallpapers/wallpaper.png"
+    theme_mode = "light"
+    wallpaper_scheme = "m3-content"
+
 [weather]
 effects = true
 enabled = true
@@ -641,6 +666,9 @@ type = "tray"
 [widget.volume]
 show_label = false
 type = "volume"
+
+[widget.wallhaven]
+type = "noctalia/wallhaven:wallhaven"
 
 [widget.workspaces]
 display = "none"
