@@ -9,27 +9,29 @@ let
 
     // niri v26.04 background-effect — regular (non-xray) blur
     // raw KDL because niri-flake schema lacks background-effect (PR sodiboo/niri-flake#1731)
+    // https://docs.noctalia.dev/v5/compositor-settings/niri/?section=blur#blur
     window-rule {
-        match app-id="^com.mitchellh.ghostty$"
-        match app-id="^ghostty$"
-
         background-effect {
             blur true
             xray false
         }
     }
 
-    // Noctalia surfaces: force regular blur (non-xray) on bar, popovers, menus.
-    // Explicit `blur true` so it applies even when Noctalia hasn't opted in
-    // via ext-background-effect for that surface.
-    // https://docs.noctalia.dev/v4/getting-started/compositor-settings/niri/
+    // Noctalia v5 surfaces: disable xray for realistic blur.
+    // blur regions are auto-published by Noctalia via ext-background-effects.
     layer-rule {
-        match namespace="^noctalia-(background|bar-content|launcher-overlay|dock|notification|control-center|session-menu|sidebar)-.*$"
+        match namespace="^noctalia-(bar-[^\"]+|notification|dock|panel|attached-panel|osd)$"
 
         background-effect {
-            blur true
             xray false
         }
+    }
+
+    blur {
+        passes 2
+        offset 3.0
+        noise 0.03
+        saturation 1.0
     }
   '';
 in
