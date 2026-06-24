@@ -15,6 +15,9 @@
       window-padding-y = 0;
       window-decoration = "auto";
 
+      # Disable close confirmation popup
+      confirm-close-surface = false;
+
       # Shell integration
       shell-integration = "zsh";
     };
