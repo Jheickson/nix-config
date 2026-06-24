@@ -2,16 +2,16 @@
 
 {
   enable = true;
-  useThemeFile = false;
+  useThemeFile = true;
   generator = "iris"; # "iris" or "matugen"
   polarity = "light";
 
-  wallpaperSource = ../../assets/wallpapers/Landscape/wallhaven-rqp3r7.jpg;
-  # wallpaperImage = ../../assets/wallpapers/wallpaper.png;
-  wallpaperImage = ../../assets/wallpapers/Landscape/wallhaven-rqp3r7.jpg;
+  wallpaperSource = ../../assets/wallpapers/Other/wallhaven-2yqpdx.png;
+  wallpaperImage = ../../assets/wallpapers/wallpaper.png;
+  # wallpaperImage = ../../assets/wallpapers/Aesthetic/wallhaven-w5q8px.jpg;
   wallpaperOutputPath = "/home/felipe/nix-config/assets/wallpapers/wallpaper.png";
 
-  themeFile = "${pkgs.base16-schemes}/share/themes/rose-pine-dawn.yaml";
+  themeFile = "${pkgs.base16-schemes}/share/themes/horizon-light.yaml";
 }
 
 /*
