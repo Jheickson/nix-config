@@ -41,7 +41,6 @@
   home.packages = with pkgs; [
     numlockx # Enable numlock in graphical session
     kdePackages.kate
-    vscode
     inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
