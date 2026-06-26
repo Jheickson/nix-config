@@ -175,6 +175,9 @@
         # System information display
         ff = "fastfetch";
 
+        # OpenCode CLI
+        oc = "opencode";
+
         # Zoxide directory jumping
         z = "__zoxide_z";
 
