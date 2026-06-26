@@ -19,6 +19,7 @@
     ../programs/terminals/ghostty.nix
     ../programs/editors/nvim/vanilla/vanilla.nix
     ../programs/editors/vscode.nix
+    ../programs/editors/zed.nix
     ../programs/shells/zsh.nix
     # ../programs/browsers/zen-browser.nix  # broken wrapProgram upstream; raw pkg in home.packages instead
     ../programs/browsers/qutebrowser.nix
