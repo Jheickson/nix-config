@@ -2,11 +2,12 @@
 
 {
   environment.systemPackages = with pkgs; [
-    gtk-engine-murrine
     papirus-icon-theme
+    orchis-theme
   ];
 
   environment.variables = {
     GTK_ICON_THEME = "Papirus-Dark";
+    GTK_THEME = "Orchis-Dark";
   };
 }

@@ -2,7 +2,6 @@
   inputs,
   config,
   pkgs,
-  lib,
   ...
 }:
 
@@ -37,6 +36,9 @@
     # utils
     wl-clipboard
 
+    # icon theme
+    papirus-icon-theme
+
     # wallpaper daemon
     awww
   ];
@@ -46,5 +48,4 @@
     SDL_VIDEODRIVER = "wayland";
     XDG_SESSION_TYPE = "wayland";
   };
-
 }

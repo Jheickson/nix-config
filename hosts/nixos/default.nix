@@ -34,7 +34,7 @@
     # ../../modules/nixos/core/networkmanager.nix
 
     # Desktop
-    # ../../modules/nixos/desktop/gtk.nix
+    ../../modules/nixos/desktop/gtk.nix
     ../../modules/nixos/desktop/stylix-wallpaper.nix
     ../../modules/nixos/desktop/niri.nix
     # ../../modules/nixos/desktop/xautolock.nix

@@ -42,11 +42,18 @@ in
     #   name = "phinger-cursors-light";
     #   size = 16;
     # };
-    
+
     cursor = {
       package = pkgs.rose-pine-cursor;
       name = "BreezeX-RosePine-Linux";
       size = 16;
+    };
+
+    icons = {
+      enable = true;
+      package = pkgs.papirus-icon-theme;
+      light = "Papirus";
+      dark = "Papirus-Dark";
     };
 
     image =
