@@ -122,12 +122,10 @@ let
     }
 
 # ── Floating utilities ────────────────────────────────────────────────────
-    # Ghostty (generic) — always floats, 50% width/height, centered. nvim ghostty (ghostty-nvim) stays tiled.
+    # Ghostty (generic) — always floats, auto-sized. nvim ghostty (ghostty-nvim) stays tiled.
     {
       matches = [ { app-id = "com.mitchellh.ghostty"; } ];
       open-floating = true;
-      default-column-width.proportion = 0.5;
-      default-window-height.proportion = 0.5;
     }
     # Audio controls
     {
