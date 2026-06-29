@@ -119,6 +119,7 @@ in {
       baobab
       brightnessctl
       busybox
+      ddcutil
       gnome-disk-utility
       jq
       libmpdclient
