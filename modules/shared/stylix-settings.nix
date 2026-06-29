@@ -18,7 +18,7 @@
 
   wallpaperOutputPath = "/home/felipe/nix-config/assets/wallpapers/wallpaper.png";
 
-  themeFile = "${pkgs.base16-schemes}/share/themes/emil.yaml";
+  themeFile = "${pkgs.base16-schemes}/share/themes/harmonic16-light.yaml";
 }
 
 /*
