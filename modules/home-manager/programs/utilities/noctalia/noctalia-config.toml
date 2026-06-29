@@ -14,7 +14,7 @@ tint_intensity = 0.30000001192092896
 order = [ "default" ]
 
     [bar.default]
-    auto_hide = false
+    auto_hide = true
     background_opacity = 0.5
     border = "outline"
     border_width = 0.0
@@ -40,7 +40,7 @@ order = [ "default" ]
     radius_bottom_right = 12
     radius_top_left = 12
     radius_top_right = 12
-    reserve_space = true
+    reserve_space = false
     scale = 1.0
     shadow = true
     start = [ "clock" ]
@@ -154,21 +154,21 @@ pre_action_fade_seconds = 2.0
     command = ""
     enabled = true
     resume_command = ""
-    timeout = 600
+    timeout = 300.0
 
     [idle.behavior.lock-and-suspend]
     action = "lock_and_suspend"
     command = ""
     enabled = false
     resume_command = ""
-    timeout = 900
+    timeout = 900.0
 
     [idle.behavior.screen-off]
     action = "screen_off"
     command = ""
-    enabled = false
+    enabled = true
     resume_command = ""
-    timeout = 660
+    timeout = 600.0
 
 [keybinds]
 cancel = [ "Escape" ]
@@ -502,7 +502,7 @@ community_palette = "Rose Pine Moon"
 custom_palette = "stylix"
 mode = "light"
 source = "custom"
-wallpaper_scheme = "m3-tonal-spot"
+wallpaper_scheme = "m3-content"
 
     [theme.templates]
     builtin_ids = []
@@ -530,16 +530,16 @@ transition_on_startup = false
     recursive = true
 
     [wallpaper.default]
-    path = "/home/felipe/nix-config/assets/wallpapers/Landscape/wallhaven-rqp3r7.jpg"
+    path = "/home/felipe/nix-config/assets/wallpapers/wallpaper.png"
 
     [wallpaper.last]
-    path = "/home/felipe/nix-config/assets/wallpapers/Landscape/wallhaven-rqp3r7.jpg"
+    path = "/home/felipe/nix-config/assets/wallpapers/wallpaper.png"
 
     [wallpaper.monitors.HDMI-A-1]
-    path = "/home/felipe/nix-config/assets/wallpapers/Landscape/wallhaven-rqp3r7.jpg"
+    path = "/home/felipe/nix-config/assets/wallpapers/wallpaper.png"
 
     [wallpaper.monitors.eDP-1]
-    path = "/home/felipe/nix-config/assets/wallpapers/Landscape/wallhaven-rqp3r7.jpg"
+    path = "/home/felipe/nix-config/assets/wallpapers/wallpaper.png"
 
     [[wallpaper.favorite]]
     palette_source = "wallpaper"
