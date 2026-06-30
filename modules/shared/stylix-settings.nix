@@ -2,9 +2,9 @@
   enable = true;
   useThemeFile = true;
   generator = "iris"; # "iris" or "matugen"
-  polarity = "light";
+  polarity = "dark";
 
-  wallpaperSource = ../../assets/wallpapers/Other/wallhaven-2yqpdx.png;
+  wallpaperSource = ../../assets/wallpapers/Minimalistic/wallhaven-eoewlk.png;
   wallpaperImage = ../../assets/wallpapers/wallpaper.png;
   # wallpaperImage = ../../assets/wallpapers/Aesthetic/wallhaven-w5q8px.jpg;
   # Wallpaper resize mode for awww:
@@ -16,7 +16,7 @@
 
   wallpaperOutputPath = "/home/felipe/nix-config/assets/wallpapers/wallpaper.png";
 
-  themeFile = "${pkgs.base16-schemes}/share/themes/harmonic16-light.yaml";
+  themeFile = "${pkgs.base16-schemes}/share/themes/synth-midnight-dark.yaml";
 }
 /*
 result/
