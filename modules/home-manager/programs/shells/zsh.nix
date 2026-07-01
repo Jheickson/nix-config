@@ -216,41 +216,80 @@
     };
 
     initContent = ''
-      # Notify after rebuild commands (critical priority, persists until dismissed)
-      nixre() {
-        local label="$1" ec pretty
-        shift
-        SECONDS=0
-        "$@"
-        ec=$?
-        if [ $SECONDS -ge 60 ]; then
-          pretty="$((SECONDS / 60))m $((SECONDS % 60))s"
-        else
-          pretty="''${SECONDS}s"
-        fi
-        if [ $ec -eq 0 ]; then
-          ${pkgs.libnotify}/bin/notify-send -a Nix -u critical "✓ $label" "Done — ''${pretty}"
-        else
-          ${pkgs.libnotify}/bin/notify-send -a Nix -u critical "✗ $label" "Failed ($ec) — ''${pretty}"
-        fi
-        return $ec
-      }
+            # Notify after rebuild commands (critical priority, persists until dismissed)
+            nixre() {
+              local label="$1" ec pretty
+              shift
+              SECONDS=0
+              "$@"
+              ec=$?
+              if [ $SECONDS -ge 60 ]; then
+                pretty="$((SECONDS / 60))m $((SECONDS % 60))s"
+              else
+                pretty="''${SECONDS}s"
+              fi
+              if [ $ec -eq 0 ]; then
+                ${pkgs.libnotify}/bin/notify-send -a Nix -u critical "✓ $label" "Done — ''${pretty}"
+              else
+                ${pkgs.libnotify}/bin/notify-send -a Nix -u critical "✗ $label" "Failed ($ec) — ''${pretty}"
+              fi
+              return $ec
+            }
 
-      # hook "F" (or a custom alias) to pay-respects
-      eval "$(pay-respects zsh --alias)"
+            # hook "F" (or a custom alias) to pay-respects
+            eval "$(pay-respects zsh --alias)"
 
-      # If you use oh-my-zsh command-not-found, skip its hook here to avoid duplicates:
-      # eval "$(pay-respects zsh --alias --nocnf)"
+            # If you use oh-my-zsh command-not-found, skip its hook here to avoid duplicates:
+            # eval "$(pay-respects zsh --alias --nocnf)"
 
-      # Optional: disable AI suggestions
-      # export _PR_AI_DISABLE=1
+            # Optional: disable AI suggestions
+            # export _PR_AI_DISABLE=1
 
-      # Auto-load Bitwarden Secrets Manager token (file is gitignored, chmod 600)
-      if [ -r "$HOME/.config/bws/token.env" ]; then
-        set -a
-        source "$HOME/.config/bws/token.env"
-        set +a
-      fi
+            # Auto-load Bitwarden Secrets Manager token (file is gitignored, chmod 600)
+            if [ -r "$HOME/.config/bws/token.env" ]; then
+              set -a
+              source "$HOME/.config/bws/token.env"
+              set +a
+            fi
+
+            # Create a new DataAnnotation task directory with standard structure
+            newtask() {
+              if [ $# -eq 0 ]; then
+                echo "Usage: newtask <task-name>"
+                return 1
+              fi
+
+              local ROOT="$HOME/Programming/DataAnnotation"
+              local DIR="$ROOT/$(date +%F)_$1"
+
+              mkdir -p "$DIR"/{references,work,outputs}
+
+              cp "$ROOT/templates/notes.md" "$DIR/notes.md" 2>/dev/null || true
+              cp "$ROOT/templates/task_state.md" "$DIR/TASK_STATE.md" 2>/dev/null || true
+
+              cat > "$DIR/AGENTS.md" <<'EOT'
+      # Task
+
+      ## Objective
+
+      ## Task-specific Instructions
+
+      ## Rubric
+
+      ## Constraints
+
+      ## Expected Output
+
+      ## Notes
+      EOT
+
+              touch "$DIR/prompt.txt"
+
+              echo
+              echo "Created:"
+              find "$DIR"
+              echo
+            }
     '';
 
   };
