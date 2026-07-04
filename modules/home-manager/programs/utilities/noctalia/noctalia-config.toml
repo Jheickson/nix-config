@@ -34,7 +34,7 @@ order = [ "default" ]
     margin_ends = 4
     padding = 14
     panel_overlap = 1
-    position = "top"
+    position = "bottom"
     radius = 12
     radius_bottom_left = 12
     radius_bottom_right = 12
@@ -51,12 +51,17 @@ order = [ "default" ]
 warning_threshold = 20
 
 [brightness]
-enable_ddcutil = false
+enable_ddcutil = true
 ignore_mmids = []
+minimum_brightness = 0.0099999997764825821
 
 [calendar]
-enabled = false
+enabled = true
 refresh_minutes = 15
+
+    [calendar.account.personal_google]
+    name = "Personal Google"
+    type = "google"
 
 [control_center]
 sidebar = "compact"
@@ -99,7 +104,7 @@ active_scale = 1.0
 auto_hide = true
 background_opacity = 0.87999999523162842
 cross_axis_padding = 8
-enabled = true
+enabled = false
 icon_size = 24
 inactive_opacity = 0.85000002384185791
 inactive_scale = 0.85000002384185791
@@ -530,16 +535,16 @@ transition_on_startup = false
     recursive = true
 
     [wallpaper.default]
-    path = "/home/felipe/nix-config/assets/wallpapers/wallpaper.png"
+    path = "/home/felipe/nix-config/assets/wallpapers/Minimalistic/wallhaven-eoewlk.png"
 
     [wallpaper.last]
-    path = "/home/felipe/nix-config/assets/wallpapers/wallpaper.png"
+    path = "/home/felipe/nix-config/assets/wallpapers/Minimalistic/wallhaven-eoewlk.png"
 
     [wallpaper.monitors.HDMI-A-1]
-    path = "/home/felipe/nix-config/assets/wallpapers/wallpaper.png"
+    path = "/home/felipe/nix-config/assets/wallpapers/Minimalistic/wallhaven-eoewlk.png"
 
     [wallpaper.monitors.eDP-1]
-    path = "/home/felipe/nix-config/assets/wallpapers/wallpaper.png"
+    path = "/home/felipe/nix-config/assets/wallpapers/Minimalistic/wallhaven-eoewlk.png"
 
     [[wallpaper.favorite]]
     palette_source = "wallpaper"
@@ -593,7 +598,9 @@ use_mpris_filter = true
 
 [widget.clock]
 format = "{:%Y/%m/%d %H:%M}"
+tooltip_format = "{:%A, %B %d, %Y}"
 type = "clock"
+vertical_format = "{:%Y\\n%m\\n%d\\n%H\\n%M}"
 
 [widget.cpu]
 stat = "cpu_usage"
