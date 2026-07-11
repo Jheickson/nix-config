@@ -15,7 +15,7 @@ let
 
   # Resolve wallpaper path: gowall output when useThemeFile, else source JPEG
   wallpaperPath =
-    if stylixConfig.useThemeFile
+    if stylixConfig.useThemeFile && stylixConfig.colorizeWallpaper
     then stylixConfig.wallpaperOutputPath
     else toString stylixConfig.wallpaperSource;
 

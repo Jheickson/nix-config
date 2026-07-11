@@ -1,10 +1,11 @@
 {pkgs, ...}: {
   enable = true;
   useThemeFile = true;
+  colorizeWallpaper = true; # false = skip gowall recolor, keep original wallpaper
   generator = "iris"; # "iris" or "matugen"
   polarity = "dark";
 
-  wallpaperSource = ../../assets/wallpapers/Minimalistic/wallhaven-eoewlk.png;
+  wallpaperSource = ../../assets/wallpapers/Minimalistic/wallhaven-zm9zlv.jpg;
   wallpaperImage = ../../assets/wallpapers/wallpaper.png;
   # wallpaperImage = ../../assets/wallpapers/Aesthetic/wallhaven-w5q8px.jpg;
   # Wallpaper resize mode for awww:

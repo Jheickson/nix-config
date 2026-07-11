@@ -57,7 +57,7 @@ in
     };
 
     image =
-      if stylixConfig.useThemeFile then stylixConfig.wallpaperImage else stylixConfig.wallpaperSource;
+      if stylixConfig.useThemeFile && stylixConfig.colorizeWallpaper then stylixConfig.wallpaperImage else stylixConfig.wallpaperSource;
 
     base16Scheme =
       if stylixConfig.useThemeFile then stylixConfig.themeFile else generatorDrv.${if stylixConfig.generator == "iris" then "irisScheme" else "matugenScheme"};

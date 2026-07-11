@@ -7,7 +7,7 @@
 
 let
   # Parse the YAML theme file to get colors
-  themeYaml = if stylixConfig.useThemeFile then
+  themeYaml = if stylixConfig.useThemeFile && stylixConfig.colorizeWallpaper then
     builtins.fromJSON (
       builtins.readFile (
         pkgs.runCommand "theme-as-json" { } ''
@@ -19,7 +19,7 @@ let
     null;
 
   # Generate gowall JSON theme file
-  gowallThemeJson = if stylixConfig.useThemeFile then
+  gowallThemeJson = if stylixConfig.useThemeFile && stylixConfig.colorizeWallpaper then
     pkgs.writeText "gowall-theme.json" (builtins.toJSON {
       name = "stylix";
       colors = [
@@ -45,15 +45,15 @@ let
     null;
 in
 {
-  environment.systemPackages = (lib.optional stylixConfig.useThemeFile pkgs.gowall) ++ [ pkgs.awww ];
+  environment.systemPackages = (lib.optional (stylixConfig.useThemeFile && stylixConfig.colorizeWallpaper) pkgs.gowall) ++ [ pkgs.awww ];
 
   # Generate themed wallpaper on system activation (only when stylixConfig.useThemeFile = true)
-  system.activationScripts.gowallWallpaper = lib.mkIf stylixConfig.useThemeFile ''
+  system.activationScripts.gowallWallpaper = lib.mkIf (stylixConfig.useThemeFile && stylixConfig.colorizeWallpaper) ''
     HOME=/home/felipe ${pkgs.gowall}/bin/gowall convert ${stylixConfig.wallpaperSource} -t ${gowallThemeJson} --output ${stylixConfig.wallpaperOutputPath}
   '';
 
   # Expose the wallpaper path for shell scripts (awww, etc.)
-  environment.sessionVariables.STYLIX_WALLPAPER = if stylixConfig.useThemeFile then
+  environment.sessionVariables.STYLIX_WALLPAPER = if stylixConfig.useThemeFile && stylixConfig.colorizeWallpaper then
     stylixConfig.wallpaperOutputPath
   else
     toString stylixConfig.wallpaperSource;
