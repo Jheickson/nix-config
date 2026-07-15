@@ -66,14 +66,14 @@ in {
       # libreoffice
       gnumeric
       abiword
-      nautilus
+      # nautilus
       scanmem
       # slack
       # telegram-desktop
       # googleearth-pro
-      # nemo
-      # nemo-preview
-      # nemo-with-extensions
+      nemo
+      nemo-preview
+      nemo-with-extensions
       # thunar
       # whatsapp-for-linux
       # zapzap
