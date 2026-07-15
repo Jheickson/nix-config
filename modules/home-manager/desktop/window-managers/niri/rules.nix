@@ -143,6 +143,8 @@ let
         { app-id = "nautilus"; }
         { app-id = "file-roller"; }
         { app-id = "org.gnome.FileRoller"; }
+        { app-id = "org.Nemo"; }
+        { app-id = "nemo"; }
       ];
       open-floating = true;
     }
