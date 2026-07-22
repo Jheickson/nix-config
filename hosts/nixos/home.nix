@@ -13,6 +13,11 @@
     ../../modules/shared/nixpkgs-config.nix
   ];
 
+  # Explicitly enable cursor config generation. Previously this was
+  # auto-enabled by setting home.pointerCursor; that implicit behavior
+  # is deprecated and will be removed.
+  home.pointerCursor.enable = true;
+
   # Preserve legacy GTK4 theme behavior (default flipped to null in HM 26.05).
   # Stylix manages config.gtk.theme; mirror it for GTK4 explicitly.
   gtk.gtk4.theme = config.gtk.theme;
