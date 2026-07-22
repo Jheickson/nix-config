@@ -38,9 +38,16 @@ in
 {
   xdg.configFile.niri-config.source = lib.mkForce (
     let
-      raw = pkgs.writeText "niri-config-with-blur.kdl" (
-        config.programs.niri.finalConfig + blurKdl
-      );
+      # Use runCommandLocal (not writeText) so store path string context
+      # in niriConfig is tracked properly via stdenv.mkDerivation, avoiding
+      # the "builtins.derivation without proper context" warning.
+      raw = pkgs.runCommandLocal "niri-config-with-blur.kdl" {
+        niriConfig = config.programs.niri.finalConfig;
+        preferLocalBuild = true;
+      } ''
+        printf '%s' "$niriConfig" > "$out"
+        printf '%s' '${blurKdl}' >> "$out"
+      '';
     in
     pkgs.runCommand "niri-config-validated" { } ''
       ${config.programs.niri.package}/bin/niri validate -c ${raw}
