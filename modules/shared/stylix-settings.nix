@@ -5,7 +5,7 @@
   generator = "iris"; # "iris" or "matugen"
   polarity = "dark";
 
-  wallpaperSource = ../../assets/wallpapers/Minimalistic/wallhaven-j3x3jq.png;
+  wallpaperSource = ../../assets/wallpapers/Other/wallhaven-6ld5kx.png;
   wallpaperImage = ../../assets/wallpapers/wallpaper.png;
   # Wallpaper resize mode for awww:
   #   no      — No resizing, center image, pad with fill color
