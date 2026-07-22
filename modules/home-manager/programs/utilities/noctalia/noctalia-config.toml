@@ -14,7 +14,7 @@ tint_intensity = 0.30000001192092896
 order = [ "default" ]
 
     [bar.default]
-    auto_hide = true
+    auto_hide = false
     background_opacity = 0.5
     border = "outline"
     border_width = 0.0
@@ -43,7 +43,8 @@ order = [ "default" ]
     reserve_space = false
     scale = 1.0
     shadow = true
-    start = [ "clock" ]
+    smart_auto_hide = true
+    start = [ "clock", "nix-monitor" ]
     thickness = 34
     widget_spacing = 12
 
@@ -152,7 +153,7 @@ wifi_enabled = []
 
 [idle]
 behavior_order = [ "lock", "screen-off", "lock-and-suspend" ]
-pre_action_fade_seconds = 2.0
+pre_action_fade_seconds = 5
 
     [idle.behavior.lock]
     action = "lock"
@@ -356,8 +357,11 @@ scale = 1.0
     volume_output = true
     wifi = true
 
+[plugin_settings."avivbintangaringga/nix-monitor"]
+show_update_check_notification = true
+
 [plugins]
-enabled = []
+enabled = [ "avivbintangaringga/nix-monitor", "whyoolw/sharednd" ]
 
 [shell]
 app_icon_colorize = false
@@ -377,7 +381,7 @@ niri_overview_type_to_launch_enabled = false
 offline_mode = false
 password_style = "random"
 polkit_agent = true
-screen_time_enabled = false
+screen_time_enabled = true
 settings_show_advanced = true
 setup_wizard_enabled = true
 shared_gl_context = true
@@ -505,7 +509,7 @@ swap_pct_critical_threshold = 80.0
 builtin = "Rosé Pine"
 community_palette = "Rose Pine Moon"
 custom_palette = "stylix"
-mode = "light"
+mode = "auto"
 source = "custom"
 wallpaper_scheme = "m3-content"
 
@@ -535,16 +539,16 @@ transition_on_startup = false
     recursive = true
 
     [wallpaper.default]
-    path = "/home/felipe/nix-config/assets/wallpapers/Minimalistic/wallhaven-eoewlk.png"
+    path = "/home/felipe/nix-config/assets/wallpapers/Minimalistic/wallhaven-j3x3jq.png"
 
     [wallpaper.last]
-    path = "/home/felipe/nix-config/assets/wallpapers/Minimalistic/wallhaven-eoewlk.png"
+    path = "/home/felipe/nix-config/assets/wallpapers/Minimalistic/wallhaven-j3x3jq.png"
 
     [wallpaper.monitors.HDMI-A-1]
-    path = "/home/felipe/nix-config/assets/wallpapers/Minimalistic/wallhaven-eoewlk.png"
+    path = "/home/felipe/nix-config/assets/wallpapers/Minimalistic/wallhaven-j3x3jq.png"
 
     [wallpaper.monitors.eDP-1]
-    path = "/home/felipe/nix-config/assets/wallpapers/Minimalistic/wallhaven-eoewlk.png"
+    path = "/home/felipe/nix-config/assets/wallpapers/Minimalistic/wallhaven-j3x3jq.png"
 
     [[wallpaper.favorite]]
     palette_source = "wallpaper"
@@ -646,6 +650,10 @@ type = "sysmon"
 [widget.network_tx]
 stat = "net_tx"
 type = "sysmon"
+
+[widget.nix-monitor]
+colorize_glyph = false
+type = "avivbintangaringga/nix-monitor:nix-monitor"
 
 [widget.notifications]
 hide_when_no_unread = true
