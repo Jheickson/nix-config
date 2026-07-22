@@ -1,10 +1,16 @@
 #!/usr/bin/env bash
-# AWWW_BIN, AWWW_DAEMON_BIN and STYLIX_WALLPAPER are injected at build time by
-# settings.nix. No runtime PATH / environment discovery needed.
+# Store paths injected at build time by settings.nix via substituteInPlace
+# (@awwwBin@, @awwwDaemonBin@, @wallpaper@, @resize@).
+# No runtime PATH / environment discovery needed.
 # Retry loops handle daemon readiness after cold boot.
 # Diagnostics go to ~/.cache/awww-init.log for postmortem.
 
 set -uo pipefail
+
+AWWW_BIN="@awwwBin@"
+AWWW_DAEMON_BIN="@awwwDaemonBin@"
+STYLIX_WALLPAPER="@wallpaper@"
+AWWW_RESIZE="@resize@"
 
 LOG="$HOME/.cache/awww-init.log"
 mkdir -p "$(dirname "$LOG")"
@@ -42,18 +48,17 @@ if [ "$DAEMON_READY" -ne 1 ]; then
     exit 1
 fi
 
-WALLPAPER="${STYLIX_WALLPAPER:-$HOME/nix-config/assets/wallpapers/Landscape/wallhaven-rqp3r7.jpg}"
-echo "Wallpaper: $WALLPAPER"
+echo "Wallpaper: $STYLIX_WALLPAPER"
 
-if [ ! -f "$WALLPAPER" ]; then
-    echo "ERROR: wallpaper file missing: $WALLPAPER"
+if [ ! -f "$STYLIX_WALLPAPER" ]; then
+    echo "ERROR: wallpaper file missing: $STYLIX_WALLPAPER"
     exit 1
 fi
 
 # Retry the img call: daemon may accept query but not be fully ready to
 # render on the very first attempt after cold boot.
 for attempt in $(seq 1 10); do
-    if "$AWWW_BIN" img "$WALLPAPER" --resize "$AWWW_RESIZE"; then
+    if "$AWWW_BIN" img "$STYLIX_WALLPAPER" --resize "$AWWW_RESIZE"; then
         echo "Wallpaper applied on attempt $attempt"
         exit 0
     fi
