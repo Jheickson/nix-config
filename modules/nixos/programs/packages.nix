@@ -58,7 +58,6 @@ in {
       # === DESKTOP APPLICATIONS ===
       anki
       calibre
-      chromium
       # discord
       # electron-mail
       evince
