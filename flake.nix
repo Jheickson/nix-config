@@ -47,8 +47,10 @@
     };
 
     noctalia = {
-      url = "github:noctalia-dev/noctalia-shell";
-      inputs.nixpkgs.follows = "nixpkgs";
+      # cachix branch always points to the latest commit CI has cached,
+      # guaranteeing binary cache hits. Do NOT add inputs.nixpkgs.follows
+      # here — overriding the input changes derivations and misses the cache.
+      url = "github:noctalia-dev/noctalia-shell/cachix";
     };
 
     determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
