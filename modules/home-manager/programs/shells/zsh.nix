@@ -178,6 +178,9 @@
         # OpenCode CLI
         oc = "opencode";
 
+        # Bare OpenCode — isolated HOME (~/.opencode-home), no personal config/state/auth
+        ocb = "opencode-bare";
+
         # Zoxide directory jumping
         z = "__zoxide_z";
 
@@ -311,6 +314,12 @@
     zsh-autocomplete
     zsh-autosuggestions
     zoxide
+    # Bare OpenCode — runs opencode with an isolated HOME so it starts
+    # with no personal config, state, or auth (see alias `ocb`)
+    (writeShellScriptBin "opencode-bare" ''
+      export HOME="$HOME/.opencode-home"
+      exec opencode "$@"
+    '')
   ];
 
 }
