@@ -366,7 +366,7 @@ show_update_check_notification = true
 update_check_interval = 100
 
 [plugins]
-enabled = [ "avivbintangaringga/nix-monitor", "whyoolw/sharednd", "h465855hgg/lyrics" ]
+enabled = [ "avivbintangaringga/nix-monitor", "whyoolw/sharednd", "h465855hgg/lyrics", "shin/lrc", "8bury/lid-guard" ]
 
 [shell]
 app_icon_colorize = false
@@ -381,7 +381,6 @@ date_format = "%A, %x"
 disable_mipmaps = false
 font_family = "sans-serif"
 launch_apps_as_systemd_services = false
-middle_click_opens_widget_settings = true
 niri_overview_type_to_launch_enabled = false
 offline_mode = false
 password_style = "random"
@@ -584,7 +583,8 @@ type = "battery"
 device = "/org/freedesktop/UPower/devices/battery_BAT0"
 display_mode = "graphic"
 hide_when_full = true
-show_label = false
+label_content = "time"
+show_label = true
 type = "battery"
 
 [widget.battery_2]
@@ -624,9 +624,11 @@ device = "input"
 type = "volume"
 
 [widget.keyboard_layout]
-cycle_command = ""
 hide_when_single_layout = false
 type = "keyboard_layout"
+
+[widget.lid-guard]
+type = "8bury/lid-guard:lid-guard"
 
 [widget.lock_keys]
 display = "short"
@@ -636,8 +638,14 @@ show_num_lock = true
 show_scroll_lock = false
 type = "lock_keys"
 
+[widget.lrc]
+type = "shin/lrc:lrc"
+
 [widget.lyrics]
 enabled = false
+type = "h465855hgg/lyrics:lyrics"
+
+[widget.lyrics_2]
 type = "h465855hgg/lyrics:lyrics"
 
 [widget.media]
@@ -661,8 +669,13 @@ stat = "net_tx"
 type = "sysmon"
 
 [widget.nix-monitor]
-colorize_glyph = false
+checking_color = "primary"
+colorize_glyph = true
+colorize_text = true
 type = "avivbintangaringga/nix-monitor:nix-monitor"
+unknown_color = "tertiary"
+up_to_date_color = "surface"
+update_available_color = "secondary"
 
 [widget.notifications]
 hide_when_no_unread = true
@@ -695,7 +708,7 @@ type = "volume"
 type = "noctalia/wallhaven:wallhaven"
 
 [widget.workspaces]
-display = "none"
 hide_when_empty = true
 labels_only_when_occupied = true
+show_labels = false
 type = "workspaces"
