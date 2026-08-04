@@ -1,6 +1,6 @@
 {pkgs, ...}: {
   enable = true;
-  useThemeFile = false; # false = use wallpaper recolor, true = use themeFile
+  useThemeFile = true; # false = use wallpaper recolor, true = use themeFile
   colorizeWallpaper = true; # false = skip gowall recolor, keep original wallpaper
   generator = "iris"; # "iris" or "matugen"
   polarity = "dark";
@@ -16,7 +16,7 @@
 
   wallpaperOutputPath = "/home/felipe/nix-config/assets/wallpapers/wallpaper.png";
 
-  themeFile = "${pkgs.base16-schemes}/share/themes/synth-midnight-dark.yaml";
+  themeFile = "${pkgs.base16-schemes}/share/themes/nord.yaml";
 }
 /*
 result/
