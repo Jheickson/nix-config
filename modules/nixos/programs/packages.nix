@@ -157,7 +157,7 @@ in {
       # === DOCUMENT PROCESSING ===
       ghostscript
       gnumake
-      texlive.combined.scheme-full
+      texliveSmall
 
       # === THEMING & CUSTOMIZATION ===
       base16-schemes
