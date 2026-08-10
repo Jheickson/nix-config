@@ -25,6 +25,10 @@ vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.expandtab = true
 vim.opt.termguicolors = true
+vim.opt.showcmd = true
+vim.opt.wildmenu = true
+vim.opt.cmdheight = 1
+vim.opt.confirm = true
 
 -- =============================================================================
 -- KEYMAPS
@@ -38,6 +42,19 @@ vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal' })
 
 -- Save with Ctrl+S (VSCode muscle memory)
 vim.keymap.set({ 'n', 'i', 'v' }, '<C-s>', '<cmd>w<CR><Esc>', { desc = 'Save file' })
+
+-- VS Code-like conveniences for a smoother transition
+vim.keymap.set('n', '<C-Tab>', '<cmd>bnext<CR>', { desc = 'Next buffer' })
+vim.keymap.set('n', '<C-S-Tab>', '<cmd>bprev<CR>', { desc = 'Previous buffer' })
+vim.keymap.set('n', '<C-S-p>', function()
+  vim.api.nvim_feedkeys(':', 'n', false)
+end, { desc = 'Open command line' })
+vim.keymap.set('n', '<C-S-f>', function()
+  MiniPick.builtin.grep_live()
+end, { desc = 'Search in project' })
+vim.keymap.set('n', '<C-S-e>', function()
+  if not MiniFiles.close() then MiniFiles.open() end
+end, { desc = 'Toggle file explorer' })
 
 -- Close buffer (VSCode <C-w>) — keeps window, jumps to prev buffer first
 local function close_buffer(force)
