@@ -477,57 +477,43 @@ clue.setup({
 -- =============================================================================
 -- SESSIONS (auto-session — save/restore per cwd like VSCode workspaces)
 -- =============================================================================
+-- Shared session picker (search via <leader>ss, delete via <leader>sd,
+-- also reused by the starter's Quick actions)
+local function pick_session(delete)
+  local dir = require('auto-session').get_root_dir()
+  local files = vim.fn.glob(dir .. '*.vim', false, true)
+  local items = {}
+  for _, path in ipairs(files) do
+    local name = vim.fn.fnamemodify(path, ':t:r'):gsub('%%2F', '/')
+    table.insert(items, { text = name, _path = path })
+  end
+  MiniPick.start({
+    source = {
+      items = items,
+      name = delete and 'Delete Session' or 'Sessions',
+      choose = function(item)
+        if delete then
+          vim.fn.delete(item._path)
+          vim.notify('Deleted session: ' .. item.text)
+        else
+          vim.schedule(function()
+            vim.cmd('%bdelete!')
+            vim.cmd('source ' .. vim.fn.fnameescape(item._path))
+          end)
+        end
+      end,
+    },
+  })
+end
+
 pcall(function()
   require('auto-session').setup({
     auto_save = true,
     auto_restore = false, -- starter screen picks session; see <leader>ss
     suppressed_dirs = { '~/', '~/Downloads', '/' },
   })
-  local function session_dir()
-    return require('auto-session').get_root_dir()
-  end
-
-  vim.keymap.set('n', '<leader>ss', function()
-    local dir = session_dir()
-    local files = vim.fn.glob(dir .. '*.vim', false, true)
-    local items = {}
-    for _, path in ipairs(files) do
-      local name = vim.fn.fnamemodify(path, ':t:r'):gsub('%%2F', '/')
-      table.insert(items, { text = name, _path = path })
-    end
-    MiniPick.start({
-      source = {
-        items = items,
-        name = 'Sessions',
-        choose = function(item)
-          vim.schedule(function()
-            vim.cmd('%bdelete!')
-            vim.cmd('source ' .. vim.fn.fnameescape(item._path))
-          end)
-        end,
-      },
-    })
-  end, { desc = 'Search sessions' })
-
-  vim.keymap.set('n', '<leader>sd', function()
-    local dir = session_dir()
-    local files = vim.fn.glob(dir .. '*.vim', false, true)
-    local items = {}
-    for _, path in ipairs(files) do
-      local name = vim.fn.fnamemodify(path, ':t:r'):gsub('%%2F', '/')
-      table.insert(items, { text = name, _path = path })
-    end
-    MiniPick.start({
-      source = {
-        items = items,
-        name = 'Delete Session',
-        choose = function(item)
-          vim.fn.delete(item._path)
-          vim.notify('Deleted session: ' .. item.text)
-        end,
-      },
-    })
-  end, { desc = 'Delete session' })
+  vim.keymap.set('n', '<leader>ss', function() pick_session(false) end, { desc = 'Search sessions' })
+  vim.keymap.set('n', '<leader>sd', function() pick_session(true) end, { desc = 'Delete session' })
 end)
 
 -- Sessions section for mini.starter
