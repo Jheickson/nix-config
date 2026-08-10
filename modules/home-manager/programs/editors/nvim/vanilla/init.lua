@@ -398,7 +398,7 @@ require('mini.pick').setup({
   },
   window = {
     config = { border = 'rounded' },
-    prompt_cursor = '▎',
+    prompt_caret = '▎',
     prompt_prefix = ' ',
   },
 })
