@@ -55,6 +55,9 @@ order = [ "default" ]
 [battery]
 warning_threshold = 20
 
+    [battery.device."/org/freedesktop/UPower/devices/headset_dev_F5_5B_D3_3D_EA_9E"]
+    warning_threshold = 30
+
 [brightness]
 enable_ddcutil = true
 ignore_mmids = []
@@ -202,25 +205,25 @@ tint_intensity = 0.30000001192092896
 wallpaper = ""
 
 [lockscreen_widgets]
-enabled = false
+enabled = true
 schema_version = 2
 widget_order = [
     "lockscreen-login-box@HDMI-A-1",
     "lockscreen-login-box@eDP-1",
-    "lockscreen-widget-0000000000000001",
     "lockscreen-widget-0000000000000003",
     "lockscreen-widget-0000000000000004",
-    "lockscreen-widget-0000000000000005"
+    "lockscreen-widget-0000000000000005",
+    "lockscreen-widget-0000000000000006"
 ]
 
     [lockscreen_widgets.grid]
-    cell_size = 64
+    cell_size = 24
     major_interval = 4
     visible = true
 
     [lockscreen_widgets.widget."lockscreen-login-box@HDMI-A-1"]
-    box_height = 0.0
-    box_width = 0.0
+    box_height = 196.0
+    box_width = 810.0
     cx = 960.0
     cy = 957.0
     enabled = true
@@ -229,10 +232,19 @@ widget_order = [
     type = "login_box"
 
         [lockscreen_widgets.widget."lockscreen-login-box@HDMI-A-1".settings]
+        center_password_text = false
+        layout = "regular"
+        show_caps_lock = true
+        show_keyboard_layout = true
+        show_login_button = true
+        show_media = true
+        show_session_buttons = true
+        show_unlock_hint = true
+        show_weather = true
 
     [lockscreen_widgets.widget."lockscreen-login-box@eDP-1"]
-    box_height = 0.0
-    box_width = 0.0
+    box_height = 196.0
+    box_width = 810.0
     cx = 960.0
     cy = 957.0
     enabled = true
@@ -241,6 +253,15 @@ widget_order = [
     type = "login_box"
 
         [lockscreen_widgets.widget."lockscreen-login-box@eDP-1".settings]
+        center_password_text = false
+        layout = "regular"
+        show_caps_lock = true
+        show_keyboard_layout = true
+        show_login_button = true
+        show_media = true
+        show_session_buttons = true
+        show_unlock_hint = true
+        show_weather = true
 
     [lockscreen_widgets.widget.lockscreen-widget-0000000000000001]
     box_height = 464.0
@@ -274,7 +295,7 @@ widget_order = [
     type = "media_player"
 
         [lockscreen_widgets.widget.lockscreen-widget-0000000000000003.settings]
-        background = true
+        background = false
         background_color = "surface"
         background_opacity = 0.40000000000000002
         background_padding = 0.0
@@ -287,34 +308,51 @@ widget_order = [
     box_height = 128.0
     box_width = 512.0
     cx = 960.0
-    cy = 220.0
+    cy = 84.0
     enabled = true
     output = "HDMI-A-1"
     rotation = 0.0
     type = "clock"
 
         [lockscreen_widgets.widget.lockscreen-widget-0000000000000004.settings]
-        background = true
+        background = false
         background_opacity = 0.75
         background_padding = 4.0
         background_radius = 9.0
         circle = true
         clock_style = "digital"
-        format = "{:%Y/%m/%d}"
-        shadow = false
+        format = "{:%Y %m %d}"
+        shadow = true
 
     [lockscreen_widgets.widget.lockscreen-widget-0000000000000005]
-    box_height = 128.0
-    box_width = 256.0
+    box_height = 384.0
+    box_width = 896.0
     cx = 960.0
-    cy = 372.0
+    cy = 468.0
     enabled = true
     output = "HDMI-A-1"
     rotation = 0.0
     type = "clock"
 
         [lockscreen_widgets.widget.lockscreen-widget-0000000000000005.settings]
-        shadow = false
+        background = false
+        clock_style = "digital"
+        shadow = true
+
+    [lockscreen_widgets.widget.lockscreen-widget-0000000000000006]
+    box_height = 192.0
+    box_width = 448.0
+    cx = 256.0
+    cy = 955.0
+    output = "HDMI-A-1"
+    rotation = 0.0
+    type = "weather"
+
+        [lockscreen_widgets.widget.lockscreen-widget-0000000000000006.settings]
+        background = false
+        forecast_days = 3
+        shadow = true
+        show_forecast = true
 
 [nightlight]
 enabled = false
@@ -398,6 +436,9 @@ ui_scale = 0.85000000521540642
     enabled = true
     speed = 1.0
 
+    [shell.launcher]
+    app_grid = true
+
     [shell.mpris]
     blacklist = []
 
@@ -407,7 +448,7 @@ ui_scale = 0.85000000521540642
     control_center_placement = "attached"
     launcher_categories = true
     launcher_compact = true
-    launcher_placement = "centered"
+    launcher_placement = "attached"
     launcher_show_icons = true
     open_near_click_clipboard = false
     open_near_click_control_center = true
@@ -510,10 +551,10 @@ swap_pct_activity_threshold = 20.0
 swap_pct_critical_threshold = 80.0
 
 [theme]
-builtin = "Rosé Pine"
-community_palette = "Rose Pine Moon"
+builtin = "Nord"
+community_palette = "ADW"
 custom_palette = "stylix"
-mode = "auto"
+mode = "dark"
 source = "custom"
 wallpaper_scheme = "m3-content"
 
@@ -543,16 +584,16 @@ transition_on_startup = false
     recursive = true
 
     [wallpaper.default]
-    path = "/home/felipe/nix-config/assets/wallpapers/Minimalistic/wallhaven-j3x3jq.png"
+    path = "/home/felipe/nix-config/assets/wallpapers/Minimalistic/wallhaven-0pvxpe.png"
 
     [wallpaper.last]
-    path = "/home/felipe/nix-config/assets/wallpapers/Minimalistic/wallhaven-j3x3jq.png"
+    path = "/home/felipe/nix-config/assets/wallpapers/Minimalistic/wallhaven-0pvxpe.png"
 
     [wallpaper.monitors.HDMI-A-1]
-    path = "/home/felipe/nix-config/assets/wallpapers/Minimalistic/wallhaven-j3x3jq.png"
+    path = "/home/felipe/nix-config/assets/wallpapers/Minimalistic/wallhaven-0pvxpe.png"
 
     [wallpaper.monitors.eDP-1]
-    path = "/home/felipe/nix-config/assets/wallpapers/Minimalistic/wallhaven-j3x3jq.png"
+    path = "/home/felipe/nix-config/assets/wallpapers/Minimalistic/wallhaven-0pvxpe.png"
 
     [[wallpaper.favorite]]
     palette_source = "wallpaper"
