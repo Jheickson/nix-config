@@ -125,8 +125,10 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   callback = function() vim.highlight.on_yank() end,
 })
 
--- mini.pick + mini.starter highlights (must reapply after colorscheme changes,
--- including matugen live reloads — the starter header uses the theme accent)
+-- mini.pick + mini.starter + mini.statusline highlights (must reapply after
+-- colorscheme changes, including matugen live reloads — mini.statusline's own
+-- defaults point at Cursor/Diff*/IncSearch/StatusLineNC, which matugen doesn't
+-- define, so they'd fall back to Vim's colors and clash with the palette)
 vim.api.nvim_create_autocmd('ColorScheme', {
   group = vim.api.nvim_create_augroup('mini-pick-hl', { clear = true }),
   callback = function()
@@ -138,6 +140,30 @@ vim.api.nvim_create_autocmd('ColorScheme', {
     vim.api.nvim_set_hl(0, 'MiniStarterSection', { link = 'Keyword' })
     vim.api.nvim_set_hl(0, 'MiniStarterQuery', { link = 'Function' })
     vim.api.nvim_set_hl(0, 'MiniStarterInactive', { link = 'Comment' })
+
+    -- Mode indicator: distinct accent per mode so it never blends with the
+    -- dim location/search groups at the right end of the statusline
+    vim.api.nvim_set_hl(0, 'MiniStatuslineModeNormal', { link = 'Keyword', force = true })
+    vim.api.nvim_set_hl(0, 'MiniStatuslineModeInsert', { link = 'Function', force = true })
+    vim.api.nvim_set_hl(0, 'MiniStatuslineModeVisual', { link = 'String', force = true })
+    vim.api.nvim_set_hl(0, 'MiniStatuslineModeReplace', { link = 'Special', force = true })
+    vim.api.nvim_set_hl(0, 'MiniStatuslineModeCommand', { link = 'Special', force = true })
+    vim.api.nvim_set_hl(0, 'MiniStatuslineModeOther', { link = 'Constant', force = true })
+    vim.api.nvim_set_hl(0, 'MiniStatuslineDevinfo', { link = 'LineNr', force = true })
+    vim.api.nvim_set_hl(0, 'MiniStatuslineFileinfo', { link = 'LineNr', force = true })
+    vim.api.nvim_set_hl(0, 'MiniStatuslineLocation', { link = 'LineNr', force = true })
+    vim.api.nvim_set_hl(0, 'MiniStatuslineFilename', {
+      fg = vim.api.nvim_get_hl(0, { name = 'Normal' }).fg,
+      bold = true,
+      force = true,
+    })
+    -- matugen doesn't define StatusLineNC; without this inactive windows use
+    -- Vim's default StatusLineNC and clash with the palette
+    vim.api.nvim_set_hl(0, 'MiniStatuslineInactive', { link = 'LineNr', force = true })
+    vim.api.nvim_set_hl(0, 'StatusLineNC', {
+      fg = vim.api.nvim_get_hl(0, { name = 'LineNr' }).fg,
+      bg = vim.api.nvim_get_hl(0, { name = 'StatusLine' }).bg,
+    })
   end,
 })
 vim.api.nvim_set_hl(0, 'MiniPickMatchCurrent', { link = 'PmenuSel', force = true })
@@ -345,8 +371,35 @@ vim.notify = MiniNotify.make_notify()
 -- Buffer tabs at the top (like VSCode's tabs)
 require('mini.tabline').setup()
 
--- Status line at the bottom
-require('mini.statusline').setup()
+-- Status line at the bottom — matugen-themed via the ColorScheme autocmd above
+local statusline = require('mini.statusline')
+
+local function statusline_content()
+  local mode, mode_hl = statusline.section_mode({ trunc_width = 120 })
+  local git = statusline.section_git({ trunc_width = 40 })
+  local diff = statusline.section_diff({ trunc_width = 75 })
+  local diagnostics = statusline.section_diagnostics({ trunc_width = 75 })
+  local lsp = statusline.section_lsp({ trunc_width = 75 })
+  local filename = statusline.section_filename({ trunc_width = 140 })
+  local fileinfo = statusline.section_fileinfo({ trunc_width = 120 })
+  local location = statusline.section_location({ trunc_width = 75 })
+  local search = statusline.section_searchcount({ trunc_width = 75 })
+
+  if vim.bo.modified then filename = filename .. ' ●' end
+
+  return statusline.combine_groups({
+    { hl = mode_hl, strings = { mode } },
+    { hl = 'MiniStatuslineDevinfo', strings = { git, diff } },
+    '%<', -- truncate point for narrow windows
+    { hl = 'MiniStatuslineFilename', strings = { filename } },
+    '%=', -- end of left-aligned part
+    { hl = 'MiniStatuslineDevinfo', strings = { diagnostics, lsp } },
+    { hl = 'MiniStatuslineFileinfo', strings = { fileinfo } },
+    { hl = 'MiniStatuslineLocation', strings = { search, location } },
+  })
+end
+
+statusline.setup({ content = { active = statusline_content } })
 
 -- Highlight the word under cursor across the file (like VSCode)
 require('mini.cursorword').setup({ delay = 200 })
