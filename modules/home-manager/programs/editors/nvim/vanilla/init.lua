@@ -537,21 +537,62 @@ local function sessions_section()
 end
 
 -- Startup screen (opens when nvim started with no file args)
-require('mini.starter').setup({
-  -- header = table.concat({
-  --   '  ███╗   ██╗██╗   ██╗██╗███╗   ███╗',
-  --   '  ████╗  ██║██║   ██║██║████╗ ████║',
-  --   '  ██╔██╗ ██║██║   ██║██║██╔████╔██║',
-  --   '  ██║╚██╗██║╚██╗ ██╔╝██║██║╚██╔╝██║',
-  --   '  ██║ ╚████║ ╚████╔╝ ██║██║ ╚═╝ ██║',
-  --   '  ╚═╝  ╚═══╝  ╚═══╝  ╚═╝╚═╝     ╚═╝',
-  -- }, '\n'),
+local starter = require('mini.starter')
+
+-- Header: NVM logo + version line (like NVchad's logo + version)
+local function starter_header()
+  local v = vim.version()
+  return table.concat({
+    '  ███╗   ██╗██╗   ██╗██╗███╗   ███╗',
+    '  ████╗  ██║██║   ██║██║████╗ ████║',
+    '  ██╔██╗ ██║██║   ██║██║██╔████╔██║',
+    '  ██║╚██╗██║╚██╗ ██╔╝██║██║╚██╔╝██║',
+    '  ██║ ╚████║ ╚████╔╝ ██║██║ ╚═╝ ██║',
+    '  ╚═╝  ╚═══╝  ╚═══╝  ╚═╝╚═╝     ╚═╝',
+    '',
+    '  nvim v' .. v.major .. '.' .. v.minor .. '.' .. v.patch,
+  }, '\n')
+end
+
+-- Footer: random quote + date (like NVchad's quote of the day)
+local starter_quotes = {
+  'Programming is the art of telling another human what one wants the computer to do.',
+  'Simplicity is the soul of efficiency.',
+  'There are only two hard things in computer science: cache invalidation and naming things.',
+  'Talk is cheap. Show me the code.',
+  'First, solve the problem. Then, write the code.',
+}
+local function starter_footer()
+  return starter_quotes[math.random(#starter_quotes)] .. '  •  ' .. os.date('%a %b %d')
+end
+
+-- Quick actions (like VSCode's New File / Open Folder buttons)
+local function starter_quick_actions()
+  return {
+    { name = 'New file',          action = function() vim.cmd.enew() end,               section = 'Quick' },
+    { name = 'Find files',        action = function() MiniPick.builtin.files() end,      section = 'Quick' },
+    { name = 'Search in project', action = function() MiniPick.builtin.grep_live() end,  section = 'Quick' },
+    { name = 'File explorer',     action = function() MiniFiles.open() end,              section = 'Quick' },
+    { name = 'Open session',      action = function() pick_session(false) end,           section = 'Quick' },
+  }
+end
+
+starter.setup({
+  header = starter_header,
+  footer = starter_footer,
+  evaluate_single = true, -- auto-run once the query narrows to a single item
   items = {
+    starter_quick_actions,
+    starter.sections.recent_files(5, false),
     sessions_section,
-    require('mini.starter').sections.recent_files(5, false),
-    require('mini.starter').sections.builtin_actions(),
+    starter.sections.builtin_actions(),
   },
-  footer = '',
+  content_hooks = {
+    starter.gen_hook.padding(3, 2),                          -- breathing room around the content
+    starter.gen_hook.indexing('all', { 'Builtin actions' }), -- numbered list; type the number to jump
+    starter.gen_hook.adding_bullet(),                        -- keep the "░ " bullets
+    starter.gen_hook.aligning('center', 'center'),           -- keep the centered layout
+  },
 })
 
 -- =============================================================================
