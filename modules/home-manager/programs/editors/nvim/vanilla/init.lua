@@ -52,7 +52,7 @@ local function close_buffer(force)
 end
 
 -- Save and quit using leader-based bindings
-vim.keymap.set({ 'n', 'i', 'v' }, '<leader>w', '<cmd>update<CR>', { desc = 'Write buffer' })
+vim.keymap.set({ 'n', 'i', 'v' }, '<leader>W', '<cmd>update<CR>', { desc = 'Write buffer' })
 vim.keymap.set('n', '<leader>q', '<cmd>q<CR>', { desc = 'Close window' })
 vim.keymap.set('n', '<leader>Q', '<cmd>qa<CR>', { desc = 'Quit all' })
 
