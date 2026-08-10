@@ -34,6 +34,9 @@
     grim
     slurp
 
+    # typing tutor
+    inputs.toofan.packages.${pkgs.stdenv.hostPlatform.system}.default
+
     # utils
     wl-clipboard
 
