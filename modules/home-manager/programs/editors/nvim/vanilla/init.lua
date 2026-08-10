@@ -125,11 +125,19 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   callback = function() vim.highlight.on_yank() end,
 })
 
--- mini.pick current item highlight (must reapply after colorscheme changes)
+-- mini.pick + mini.starter highlights (must reapply after colorscheme changes,
+-- including matugen live reloads — the starter header uses the theme accent)
 vim.api.nvim_create_autocmd('ColorScheme', {
   group = vim.api.nvim_create_augroup('mini-pick-hl', { clear = true }),
   callback = function()
     vim.api.nvim_set_hl(0, 'MiniPickMatchCurrent', { link = 'PmenuSel', force = true })
+    local accent = vim.api.nvim_get_hl(0, { name = 'Special' }).fg
+    vim.api.nvim_set_hl(0, 'MiniStarterHeader', { fg = accent, bold = true })
+    vim.api.nvim_set_hl(0, 'MiniStarterFooter', { link = 'Comment' })
+    vim.api.nvim_set_hl(0, 'MiniStarterCurrent', { link = 'PmenuSel', force = true })
+    vim.api.nvim_set_hl(0, 'MiniStarterSection', { link = 'Keyword' })
+    vim.api.nvim_set_hl(0, 'MiniStarterQuery', { link = 'Function' })
+    vim.api.nvim_set_hl(0, 'MiniStarterInactive', { link = 'Comment' })
   end,
 })
 vim.api.nvim_set_hl(0, 'MiniPickMatchCurrent', { link = 'PmenuSel', force = true })
