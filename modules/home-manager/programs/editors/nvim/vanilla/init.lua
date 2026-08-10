@@ -529,7 +529,7 @@ local function sessions_section()
     local name = vim.fn.fnamemodify(path, ':t:r'):gsub('%%2F', '/')
     table.insert(items, {
       name = name,
-      action = 'SessionRestore ' .. vim.fn.fnameescape(name),
+      action = 'AutoSession restore ' .. vim.fn.fnameescape(name),
       section = 'Sessions',
     })
   end
