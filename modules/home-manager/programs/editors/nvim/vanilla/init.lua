@@ -40,58 +40,40 @@ vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 -- Exit terminal mode
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal' })
 
--- Save with Ctrl+S (VSCode muscle memory)
-vim.keymap.set({ 'n', 'i', 'v' }, '<C-s>', '<cmd>w<CR><Esc>', { desc = 'Save file' })
-
--- VS Code-like conveniences for a smoother transition
-vim.keymap.set('n', '<C-Tab>', '<cmd>bnext<CR>', { desc = 'Next buffer' })
-vim.keymap.set('n', '<C-S-Tab>', '<cmd>bprev<CR>', { desc = 'Previous buffer' })
-vim.keymap.set('n', '<C-S-p>', function()
-  vim.api.nvim_feedkeys(':', 'n', false)
-end, { desc = 'Open command line' })
-vim.keymap.set('n', '<C-S-f>', function()
-  MiniPick.builtin.grep_live()
-end, { desc = 'Search in project' })
-vim.keymap.set('n', '<C-S-e>', function()
-  if not MiniFiles.close() then MiniFiles.open() end
-end, { desc = 'Toggle file explorer' })
-
--- Close buffer (VSCode <C-w>) — keeps window, jumps to prev buffer first
+-- Buffer helpers
 local function close_buffer(force)
   local cur = vim.api.nvim_get_current_buf()
   local listed = vim.tbl_filter(function(b)
     return vim.api.nvim_buf_is_valid(b) and vim.bo[b].buflisted
   end, vim.api.nvim_list_bufs())
-  -- Terminal buffers have running jobs — always force
   local bang = (force or vim.bo[cur].buftype == 'terminal') and '!' or ''
   if #listed > 1 then vim.cmd('bprevious') end
   vim.cmd('bdelete' .. bang .. ' ' .. cur)
 end
-vim.keymap.set('n', '<C-w>', function() close_buffer(false) end, { desc = 'Close buffer' })
+
+-- Save and quit using leader-based bindings
+vim.keymap.set({ 'n', 'i', 'v' }, '<leader>w', '<cmd>update<CR>', { desc = 'Write buffer' })
+vim.keymap.set('n', '<leader>q', '<cmd>q<CR>', { desc = 'Close window' })
+vim.keymap.set('n', '<leader>Q', '<cmd>qa<CR>', { desc = 'Quit all' })
+
+-- Buffer navigation and closing (more Vim-native than tab-style switching)
+vim.keymap.set('n', '<leader>bn', '<cmd>bnext<CR>', { desc = 'Next buffer' })
+vim.keymap.set('n', '<leader>bp', '<cmd>bprev<CR>', { desc = 'Previous buffer' })
 vim.keymap.set('n', '<leader>bd', function() close_buffer(false) end, { desc = 'Close buffer' })
-vim.keymap.set('n', '<leader>bD', function() close_buffer(true)  end, { desc = 'Force close buffer' })
+vim.keymap.set('n', '<leader>bD', function() close_buffer(true) end, { desc = 'Force close buffer' })
 
--- Window management (since <C-w> is now close-buffer)
-vim.keymap.set('n', '<leader>-',  '<cmd>split<CR>',  { desc = 'Split horizontal' })
+-- Window management
+vim.keymap.set('n', '<leader>-', '<cmd>split<CR>', { desc = 'Split horizontal' })
 vim.keymap.set('n', '<leader>\\', '<cmd>vsplit<CR>', { desc = 'Split vertical' })
-vim.keymap.set('n', '<leader>wq', '<C-w>q',          { desc = 'Close window' })
-vim.keymap.set('n', '<leader>wo', '<C-w>o',          { desc = 'Only this window' })
-vim.keymap.set('n', '<leader>w=', '<C-w>=',          { desc = 'Equalize windows' })
-vim.keymap.set('n', '<leader>wr', '<C-w>r',          { desc = 'Rotate windows' })
+vim.keymap.set('n', '<leader>wq', '<C-w>q', { desc = 'Close window' })
+vim.keymap.set('n', '<leader>wo', '<C-w>o', { desc = 'Only this window' })
+vim.keymap.set('n', '<leader>w=', '<C-w>=', { desc = 'Equalize windows' })
+vim.keymap.set('n', '<leader>wr', '<C-w>r', { desc = 'Rotate windows' })
 
--- Switch buffers (Tab cycles; <S-h>/<S-l> as vim-native alt)
-vim.keymap.set('n', '<Tab>',   '<cmd>bnext<CR>', { desc = 'Next buffer' })
-vim.keymap.set('n', '<S-Tab>', '<cmd>bprev<CR>', { desc = 'Previous buffer' })
-vim.keymap.set('n', '<S-h>',   '<cmd>bprev<CR>', { desc = 'Previous buffer' })
-vim.keymap.set('n', '<S-l>',   '<cmd>bnext<CR>', { desc = 'Next buffer' })
+-- Window navigation uses the native Ctrl+w prefix
+-- Example: <C-w>h, <C-w>j, <C-w>k, <C-w>l
 
--- Window navigation (panes, like Ctrl+1/2/3 in VSCode)
-vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move to left window' })
-vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move to right window' })
-vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move to lower window' })
-vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move to upper window' })
-
--- Move selected lines up/down (like Alt+Up/Down in VSCode)
+-- Move selected lines up/down
 vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv", { desc = 'Move selection down' })
 vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv", { desc = 'Move selection up' })
 
@@ -105,24 +87,20 @@ vim.keymap.set('n', '<leader>Y', '"+Y', { desc = 'Yank line to clipboard' })
 vim.keymap.set({ 'n', 'v' }, '<leader>p', '"+p', { desc = 'Paste from clipboard' })
 vim.keymap.set({ 'n', 'v' }, '<leader>P', '"+P', { desc = 'Paste before from clipboard' })
 
--- Diagnostics (like VSCode's Problems panel hover)
+-- Diagnostics
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show error' })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Next error' })
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Prev error' })
-
--- Close window / quit
-vim.keymap.set('n', '<leader>q', '<cmd>q<CR>', { desc = 'Close window' })
-vim.keymap.set('n', '<leader>Q', '<cmd>qa<CR>', { desc = 'Quit all' })
 
 -- Format now (manual trigger on top of format-on-save)
 vim.keymap.set('n', '<leader>lf', function()
   require('conform').format({ async = true, lsp_format = 'fallback' })
 end, { desc = 'Format file' })
 
--- Toggle terminal (like Ctrl+` in VSCode)
+-- Toggle terminal with a leader-based mapping
 local term_buf = nil
 local term_win = nil
-vim.keymap.set({ 'n', 't' }, '<C-`>', function()
+vim.keymap.set({ 'n', 't' }, '<leader>tt', function()
   if term_win and vim.api.nvim_win_is_valid(term_win) then
     vim.api.nvim_win_hide(term_win)
     term_win = nil
@@ -419,8 +397,6 @@ require('mini.pick').setup({
     prompt_prefix = ' ',
   },
 })
-vim.keymap.set('n', '<C-p>', MiniPick.builtin.files, { desc = 'Find files' })
-vim.keymap.set('n', '<C-f>', MiniPick.builtin.grep_live, { desc = 'Search in project' })
 vim.keymap.set('n', '<leader>ff', MiniPick.builtin.files, { desc = 'Find files' })
 vim.keymap.set('n', '<leader>fg', MiniPick.builtin.grep_live, { desc = 'Search in project' })
 vim.keymap.set('n', '<leader>fb', MiniPick.builtin.buffers, { desc = 'Open buffers' })
