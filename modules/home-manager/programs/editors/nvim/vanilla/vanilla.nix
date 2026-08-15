@@ -18,6 +18,7 @@ in
     alejandra
     stylua
     rust-analyzer
+    lldb # DAP debugger for rustaceanvim (:RustDebuggables) — provides lldb-dap
     tailwindcss-language-server
     typescript-language-server
     lazygit

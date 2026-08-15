@@ -26,6 +26,13 @@ in {
       # === DEVELOPMENT ===
       bruno
       bun
+      # Rust toolchain (cargo/rustc/rustfmt/clippy from nixpkgs)
+      cargo
+      cargo-generate
+      rustc
+      rustfmt
+      clippy
+      cargo-watch
       gh
       git
       lazygit

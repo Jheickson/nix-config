@@ -186,12 +186,6 @@ vim.lsp.config('nixd', {
   root_markers = { 'flake.nix', '.git' },
 })
 
-vim.lsp.config('rust_analyzer', {
-  cmd = { 'rust-analyzer' },
-  filetypes = { 'rust' },
-  root_markers = { 'Cargo.toml', 'Cargo.lock', '.git' },
-})
-
 vim.lsp.config('ts_ls', {
   cmd = { 'typescript-language-server', '--stdio' },
   filetypes = {
@@ -212,7 +206,8 @@ vim.lsp.config('tailwindcss', {
   root_markers = { 'tailwind.config.js', 'tailwind.config.ts', 'package.json', '.git' },
 })
 
-vim.lsp.enable({ 'lua_ls', 'nixd', 'rust_analyzer', 'ts_ls', 'tailwindcss' })
+-- rust_analyzer is managed by rustaceanvim — do NOT re-add it here (double client)
+vim.lsp.enable({ 'lua_ls', 'nixd', 'ts_ls', 'tailwindcss' })
 
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('lsp-attach', { clear = true }),
@@ -258,7 +253,26 @@ vim.pack.add({
   'https://github.com/Saghen/blink.cmp',
   'https://github.com/rmagatti/auto-session',
   'https://github.com/stevearc/conform.nvim',
+  'https://github.com/mfussenegger/nvim-dap',
+  'https://github.com/mrcjkb/rustaceanvim',
 })
+
+-- Rust tooling (rustaceanvim) — manages rust-analyzer itself, adds cargo
+-- integration (:RustRun/:RustTest), DAP debugging, and RustLsp commands.
+-- Debugging uses lldb-dap (from the lldb package in vanilla.nix); rust-analyzer
+-- is picked up from PATH.
+vim.g.rustaceanvim = {
+  tools = {
+    float_win_config = { border = 'rounded' }, -- match mini.pick's rounded border
+  },
+  dap = {
+    adapter = {
+      type = 'executable',
+      command = 'lldb-dap',
+      args = {},
+    },
+  },
+}
 
 -- Format on save via conform.nvim — explicit formatter per filetype,
 -- bypass via :FormatDisable (buffer: !), re-enable via :FormatEnable
