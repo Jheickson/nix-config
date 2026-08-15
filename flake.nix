@@ -58,6 +58,11 @@
       url = "github:noctalia-dev/noctalia-shell/cachix";
     };
 
+    omp = {
+      url = "github:can1357/oh-my-pi";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
 
     iris = {

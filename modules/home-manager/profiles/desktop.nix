@@ -27,6 +27,7 @@
     ../programs/utilities/fastfetch.nix
     ../programs/utilities/gowall.nix
     ../programs/utilities/noctalia
+    ../programs/utilities/omp
   ];
 
   home.packages = with pkgs; [
