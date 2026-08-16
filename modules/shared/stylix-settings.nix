@@ -15,7 +15,7 @@
   # ──────────────────────────────────────────────────────────────
   # Wallpaper (what gets displayed)
   # ──────────────────────────────────────────────────────────────
-  wallpaperSource = ../../assets/wallpapers/Other/wallhaven-2yo51x.png; # applied wallpaper image
+  wallpaperSource = ../../assets/wallpapers/Other/wallhaven-7p792o.jpg; # applied wallpaper image
   wallpaperImage = ../../assets/wallpapers/wallpaper.png; # store-tracked copy of the gowall output, what Stylix points at
   # Wallpaper resize mode for awww:
   #   no      — No resizing, center image, pad with fill color
@@ -34,8 +34,8 @@
   #   useSchemeWallpaper = false → wallpaperSource is both scheme source and
   #                                applied wallpaper (no recolor)
   # No effect when useThemeFile = true.
-  useSchemeWallpaper = false;
-  schemeWallpaperSource = ../../assets/wallpapers/Other/wallhaven-wq56mp.png;
+  useSchemeWallpaper = true;
+  schemeWallpaperSource = ../../assets/wallpapers/Other/wallhaven-2yo51x.png;
 
   # ──────────────────────────────────────────────────────────────
   # Gowall recolor

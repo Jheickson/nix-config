@@ -10,6 +10,7 @@
   imports = [
     ../../modules/shared/stylix.nix
     ../../modules/home-manager/profiles/desktop.nix
+    ../../modules/home-manager/desktop/stylix-wallpaper.nix
     ../../modules/shared/nixpkgs-config.nix
   ];
 
