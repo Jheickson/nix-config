@@ -7,15 +7,15 @@
   # ──────────────────────────────────────────────────────────────
   # Colorscheme
   # ──────────────────────────────────────────────────────────────
-  useThemeFile = false; # false = generate scheme from image, true = fixed themeFile
+  useThemeFile = true; # false = generate scheme from image, true = fixed themeFile
   generator = "iris"; # "iris" or "matugen" (only used when useThemeFile = false)
   polarity = "dark"; # "dark" or "light"
-  themeFile = "${pkgs.base16-schemes}/share/themes/nord.yaml"; # fixed scheme (only used when useThemeFile = true)
+  themeFile = "${pkgs.base16-schemes}/share/themes/rebecca.yaml"; # fixed scheme (only used when useThemeFile = true)
 
   # ──────────────────────────────────────────────────────────────
   # Wallpaper (what gets displayed)
   # ──────────────────────────────────────────────────────────────
-  wallpaperSource = ../../assets/wallpapers/Other/wallhaven-wq56mp.png; # applied wallpaper image
+  wallpaperSource = ../../assets/wallpapers/Landscape/wallhaven-yxgvv7.jpg; # applied wallpaper image
   wallpaperImage = ../../assets/wallpapers/wallpaper.png; # store-tracked copy of the gowall output, what Stylix points at
   # Wallpaper resize mode for awww:
   #   no      — No resizing, center image, pad with fill color
@@ -24,7 +24,7 @@
   #   stretch — Fill screen, ignore aspect ratio
   wallpaperResize = "crop";
   wallpaperOutputPath = "/home/felipe/nix-config/assets/wallpapers/wallpaper.png"; # where gowall writes the recolored wallpaper
-  invertWallpaper = true; # true = invert the wallpaper colors before gowall recolor (turns light wallpapers dark)
+  invertWallpaper = false; # true = invert the wallpaper colors before gowall recolor (turns light wallpapers dark)
 
   # ──────────────────────────────────────────────────────────────
   # Scheme-source wallpaper (optional)
@@ -35,8 +35,8 @@
   #   useSchemeWallpaper = false → wallpaperSource is both scheme source and
   #                                applied wallpaper (no recolor)
   # No effect when useThemeFile = true.
-  useSchemeWallpaper = false;
-  schemeWallpaperSource = ../../assets/wallpapers/Other/wallhaven-2yo51x.png;
+  useSchemeWallpaper = true;
+  schemeWallpaperSource = ../../assets/wallpapers/Other/wallhaven-5gqde7.jpg;
 
   # ──────────────────────────────────────────────────────────────
   # Gowall recolor
@@ -46,7 +46,10 @@
   # ──────────────────────────────────────────────────────────────
   # Derived (computed from the above — don't edit)
   # ──────────────────────────────────────────────────────────────
-  schemeSource = if useSchemeWallpaper then schemeWallpaperSource else wallpaperSource; # image the generators read
+  schemeSource =
+    if useSchemeWallpaper
+    then schemeWallpaperSource
+    else wallpaperSource; # image the generators read
   recolorWallpaper = colorizeWallpaper && (useThemeFile || useSchemeWallpaper); # master gate for gowall recolor + niri wallpaper path
   processedWallpaper = recolorWallpaper || invertWallpaper; # master gate for the processed wallpaper path (recolor or invert)
 }
