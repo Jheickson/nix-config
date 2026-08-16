@@ -126,9 +126,10 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 })
 
 -- mini.pick + mini.starter + mini.statusline highlights (must reapply after
--- colorscheme changes, including matugen live reloads — mini.statusline's own
--- defaults point at Cursor/Diff*/IncSearch/StatusLineNC, which matugen doesn't
--- define, so they'd fall back to Vim's colors and clash with the palette)
+-- colorscheme changes, including stylix live reloads — mini.statusline's own
+-- defaults point at Cursor/Diff*/IncSearch/StatusLineNC, which the stylix
+-- scheme doesn't define consistently, so they'd fall back to Vim's colors and
+-- clash with the palette)
 vim.api.nvim_create_autocmd('ColorScheme', {
   group = vim.api.nvim_create_augroup('mini-pick-hl', { clear = true }),
   callback = function()
@@ -157,13 +158,20 @@ vim.api.nvim_create_autocmd('ColorScheme', {
       bold = true,
       force = true,
     })
-    -- matugen doesn't define StatusLineNC; without this inactive windows use
-    -- Vim's default StatusLineNC and clash with the palette
+    -- the stylix scheme's StatusLineNC clashes with mini.statusline's palette;
+    -- without this override inactive windows use Vim's default and clash
     vim.api.nvim_set_hl(0, 'MiniStatuslineInactive', { link = 'LineNr', force = true })
     vim.api.nvim_set_hl(0, 'StatusLineNC', {
       fg = vim.api.nvim_get_hl(0, { name = 'LineNr' }).fg,
       bg = vim.api.nvim_get_hl(0, { name = 'StatusLine' }).bg,
     })
+    -- Transparent-window parity with the old matugen theme: stylix's
+    -- transparentBackground only clears Normal/NonText/SignColumn/LineNr
+    vim.api.nvim_set_hl(0, 'NormalNC', { bg = 'NONE' })
+    vim.api.nvim_set_hl(0, 'EndOfBuffer', { bg = 'NONE' })
+    local dim = vim.api.nvim_get_hl(0, { name = 'LineNr' }).fg
+    vim.api.nvim_set_hl(0, 'WinSeparator', { fg = dim, bg = 'NONE' })
+    vim.api.nvim_set_hl(0, 'FloatBorder', { fg = dim, bg = 'NONE' })
   end,
 })
 vim.api.nvim_set_hl(0, 'MiniPickMatchCurrent', { link = 'PmenuSel', force = true })
@@ -249,7 +257,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
 -- =============================================================================
 
 vim.pack.add({
-  'https://github.com/nvim-mini/mini.nvim',
   'https://github.com/Saghen/blink.cmp',
   'https://github.com/rmagatti/auto-session',
   'https://github.com/stevearc/conform.nvim',
@@ -328,29 +335,32 @@ require('mini.misc').setup()
 MiniMisc.setup_auto_root({ '.git', 'flake.nix', 'Cargo.toml', 'package.json', 'pyproject.toml' })
 
 -- =============================================================================
--- COLORSCHEME (matugen-driven, FS-watched for live reload)
+-- COLORSCHEME (stylix-driven, FS-watched for live reload)
 -- =============================================================================
--- ~/.config/nvim/colors/matugen.lua is a home-manager symlink to a /nix/store
--- path produced by modules/shared/matugen.nix. The symlink target changes on
--- every nh switch when the matugen palette is regenerated; we watch the path
--- and re-source :colorscheme matugen so live nvim instances pick up the new
--- colors without a restart.
-local colors_file = vim.fn.expand('~/.config/nvim/colors/matugen.lua')
+-- ~/.config/nvim/colors/stylix.lua is a home-manager symlink to a /nix/store
+-- path generated from stylix.base16Scheme (see vanilla.nix). The symlink
+-- target changes on every nh switch when the palette changes; we watch the
+-- parent directory (uv fs_event on the symlink itself would follow it to the
+-- immutable store file and never see the replacement) and re-source
+-- :colorscheme stylix so live nvim instances pick up the new colors without a
+-- restart.
+local colors_file = vim.fn.expand('~/.config/nvim/colors/stylix.lua')
+local colors_dir = vim.fn.fnamemodify(colors_file, ':h')
 
 local function reload_colorscheme()
   vim.schedule(function()
-    pcall(vim.cmd.colorscheme, 'matugen')
+    pcall(vim.cmd.colorscheme, 'stylix')
   end)
 end
 
 local watcher = vim.uv.new_fs_event()
-if watcher then
-  watcher:start(colors_file, {}, function(err)
+if watcher and vim.fn.isdirectory(colors_dir) == 1 then
+  watcher:start(colors_dir, {}, function(err)
     if not err then reload_colorscheme() end
   end)
 end
 
-pcall(vim.cmd.colorscheme, 'matugen')
+pcall(vim.cmd.colorscheme, 'stylix')
 
 -- Icons (used by statusline, tabline, etc.)
 require('mini.icons').setup()
@@ -385,7 +395,7 @@ vim.notify = MiniNotify.make_notify()
 -- Buffer tabs at the top (like VSCode's tabs)
 require('mini.tabline').setup()
 
--- Status line at the bottom — matugen-themed via the ColorScheme autocmd above
+-- Status line at the bottom — stylix-themed via the ColorScheme autocmd above
 local statusline = require('mini.statusline')
 
 local function statusline_content()

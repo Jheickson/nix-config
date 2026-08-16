@@ -32,17 +32,14 @@ let
         mkdir -p .config/iris/templates
 
         cp ${./iris-templates/base16.yaml} .config/iris/templates/base16.yaml
-        cp ${./iris-templates/nvim.lua} .config/iris/templates/iris.lua
 
         iris ${stylixConfig.schemeSource} --dark ${polarityFlag}
 
         mkdir -p $out
         cp .cache/iris/base16.yaml $out/
-        cp .cache/iris/iris.lua $out/
       '';
 in
 {
   irisOutputs = outputs;
   irisScheme = "${outputs}/base16.yaml";
-  irisNvim = "${outputs}/iris.lua";
 }

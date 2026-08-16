@@ -39,9 +39,6 @@ let
         [templates.base16]
         input_path  = '${./matugen-templates/base16.yaml}'
         output_path = './base16.yaml'
-        [templates.nvim]
-        input_path  = '${./matugen-templates/nvim.lua}'
-        output_path = './matugen.lua'
         EOF
         # Try source-color-index 1 first (often punchier than 0 for landscape
         # photos where 0 is dominated by sky/ground). Fall back to 0 when an
@@ -60,11 +57,9 @@ let
           --mode ${stylixConfig.polarity} \
           --config ./config.toml
         cp base16.yaml $out/
-        cp matugen.lua $out/
       '';
 in
 {
   matugenOutputs = outputs;
   matugenScheme = "${outputs}/base16.yaml";
-  matugenNvim = "${outputs}/matugen.lua";
 }

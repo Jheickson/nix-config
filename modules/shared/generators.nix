@@ -12,10 +12,8 @@ in
 if stylixConfig.generator == "iris" then
   {
     scheme = iris.irisScheme;
-    nvim = iris.irisNvim;
   }
 else
   {
     scheme = matugen.matugenScheme;
-    nvim = matugen.matugenNvim;
   }
