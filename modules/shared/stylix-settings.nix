@@ -1,40 +1,52 @@
 {pkgs, ...}: rec {
-  enable = true;
+  # ──────────────────────────────────────────────────────────────
+  # General
+  # ──────────────────────────────────────────────────────────────
+  enable = true; # master switch for Stylix theming
+
+  # ──────────────────────────────────────────────────────────────
+  # Colorscheme
+  # ──────────────────────────────────────────────────────────────
   useThemeFile = false; # false = generate scheme from image, true = fixed themeFile
-  colorizeWallpaper = true; # false = skip gowall recolor, keep original wallpaper
-  generator = "iris"; # "iris" or "matugen"
-  polarity = "dark";
+  generator = "iris"; # "iris" or "matugen" (only used when useThemeFile = false)
+  polarity = "dark"; # "dark" or "light"
+  themeFile = "${pkgs.base16-schemes}/share/themes/nord.yaml"; # fixed scheme (only used when useThemeFile = true)
 
-  # Dedicated colorscheme-source wallpaper (wallpaper x):
-  #   useSchemeWallpaper = true  → scheme generated from schemeWallpaperSource; the
-  #                                applied wallpaper (wallpaperSource) is recolored
-  #                                by gowall to match it
-  #   useSchemeWallpaper = false → wallpaperSource doubles as scheme source AND
-  #                                applied wallpaper (no recolor). No effect when
-  #                                useThemeFile = true.
-  useSchemeWallpaper = false;
-  schemeWallpaperSource = ../../assets/wallpapers/Other/wallhaven-wq56mp.png;
-
-  wallpaperSource = ../../assets/wallpapers/Other/wallhaven-2yo51x.png;
-  wallpaperImage = ../../assets/wallpapers/wallpaper.png;
+  # ──────────────────────────────────────────────────────────────
+  # Wallpaper (what gets displayed)
+  # ──────────────────────────────────────────────────────────────
+  wallpaperSource = ../../assets/wallpapers/Other/wallhaven-2yo51x.png; # applied wallpaper image
+  wallpaperImage = ../../assets/wallpapers/wallpaper.png; # store-tracked copy of the gowall output, what Stylix points at
   # Wallpaper resize mode for awww:
   #   no      — No resizing, center image, pad with fill color
   #   crop    — Fill screen, crop excess (awww default)
   #   fit     — Fit inside screen, preserve aspect ratio
   #   stretch — Fill screen, ignore aspect ratio
   wallpaperResize = "crop";
+  wallpaperOutputPath = "/home/felipe/nix-config/assets/wallpapers/wallpaper.png"; # where gowall writes the recolored wallpaper
 
-  wallpaperOutputPath = "/home/felipe/nix-config/assets/wallpapers/wallpaper.png";
+  # ──────────────────────────────────────────────────────────────
+  # Scheme-source wallpaper (optional)
+  # ──────────────────────────────────────────────────────────────
+  # Decouple the colorscheme source (x) from the applied wallpaper (y):
+  #   useSchemeWallpaper = true  → scheme generated from schemeWallpaperSource,
+  #                                wallpaperSource is recolored by gowall to match
+  #   useSchemeWallpaper = false → wallpaperSource is both scheme source and
+  #                                applied wallpaper (no recolor)
+  # No effect when useThemeFile = true.
+  useSchemeWallpaper = false;
+  schemeWallpaperSource = ../../assets/wallpapers/Other/wallhaven-wq56mp.png;
 
-  themeFile = "${pkgs.base16-schemes}/share/themes/nord.yaml";
+  # ──────────────────────────────────────────────────────────────
+  # Gowall recolor
+  # ──────────────────────────────────────────────────────────────
+  colorizeWallpaper = true; # false = skip gowall recolor, keep original wallpaper
 
-  # --- derived, don't edit ---
-  # Image the colorscheme is generated from (generators only).
-  schemeSource = if useSchemeWallpaper then schemeWallpaperSource else wallpaperSource;
-  # Master gowall gate: recolor the applied wallpaper only when it differs from
-  # the scheme source (fixed theme mode, or generator mode with a dedicated
-  # scheme wallpaper).
-  recolorWallpaper = colorizeWallpaper && (useThemeFile || useSchemeWallpaper);
+  # ──────────────────────────────────────────────────────────────
+  # Derived (computed from the above — don't edit)
+  # ──────────────────────────────────────────────────────────────
+  schemeSource = if useSchemeWallpaper then schemeWallpaperSource else wallpaperSource; # image the generators read
+  recolorWallpaper = colorizeWallpaper && (useThemeFile || useSchemeWallpaper); # master gate for gowall recolor + niri wallpaper path
 }
 /*
 result/
