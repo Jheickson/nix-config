@@ -15,21 +15,26 @@
     shellAliases =
       let
         flakeDir = "~/nix-config";
-        # Apply stylix wallpaper after rebuild using awww. The path is baked at
-        # build time (same logic as the niri awww-init): reading STYLIX_WALLPAPER
-        # from the shell env goes stale in sessions that predate the switch.
-        wallpaperPath =
-          if stylixConfig.processedWallpaper
-          then stylixConfig.wallpaperOutputPath
-          else toString (builtins.path { path = stylixConfig.wallpaperSource; name = "wallpaper"; });
+        # Apply stylix wallpaper after rebuild using awww. The path is resolved
+        # at runtime from the HM profile the switch just wrote — baking it at
+        # build time (or reading the shell env) goes stale in shells that
+        # predate the config change.
         applyWallpaper = ''
+          # Refresh session vars from the freshly-switched HM profile
+          # (~/.local/state for standalone HM, /etc/profiles for NixOS-managed)
+          source "$HOME/.local/state/nix/profiles/profile/etc/profile.d/hm-session-vars.sh" 2>/dev/null \
+            || source /etc/profiles/per-user/felipe/etc/profile.d/hm-session-vars.sh 2>/dev/null
+
+          WALLPAPER="$HOME/nix-config/assets/wallpapers/wallpaper.png"
+          [ -n "$STYLIX_WALLPAPER" ] && WALLPAPER=$(eval echo "$STYLIX_WALLPAPER")
+
           echo "========================================" >&2
           echo "[DEBUG] Starting wallpaper application..." >&2
-          echo "[DEBUG] Wallpaper path: ${wallpaperPath}" >&2
-          echo "[DEBUG] File exists check: $([ -f ${wallpaperPath} ] && echo YES || echo NO)" >&2
+          echo "[DEBUG] Wallpaper path: $WALLPAPER" >&2
+          echo "[DEBUG] File exists check: $([ -f "$WALLPAPER" ] && echo YES || echo NO)" >&2
           echo "========================================" >&2
 
-          awww img ${wallpaperPath} --resize ${stylixConfig.wallpaperResize} && echo 'Wallpaper applied successfully' || echo 'Failed to apply wallpaper'
+          awww img "$WALLPAPER" --resize ${stylixConfig.wallpaperResize} && echo 'Wallpaper applied successfully' || echo 'Failed to apply wallpaper'
         '';
       in
       {
@@ -53,11 +58,11 @@
         updn = "sudo nix flake update";
 
         # ===== HOME-MANAGER CONFIGURATION (nh) =====
-        # Apply home-manager configuration
-        hms = "nixre 'home switch' nh home switch ${flakeDir}";
+        # Apply home-manager configuration (also re-applies the wallpaper)
+        hms = "nixre 'home switch' nh home switch ${flakeDir} && ${applyWallpaper}";
 
         # Apply home-manager with backup of previous generation
-        hmsb = "nixre 'home switch' nh home switch ${flakeDir} -b backup";
+        hmsb = "nixre 'home switch' nh home switch ${flakeDir} -b backup && ${applyWallpaper}";
 
         # ===== CONFIGURATION EDITING =====
         # Edit main NixOS configuration file

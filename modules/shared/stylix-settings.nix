@@ -9,7 +9,7 @@
   # ──────────────────────────────────────────────────────────────
   useThemeFile = false; # false = generate scheme from image, true = fixed themeFile
   generator = "iris"; # "iris" or "matugen" (only used when useThemeFile = false)
-  polarity = "light"; # "dark" or "light"
+  polarity = "dark"; # "dark" or "light"
   themeFile = "${pkgs.base16-schemes}/share/themes/nord.yaml"; # fixed scheme (only used when useThemeFile = true)
 
   # ──────────────────────────────────────────────────────────────
@@ -24,7 +24,7 @@
   #   stretch — Fill screen, ignore aspect ratio
   wallpaperResize = "crop";
   wallpaperOutputPath = "/home/felipe/nix-config/assets/wallpapers/wallpaper.png"; # where gowall writes the recolored wallpaper
-  invertWallpaper = false; # true = invert the wallpaper colors before gowall recolor (turns light wallpapers dark)
+  invertWallpaper = true; # true = invert the wallpaper colors before gowall recolor (turns light wallpapers dark)
 
   # ──────────────────────────────────────────────────────────────
   # Scheme-source wallpaper (optional)
