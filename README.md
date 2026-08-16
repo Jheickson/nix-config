@@ -118,18 +118,28 @@ Edit `modules/shared/stylix-settings.nix`:
   useThemeFile = true;          # true = fixed base16 scheme, false = generator from wallpaper
   generator = "matugen";        # "matugen" or "iris" — only used when useThemeFile = false
   polarity = "light";           # "light" or "dark"
+  colorizeWallpaper = true;     # false = skip gowall recolor, keep original wallpaper
+
+  # Decouple the colorscheme source from the applied wallpaper:
+  #   useSchemeWallpaper = true  → scheme generated from schemeWallpaperSource;
+  #                                wallpaperSource is recolored by gowall to match
+  #   useSchemeWallpaper = false → wallpaperSource is both scheme source and
+  #                                applied wallpaper (no recolor)
+  useSchemeWallpaper = false;
+  schemeWallpaperSource = ../../assets/wallpapers/YourCategory/other.png;
 
   wallpaperSource = ../../assets/wallpapers/YourCategory/wallpaper.png;
   themeFile = "${pkgs.base16-schemes}/share/themes/your-theme.yaml";
 }
 ```
 
-Three modes:
-| Mode | `useThemeFile` | `generator` | Source |
+Four modes:
+| Mode | `useThemeFile` | `useSchemeWallpaper` | Scheme source |
 |---|---|---|---|
 | Fixed scheme | `true` | ignored | `themeFile` from base16-schemes |
-| Dynamic (Matugen) | `false` | `"matugen"` | Material You palette from wallpaper |
-| Dynamic (Iris) | `false` | `"iris"` | Semantic palette from wallpaper |
+| Dynamic (Matugen) | `false` | `false` | wallpaper from `wallpaperSource` |
+| Dynamic (Iris) | `false` | `false` | wallpaper from `wallpaperSource` |
+| Dynamic + separate source | `false` | `true` | `schemeWallpaperSource`, applied wallpaper recolored by gowall |
 
 ### Adding Packages
 Edit `modules/nixos/programs/packages.nix` to add system packages or create new module files in the appropriate category.

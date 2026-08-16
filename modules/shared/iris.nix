@@ -1,4 +1,9 @@
-{ pkgs, stylixConfig, inputs, ... }:
+{
+  pkgs,
+  stylixConfig,
+  inputs,
+  ...
+}:
 
 let
   irisPkg = pkgs.python3Packages.buildPythonApplication {
@@ -7,7 +12,10 @@ let
     src = inputs.iris;
     format = "pyproject";
     nativeBuildInputs = with pkgs.python3Packages; [ hatchling ];
-    propagatedBuildInputs = with pkgs.python3Packages; [ pillow numpy ];
+    propagatedBuildInputs = with pkgs.python3Packages; [
+      pillow
+      numpy
+    ];
     doCheck = false;
     meta.mainProgram = "iris";
   };
@@ -26,7 +34,7 @@ let
         cp ${./iris-templates/base16.yaml} .config/iris/templates/base16.yaml
         cp ${./iris-templates/nvim.lua} .config/iris/templates/iris.lua
 
-        iris ${stylixConfig.wallpaperSource} --dark ${polarityFlag}
+        iris ${stylixConfig.schemeSource} --dark ${polarityFlag}
 
         mkdir -p $out
         cp .cache/iris/base16.yaml $out/

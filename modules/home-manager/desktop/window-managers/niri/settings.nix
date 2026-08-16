@@ -13,34 +13,46 @@ let
   selectedAnimation = config.programs.niri.animationPreset;
   animationPresetNames = import ./animations/preset-names.nix;
 
-  # Resolve wallpaper path: gowall output when useThemeFile, else source JPEG.
+  # Resolve wallpaper path: gowall output when recolored, else source image.
   # Use builtins.path so the file is copied as an independent store path
   # rather than referencing the flake source tree, avoiding the
   # "builtins.derivation without proper context" warning.
   wallpaperPath =
-    if stylixConfig.useThemeFile && stylixConfig.colorizeWallpaper
-    then stylixConfig.wallpaperOutputPath
-    else toString (builtins.path { path = stylixConfig.wallpaperSource; name = "wallpaper"; });
+    if stylixConfig.recolorWallpaper then
+      stylixConfig.wallpaperOutputPath
+    else
+      toString (
+        builtins.path {
+          path = stylixConfig.wallpaperSource;
+          name = "wallpaper";
+        }
+      );
 
   # Self-contained awww-init script with build-time injected store paths,
   # eliminating runtime PATH / environment dependencies that fail on cold boot.
   # Uses runCommandLocal (not writeShellScript) so store path string context
   # is tracked properly via stdenv.mkDerivation, avoiding the
   # "builtins.derivation without proper context" warning.
-  awwwInit = pkgs.runCommandLocal "awww-init" {
-    inherit wallpaperPath;
-    awwwResize = stylixConfig.wallpaperResize;
-    awwwInitSh = builtins.path { path = ./awww-init.sh; name = "awww-init-sh"; };
-    preferLocalBuild = true;
-  } ''
-    cp "$awwwInitSh" "$out"
-    chmod +x "$out"
-    substituteInPlace "$out" \
-      --replace-fail "@awwwBin@" "${pkgs.awww}/bin/awww" \
-      --replace-fail "@awwwDaemonBin@" "${pkgs.awww}/bin/awww-daemon" \
-      --replace-fail "@wallpaper@" "$wallpaperPath" \
-      --replace-fail "@resize@" "$awwwResize"
-  '';
+  awwwInit =
+    pkgs.runCommandLocal "awww-init"
+      {
+        inherit wallpaperPath;
+        awwwResize = stylixConfig.wallpaperResize;
+        awwwInitSh = builtins.path {
+          path = ./awww-init.sh;
+          name = "awww-init-sh";
+        };
+        preferLocalBuild = true;
+      }
+      ''
+        cp "$awwwInitSh" "$out"
+        chmod +x "$out"
+        substituteInPlace "$out" \
+          --replace-fail "@awwwBin@" "${pkgs.awww}/bin/awww" \
+          --replace-fail "@awwwDaemonBin@" "${pkgs.awww}/bin/awww-daemon" \
+          --replace-fail "@wallpaper@" "$wallpaperPath" \
+          --replace-fail "@resize@" "$awwwResize"
+      '';
 in
 {
   options.programs.niri.animationPreset = lib.mkOption {

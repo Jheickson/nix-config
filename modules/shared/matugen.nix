@@ -47,13 +47,13 @@ let
         # photos where 0 is dominated by sky/ground). Fall back to 0 when an
         # image only extracts a single dominant color, otherwise matugen
         # errors with "Source color index 1 is out of bounds (0-0)".
-        matugen image ${stylixConfig.wallpaperSource} \
+        matugen image ${stylixConfig.schemeSource} \
           --type scheme-vibrant \
           --contrast 0.5 \
           --source-color-index 1 \
           --mode ${stylixConfig.polarity} \
           --config ./config.toml \
-        || matugen image ${stylixConfig.wallpaperSource} \
+        || matugen image ${stylixConfig.schemeSource} \
           --type scheme-vibrant \
           --contrast 0.5 \
           --source-color-index 0 \

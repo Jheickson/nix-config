@@ -66,7 +66,7 @@ Three-layer module tree assembled by `flake.nix`:
 
 - `stylixConfig` is built in `flake.nix` (`import ./modules/shared/stylix-settings.nix { inherit pkgs; }`) and threaded through `specialArgs` / `extraSpecialArgs` so both the NixOS module and the HM module share one source of truth.
 - `home-manager.backupFileExtension = "hm-backup"` is set in `hosts/nixos/default.nix` to prevent Stylix from refusing to overwrite existing dotfiles on first switch.
-- The wallpaper has two paths: `wallpaperSource` (in-repo asset) and `wallpaperImage` (the path Stylix points at). When `useThemeFile = true`, Stylix uses `wallpaperImage`; the Gowall pipeline writes to `wallpaperOutputPath`.
+- The wallpaper has three paths: `wallpaperSource` (in-repo asset that gets displayed), `schemeWallpaperSource` (optional dedicated colorscheme-source image, enabled via `useSchemeWallpaper`), and `wallpaperImage` (the path Stylix points at — same file `wallpaperOutputPath` writes to). Generators (iris/matugen, selected via `modules/shared/generators.nix`) read `schemeSource` (`schemeWallpaperSource` if `useSchemeWallpaper` else `wallpaperSource`). Gowall recolors `wallpaperSource` → `wallpaperOutputPath` whenever `recolorWallpaper` (`colorizeWallpaper && (useThemeFile || useSchemeWallpaper)`) is true; Stylix's `image` then points at `wallpaperImage`, else at `wallpaperSource`.
 
 ### Niri
 

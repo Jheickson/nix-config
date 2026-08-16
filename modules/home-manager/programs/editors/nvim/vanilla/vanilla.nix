@@ -1,12 +1,13 @@
-{ pkgs, stylixConfig, inputs, ... }:
+{
+  pkgs,
+  stylixConfig,
+  inputs,
+  ...
+}:
 
 let
-  matugen = import ../../../../../shared/matugen.nix { inherit pkgs stylixConfig; };
-  iris = import ../../../../../shared/iris.nix { inherit pkgs stylixConfig inputs; };
-  nvimColorscheme =
-    if stylixConfig.generator == "iris"
-    then iris.irisNvim
-    else matugen.matugenNvim;
+  generator = import ../../../../../shared/generators.nix { inherit pkgs stylixConfig inputs; };
+  nvimColorscheme = generator.nvim;
 in
 {
   home.packages = with pkgs; [

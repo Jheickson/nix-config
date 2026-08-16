@@ -7,10 +7,7 @@
 }:
 
 let
-  generatorDrv =
-    if stylixConfig.generator == "iris"
-    then import ./iris.nix { inherit pkgs stylixConfig inputs; }
-    else import ./matugen.nix { inherit pkgs stylixConfig; };
+  generator = import ./generators.nix { inherit pkgs stylixConfig inputs; };
 in
 {
   stylix = {
@@ -57,9 +54,8 @@ in
     };
 
     image =
-      if stylixConfig.useThemeFile && stylixConfig.colorizeWallpaper then stylixConfig.wallpaperImage else stylixConfig.wallpaperSource;
+      if stylixConfig.recolorWallpaper then stylixConfig.wallpaperImage else stylixConfig.wallpaperSource;
 
-    base16Scheme =
-      if stylixConfig.useThemeFile then stylixConfig.themeFile else generatorDrv.${if stylixConfig.generator == "iris" then "irisScheme" else "matugenScheme"};
+    base16Scheme = if stylixConfig.useThemeFile then stylixConfig.themeFile else generator.scheme;
   };
 }

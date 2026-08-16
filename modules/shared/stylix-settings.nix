@@ -1,9 +1,19 @@
-{pkgs, ...}: {
+{pkgs, ...}: rec {
   enable = true;
-  useThemeFile = false; # false = use wallpaper recolor, true = use themeFile
+  useThemeFile = false; # false = generate scheme from image, true = fixed themeFile
   colorizeWallpaper = true; # false = skip gowall recolor, keep original wallpaper
   generator = "iris"; # "iris" or "matugen"
   polarity = "dark";
+
+  # Dedicated colorscheme-source wallpaper (wallpaper x):
+  #   useSchemeWallpaper = true  → scheme generated from schemeWallpaperSource; the
+  #                                applied wallpaper (wallpaperSource) is recolored
+  #                                by gowall to match it
+  #   useSchemeWallpaper = false → wallpaperSource doubles as scheme source AND
+  #                                applied wallpaper (no recolor). No effect when
+  #                                useThemeFile = true.
+  useSchemeWallpaper = false;
+  schemeWallpaperSource = ../../assets/wallpapers/Other/wallhaven-wq56mp.png;
 
   wallpaperSource = ../../assets/wallpapers/Other/wallhaven-2yo51x.png;
   wallpaperImage = ../../assets/wallpapers/wallpaper.png;
@@ -17,6 +27,14 @@
   wallpaperOutputPath = "/home/felipe/nix-config/assets/wallpapers/wallpaper.png";
 
   themeFile = "${pkgs.base16-schemes}/share/themes/nord.yaml";
+
+  # --- derived, don't edit ---
+  # Image the colorscheme is generated from (generators only).
+  schemeSource = if useSchemeWallpaper then schemeWallpaperSource else wallpaperSource;
+  # Master gowall gate: recolor the applied wallpaper only when it differs from
+  # the scheme source (fixed theme mode, or generator mode with a dedicated
+  # scheme wallpaper).
+  recolorWallpaper = colorizeWallpaper && (useThemeFile || useSchemeWallpaper);
 }
 /*
 result/
