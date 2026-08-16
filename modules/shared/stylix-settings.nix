@@ -1,11 +1,11 @@
 {pkgs, ...}: {
   enable = true;
-  useThemeFile = true; # false = use wallpaper recolor, true = use themeFile
+  useThemeFile = false; # false = use wallpaper recolor, true = use themeFile
   colorizeWallpaper = true; # false = skip gowall recolor, keep original wallpaper
   generator = "iris"; # "iris" or "matugen"
   polarity = "dark";
 
-  wallpaperSource = ../../assets/wallpapers/Other/wallhaven-6ld5kx.png;
+  wallpaperSource = ../../assets/wallpapers/Other/wallhaven-2yo51x.png;
   wallpaperImage = ../../assets/wallpapers/wallpaper.png;
   # Wallpaper resize mode for awww:
   #   no      — No resizing, center image, pad with fill color
