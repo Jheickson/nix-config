@@ -13,12 +13,12 @@ let
   selectedAnimation = config.programs.niri.animationPreset;
   animationPresetNames = import ./animations/preset-names.nix;
 
-  # Resolve wallpaper path: gowall output when recolored, else source image.
-  # Use builtins.path so the file is copied as an independent store path
-  # rather than referencing the flake source tree, avoiding the
-  # "builtins.derivation without proper context" warning.
+  # Resolve wallpaper path: processed output (gowall recolor or invert) when
+  # enabled, else source image. Use builtins.path so the file is copied as an
+  # independent store path rather than referencing the flake source tree,
+  # avoiding the "builtins.derivation without proper context" warning.
   wallpaperPath =
-    if stylixConfig.recolorWallpaper then
+    if stylixConfig.processedWallpaper then
       stylixConfig.wallpaperOutputPath
     else
       toString (

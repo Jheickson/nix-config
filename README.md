@@ -119,6 +119,7 @@ Edit `modules/shared/stylix-settings.nix`:
   generator = "matugen";        # "matugen" or "iris" — only used when useThemeFile = false
   polarity = "light";           # "light" or "dark"
   colorizeWallpaper = true;     # false = skip gowall recolor, keep original wallpaper
+  invertWallpaper = false;      # true = invert the wallpaper colors before gowall recolor
 
   # Decouple the colorscheme source from the applied wallpaper:
   #   useSchemeWallpaper = true  → scheme generated from schemeWallpaperSource;

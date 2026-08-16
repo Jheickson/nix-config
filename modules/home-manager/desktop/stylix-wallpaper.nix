@@ -53,20 +53,34 @@ let
     })
   else
     null;
+
+  # Image gowall convert reads: the inverted intermediate when inverting
+  # (invert runs first), else the original source.
+  convertSource = if stylixConfig.invertWallpaper then "$tmp" else stylixConfig.wallpaperSource;
 in
 {
-  home.packages = lib.mkIf stylixConfig.recolorWallpaper [ pkgs.gowall ];
+  # gowall is needed for recolor (convert) and/or invert
+  home.packages = lib.optionals stylixConfig.processedWallpaper [ pkgs.gowall ];
 
-  # Recolor the applied wallpaper on switch (only when it differs from the
-  # scheme source: fixed theme mode, or generator mode with a dedicated
-  # scheme wallpaper). Runs as the user on both `home-manager switch` and
-  # `nixos-rebuild switch` (HM is embedded in the NixOS config).
-  home.activation.gowallWallpaper = lib.mkIf stylixConfig.recolorWallpaper ''
-    ${pkgs.gowall}/bin/gowall convert ${stylixConfig.wallpaperSource} -t ${gowallThemeJson} --output ${stylixConfig.wallpaperOutputPath}
+  # Process the applied wallpaper on switch: optional color inversion (gowall
+  # invert, turns light wallpapers dark) runs first, then gowall recolor maps
+  # the scheme onto the result. Runs as the user on both `home-manager switch`
+  # and `nixos-rebuild switch` (HM is embedded in the NixOS config).
+  home.activation.wallpaper = lib.mkIf stylixConfig.processedWallpaper ''
+    ${lib.optionalString stylixConfig.invertWallpaper ''
+      tmp=/tmp/stylix-invert-$$.png
+      ${pkgs.gowall}/bin/gowall invert ${toString stylixConfig.wallpaperSource} --output "$tmp"
+    ''}
+    ${lib.optionalString stylixConfig.recolorWallpaper ''
+      ${pkgs.gowall}/bin/gowall convert "${convertSource}" -t ${gowallThemeJson} --output ${stylixConfig.wallpaperOutputPath}
+    ''}
+    ${lib.optionalString (stylixConfig.invertWallpaper && !stylixConfig.recolorWallpaper) ''
+      mv "$tmp" ${stylixConfig.wallpaperOutputPath}
+    ''}
   '';
 
   # Expose the wallpaper path for shell scripts (awww, etc.)
-  home.sessionVariables.STYLIX_WALLPAPER = if stylixConfig.recolorWallpaper then
+  home.sessionVariables.STYLIX_WALLPAPER = if stylixConfig.processedWallpaper then
     stylixConfig.wallpaperOutputPath
   else
     toString stylixConfig.wallpaperSource;

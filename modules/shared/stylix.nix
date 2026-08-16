@@ -54,7 +54,7 @@ in
     };
 
     image =
-      if stylixConfig.recolorWallpaper then stylixConfig.wallpaperImage else stylixConfig.wallpaperSource;
+      if stylixConfig.processedWallpaper then stylixConfig.wallpaperImage else stylixConfig.wallpaperSource;
 
     base16Scheme = if stylixConfig.useThemeFile then stylixConfig.themeFile else generator.scheme;
   };
