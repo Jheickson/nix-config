@@ -15,26 +15,21 @@
     shellAliases =
       let
         flakeDir = "~/nix-config";
-        # Apply stylix wallpaper after rebuild using awww
-        # Uses STYLIX_WALLPAPER environment variable set by stylix.nix
+        # Apply stylix wallpaper after rebuild using awww. The path is baked at
+        # build time (same logic as the niri awww-init): reading STYLIX_WALLPAPER
+        # from the shell env goes stale in sessions that predate the switch.
+        wallpaperPath =
+          if stylixConfig.processedWallpaper
+          then stylixConfig.wallpaperOutputPath
+          else toString (builtins.path { path = stylixConfig.wallpaperSource; name = "wallpaper"; });
         applyWallpaper = ''
-          source /etc/set-environment 2>/dev/null
-
           echo "========================================" >&2
           echo "[DEBUG] Starting wallpaper application..." >&2
-          echo "[DEBUG] STYLIX_WALLPAPER env var: $STYLIX_WALLPAPER" >&2
-
-          if [ -n "$STYLIX_WALLPAPER" ]; then
-            WALLPAPER=$(eval echo "$STYLIX_WALLPAPER")
-          else
-            WALLPAPER="$HOME/nix-config/assets/wallpapers/wallpaper.png"
-          fi
-
-          echo "[DEBUG] Resolved wallpaper path: $WALLPAPER" >&2
-          echo "[DEBUG] File exists check: $([ -f "$WALLPAPER" ] && echo YES || echo NO)" >&2
+          echo "[DEBUG] Wallpaper path: ${wallpaperPath}" >&2
+          echo "[DEBUG] File exists check: $([ -f ${wallpaperPath} ] && echo YES || echo NO)" >&2
           echo "========================================" >&2
 
-          awww img "$WALLPAPER" --resize ${stylixConfig.wallpaperResize} && echo 'Wallpaper applied successfully' || echo 'Failed to apply wallpaper'
+          awww img ${wallpaperPath} --resize ${stylixConfig.wallpaperResize} && echo 'Wallpaper applied successfully' || echo 'Failed to apply wallpaper'
         '';
       in
       {
