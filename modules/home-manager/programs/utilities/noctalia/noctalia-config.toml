@@ -23,23 +23,11 @@ order = [ "default" ]
     capsule_group = []
     capsule_opacity = 1.0
     capsule_padding = 6.0
-    center = [ "lyrics" ]
+    center = [ "lyrics", "privacy", "media", "notifications" ]
     color = "on_surface"
     contact_shadow = false
     enabled = true
-    end = [
-        "privacy",
-        "nix-monitor",
-        "media",
-        "battery_1",
-        "network",
-        "bluetooth",
-        "battery_2",
-        "volume",
-        "clock",
-        "notifications",
-        "tray"
-    ]
+    end = [ "battery_1", "network", "bluetooth", "battery_2", "volume" ]
     font_weight = 400
     layer = "top"
     margin_edge = 4
@@ -57,7 +45,7 @@ order = [ "default" ]
     shadow = false
     show_on_workspace_switch = false
     smart_auto_hide = true
-    start = [ "taskbar" ]
+    start = [ "clock", "tray" ]
     thickness = 34
     widget_spacing = 12
 
@@ -420,7 +408,7 @@ show_update_check_notification = true
 update_check_interval = 100
 
 [plugins]
-enabled = [ "avivbintangaringga/nix-monitor", "whyoolw/sharednd", "h465855hgg/lyrics", "shin/lrc", "8bury/lid-guard" ]
+enabled = [ "whyoolw/sharednd" ]
 
 [shell]
 app_icon_colorize = false
@@ -601,16 +589,16 @@ transition_on_startup = false
     recursive = true
 
     [wallpaper.default]
-    path = "/home/felipe/nix-config/assets/wallpapers/Minimalistic/wallhaven-0pvxpe.png"
+    path = "/home/felipe/nix-config/assets/wallpapers/Other/wallhaven-2yo51x.png"
 
     [wallpaper.last]
-    path = "/home/felipe/nix-config/assets/wallpapers/Minimalistic/wallhaven-0pvxpe.png"
+    path = "/home/felipe/nix-config/assets/wallpapers/Other/wallhaven-2yo51x.png"
 
     [wallpaper.monitors.HDMI-A-1]
-    path = "/home/felipe/nix-config/assets/wallpapers/Minimalistic/wallhaven-0pvxpe.png"
+    path = "/home/felipe/nix-config/assets/wallpapers/Other/wallhaven-2yo51x.png"
 
     [wallpaper.monitors.eDP-1]
-    path = "/home/felipe/nix-config/assets/wallpapers/Minimalistic/wallhaven-0pvxpe.png"
+    path = "/home/felipe/nix-config/assets/wallpapers/Other/wallhaven-2yo51x.png"
 
     [[wallpaper.favorite]]
     palette_source = "wallpaper"
@@ -769,7 +757,7 @@ stat = "cpu_temp"
 type = "sysmon"
 
 [widget.tray]
-drawer = true
+drawer = false
 type = "tray"
 
 [widget.volume]
