@@ -13,7 +13,7 @@
       font-size = 12;
       window-padding-x = 0;
       window-padding-y = 0;
-      window-decoration = "auto";
+      window-width = "50%";
 
       # Disable close confirmation popup
       confirm-close-surface = false;
