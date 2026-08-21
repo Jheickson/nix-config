@@ -16,6 +16,7 @@
 
     # Programs
     ../programs/terminals/ghostty.nix
+    ../programs/terminals/tmux.nix
     ../programs/editors/nvim/vanilla/vanilla.nix
     ../programs/editors/vscode.nix
     ../programs/editors/zed.nix
@@ -28,6 +29,7 @@
     ../programs/utilities/gowall.nix
     ../programs/utilities/noctalia
     ../programs/utilities/omp
+    # ../programs/utilities/codex.nix
   ];
 
   home.packages = with pkgs; [
