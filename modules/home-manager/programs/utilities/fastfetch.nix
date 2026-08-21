@@ -18,24 +18,63 @@ in
         "color": "cyan"
       },
       "modules": [
-        "title",
-        "separator",
+        "break",
+        {
+          "type": "custom",
+          "key": " ",
+          "format": "\u001b[1;36mSystem\u001b[0m"
+        },
+        {
+          "type": "custom",
+          "key": " ",
+          "format": "────────────────────────────────",
+          "outputColor": "cyan"
+        },
         "os",
         "host",
-        "kernel",
         "uptime",
-        "packages",
-        "shell",
+        "break",
+        {
+          "type": "custom",
+          "key": " ",
+          "format": "\u001b[1;36mDesktop\u001b[0m"
+        },
+        {
+          "type": "custom",
+          "key": " ",
+          "format": "────────────────────────────────",
+          "outputColor": "cyan"
+        },
         "de",
         "wm",
-        "theme",
-        "icons",
-        "font",
+        "break",
+        {
+          "type": "custom",
+          "key": " ",
+          "format": "\u001b[1;36mHardware\u001b[0m"
+        },
+        {
+          "type": "custom",
+          "key": " ",
+          "format": "────────────────────────────────",
+          "outputColor": "cyan"
+        },
         "cpu",
         "gpu",
         "memory",
         "disk",
-        "separator",
+        "break",
+        {
+          "type": "custom",
+          "key": " ",
+          "format": "\u001b[1;36mAppearance\u001b[0m"
+        },
+        {
+          "type": "custom",
+          "key": " ",
+          "format": "────────────────────────────────",
+          "outputColor": "cyan"
+        },
         "colors"
       ]
     }
