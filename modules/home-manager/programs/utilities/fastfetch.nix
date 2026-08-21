@@ -108,7 +108,8 @@ in
         {
           "type": "colors",
           "key": " ",
-          "symbol": "circle"
+          "symbol": "circle",
+          "paddingLeft": 2
         },
         {
           "type": "custom",

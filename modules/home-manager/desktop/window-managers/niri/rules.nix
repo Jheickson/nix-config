@@ -122,11 +122,6 @@ let
     }
 
 # ── Floating utilities ────────────────────────────────────────────────────
-    # Ghostty (generic) — always floats, auto-sized. nvim ghostty (ghostty-nvim) stays tiled.
-    {
-      matches = [ { app-id = "com.mitchellh.ghostty"; } ];
-      open-floating = true;
-    }
     # Audio controls
     {
       matches = [
