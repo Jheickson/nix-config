@@ -14,7 +14,7 @@ in
         "padding": { "top": 2, "left": 2 }
       },
       "display": {
-        "separator": "  ",
+      "separator": " ",
         "color": "cyan"
       },
       "modules": [
@@ -22,60 +22,98 @@ in
         {
           "type": "custom",
           "key": " ",
-          "format": "\u001b[1;36mSystem\u001b[0m"
+          "format": "\u001b[93m┌───────────────────────── System ─────────────────────────┐"
+        },
+        {
+          "type": "os",
+          "key": "│ ├",
+          "keyColor": "yellow",
+          "format": "{name}"
+        },
+        {
+          "type": "host",
+          "key": "│ ├",
+          "keyColor": "yellow"
+        },
+        {
+          "type": "uptime",
+          "key": "│ └",
+          "keyColor": "yellow"
         },
         {
           "type": "custom",
           "key": " ",
-          "format": "────────────────────────────────",
-          "outputColor": "cyan"
+          "format": "\u001b[93m└──────────────────────────────────────────────────────────┘"
         },
-        "os",
-        "host",
-        "uptime",
         "break",
         {
           "type": "custom",
           "key": " ",
-          "format": "\u001b[1;36mDesktop\u001b[0m"
+          "format": "\u001b[36m┌──────────────────────── Desktop ─────────────────────────┐"
+        },
+        {
+          "type": "de",
+          "key": "│ ├",
+          "keyColor": "cyan"
+        },
+        {
+          "type": "wm",
+          "key": "│ └",
+          "keyColor": "cyan"
         },
         {
           "type": "custom",
           "key": " ",
-          "format": "────────────────────────────────",
-          "outputColor": "cyan"
+          "format": "\u001b[36m└──────────────────────────────────────────────────────────┘"
         },
-        "de",
-        "wm",
         "break",
         {
           "type": "custom",
           "key": " ",
-          "format": "\u001b[1;36mHardware\u001b[0m"
+          "format": "\u001b[92m┌──────────────────────── Hardware ────────────────────────┐"
+        },
+        {
+          "type": "cpu",
+          "key": "│ ├",
+          "keyColor": "green",
+          "format": "{1}, {3} Cores"
+        },
+        {
+          "type": "gpu",
+          "key": "│ ├󰍛",
+          "keyColor": "green",
+          "format": "{2}, {3}"
+        },
+        {
+          "type": "memory",
+          "key": "│ ├󰍛",
+          "keyColor": "green"
+        },
+        {
+          "type": "disk",
+          "key": "│ └󰋊",
+          "keyColor": "green"
         },
         {
           "type": "custom",
           "key": " ",
-          "format": "────────────────────────────────",
-          "outputColor": "cyan"
+          "format": "\u001b[92m└──────────────────────────────────────────────────────────┘"
         },
-        "cpu",
-        "gpu",
-        "memory",
-        "disk",
         "break",
         {
           "type": "custom",
           "key": " ",
-          "format": "\u001b[1;36mAppearance\u001b[0m"
+          "format": "\u001b[95m┌─────────────────────── Appearance ───────────────────────┐"
+        },
+        {
+          "type": "colors",
+          "key": " "
         },
         {
           "type": "custom",
           "key": " ",
-          "format": "────────────────────────────────",
-          "outputColor": "cyan"
-        },
-        "colors"
+          "format": "\u001b[95m└──────────────────────────────────────────────────────────┘"
+        }
       ]
     }
   '';
