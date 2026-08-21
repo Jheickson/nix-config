@@ -36,6 +36,7 @@ in {
       gh
       git
       lazygit
+      sourcegit
       micro
       ngrok
       nodejs_22
