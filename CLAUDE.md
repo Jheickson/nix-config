@@ -70,7 +70,7 @@ Three-layer module tree assembled by `flake.nix`:
 
 ### Niri
 
-- Niri is supplied by the `niri-flake` input and wired in via `inputs.niri.homeModules.niri` inside `modules/home-manager/desktop/window-managers/niri/default.nix`. Config is split into `settings.nix`, `binds.nix`, `rules.nix`, `blur.nix`, `animations/`. The system-side desktop entry is `modules/nixos/desktop/niri.nix` + `niri-session.desktop`.
+- Niri is supplied by the `niri-flake` input and wired in via `inputs.niri.homeModules.niri` inside `modules/home-manager/desktop/window-managers/niri/default.nix`. Config is split into `settings.nix`, `binds.nix`, `rules.nix`, `blur.nix`, `animations/`. The system-side desktop entry is provided by the `niri` package (`share/wayland-sessions/niri.desktop`) and discovered by the greeter (`modules/nixos/desktop/niri.nix` describes the greetd/regreet setup).
 - Noctalia shell is the bar/launcher/notifications layer (input `noctalia`). Managed entirely in home-manager via `inputs.noctalia.homeModules.default` at `modules/home-manager/programs/utilities/noctalia/default.nix` (so `hms` reloads it). Boot launch is via niri `spawn-at-startup`; an HM activation hook respawns it on every `hms` through `niri msg action spawn`. `modules/nixos/programs/noctalia.nix` only carries system-level deps (bluetooth, power-profiles-daemon, evolution-data-server) — the upstream NixOS module is intentionally **not** imported because its systemd integration is deprecated.
 
 ### Adding things

@@ -1,16 +1,12 @@
 { config, pkgs, ... }:
 
 {
-  # Enable greetd as the display manager.
-  # Keep `command` as a single-line string: nixpkgs greetd module now
-  # serialises multi-line Nix strings as TOML triple-quoted strings, which
-  # greetd's parser rejects ("expected equals sign on line, but found none"),
-  # leaving the system stuck after "Reached target Graphical Interface".
+  # greetd is the display manager. The graphical, session-picking greeter
+  # (regreet) and its launch command live in desktop/greeter.nix.
   services.greetd = {
     enable = true;
     settings = {
       default_session = {
-        command = "${pkgs.niri}/bin/niri-session";
         user = "felipe";
       };
     };
@@ -23,10 +19,9 @@
     niri
   ];
 
-  # Install the desktop session file
-  environment.etc = {
-    "xsessions/niri.desktop".source = ./niri-session.desktop;
-  };
+  # Niri's session file is provided by the `niri` package
+  # (share/wayland-sessions/niri.desktop) and is auto-discovered by the
+  # greeter, so no manual session file is needed here.
 
   # Configure seatd for Wayland
   services.seatd.enable = true;

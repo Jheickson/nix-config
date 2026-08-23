@@ -37,7 +37,8 @@
     ../../modules/nixos/desktop/gtk.nix
     ../../modules/nixos/desktop/stylix-wallpaper.nix
     ../../modules/nixos/desktop/niri.nix
-    # ../../modules/nixos/desktop/xautolock.nix
+    ../../modules/nixos/desktop/greeter.nix
+    ../../modules/nixos/desktop/xfce.nix
     ../../modules/nixos/desktop/xdg.nix
 
     # Hardware
