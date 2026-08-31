@@ -35,6 +35,7 @@ in {
       cargo-watch
       gh
       git
+      jdk17
       lazygit
       sourcegit
       micro
