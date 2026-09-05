@@ -318,7 +318,6 @@
     fzf
     pay-respects
     deja
-    zsh-autocomplete
     zoxide
     # Bare OpenCode — runs opencode with an isolated HOME so it starts
     # with no personal config, state, or auth (see alias `ocb`)
