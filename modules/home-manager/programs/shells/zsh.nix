@@ -9,7 +9,7 @@
   programs.zsh = {
     enable = true;
     enableCompletion = true;
-    autosuggestion.enable = true;
+    autosuggestion.enable = false;
     syntaxHighlighting.enable = true;
 
     shellAliases =
@@ -293,6 +293,12 @@
               find "$DIR"
               echo
             }
+            # Deja predictive inline suggestions. It replaces zsh-autosuggestions.
+            if [[ -r "$HOME/.local/share/deja/init.zsh" ]]; then
+              source "$HOME/.local/share/deja/init.zsh"
+            elif (( $+commands[deja] )); then
+              eval "$(deja init zsh)"
+            fi
     '';
 
   };
@@ -311,8 +317,8 @@
     # thefuck # has been removed due to lack of maintenance upstream and incompatible with python 3.12+. Consider using 'pay-respects' instead
     fzf
     pay-respects
+    deja
     zsh-autocomplete
-    zsh-autosuggestions
     zoxide
     # Bare OpenCode — runs opencode with an isolated HOME so it starts
     # with no personal config, state, or auth (see alias `ocb`)
