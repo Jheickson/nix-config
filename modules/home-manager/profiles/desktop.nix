@@ -21,7 +21,7 @@
     ../programs/editors/vscode.nix
     ../programs/editors/zed.nix
     ../programs/shells/zsh.nix
-    # ../programs/browsers/zen-browser.nix  # broken wrapProgram upstream; raw pkg in home.packages instead
+    ../programs/browsers/zen-browser.nix
     ../programs/browsers/qutebrowser.nix
     ../programs/browsers/chromium.nix
     ../programs/utilities/yazi.nix
