@@ -55,7 +55,7 @@
         upd = "nixre 'update' nh os switch ${flakeDir} -u";
 
         # Update flake.lock file using nix flake update
-        updn = "sudo nix flake update";
+        updn = "nixre 'update' nix flake update --flake ${flakeDir}";
 
         # ===== HOME-MANAGER CONFIGURATION (nh) =====
         # Apply home-manager configuration (also re-applies the wallpaper)
@@ -70,7 +70,7 @@
         confv = "vim ${flakeDir}";
 
         # Edit NixOS packages configuration
-        pkgs = "nvim ${flakeDir}/nixos/packages.nix";
+        pkgs = "nvim ${flakeDir}/modules/nixos/programs/packages.nix";
 
         # ===== NIX BUILD TESTING (nh) =====
         # Build NixOS configuration without switching (test build)
