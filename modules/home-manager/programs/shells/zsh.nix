@@ -188,8 +188,17 @@
         bws = "/home/felipe/bws/bws";
       };
 
-    history.size = 10000;
-    history.path = "${config.xdg.dataHome}/zsh/history";
+    history = {
+      size = 100000;
+      save = 100000;
+      path = "${config.xdg.dataHome}/zsh/history";
+      append = true;
+      share = true;
+      extended = true;
+      ignoreDups = true;
+      expireDuplicatesFirst = true;
+      ignoreSpace = true;
+    };
 
     oh-my-zsh = {
       enable = true;
