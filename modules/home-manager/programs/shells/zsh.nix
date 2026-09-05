@@ -210,7 +210,6 @@
         "sudo"
         # "thefuck"
         "vscode"
-        "z"
         "zsh-interactive-cd"
       ];
       theme = "minimal";
