@@ -5,12 +5,21 @@
   stylixConfig,
   ...
 }:
+let
+  fzfTab = pkgs.fetchFromGitHub {
+    owner = "Aloxaf";
+    repo = "fzf-tab";
+    rev = "v1.3.0";
+    hash = "sha256-8atbysoOyCBW2OYKmdc91x9V/Mk3eyg3hvzvhJpQ32w=";
+  };
+in
 {
   programs.zsh = {
     enable = true;
     enableCompletion = true;
     autosuggestion.enable = false;
     syntaxHighlighting.enable = true;
+    zsh-abbr.enable = true;
 
     shellAliases =
       let
@@ -226,7 +235,11 @@
       # lambda, blinks, strug, sammy, refined, peepcode, nicoulaj, kardan, emotty, bureau, minimal
     };
 
-    initContent = ''
+    initContent = lib.mkMerge [
+      (lib.mkOrder 920 ''
+        source ${fzfTab}/fzf-tab.plugin.zsh
+      '')
+      ''
             # Notify after rebuild commands (critical priority, persists until dismissed)
             nixre() {
               local label="$1" ec pretty
@@ -301,13 +314,16 @@
               find "$DIR"
               echo
             }
+            # Leave Tab to fzf-tab; Deja still accepts suggestions with Right Arrow.
+            export DEJA_CYCLE_KEY=
             # Deja predictive inline suggestions. It replaces zsh-autosuggestions.
             if [[ -r "$HOME/.local/share/deja/init.zsh" ]]; then
               source "$HOME/.local/share/deja/init.zsh"
             elif (( $+commands[deja] )); then
               eval "$(deja init zsh)"
             fi
-    '';
+      ''
+    ];
 
   };
 
@@ -326,6 +342,7 @@
     fzf
     pay-respects
     deja
+    zsh-completions
     zoxide
     # Bare OpenCode — runs opencode with an isolated HOME so it starts
     # with no personal config, state, or auth (see alias `ocb`)
