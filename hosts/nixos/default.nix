@@ -4,6 +4,7 @@
 # stay inline below.
 
 {
+  pkgs,
   inputs,
   stylixConfig,
   ...
@@ -64,7 +65,20 @@
 
   home-manager = {
     extraSpecialArgs = { inherit inputs stylixConfig; };
-    backupFileExtension = "hm-backup"; # Prevents Stylix conflicts
+    # Preserve conflicting user files with unique names instead of failing when
+    # a previous backup already exists.
+    backupCommand = pkgs.writeShellScript "home-manager-backup" ''
+      set -eu
+      target="$1"
+      timestamp="$(${pkgs.coreutils}/bin/date -u +%Y%m%dT%H%M%SZ)"
+      backup="$target.hm-backup.$timestamp"
+      suffix=0
+      while [ -e "$backup" ]; do
+        suffix=$((suffix + 1))
+        backup="$target.hm-backup.$timestamp.$suffix"
+      done
+      ${pkgs.coreutils}/bin/mv -- "$target" "$backup"
+    '';
     users.felipe = import ./home.nix;
   };
 
