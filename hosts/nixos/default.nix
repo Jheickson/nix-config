@@ -83,6 +83,14 @@
   };
 
   # Host-unique
+  # hardware-configuration.nix lists luks-4ce3bfdd... as swap but never opens
+  # it, so the system boots with no swap and a full rebuild gets OOM-killed.
+  # Unlock it via a keyfile stored on the encrypted root at boot.
+  boot.initrd.luks.devices."luks-4ce3bfdd-f6e6-49a1-9e90-1070b0bbe847" = {
+    device = "/dev/disk/by-uuid/4ce3bfdd-f6e6-49a1-9e90-1070b0bbe847";
+    keyFile = "/crypto_keyfile.bin";
+  };
+
   networking.hostName = "nixos";
   system.stateVersion = "24.05";
 
