@@ -15,11 +15,10 @@
     environmentFile = "/etc/navidrome/secrets.env";
   };
 
-  # The upstream module hardcodes ProtectHome = true, which hides /home inside
-  # the service namespace. That makes MusicFolder = ~/Music unreachable ("lstat
-  # /home: no such file or directory"). Make /home visible read-only so the
-  # library is scannable; the folder stays read-only (module bind-mounts it).
-  systemd.services.navidrome.serviceConfig.ProtectHome = lib.mkForce "read-only";
+  # ProtectHome=true masks /home after the module bind-mounts MusicFolder, so
+  # Navidrome sees /home/felipe/Music as missing inside its RootDirectory.
+  # The service still sees only the explicitly bound MusicFolder path.
+  systemd.services.navidrome.serviceConfig.ProtectHome = lib.mkForce false;
 
   environment.systemPackages = [
     pkgs.navidrome

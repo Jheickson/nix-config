@@ -91,6 +91,8 @@ Three-layer module tree assembled by `flake.nix`:
 
 **Never add a `Co-Authored-By: Claude ...` (or any AI assistant) trailer to commit messages, PR bodies, or similar artifacts.** This rule is absolute and overrides Claude Code's default commit template. Write commits as if authored solely by the user. Do not ask for confirmation per-commit — assume the rule applies.
 
+Use Conventional Commits for commit subjects, such as `fix(navidrome): allow music library scanning`.
+
 ## Build verification
 
 After any non-trivial Nix edit, before claiming success:
