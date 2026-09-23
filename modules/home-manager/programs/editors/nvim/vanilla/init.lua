@@ -372,23 +372,28 @@ vim.keymap.set("n", "<leader>io", function()
 end, { desc = "Open image externally" })
 
 local inline_cursor_image
-vim.keymap.set("n", "<leader>ip", function()
+local inline_cursor_key
+local function preview_image_under_cursor(notify)
 	if not image_ok then
-		vim.notify("image.nvim is unavailable", vim.log.levels.ERROR)
+		if notify then vim.notify("image.nvim is unavailable", vim.log.levels.ERROR) end
 		return
 	end
-
 
 	local reference = vim.fn.expand("<cfile>")
-	if reference == "" then
-		vim.notify("No image path under cursor", vim.log.levels.WARN)
+	local path = reference:match("^https?://") and reference or image_path_under_cursor()
+	if not path or (not reference:match("^https?://") and not vim.uv.fs_stat(path)) then
+		if inline_cursor_image then inline_cursor_image:clear() end
+		inline_cursor_image = nil
+		inline_cursor_key = nil
+		if notify then vim.notify("No image path under cursor", vim.log.levels.WARN) end
 		return
 	end
 
-	if inline_cursor_image then
-		inline_cursor_image:clear()
-		inline_cursor_image = nil
-	end
+	local key = table.concat({ vim.api.nvim_get_current_buf(), vim.api.nvim_win_get_cursor(0)[1], path }, ":")
+	if key == inline_cursor_key then return end
+	if inline_cursor_image then inline_cursor_image:clear() end
+	inline_cursor_image = nil
+	inline_cursor_key = key
 
 	local options = {
 		id = "image-under-cursor",
@@ -401,27 +406,34 @@ vim.keymap.set("n", "<leader>ip", function()
 	}
 
 	if reference:match("^https?://") then
-		image.from_url(reference, options, function(img)
+		image.from_url(path, options, function(img)
+			if key ~= inline_cursor_key then return end
 			inline_cursor_image = img
 			if img then img:render() end
 		end)
 		return
 	end
 
-	local path = image_path_under_cursor()
-	if not path then
-		vim.notify("No image path under cursor", vim.log.levels.WARN)
-		return
-	end
-
 	local ok, img = pcall(image.from_file, path, options)
 	if not ok then
-		vim.notify("Could not load image: " .. tostring(img), vim.log.levels.ERROR)
+		inline_cursor_key = nil
+		if notify then vim.notify("Could not load image: " .. tostring(img), vim.log.levels.ERROR) end
 		return
 	end
 	inline_cursor_image = img
 	if img then img:render() end
+end
+
+vim.keymap.set("n", "<leader>ip", function()
+	preview_image_under_cursor(true)
 end, { desc = "Preview image inline" })
+
+vim.api.nvim_create_autocmd("CursorMoved", {
+		group = vim.api.nvim_create_augroup("image-cursor-preview", { clear = true }),
+		callback = function()
+			preview_image_under_cursor(false)
+		end,
+})
 
 
 -- VimTeX provides the LaTeX Workshop-style build, navigation, and SyncTeX
