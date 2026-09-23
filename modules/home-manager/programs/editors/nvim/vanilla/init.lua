@@ -361,22 +361,28 @@ local function image_path_under_cursor()
 	return resolve_image_path(reference)
 end
 
+local function looks_like_image(reference)
+	local lower = reference:lower():gsub("[#?].*$", "")
+	return lower:match("%.png$")
+		or lower:match("%.jpe?g$")
+		or lower:match("%.gif$")
+		or lower:match("%.webp$")
+		or lower:match("%.avif$")
+		or lower:match("%.svg$")
+		or lower:match("%.bmp$")
+		or lower:match("%.heic$")
+end
+
 local function image_reference_on_line()
 	local reference = vim.fn.expand("<cfile>")
 	local current_path = reference ~= "" and resolve_image_path(reference) or nil
-	if reference:match("^https?://") or (current_path and vim.uv.fs_stat(current_path)) then return reference end
+	if looks_like_image(reference) and (reference:match("^https?://") or (current_path and vim.uv.fs_stat(current_path))) then
+		return reference
+	end
 
 	for token in vim.api.nvim_get_current_line():gmatch("[^%s%\"'()<>]+") do
 		local clean = token:gsub("[,;%)]+$", "")
-		local lower = clean:lower()
-		if clean:match("^https?://")
-			or lower:match("%.png$")
-			or lower:match("%.jpe?g$")
-			or lower:match("%.gif$")
-			or lower:match("%.webp$")
-			or lower:match("%.avif$") then
-			return clean
-		end
+		if looks_like_image(clean) then return clean end
 	end
 end
 vim.keymap.set("n", "<leader>io", function()
