@@ -19,6 +19,9 @@ in
     lldb # DAP debugger for rustaceanvim (:RustDebuggables) — provides lldb-dap
     tailwindcss-language-server
     typescript-language-server
+    texlab
+    zathura
+    zathuraPkgs.zathura_pdf_mupdf
     lazygit
     nodejs
 

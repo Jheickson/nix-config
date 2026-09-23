@@ -213,6 +213,30 @@ vim.lsp.config('tailwindcss', {
   },
   root_markers = { 'tailwind.config.js', 'tailwind.config.ts', 'package.json', '.git' },
 })
+vim.lsp.config('texlab', {
+  cmd = { 'texlab' },
+  filetypes = { 'tex', 'plaintex', 'bib' },
+  root_markers = { '.latexmkrc', 'latexmkrc', '.git' },
+  settings = {
+    texlab = {
+      build = {
+        executable = 'latexmk',
+        args = {
+          '-pdf',
+          '-interaction=nonstopmode',
+          '-synctex=1',
+          '-file-line-error',
+          '%f',
+        },
+        onSave = false, -- VimTeX owns compilation and avoids duplicate builds.
+      },
+      chktex = { onEdit = false, onOpenAndSave = true },
+      diagnosticsDelay = 300,
+    },
+  },
+})
+
+vim.lsp.enable({ 'texlab' })
 
 -- rust_analyzer is managed by rustaceanvim — do NOT re-add it here (double client)
 vim.lsp.enable({ 'lua_ls', 'nixd', 'ts_ls', 'tailwindcss' })
@@ -248,7 +272,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
         { bufnr = event.buf }
       )
     end, 'Toggle inlay hints')
-
   end,
 })
 
@@ -257,11 +280,42 @@ vim.api.nvim_create_autocmd('LspAttach', {
 -- =============================================================================
 
 vim.pack.add({
-  'https://github.com/Saghen/blink.cmp',
+  { src = 'https://github.com/Saghen/blink.lib', version = 'main' },
+  { src = 'https://github.com/Saghen/blink.cmp', version = 'main' },
   'https://github.com/rmagatti/auto-session',
   'https://github.com/stevearc/conform.nvim',
   'https://github.com/mfussenegger/nvim-dap',
   'https://github.com/mrcjkb/rustaceanvim',
+  'https://github.com/lervag/vimtex',
+})
+
+-- VimTeX provides the LaTeX Workshop-style build, navigation, and SyncTeX
+-- workflow. Zathura is intentionally external: terminal Neovim cannot render
+-- a full graphical PDF buffer reliably.
+vim.g.vimtex_view_method = 'zathura'
+vim.g.vimtex_compiler_method = 'latexmk'
+vim.g.vimtex_quickfix_mode = 0
+vim.g.vimtex_compiler_latexmk = {
+  options = {
+    '-pdf',
+    '-interaction=nonstopmode',
+    '-synctex=1',
+    '-file-line-error',
+  },
+}
+
+vim.api.nvim_create_autocmd('FileType', {
+  group = vim.api.nvim_create_augroup('vimtex-keymaps', { clear = true }),
+  pattern = { 'tex', 'plaintex', 'bib' },
+  callback = function(event)
+    local map = function(keys, command, desc)
+      vim.keymap.set('n', keys, '<cmd>' .. command .. '<CR>',
+        { buffer = event.buf, desc = 'LaTeX: ' .. desc })
+    end
+    map('<leader>ll', 'VimtexCompile', 'Compile project')
+    map('<leader>lv', 'VimtexView', 'View PDF')
+    map('<leader>lc', 'VimtexClean', 'Clean auxiliary files')
+  end,
 })
 
 -- Rust tooling (rustaceanvim) — manages rust-analyzer itself, adds cargo

@@ -166,7 +166,9 @@ in {
       # === DOCUMENT PROCESSING ===
       ghostscript
       gnumake
-      texliveSmall
+      (texlive.combine {
+        inherit (texlive) scheme-small latexmk;
+      })
 
       # === THEMING & CUSTOMIZATION ===
       base16-schemes
