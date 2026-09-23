@@ -23,7 +23,8 @@ in
     zathura
     zathuraPkgs.zathura_pdf_mupdf
     lazygit
-    nodejs
+    ueberzugpp # image.nvim inline rendering backend
+    imagemagick # image.nvim image conversion
 
     # Formatters (used by conform.nvim)
     prettierd
