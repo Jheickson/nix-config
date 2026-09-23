@@ -311,6 +311,8 @@ if image_ok then
 			markdown = {
 				enabled = true,
 				download_remote_images = true,
+				only_render_image_at_cursor = true,
+				only_render_image_at_cursor_mode = "inline",
 				filetypes = { "markdown", "vimwiki" },
 			},
 		},
