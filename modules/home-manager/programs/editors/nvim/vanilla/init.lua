@@ -320,6 +320,18 @@ if image_ok then
 		window_overlap_clear_enabled = true,
 		hijack_file_patterns = { "*.png", "*.jpg", "*.jpeg", "*.gif", "*.webp", "*.avif" }
 	})
+
+	vim.api.nvim_create_autocmd({ "WinClosed", "WinEnter" }, {
+		group = vim.api.nvim_create_augroup("image-overlay-refresh", { clear = true }),
+		callback = function()
+			vim.schedule(function()
+				if not image.is_enabled() then return end
+				for _, current_image in ipairs(image.get_images()) do
+					if not current_image.is_rendered then current_image:render() end
+				end
+			end)
+		end,
+	})
 else
 	vim.notify("image.nvim failed to load: " .. tostring(image), vim.log.levels.ERROR)
 end
