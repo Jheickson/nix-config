@@ -15,7 +15,7 @@
   # ──────────────────────────────────────────────────────────────
   # Wallpaper (what gets displayed)
   # ──────────────────────────────────────────────────────────────
-  wallpaperSource = ../../assets/wallpapers/Other/wallhaven-qze297.jpg; # applied wallpaper image
+  wallpaperSource = ../../assets/wallpapers/Abstract/wallhaven-399gz6.png; # applied wallpaper image
   wallpaperImage = ../../assets/wallpapers/wallpaper.png; # store-tracked copy of the gowall output, what Stylix points at
   # Wallpaper resize mode for awww:
   #   no      — No resizing, center image, pad with fill color
