@@ -338,6 +338,14 @@ else
 	vim.notify("image.nvim failed to load: " .. tostring(image), vim.log.levels.ERROR)
 end
 
+local function resolve_image_path(reference)
+	local buffer_path = vim.api.nvim_buf_get_name(0)
+	local path = reference:gsub("^file://", ""):gsub("[#?].*$", ""):gsub("[,;%)]+$", "")
+	if path == "" then return nil end
+	if not path:match("^/") then path = vim.fn.fnamemodify(buffer_path, ":h") .. "/" .. path end
+	return vim.fn.fnamemodify(path, ":p")
+end
+
 local function image_path_under_cursor()
 	local buffer_path = vim.api.nvim_buf_get_name(0)
 	if buffer_path:match("%.[Pp][Nn][Gg]$")
@@ -348,19 +356,28 @@ local function image_path_under_cursor()
 		return buffer_path
 	end
 
-	local path = vim.fn.expand("<cfile>")
-	if path == "" then
-		return nil
-	end
+	local reference = vim.fn.expand("<cfile>")
+	if reference == "" then return nil end
+	return resolve_image_path(reference)
+end
 
-	path = path:gsub("^file://", ""):gsub("[#?].*$", "")
-	if path == "" then
-		return nil
+local function image_reference_on_line()
+	local reference = vim.fn.expand("<cfile>")
+	local current_path = reference ~= "" and resolve_image_path(reference) or nil
+	if reference:match("^https?://") or (current_path and vim.uv.fs_stat(current_path)) then return reference end
+
+	for token in vim.api.nvim_get_current_line():gmatch("[^%s%\"'()<>]+") do
+		local clean = token:gsub("[,;%)]+$", "")
+		local lower = clean:lower()
+		if clean:match("^https?://")
+			or lower:match("%.png$")
+			or lower:match("%.jpe?g$")
+			or lower:match("%.gif$")
+			or lower:match("%.webp$")
+			or lower:match("%.avif$") then
+			return clean
+		end
 	end
-	if not path:match("^/") then
-		path = vim.fn.fnamemodify(buffer_path, ":h") .. "/" .. path
-	end
-	return vim.fn.fnamemodify(path, ":p")
 end
 vim.keymap.set("n", "<leader>io", function()
 	local path = image_path_under_cursor()
@@ -379,13 +396,14 @@ local function preview_image_under_cursor(notify)
 		return
 	end
 
-	local reference = vim.fn.expand("<cfile>")
-	local path = reference:match("^https?://") and reference or image_path_under_cursor()
-	if not path or (not reference:match("^https?://") and not vim.uv.fs_stat(path)) then
+	local reference = image_reference_on_line()
+	local is_remote = reference and reference:match("^https?://")
+	local path = is_remote and reference or (reference and resolve_image_path(reference))
+	if not path or (not is_remote and not vim.uv.fs_stat(path)) then
 		if inline_cursor_image then inline_cursor_image:clear() end
 		inline_cursor_image = nil
 		inline_cursor_key = nil
-		if notify then vim.notify("No image path under cursor", vim.log.levels.WARN) end
+		if notify then vim.notify("No image path on current line", vim.log.levels.WARN) end
 		return
 	end
 
@@ -405,7 +423,7 @@ local function preview_image_under_cursor(notify)
 		with_virtual_padding = true,
 	}
 
-	if reference:match("^https?://") then
+	if is_remote then
 		image.from_url(path, options, function(img)
 			if key ~= inline_cursor_key then return end
 			inline_cursor_image = img
