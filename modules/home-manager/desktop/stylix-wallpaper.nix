@@ -9,8 +9,8 @@
 let
   generator = import ../../shared/generators.nix { inherit pkgs stylixConfig inputs; };
 
-  # Base16 yaml backing the active scheme: fixed themeSource or generator output.
-  schemeYamlPath = if stylixConfig.themeSource != null then stylixConfig.themeSource else generator.scheme;
+  # Base16 yaml backing the active scheme: fixed theme file or generator output.
+  schemeYamlPath = if stylixConfig.themeFile != null then stylixConfig.themeFile else generator.scheme;
 
   # Parse the scheme YAML to get colors
   schemeYaml = if stylixConfig.recolorWallpaper then

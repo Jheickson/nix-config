@@ -53,8 +53,10 @@ in
       dark = "Papirus-Dark";
     };
 
-    image = stylixConfig.appliedWallpaper;
+    # Stylix evaluates this image while building; processedWallpaper is
+    # generated later during Home Manager activation, so use the source here.
+    image = stylixConfig.wallpaperSource;
 
-    base16Scheme = if stylixConfig.themeSource != null then stylixConfig.themeSource else generator.scheme;
+    base16Scheme = if stylixConfig.themeFile != null then stylixConfig.themeFile else generator.scheme;
   };
 }

@@ -8,8 +8,8 @@
   # Colorscheme
   # ──────────────────────────────────────────────────────────────
   # null → generate a scheme from an image.
-  # /path/to/theme.yaml → use a fixed Base16 theme.
-  themeSource = null;
+  # "rebecca" → use pkgs.base16-schemes/share/themes/rebecca.yaml.
+  themeSource = "black-metal-venom";
   # "iris" or "matugen" (only used when themeSource = null).
   generator = "iris";
   # "dark" or "light".
@@ -25,18 +25,28 @@
   # "recolor" → recolor wallpaperSource using the selected scheme.
   # "invert" → invert wallpaperSource.
   # "recolor-invert" → invert, then recolor wallpaperSource.
-  wallpaperProcessing = "none";
+  wallpaperProcessing = "recolor";
   # "no", "crop", "fit", or "stretch".
   wallpaperResize = "crop";
   # Generated wallpaper destination; an implementation detail.
   wallpaperOutputPath = "/home/felipe/nix-config/assets/wallpapers/wallpaper.png";
 
   # Derived (computed from the above — don't edit)
-  effectiveSchemeSource = if schemeSource == null then wallpaperSource else schemeSource;
-  recolorWallpaper = builtins.elem wallpaperProcessing [ "recolor" "recolor-invert" ];
-  invertWallpaper = builtins.elem wallpaperProcessing [ "invert" "recolor-invert" ];
+  effectiveSchemeSource =
+    if schemeSource == null
+    then wallpaperSource
+    else schemeSource;
+  themeFile =
+    if themeSource == null
+    then null
+    else "${pkgs.base16-schemes}/share/themes/${themeSource}.yaml";
+  recolorWallpaper = builtins.elem wallpaperProcessing ["recolor" "recolor-invert"];
+  invertWallpaper = builtins.elem wallpaperProcessing ["invert" "recolor-invert"];
   processedWallpaper = wallpaperProcessing != "none";
-  appliedWallpaper = if processedWallpaper then wallpaperOutputPath else wallpaperSource;
+  appliedWallpaper =
+    if processedWallpaper
+    then wallpaperOutputPath
+    else wallpaperSource;
 }
 /*
 result/
