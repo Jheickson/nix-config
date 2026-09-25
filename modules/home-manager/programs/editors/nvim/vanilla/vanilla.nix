@@ -70,8 +70,8 @@ in
     };
   };
 
-  # Named colorscheme from stylix.base16Scheme (themeFile when useThemeFile=true,
-  # generator scheme otherwise — single source of truth). mini.base16 colorscheme pattern:
+  # Named colorscheme from stylix.base16Scheme (fixed themeSource or
+  # generator scheme — single source of truth). mini.base16 colorscheme pattern:
   # setup(palette) then set g.colors_name. Symlink target changes on every nh switch when
   # the palette changes; init.lua FS-watches this path and re-sources :colorscheme stylix.
   xdg.configFile."nvim/colors/stylix.lua".text = ''

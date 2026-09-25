@@ -33,7 +33,7 @@ let
 
         cp ${./iris-templates/base16.yaml} .config/iris/templates/base16.yaml
 
-        iris ${stylixConfig.schemeSource} --dark ${polarityFlag}
+        iris ${stylixConfig.effectiveSchemeSource} --dark ${polarityFlag}
 
         mkdir -p $out
         cp .cache/iris/base16.yaml $out/

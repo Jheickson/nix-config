@@ -53,9 +53,8 @@ in
       dark = "Papirus-Dark";
     };
 
-    image =
-      if stylixConfig.processedWallpaper then stylixConfig.wallpaperImage else stylixConfig.wallpaperSource;
+    image = stylixConfig.appliedWallpaper;
 
-    base16Scheme = if stylixConfig.useThemeFile then stylixConfig.themeFile else generator.scheme;
+    base16Scheme = if stylixConfig.themeSource != null then stylixConfig.themeSource else generator.scheme;
   };
 }

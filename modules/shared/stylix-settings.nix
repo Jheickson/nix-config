@@ -7,51 +7,36 @@
   # ──────────────────────────────────────────────────────────────
   # Colorscheme
   # ──────────────────────────────────────────────────────────────
-  useThemeFile = true; # false = generate scheme from image, true = fixed themeFile
-  generator = "iris"; # "iris" or "matugen" (only used when useThemeFile = false)
-  polarity = "dark"; # "dark" or "light"
-  themeFile = "${pkgs.base16-schemes}/share/themes/rebecca.yaml"; # fixed scheme (only used when useThemeFile = true)
+  # null → generate a scheme from an image.
+  # /path/to/theme.yaml → use a fixed Base16 theme.
+  themeSource = null;
+  # "iris" or "matugen" (only used when themeSource = null).
+  generator = "iris";
+  # "dark" or "light".
+  polarity = "dark";
 
+  # Wallpaper
   # ──────────────────────────────────────────────────────────────
-  # Wallpaper (what gets displayed)
-  # ──────────────────────────────────────────────────────────────
-  wallpaperSource = ../../assets/wallpapers/Abstract/wallhaven-399gz6.png; # applied wallpaper image
-  wallpaperImage = ../../assets/wallpapers/wallpaper.png; # store-tracked copy of the gowall output, what Stylix points at
-  # Wallpaper resize mode for awww:
-  #   no      — No resizing, center image, pad with fill color
-  #   crop    — Fill screen, crop excess (awww default)
-  #   fit     — Fit inside screen, preserve aspect ratio
-  #   stretch — Fill screen, ignore aspect ratio
+  wallpaperSource = ../../assets/wallpapers/Minimalistic/wallhaven-jevqpy.png;
+  # null → generate the colorscheme from wallpaperSource.
+  # /path/to/image → generate the colorscheme from another image.
+  schemeSource = null;
+  # "none" → apply wallpaperSource unchanged.
+  # "recolor" → recolor wallpaperSource using the selected scheme.
+  # "invert" → invert wallpaperSource.
+  # "recolor-invert" → invert, then recolor wallpaperSource.
+  wallpaperProcessing = "none";
+  # "no", "crop", "fit", or "stretch".
   wallpaperResize = "crop";
-  wallpaperOutputPath = "/home/felipe/nix-config/assets/wallpapers/wallpaper.png"; # where gowall writes the recolored wallpaper
-  invertWallpaper = false; # true = invert the wallpaper colors before gowall recolor (turns light wallpapers dark)
+  # Generated wallpaper destination; an implementation detail.
+  wallpaperOutputPath = "/home/felipe/nix-config/assets/wallpapers/wallpaper.png";
 
-  # ──────────────────────────────────────────────────────────────
-  # Scheme-source wallpaper (optional)
-  # ──────────────────────────────────────────────────────────────
-  # Decouple the colorscheme source (x) from the applied wallpaper (y):
-  #   useSchemeWallpaper = true  → scheme generated from schemeWallpaperSource,
-  #                                wallpaperSource is recolored by gowall to match
-  #   useSchemeWallpaper = false → wallpaperSource is both scheme source and
-  #                                applied wallpaper (no recolor)
-  # No effect when useThemeFile = true.
-  useSchemeWallpaper = true;
-  schemeWallpaperSource = ../../assets/wallpapers/Other/wallhaven-5gqde7.jpg;
-
-  # ──────────────────────────────────────────────────────────────
-  # Gowall recolor
-  # ──────────────────────────────────────────────────────────────
-  colorizeWallpaper = true; # false = skip gowall recolor, keep original wallpaper
-
-  # ──────────────────────────────────────────────────────────────
   # Derived (computed from the above — don't edit)
-  # ──────────────────────────────────────────────────────────────
-  schemeSource =
-    if useSchemeWallpaper
-    then schemeWallpaperSource
-    else wallpaperSource; # image the generators read
-  recolorWallpaper = colorizeWallpaper && (useThemeFile || useSchemeWallpaper); # master gate for gowall recolor + niri wallpaper path
-  processedWallpaper = recolorWallpaper || invertWallpaper; # master gate for the processed wallpaper path (recolor or invert)
+  effectiveSchemeSource = if schemeSource == null then wallpaperSource else schemeSource;
+  recolorWallpaper = builtins.elem wallpaperProcessing [ "recolor" "recolor-invert" ];
+  invertWallpaper = builtins.elem wallpaperProcessing [ "invert" "recolor-invert" ];
+  processedWallpaper = wallpaperProcessing != "none";
+  appliedWallpaper = if processedWallpaper then wallpaperOutputPath else wallpaperSource;
 }
 /*
 result/

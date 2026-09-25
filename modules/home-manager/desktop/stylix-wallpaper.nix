@@ -9,8 +9,8 @@
 let
   generator = import ../../shared/generators.nix { inherit pkgs stylixConfig inputs; };
 
-  # Base16 yaml backing the active scheme: fixed themeFile or generator output.
-  schemeYamlPath = if stylixConfig.useThemeFile then stylixConfig.themeFile else generator.scheme;
+  # Base16 yaml backing the active scheme: fixed themeSource or generator output.
+  schemeYamlPath = if stylixConfig.themeSource != null then stylixConfig.themeSource else generator.scheme;
 
   # Parse the scheme YAML to get colors
   schemeYaml = if stylixConfig.recolorWallpaper then
@@ -79,9 +79,6 @@ in
     ''}
   '';
 
-  # Expose the wallpaper path for shell scripts (awww, etc.)
-  home.sessionVariables.STYLIX_WALLPAPER = if stylixConfig.processedWallpaper then
-    stylixConfig.wallpaperOutputPath
-  else
-    toString stylixConfig.wallpaperSource;
+  # Expose the applied wallpaper path for shell scripts (awww, etc.).
+  home.sessionVariables.STYLIX_WALLPAPER = stylixConfig.appliedWallpaper;
 }
