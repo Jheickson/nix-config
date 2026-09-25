@@ -29,12 +29,14 @@ in
         # build time (or reading the shell env) goes stale in shells that
         # predate the config change.
         applyWallpaper = ''
-          # Refresh session vars from the freshly-switched HM profile
-          # (~/.local/state for standalone HM, /etc/profiles for NixOS-managed)
+          # Refresh session vars from the freshly-switched HM profile.
+          # HM guards this file against repeated sourcing, so clear the guard
+          # first or an old STYLIX_WALLPAPER value can survive a rebuild.
+          unset __HM_SESS_VARS_SOURCED
           source "$HOME/.local/state/nix/profiles/profile/etc/profile.d/hm-session-vars.sh" 2>/dev/null \
             || source /etc/profiles/per-user/felipe/etc/profile.d/hm-session-vars.sh 2>/dev/null
 
-          WALLPAPER="$HOME/nix-config/assets/wallpapers/wallpaper.png"
+          WALLPAPER="${stylixConfig.appliedWallpaper}"
           [ -n "$STYLIX_WALLPAPER" ] && WALLPAPER=$(eval echo "$STYLIX_WALLPAPER")
 
           echo "========================================" >&2
