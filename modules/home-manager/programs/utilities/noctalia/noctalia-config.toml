@@ -20,14 +20,13 @@ order = [ "default" ]
     border_width = 0.0
     capsule = false
     capsule_fill = "surface_variant"
-    capsule_group = []
     capsule_opacity = 1.0
     capsule_padding = 6.0
-    center = [ "lyrics", "privacy", "media", "notifications" ]
+    center = [ "group:g1" ]
     color = "on_surface"
     contact_shadow = false
     enabled = true
-    end = [ "battery_1", "network", "bluetooth", "battery_2", "volume" ]
+    end = [ "group:g5", "group:g6", "icon", "volume" ]
     font_weight = 400
     layer = "top"
     margin_edge = 4
@@ -40,12 +39,12 @@ order = [ "default" ]
     radius_bottom_right = 12
     radius_top_left = 12
     radius_top_right = 12
-    reserve_space = false
+    reserve_space = true
     scale = 1.0
     shadow = false
     show_on_workspace_switch = false
-    smart_auto_hide = true
-    start = [ "clock", "tray" ]
+    smart_auto_hide = false
+    start = [ "group:g3", "group:g4", "group:g2" ]
     thickness = 34
     widget_spacing = 12
 
@@ -55,6 +54,66 @@ order = [ "default" ]
         [bar.default.monitor.eDP-1]
         reserve_space = true
         smart_auto_hide = false
+
+        [[bar.default.capsule_group]]
+        accordion = false
+        accordion_direction = "end"
+        enabled = true
+        fill = "surface_variant"
+        id = "g1"
+        members = [ "media", "lyrics_3" ]
+        opacity = 0.0
+        padding = 0.0
+
+        [[bar.default.capsule_group]]
+        accordion = false
+        accordion_direction = "end"
+        enabled = true
+        fill = "surface_variant"
+        id = "g2"
+        members = [ "github", "omp-launcher", "bar" ]
+        opacity = 0.0
+        padding = 6.0
+
+        [[bar.default.capsule_group]]
+        accordion = false
+        accordion_direction = "end"
+        enabled = true
+        fill = "surface_variant"
+        id = "g3"
+        members = [ "notifications", "clock" ]
+        opacity = 0.0
+        padding = 6.0
+
+        [[bar.default.capsule_group]]
+        accordion = false
+        accordion_direction = "end"
+        enabled = true
+        fill = "surface_variant"
+        id = "g4"
+        members = [ "spacer_2", "tray", "spacer_3" ]
+        opacity = 0.0
+        padding = 6.0
+
+        [[bar.default.capsule_group]]
+        accordion = false
+        accordion_direction = "end"
+        enabled = true
+        fill = "surface_variant"
+        id = "g5"
+        members = [ "privacy", "bar_2" ]
+        opacity = 0.0
+        padding = 6.0
+
+        [[bar.default.capsule_group]]
+        accordion = false
+        accordion_direction = "end"
+        enabled = true
+        fill = "surface_variant"
+        id = "g6"
+        members = [ "battery_1", "network", "bluetooth", "battery_2" ]
+        opacity = 0.0
+        padding = 6.0
 
 [battery]
 warning_threshold = 20
@@ -232,6 +291,8 @@ widget_order = [
     cy = 957.0
     enabled = true
     output = "HDMI-A-1"
+    placement_height = 1080.0
+    placement_width = 1920.0
     rotation = 0.0
     type = "login_box"
 
@@ -253,6 +314,8 @@ widget_order = [
     cy = 957.0
     enabled = true
     output = "eDP-1"
+    placement_height = 1080.0
+    placement_width = 1920.0
     rotation = 0.0
     type = "login_box"
 
@@ -295,6 +358,8 @@ widget_order = [
     cy = 188.0
     enabled = true
     output = "HDMI-A-1"
+    placement_height = 1080.0
+    placement_width = 1920.0
     rotation = 0.0
     type = "media_player"
 
@@ -315,6 +380,8 @@ widget_order = [
     cy = 84.0
     enabled = true
     output = "HDMI-A-1"
+    placement_height = 1080.0
+    placement_width = 1920.0
     rotation = 0.0
     type = "clock"
 
@@ -335,6 +402,8 @@ widget_order = [
     cy = 468.0
     enabled = true
     output = "HDMI-A-1"
+    placement_height = 1080.0
+    placement_width = 1920.0
     rotation = 0.0
     type = "clock"
 
@@ -349,6 +418,8 @@ widget_order = [
     cx = 256.0
     cy = 955.0
     output = "HDMI-A-1"
+    placement_height = 1080.0
+    placement_width = 1920.0
     rotation = 0.0
     type = "weather"
 
@@ -407,8 +478,29 @@ scale = 1.0
 show_update_check_notification = true
 update_check_interval = 100
 
+[plugin_settings."egno/vial_keymap"]
+vil_path = "/home/felipe/Programming/keeb/Silakka54/Flp (Miryoku).vil"
+
+[plugin_settings."icefish/phone-connect"]
+show_device_name = true
+
+[plugin_settings."mindnbytes/nix-status"]
+flake_dir = "/home/felipe/nix-config/"
+
+[plugin_settings."zumik3-del/opencode-go-usage"]
+api_key = "oc_sk_4c197d43f9a5_0TT2iy_PX30VpBQ2Il43ELt_6u1t5htS"
+
 [plugins]
-enabled = [ "whyoolw/sharednd" ]
+enabled = [
+    "whyoolw/sharednd",
+    "shangshui0302/github-kanban",
+    "emiliovenegas/omp-launcher",
+    "zumik3-del/opencode-go-usage",
+    "cleboost/ssh-launcher",
+    "egno/vial_keymap",
+    "icefish/phone-connect",
+    "h465855hgg/lyrics"
+]
 
 [shell]
 app_icon_colorize = false
@@ -433,7 +525,7 @@ settings_show_advanced = true
 setup_wizard_enabled = true
 shared_gl_context = true
 show_location = true
-telemetry_enabled = false
+telemetry_enabled = true
 time_format = "{:%H:%M}"
 ui_scale = 0.85000000521540642
 
@@ -556,11 +648,12 @@ swap_pct_activity_threshold = 20.0
 swap_pct_critical_threshold = 80.0
 
 [theme]
-builtin = "Nord"
-community_palette = "ADW"
+builtin = "Ayu"
+community_palette = "Garnet"
 custom_palette = "stylix"
 mode = "dark"
-source = "custom"
+pure_black_dark = true
+source = "community"
 wallpaper_scheme = "m3-content"
 
     [theme.templates]
@@ -589,16 +682,16 @@ transition_on_startup = false
     recursive = true
 
     [wallpaper.default]
-    path = "/home/felipe/nix-config/assets/wallpapers/Other/wallhaven-2yo51x.png"
+    path = "/home/felipe/nix-config/assets/wallpapers/Minimalistic/wallhaven-jevqpy.png"
 
     [wallpaper.last]
-    path = "/home/felipe/nix-config/assets/wallpapers/Other/wallhaven-2yo51x.png"
+    path = "/home/felipe/nix-config/assets/wallpapers/Minimalistic/wallhaven-jevqpy.png"
 
     [wallpaper.monitors.HDMI-A-1]
     path = "/home/felipe/nix-config/assets/wallpapers/Other/wallhaven-2yo51x.png"
 
     [wallpaper.monitors.eDP-1]
-    path = "/home/felipe/nix-config/assets/wallpapers/Other/wallhaven-2yo51x.png"
+    path = "/home/felipe/nix-config/assets/wallpapers/Minimalistic/wallhaven-jevqpy.png"
 
     [[wallpaper.favorite]]
     palette_source = "wallpaper"
@@ -621,6 +714,12 @@ type = "active_window"
 
 [widget.audio_visualizer]
 color_2 = "secondary"
+
+[widget.bar]
+type = "zumik3-del/opencode-go-usage:bar"
+
+[widget.bar_2]
+type = "icefish/phone-connect:bar"
 
 [widget.battery]
 device = "/org/freedesktop/UPower/devices/headset_dev_F5_5B_D3_3D_EA_9E"
@@ -668,6 +767,12 @@ type = "sysmon"
 format = "{:%a %d %b}"
 type = "clock"
 
+[widget.github]
+type = "shangshui0302/github-kanban:github"
+
+[widget.icon]
+type = "egno/vial_keymap:icon"
+
 [widget.input_volume]
 device = "input"
 type = "volume"
@@ -697,9 +802,18 @@ type = "h465855hgg/lyrics:lyrics"
 [widget.lyrics_2]
 type = "h465855hgg/lyrics:lyrics"
 
+[widget.lyrics_3]
+animation = "typewriter"
+cover_shape = "rounded"
+display_mode = "lyrics"
+double_line = false
+max_chars = 30
+type = "h465855hgg/lyrics:lyrics"
+
 [widget.media]
-anchor = true
+anchor = false
 art_size = 16.0
+hide_album_art = true
 hide_when_no_media = true
 max_length = 500
 min_length = 80.0
@@ -731,6 +845,9 @@ update_available_color = "secondary"
 hide_when_no_unread = false
 type = "notifications"
 
+[widget.omp-launcher]
+type = "emiliovenegas/omp-launcher:omp-launcher"
+
 [widget.output_volume]
 device = "output"
 type = "volume"
@@ -746,6 +863,12 @@ type = "sysmon"
 [widget.spacer]
 type = "spacer"
 
+[widget.spacer_2]
+type = "spacer"
+
+[widget.spacer_3]
+type = "spacer"
+
 [widget.taskbar]
 hide_empty_workspaces = true
 inactive_opacity = 0.69999999999999996
@@ -757,6 +880,7 @@ stat = "cpu_temp"
 type = "sysmon"
 
 [widget.tray]
+anchor = true
 drawer = false
 type = "tray"
 
