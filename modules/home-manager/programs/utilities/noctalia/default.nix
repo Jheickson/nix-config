@@ -58,7 +58,7 @@ in
   programs.noctalia = {
     enable = true;
 
-    package = inputs.noctalia.packages.${pkgs.system}.default;
+    package = inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default;
 
     # systemd user service: auto-starts on login, restarted by HM activation on
     # rebuild so noctalia picks up config changes without a fragile IPC dance.
