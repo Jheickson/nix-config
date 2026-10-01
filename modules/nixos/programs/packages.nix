@@ -166,9 +166,8 @@ in {
       # === DOCUMENT PROCESSING ===
       ghostscript
       gnumake
-      (texlive.combine {
-        inherit (texlive) scheme-small latexmk;
-      })
+      # `texlive.combine` is deprecated (removed in nixpkgs 27.05).
+      (texliveSmall.withPackages (ps: [ ps.latexmk ]))
 
       # === THEMING & CUSTOMIZATION ===
       base16-schemes
