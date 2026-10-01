@@ -1,4 +1,4 @@
-{ pkgs, inputs, lib, config, ... }:
+{ pkgs, inputs, config, ... }:
 
 let
   inherit (config.lib.stylix) colors;
@@ -64,7 +64,14 @@ in
   programs.noctalia = {
     enable = true;
 
-    package = inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default;
+    # Use the nixpkgs build instead of the noctalia flake's own package (which
+    # the flake's module sets as its `mkDefault`). The flake's package is built
+    # against the flake's pinned nixpkgs (glibc 2.42), so libglvnd cannot load
+    # the system's mesa vendor library (glibc 2.44, needs GLIBC_2.43):
+    #   libgallium-26.2.3.so: version `GLIBC_2.43' not found
+    # which leaves EGL with no vendor and makes noctalia die with
+    # "fatal: eglGetDisplay failed". pkgs.noctalia shares the system's glibc.
+    package = pkgs.noctalia;
 
     # systemd user service: auto-starts on login, restarted by HM activation on
     # rebuild so noctalia picks up config changes without a fragile IPC dance.
