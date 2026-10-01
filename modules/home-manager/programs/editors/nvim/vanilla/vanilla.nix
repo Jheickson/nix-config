@@ -53,6 +53,10 @@ in
     # which the wrapper's postBuild touch then can't write). Same 0.12.x binary.
     package = pkgs.neovim-unwrapped;
     initLua = builtins.readFile ./init.lua; # HM master option (extraLuaConfig renamed)
+    # Pin the pre-26.05 provider defaults explicitly: home.stateVersion is 23.11,
+    # so the legacy defaults are in effect and HM warns on the implicit branch.
+    withRuby = true;
+    withPython3 = true;
   };
 
   stylix.targets.neovim = {
