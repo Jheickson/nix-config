@@ -51,6 +51,12 @@ let
   };
 in
 {
+  # home-manager now ships its own noctalia module (as of the directory
+  # `modules/programs/noctalia`). The noctalia flake only disables the old
+  # single-file `programs/noctalia.nix`, so disable the new path here too to
+  # avoid duplicate `programs.noctalia` option declarations.
+  disabledModules = [ "programs/noctalia" ];
+
   imports = [
     inputs.noctalia.homeModules.default
   ];
