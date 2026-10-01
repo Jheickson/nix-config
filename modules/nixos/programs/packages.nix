@@ -168,6 +168,7 @@ in {
       gnumake
       # `texlive.combine` is deprecated (removed in nixpkgs 27.05).
       (texliveSmall.withPackages (ps: [ ps.latexmk ]))
+      texlivePackages.chktex
 
       # === THEMING & CUSTOMIZATION ===
       base16-schemes
