@@ -27,6 +27,11 @@
   # "builtins.derivation ... without a proper context" warning on options.json.
   manual.manpages.enable = false;
 
+  # Stylix release-25.11's rofi target still sets `programs.rofi.font`, which
+  # HM master renamed to `programs.rofi.settings.font`. rofi is not used here
+  # (see modules/_archive), so drop the target instead of theming it.
+  stylix.targets.rofi.enable = false;
+
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home = {

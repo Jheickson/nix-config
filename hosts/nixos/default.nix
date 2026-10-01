@@ -98,4 +98,9 @@
   # `services.kmscon.extraConfig` / `services.kmscon.fonts` options on
   # nixos-unstable. Disable until stylix tracks `services.kmscon.config`.
   stylix.targets.kmscon.enable = false;
+
+  # Stylix release-25.11's regreet target still sets `programs.regreet.*`,
+  # which nixos-unstable renamed to `services.displayManager.regreet.*`.
+  # Login goes through greetd + niri-session, not regreet.
+  stylix.targets.regreet.enable = false;
 }
