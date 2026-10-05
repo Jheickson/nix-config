@@ -167,7 +167,28 @@ in {
       ghostscript
       gnumake
       # `texlive.combine` is deprecated (removed in nixpkgs 27.05).
-      (texliveSmall.withPackages (ps: [ ps.latexmk ]))
+      (texliveSmall.withPackages (ps:
+        with ps; [
+          latexmk
+          # --- TCC: estilo.cls + pacotes usados em Latex_TCC/main.tex ---
+          # (ausentes do scheme-small; os demais já vêm no texliveSmall)
+          abntex2      # classe abnTeX2 (ABNT NBR 14724/6027) + abntex2cite
+          algorithm2e
+          chktex
+          chronosys
+          courier      # métricas Courier usadas por listings
+          enumitem
+          hyphenat
+          ifoddpage
+          makecell
+          mdframed
+          multirow
+          needspace
+          relsize
+          tabu
+          varwidth
+          zref
+        ]))
       texlivePackages.chktex
 
       # === THEMING & CUSTOMIZATION ===
