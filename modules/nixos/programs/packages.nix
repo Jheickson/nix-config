@@ -184,12 +184,15 @@ in {
           mdframed
           multirow
           needspace
+          placeins   # floats não cruzam \section (TCC issue Jheickson/TCC#22)
           relsize
           tabu
           varwidth
           zref
         ]))
-      texlivePackages.chktex
+      plantuml
+      graphviz
+      mermaid-cli
 
       # === THEMING & CUSTOMIZATION ===
       base16-schemes
