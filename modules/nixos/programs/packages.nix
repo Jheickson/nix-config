@@ -37,14 +37,14 @@ in {
       git
       jdk17
       lazygit
-      sourcegit
+      # sourcegit
       micro
       ngrok
       nodejs_22
       pnpm
       # nodePackages.eas-cli
       opencode
-      claude-code
+      # claude-code
       openssl
       # pipx
       # postman
@@ -65,7 +65,7 @@ in {
       # qemu
 
       # === DESKTOP APPLICATIONS ===
-      anki
+      # anki
       calibre
       # discord
       # electron-mail
@@ -153,7 +153,7 @@ in {
       bitwarden-cli
       cbonsai
       cowsay
-      drift
+      # drift
       f3
       fd
       hello
@@ -200,9 +200,9 @@ in {
       base16-shell-preview
 
       # === FONTS ===
-      rounded-mgenplus
-      siji
-      termsyn
+      # rounded-mgenplus
+      # siji
+      # termsyn
       # nerdfonts # Big package. Font is already being set on stylix.nix
     ]
     ++ (

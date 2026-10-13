@@ -12,17 +12,17 @@
     ../desktop/window-managers/niri
 
     # Notifications
-    ../desktop/notifications/battery/battery-notify.nix
+    # ../desktop/notifications/battery/battery-notify.nix
 
     # Programs
     ../programs/terminals/ghostty.nix
-    ../programs/terminals/tmux.nix
+    # ../programs/terminals/tmux.nix
     ../programs/editors/nvim/vanilla/vanilla.nix
     ../programs/editors/vscode.nix
-    ../programs/editors/zed.nix
+    # ../programs/editors/zed.nix
     ../programs/shells/zsh.nix
     ../programs/browsers/zen-browser.nix
-    ../programs/browsers/qutebrowser.nix
+    # ../programs/browsers/qutebrowser.nix
     ../programs/browsers/chromium.nix
     ../programs/utilities/yazi.nix
     ../programs/utilities/fastfetch.nix
@@ -38,7 +38,7 @@
     slurp
 
     # typing tutor
-    inputs.toofan.packages.${pkgs.stdenv.hostPlatform.system}.default
+    # inputs.toofan.packages.${pkgs.stdenv.hostPlatform.system}.default
 
     # utils
     wl-clipboard
