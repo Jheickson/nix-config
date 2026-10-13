@@ -124,6 +124,7 @@ in {
 
       # === SYSTEM UTILITIES ===
       android-tools
+      universal-android-debloater
       baobab
       brightnessctl
       busybox
