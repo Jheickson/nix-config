@@ -4,11 +4,10 @@
   lib,
   stylixConfig,
   ...
-}:
-let
+}: let
   pointer = config.home.pointerCursor;
   makeCommand = command: {
-    command = [ command ];
+    command = [command];
   };
   selectedAnimation = config.programs.niri.animationPreset;
   animationPresetNames = import ./animations/preset-names.nix;
@@ -16,8 +15,8 @@ let
   # Use the generated output only when wallpaper processing is enabled;
   # otherwise wallpaperSource is the applied wallpaper directly.
   wallpaperPath =
-    if stylixConfig.processedWallpaper then
-      stylixConfig.wallpaperOutputPath
+    if stylixConfig.processedWallpaper
+    then stylixConfig.wallpaperOutputPath
     else
       toString (
         builtins.path {
@@ -33,26 +32,25 @@ let
   # "builtins.derivation without proper context" warning.
   awwwInit =
     pkgs.runCommandLocal "awww-init"
-      {
-        inherit wallpaperPath;
-        awwwResize = stylixConfig.wallpaperResize;
-        awwwInitSh = builtins.path {
-          path = ./awww-init.sh;
-          name = "awww-init-sh";
-        };
-        preferLocalBuild = true;
-      }
-      ''
-        cp "$awwwInitSh" "$out"
-        chmod +x "$out"
-        substituteInPlace "$out" \
-          --replace-fail "@awwwBin@" "${pkgs.awww}/bin/awww" \
-          --replace-fail "@awwwDaemonBin@" "${pkgs.awww}/bin/awww-daemon" \
-          --replace-fail "@wallpaper@" "$wallpaperPath" \
-          --replace-fail "@resize@" "$awwwResize"
-      '';
-in
-{
+    {
+      inherit wallpaperPath;
+      awwwResize = stylixConfig.wallpaperResize;
+      awwwInitSh = builtins.path {
+        path = ./awww-init.sh;
+        name = "awww-init-sh";
+      };
+      preferLocalBuild = true;
+    }
+    ''
+      cp "$awwwInitSh" "$out"
+      chmod +x "$out"
+      substituteInPlace "$out" \
+        --replace-fail "@awwwBin@" "${pkgs.awww}/bin/awww" \
+        --replace-fail "@awwwDaemonBin@" "${pkgs.awww}/bin/awww-daemon" \
+        --replace-fail "@wallpaper@" "$wallpaperPath" \
+        --replace-fail "@resize@" "$awwwResize"
+    '';
+in {
   options.programs.niri.animationPreset = lib.mkOption {
     type = lib.types.enum animationPresetNames;
     default = "tv_crt";
@@ -81,7 +79,7 @@ in
         spawn-at-startup = [
           (makeCommand "hyprlock")
           {
-            command = [ "${awwwInit}" ];
+            command = ["${awwwInit}"];
           }
           (makeCommand "waybar")
           {
@@ -101,10 +99,10 @@ in
               "store"
             ];
           }
-          { command = [ "ferdium" ]; }
+          {command = ["ferdium"];}
           # { command = [ "electron-mail" ]; }
           # kdeconnect-app intentionally not auto-spawned (kdeconnectd daemon still runs)
-          { command = [ "xwayland-satellite" ]; }
+          {command = ["xwayland-satellite"];}
           {
             command = [
               "${pkgs.jellyfin}/bin/jellyfin"
@@ -121,7 +119,6 @@ in
           }
         ];
         input = {
-
           keyboard = {
             numlock = true;
             xkb = {
@@ -160,11 +157,11 @@ in
         # Named workspaces. Order = key order. Browsing pinned to external monitor;
         # niri auto-places it on the focused output if HDMI-A-1 is absent.
         workspaces = {
-          "1-social" = { };
+          "1-social" = {};
           "2-browsing" = {
             open-on-output = "HDMI-A-1";
           };
-          "3-coding" = { };
+          "3-coding" = {};
         };
 
         outputs = {
@@ -224,20 +221,20 @@ in
             urgent.color = "#${config.lib.stylix.colors.base08}";
           };
           shadow = {
-            enable = false;
+            enable = true;
           };
           preset-column-widths = [
-            { proportion = 0.25; }
-            { proportion = 0.5; }
-            { proportion = 0.75; }
-            { proportion = 1.0; }
+            {proportion = 0.25;}
+            {proportion = 0.5;}
+            {proportion = 0.75;}
+            {proportion = 1.0;}
           ];
           default-column-width = {
             proportion = 0.5;
           };
           default-column-display = "tabbed";
 
-          gaps = 2;
+          gaps = 30;
           struts = {
             left = 2;
             right = 2;
@@ -249,10 +246,10 @@ in
             hide-when-single-tab = true;
             place-within-column = true;
             position = "left";
-            corner-radius = 0.0;
+            corner-radius = 100.0;
             gap = -12.0;
             gaps-between-tabs = 10.0;
-            width = 4.0;
+            width = 5.0;
             length.total-proportion = 0.1;
             # color = "#${config.lib.stylix.colors.base0D}";
           };
@@ -273,22 +270,24 @@ in
         # The preset is merged with a global workspace-switch override so the
         # transition is snappy with a slight overshoot, regardless of preset.
         # Spring with damping-ratio < 1 produces the overshoot; stiffness tunes speed.
-        animations = (import ./animations/presets/${selectedAnimation}.nix) // {
-          workspace-switch = {
-            kind.spring = {
-              damping-ratio = 0.80;
-              stiffness = 500;
-              epsilon = 0.0001;
+        animations =
+          (import ./animations/presets/${selectedAnimation}.nix)
+          // {
+            workspace-switch = {
+              kind.spring = {
+                damping-ratio = 0.80;
+                stiffness = 500;
+                epsilon = 0.0001;
+              };
+            };
+            horizontal-view-movement = {
+              kind.spring = {
+                damping-ratio = 0.80;
+                stiffness = 500;
+                epsilon = 0.0001;
+              };
             };
           };
-          horizontal-view-movement = {
-            kind.spring = {
-              damping-ratio = 0.80;
-              stiffness = 500;
-              epsilon = 0.0001;
-            };
-          };
-        };
 
         prefer-no-csd = true;
         hotkey-overlay.skip-at-startup = true;
