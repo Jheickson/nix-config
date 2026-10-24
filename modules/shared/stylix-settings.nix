@@ -9,7 +9,7 @@
   # ──────────────────────────────────────────────────────────────
   # null → generate a scheme from an image.
   # "rebecca" → use pkgs.base16-schemes/share/themes/rebecca.yaml.
-  themeSource = "black-metal-venom";
+  themeSource = null;
   # "iris" or "matugen" (only used when themeSource = null).
   generator = "iris";
   # "dark" or "light".
@@ -17,7 +17,7 @@
 
   # Wallpaper
   # ──────────────────────────────────────────────────────────────
-  wallpaperSource = ../../assets/wallpapers/Minimalistic/wallhaven-jevqpy.png;
+  wallpaperSource = ../../assets/wallpapers/Minimalistic/wallhaven-mlo65m.png;
   # null → generate the colorscheme from wallpaperSource.
   # /path/to/image → generate the colorscheme from another image.
   schemeSource = null;
@@ -25,7 +25,7 @@
   # "recolor" → recolor wallpaperSource using the selected scheme.
   # "invert" → invert wallpaperSource.
   # "recolor-invert" → invert, then recolor wallpaperSource.
-  wallpaperProcessing = "recolor";
+  wallpaperProcessing = "none";
   # "no", "crop", "fit", or "stretch".
   wallpaperResize = "crop";
   # Generated wallpaper destination; an implementation detail.
