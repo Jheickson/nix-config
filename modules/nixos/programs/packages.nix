@@ -163,6 +163,7 @@ in {
 
       # === GAMES ===
       benhsm-minesweeper
+      steam-run-free # FHS env for non-Steam binaries (Ren'Py games, etc.)
 
       # === DOCUMENT PROCESSING ===
       ghostscript
