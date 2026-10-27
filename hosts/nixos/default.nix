@@ -53,6 +53,7 @@
     ../../modules/nixos/services/flatpak.nix
     ../../modules/nixos/services/udisks2.nix
     ../../modules/nixos/services/mpd.nix
+    ../../modules/nixos/services/waydroid.nix
 
     # Programs
     ../../modules/nixos/programs/nix-ld.nix
