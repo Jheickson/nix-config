@@ -16,6 +16,12 @@
 #   -c/--color              Swaps a few slots for punchy accents. Composes with
 #                           --dark/--light (applied after both).
 #
+# Background ("auto" vs "dominant"):
+#   --dominant-background   Use the wallpaper's most common color for
+#                           background/color0 instead of the darkest palette
+#                           color (still darkened: lightness ×0.35 classic,
+#                           L=0.24 comfort). Classic only with dark
+#
 # Finish ("original", "neon", "invert", "mono"):
 #   (default)               No finish flag.
 #   -m/--neon-mode          HSL saturation/lightness boost, classic only.
@@ -55,6 +61,17 @@ let
     if stylixConfig.hellwalAppearance == "light" then "--light"
     else if stylixConfig.hellwalAppearance == "color" then "--color"
     else "--dark";
+  # Classic mode rejects --dominant-background unless appearance is exactly
+  # dark (hellwal errors with --light/--color); comfort accepts any.
+  dominantFlag =
+    if stylixConfig.hellwalBackground == "dominant" then
+      if stylixConfig.hellwalAlgorithm == "classic"
+        && stylixConfig.hellwalAppearance != "dark" then
+        throw "hellwalBackground = \"dominant\" needs hellwalAppearance = \"dark\" with hellwalAlgorithm = \"classic\" (hellwal rejects --dominant-background with --light/--color in classic mode)"
+      else
+        "--dominant-background"
+    else
+      "";
   finishFlags =
     if stylixConfig.hellwalFinish == "neon" then "--neon-mode"
     else if stylixConfig.hellwalFinish == "invert" then "--invert"
@@ -76,6 +93,7 @@ let
         hellwal -i ${stylixConfig.effectiveSchemeSource} \
           ${comfortFlag} \
           ${appearanceFlags} \
+          ${dominantFlag} \
           ${finishFlags} \
           --skip-term-colors \
           --skip-luminance-sort \

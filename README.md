@@ -209,9 +209,10 @@ slots for Stylix consumption. Built as a flake input in `flake.nix`.
 **[Hellwal](https://github.com/danihek/hellwal)** — Fast C palette generator.
 Tune it via `hellwalAlgorithm` (`comfort` perceptual extraction with contrast
 targets, or `classic` median-cut), `hellwalAppearance` (`dark`, `light`,
-`color`), and `hellwalFinish` (`original`, `neon`, `invert`, `mono`). See
-`modules/shared/hellwal.nix`. `hellwalAppearance` also drives Stylix polarity
-(`color` maps to light).
+`color`), `hellwalBackground` (`auto`, or `dominant` for the wallpaper's most
+common color as background), and `hellwalFinish` (`original`, `neon`,
+`invert`, `mono`). See `modules/shared/hellwal.nix`. `hellwalAppearance` also
+drives Stylix polarity (`color` maps to light in comfort mode).
 
 Switch between them in `modules/shared/stylix-settings.nix`:
 

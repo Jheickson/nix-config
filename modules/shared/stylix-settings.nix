@@ -22,6 +22,11 @@
   # Appearance: "dark", "light" or "color". Classic color mode keeps a dark
   # background; comfort color mode forces light (see hellwalPolarity).
   hellwalAppearance = "dark";
+  # Background: "auto" (darkest palette color, darkened) or "dominant"
+  # (wallpaper's most common color, darkened, via --dominant-background).
+  # Classic mode only supports "dominant" with dark appearance; comfort
+  # supports it with any appearance.
+  hellwalBackground = "auto";
   # Finish: "original", "neon" (vivid boost), "invert" or "mono" (true
   # greyscale via template op, not --gray-scale).
   hellwalFinish = "original";
