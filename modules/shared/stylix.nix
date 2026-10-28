@@ -18,8 +18,15 @@ in
     # available) while HM/nixpkgs are on the 26.05 cycle. Remove this once a
     # matching Stylix release branch exists.
     enableReleaseChecks = false;
-
-    polarity = stylixConfig.polarity;
+    # Hellwal carries its own appearance switch, so it drives polarity when
+    # it is the active generator; iris/matugen use the shared polarity field.
+    polarity =
+      if stylixConfig.generator == "hellwal" && stylixConfig.themeFile == null then
+        stylixConfig.hellwalPolarityFor {
+          inherit (stylixConfig) hellwalAlgorithm hellwalAppearance hellwalFinish;
+        }
+      else
+        stylixConfig.polarity;
 
     opacity = {
       terminal = 0.75;

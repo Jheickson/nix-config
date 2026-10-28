@@ -407,6 +407,23 @@
         "type": "gitlab"
       }
     },
+    "hellwal": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1792716655,
+        "narHash": "sha256-TD2PxBubYLMkdvPxXJb6xiDo33wnYmUDt7hbGePvFcM=",
+        "owner": "danihek",
+        "repo": "hellwal",
+        "rev": "97f033ad58c35b31bb2964e9ae55ac6f38527e69",
+        "type": "github"
+      },
+      "original": {
+        "owner": "danihek",
+        "ref": "v1.0.9",
+        "repo": "hellwal",
+        "type": "github"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -820,6 +837,7 @@
     "root": {
       "inputs": {
         "determinate": "determinate",
+        "hellwal": "hellwal",
         "home-manager": "home-manager",
         "iris": "iris",
         "niri": "niri",

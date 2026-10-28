@@ -206,10 +206,17 @@ a simpler greyscale. The iris template at
 `modules/shared/iris-templates/base16.yaml` maps iris semantic colors to base16
 slots for Stylix consumption. Built as a flake input in `flake.nix`.
 
+**[Hellwal](https://github.com/danihek/hellwal)** — Fast C palette generator.
+Tune it via `hellwalAlgorithm` (`comfort` perceptual extraction with contrast
+targets, or `classic` median-cut), `hellwalAppearance` (`dark`, `light`,
+`color`), and `hellwalFinish` (`original`, `neon`, `invert`, `mono`). See
+`modules/shared/hellwal.nix`. `hellwalAppearance` also drives Stylix polarity
+(`color` maps to light).
+
 Switch between them in `modules/shared/stylix-settings.nix`:
 
 ```nix
-generator = "iris";   # or "matugen"
+generator = "iris";   # "iris", "matugen", or "hellwal"
 ```
 
 Thanks to [Harman1307](https://github.com/Harman1307) for creating Iris.

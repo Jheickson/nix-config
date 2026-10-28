@@ -70,6 +70,10 @@
       url = "github:Harman1307/iris";
       flake = false;
     };
+    hellwal = {
+      url = "github:danihek/hellwal/v1.0.9";
+      flake = false;
+    };
   };
 
   outputs =

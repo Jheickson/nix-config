@@ -24,8 +24,8 @@ let
   else
     null;
 
-  # gowall requires #-prefixed hex; generated schemes (iris/matugen) emit bare
-  # hex per the base16 spec, so normalize here.
+  # gowall requires #-prefixed hex; generated schemes (iris/matugen/hellwal)
+  # emit bare hex per the base16 spec, so normalize here.
   normalizeHex = c: if builtins.substring 0 1 c == "#" then c else "#${c}";
 
   # Generate gowall JSON theme file

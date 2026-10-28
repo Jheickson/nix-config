@@ -10,10 +10,40 @@
   # null → generate a scheme from an image.
   # "rebecca" → use pkgs.base16-schemes/share/themes/rebecca.yaml.
   themeSource = null;
-  # "iris" or "matugen" (only used when themeSource = null).
+  # "iris", "matugen" or "hellwal" (only used when themeSource = null).
   generator = "iris";
-  # "dark" or "light".
+  # "dark" or "light" (unused by hellwal: hellwalPolarity below is derived
+  # from hellwalAppearance + hellwalFinish and drives stylix instead).
   polarity = "dark";
+  # Hellwal options (only used when generator = "hellwal").
+  # Algorithm: "comfort" (perceptual extraction with contrast targets) or
+  # "classic" (median-cut extraction, hellwal's own default).
+  hellwalAlgorithm = "comfort";
+  # Appearance: "dark", "light" or "color". Classic color mode keeps a dark
+  # background; comfort color mode forces light (see hellwalPolarity).
+  hellwalAppearance = "dark";
+  # Finish: "original", "neon" (vivid boost), "invert" or "mono" (true
+  # greyscale via template op, not --gray-scale).
+  hellwalFinish = "original";
+  # Derived: stylix polarity matching what hellwal will actually emit.
+  # Function (not a plain value) so // overrides of the three inputs are
+  # honored: rec values self-reference and would ignore overrides.
+  # Light background happens for: explicit light; comfort color (forces
+  # light); invert of any dark-background combo. Invert flips either way,
+  # so an inverted light combo (light+invert, comfort color+invert) is dark.
+  hellwalPolarityFor =
+    { hellwalAlgorithm, hellwalAppearance, hellwalFinish }:
+    let
+      lightBg =
+        hellwalAppearance == "light"
+        || (hellwalAppearance == "color" && hellwalAlgorithm == "comfort");
+      flipped = if hellwalFinish == "invert" then !lightBg else lightBg;
+    in
+    if flipped then "light" else "dark";
+  # Default instantiation for the current settings.
+  hellwalPolarity = hellwalPolarityFor {
+    inherit hellwalAlgorithm hellwalAppearance hellwalFinish;
+  };
 
   # Wallpaper
   # ──────────────────────────────────────────────────────────────
