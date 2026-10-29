@@ -30,6 +30,15 @@ in rec {
   enable = true; # master switch for Stylix theming
 
   # ──────────────────────────────────────────────────────────────
+  # Font (single definition — stylix.nix, system fonts.packages and
+  # per-app configs all reference this; edit here only)
+  # ──────────────────────────────────────────────────────────────
+  font = {
+    package = pkgs.nerd-fonts.terminess-ttf;
+    name = "Terminess Nerd Font Mono";
+  };
+
+  # ──────────────────────────────────────────────────────────────
   # Colorscheme
   # ──────────────────────────────────────────────────────────────
   # null → generate a scheme from an image.

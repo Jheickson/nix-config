@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, stylixConfig, ... }:
 
 {
   programs.ghostty = {
@@ -9,7 +9,7 @@
 
     settings = {
       # Match the Alacritty profile
-      font-family = "Hack Nerd Font";
+      font-family = stylixConfig.font.name;
       font-size = 12;
       window-padding-x = 0;
       window-padding-y = 0;

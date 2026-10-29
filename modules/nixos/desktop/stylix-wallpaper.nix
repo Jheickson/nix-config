@@ -1,5 +1,6 @@
 {
   pkgs,
+  stylixConfig,
   ...
 }:
 # System fonts. (The gowall wallpaper recolor used to live here; it moved to
@@ -11,7 +12,7 @@
     enableDefaultPackages = true;
     packages = with pkgs; [
       ipafont
-      (nerd-fonts.hack)
+      stylixConfig.font.package
     ];
   };
 }

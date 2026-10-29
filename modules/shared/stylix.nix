@@ -32,11 +32,8 @@ in
       terminal = 0.75;
     };
 
-    fonts = with pkgs; rec {
-      monospace = {
-        package = nerd-fonts.hack;
-        name = "HackNerdFontMono";
-      };
+    fonts = rec {
+      monospace = stylixConfig.font;
       sansSerif = monospace;
       serif = monospace;
     };
