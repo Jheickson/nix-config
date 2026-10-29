@@ -51,6 +51,22 @@
         "type": "github"
       }
     },
+    "base16-schemes": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1793143657,
+        "narHash": "sha256-DINoZiPs8/0G6aO5l/HLvhQFSfP4N3XEoC44PRw6Adc=",
+        "owner": "tinted-theming",
+        "repo": "schemes",
+        "rev": "dd2a1379533372ad79560bb4392570782a8a0a9d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "tinted-theming",
+        "repo": "schemes",
+        "type": "github"
+      }
+    },
     "base16-vim": {
       "flake": false,
       "locked": {
@@ -836,6 +852,7 @@
     },
     "root": {
       "inputs": {
+        "base16-schemes": "base16-schemes",
         "determinate": "determinate",
         "hellwal": "hellwal",
         "home-manager": "home-manager",

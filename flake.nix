@@ -74,6 +74,10 @@
       url = "github:danihek/hellwal/v1.0.9";
       flake = false;
     };
+    base16-schemes = {
+      url = "github:tinted-theming/schemes";
+      flake = false;
+    };
   };
 
   outputs =
@@ -89,7 +93,10 @@
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
-      stylixConfig = import ./modules/shared/stylix-settings.nix { inherit pkgs; };
+      stylixConfig = import ./modules/shared/stylix-settings.nix {
+        inherit pkgs;
+        base16Schemes = inputs."base16-schemes";
+      };
     in
     {
 

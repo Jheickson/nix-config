@@ -1,4 +1,29 @@
-{pkgs, ...}: rec {
+{
+  pkgs,
+  base16Schemes,
+  ...
+}: let
+  # Raw upstream file: tinted-theming 0.11+ files carry trailing comments
+  # containing colons (e.g. `# derived: ...`) that Stylix's fromYaml parser
+  # mangles into bogus palette keys, dropping real colors (base09, ...).
+  # builtins.readFile scrubbing: strip a trailing `# ...` comment only when
+  # the comment itself contains a second colon (the mangling trigger), and
+  # only after the closing quote of the hex value. IFD-free, so
+  # `nix flake check` still evaluates without building anything.
+  stripCommentColons = s: let
+    lines = pkgs.lib.splitString "\n" s;
+    scrub = line: let
+      m = builtins.match ''(.*"#[0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F]"[ ]*)#([^:]*:.*)'' line;
+    in
+      if m == null
+      then line
+      else builtins.elemAt m 0;
+  in
+    pkgs.lib.concatStringsSep "\n" (map scrub lines);
+  scrubbedScheme = name:
+    builtins.toFile "${name}-scrubbed.yaml"
+    (stripCommentColons (builtins.readFile "${base16Schemes}/base16/${name}.yaml"));
+in rec {
   # ──────────────────────────────────────────────────────────────
   # General
   # ──────────────────────────────────────────────────────────────
@@ -8,7 +33,7 @@
   # Colorscheme
   # ──────────────────────────────────────────────────────────────
   # null → generate a scheme from an image.
-  # "rebecca" → use pkgs.base16-schemes/share/themes/rebecca.yaml.
+  # "rebecca" → scrubbed copy of the base16-schemes flake input's base16/rebecca.yaml.
   themeSource = null;
   # "iris", "matugen" or "hellwal" (only used when themeSource = null).
   generator = "iris";
@@ -74,7 +99,7 @@
   themeFile =
     if themeSource == null
     then null
-    else "${pkgs.base16-schemes}/share/themes/${themeSource}.yaml";
+    else scrubbedScheme themeSource;
   recolorWallpaper = builtins.elem wallpaperProcessing ["recolor" "recolor-invert"];
   invertWallpaper = builtins.elem wallpaperProcessing ["invert" "recolor-invert"];
   processedWallpaper = wallpaperProcessing != "none";
