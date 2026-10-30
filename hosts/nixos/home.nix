@@ -104,8 +104,8 @@
   #  /etc/profiles/per-user/felipe/etc/profile.d/hm-session-vars.sh
   #
   home.sessionVariables = {
-    EDITOR = "vim";
-    VISUAL = "vim";
+    EDITOR = "nvim";
+    VISUAL = "nvim";
   };
 
   # Enable NumLock

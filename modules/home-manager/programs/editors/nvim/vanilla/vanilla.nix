@@ -46,6 +46,9 @@ in
 
   programs.neovim = {
     enable = true;
+    defaultEditor = true;
+    viAlias = true;
+    vimAlias = true;
     # HM wraps this base itself (wrapNeovimUnstable), installing the result as
     # finalPackage. Must be the unwrapped binary: wrapping pkgs.neovim (the
     # default wrapper) double-wraps, and on current nixpkgs that breaks the
