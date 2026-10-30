@@ -1,49 +1,89 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 {
-  home.packages = with pkgs; [
-    # Add Yazi to your Home Manager managed packages
-    yazi
+  programs.yazi = {
+    enable = true;
+    enableZshIntegration = true;
+    # Shell wrapper (cd-on-exit): `y` opens Yazi and cds back on quit.
+    shellWrapperName = "y";
 
-    # Optional: Dependencies for Yazi plugins
-    ueberzugpp # For image preview (alternative to ueberzug)
-    zsh # For Zsh integration
-    bat # For syntax-highlighted file previews
-    ripgrep # For file search functionality
-    fd # For efficient file listing
-  ];
+    extraPackages = with pkgs; [
+      bat
+      fd
+      ripgrep
+      ueberzugpp
+      ouch
+      poppler-utils # PDF preview
+      udisks # mount.yazi: udisksctl
+      util-linux # mount.yazi: lsblk + eject
+    ];
 
-  # Configuration for Zsh integration (optional, required for Zsh plugin)
-  # programs.zsh = {
-  #   enable = true;
-  #   interactiveShellInit = ''
-  #     # Initialize Yazi zsh integration
-  #     [ -f "$HOME/.config/yazi/shell/zsh.sh" ] && source "$HOME/.config/yazi/shell/zsh.sh"
-  #   '';
-  # };
+    settings = {
+      mgr.show_hidden = true;
 
-  # Yazi configuration file setup
-  home.file.".config/yazi/config.yml".text = ''
-    # Yazi basic configuration
-    plugins:
-      - name: image-preview
-        enable: true
+      # git.yazi: expose git status to the file list
+      plugin.prepend_fetchers = [
+        {
+          url = "*";
+          run = "git";
+          group = "git";
+        }
+        {
+          url = "*/";
+          run = "git";
+          group = "git";
+        }
+      ];
+      # toggle-pane tip: raise caps so a maximized preview uses the space
+      preview = {
+        max_width = 1000;
+        max_height = 1000;
+      };
+    };
 
-      - name: zsh-integration
-        enable: true
+    keymap = {
+      mgr.prepend_keymap = [
+        {
+          on = "l";
+          run = "plugin smart-enter";
+          desc = "Enter directory or open file";
+        }
+        {
+          on = "M";
+          run = "plugin mount";
+          desc = "Manage disk mounts";
+        }
+        {
+          on = "T";
+          run = "plugin toggle-pane max-preview";
+          desc = "Maximize or restore the preview pane";
+        }
+        {
+          on = "F";
+          run = "plugin smart-filter";
+          desc = "Smart filter";
+        }
+        {
+          on = [
+            "c"
+            "m"
+          ];
+          run = "plugin chmod";
+          desc = "Chmod on selected files";
+        }
+      ];
+    };
 
-      - name: bat-preview
-        enable: true
-        config:
-          command: "bat --color=always --style=numbers,grid"
-
-      - name: ripgrep-integration
-        enable: true
-        config:
-          command: "rg --files"
-
-      - name: fd-integration
-        enable: true
-        config:
-          command: "fd --type f"
-  '';
+    plugins = {
+      git = {
+        package = pkgs.yaziPlugins.git;
+        setup = true;
+        settings.order = 1500;
+      };
+      smart-enter = pkgs.yaziPlugins.smart-enter;
+      mount = pkgs.yaziPlugins.mount;
+      toggle-pane = pkgs.yaziPlugins.toggle-pane;
+      smart-filter = pkgs.yaziPlugins.smart-filter;
+      chmod = pkgs.yaziPlugins.chmod;
+    };
+  };
 }
