@@ -43,7 +43,7 @@ in rec {
   # ──────────────────────────────────────────────────────────────
   # null → generate a scheme from an image.
   # "rebecca" → scrubbed copy of the base16-schemes flake input's base16/rebecca.yaml.
-  themeSource = null;
+  themeSource = "lichen-chartreuse-dark";
   # "iris", "matugen" or "hellwal" (only used when themeSource = null).
   generator = "iris";
   # "dark" or "light" (unused by hellwal: hellwalPolarity below is derived
@@ -70,15 +70,23 @@ in rec {
   # Light background happens for: explicit light; comfort color (forces
   # light); invert of any dark-background combo. Invert flips either way,
   # so an inverted light combo (light+invert, comfort color+invert) is dark.
-  hellwalPolarityFor =
-    { hellwalAlgorithm, hellwalAppearance, hellwalFinish }:
-    let
-      lightBg =
-        hellwalAppearance == "light"
-        || (hellwalAppearance == "color" && hellwalAlgorithm == "comfort");
-      flipped = if hellwalFinish == "invert" then !lightBg else lightBg;
-    in
-    if flipped then "light" else "dark";
+  hellwalPolarityFor = {
+    hellwalAlgorithm,
+    hellwalAppearance,
+    hellwalFinish,
+  }: let
+    lightBg =
+      hellwalAppearance
+      == "light"
+      || (hellwalAppearance == "color" && hellwalAlgorithm == "comfort");
+    flipped =
+      if hellwalFinish == "invert"
+      then !lightBg
+      else lightBg;
+  in
+    if flipped
+    then "light"
+    else "dark";
   # Default instantiation for the current settings.
   hellwalPolarity = hellwalPolarityFor {
     inherit hellwalAlgorithm hellwalAppearance hellwalFinish;
@@ -86,7 +94,7 @@ in rec {
 
   # Wallpaper
   # ──────────────────────────────────────────────────────────────
-  wallpaperSource = ../../assets/wallpapers/Minimalistic/wallhaven-mlo65m.png;
+  wallpaperSource = ../../assets/wallpapers/Abstract/wallhaven-8g8eg1.png;
   # null → generate the colorscheme from wallpaperSource.
   # /path/to/image → generate the colorscheme from another image.
   schemeSource = null;
@@ -94,7 +102,7 @@ in rec {
   # "recolor" → recolor wallpaperSource using the selected scheme.
   # "invert" → invert wallpaperSource.
   # "recolor-invert" → invert, then recolor wallpaperSource.
-  wallpaperProcessing = "none";
+  wallpaperProcessing = "recolor";
   # "no", "crop", "fit", or "stretch".
   wallpaperResize = "crop";
   # Generated wallpaper destination; an implementation detail.
