@@ -37,8 +37,15 @@ in
         },
         {
           "type": "uptime",
-          "key": "│ └",
+          "key": "│ ├",
           "keyColor": "yellow"
+        },
+        {
+          "type": "localip",
+          "key": "│ └",
+          "keyColor": "yellow",
+          "showPrefixLen": false,
+          "showIpv6": false
         },
         {
           "type": "custom",
