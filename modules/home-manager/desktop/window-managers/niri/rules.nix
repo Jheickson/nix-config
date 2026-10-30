@@ -134,8 +134,6 @@ let
     # File managers & archive tools
     {
       matches = [
-        { app-id = "org.gnome.Nautilus"; }
-        { app-id = "nautilus"; }
         { app-id = "file-roller"; }
         { app-id = "org.gnome.FileRoller"; }
         { app-id = "org.Nemo"; }

@@ -74,7 +74,6 @@ in {
       # libreoffice
       gnumeric
       abiword
-      nautilus
       scanmem
       # slack
       # telegram-desktop

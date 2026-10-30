@@ -25,6 +25,7 @@
     # ../programs/browsers/qutebrowser.nix
     ../programs/browsers/chromium.nix
     ../programs/utilities/yazi.nix
+    ../programs/utilities/nemo.nix
     ../programs/utilities/fastfetch.nix
     ../programs/utilities/gowall.nix
     ../programs/utilities/neoclear.nix

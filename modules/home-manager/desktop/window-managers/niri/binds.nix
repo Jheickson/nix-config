@@ -62,6 +62,7 @@
       "Mod+Shift+B".action = spawn "zen-beta";
       "Mod+Shift+C".action = spawn "code";
       "Mod+Shift+N".action = spawn "${pkgs.ghostty}/bin/ghostty" "--class=ghostty-nvim" "-e" "nvim";
+      "Mod+E".action = spawn "nemo";
       "Mod+U".action = spawn "env XDG_CURRENT_DESKTOP=gnome gnome-control-center";
 
       # ── Focus / Navigation ────────────────────────────────────────────────
