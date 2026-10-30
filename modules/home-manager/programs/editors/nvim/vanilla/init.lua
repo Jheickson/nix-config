@@ -494,7 +494,7 @@ vim.api.nvim_create_autocmd("FileType", {
 -- is picked up from PATH.
 vim.g.rustaceanvim = {
 	tools = {
-		float_win_config = { border = "rounded" }, -- match mini.pick's rounded border
+		float_win_config = { border = "single" }, -- sharp: match mini.pick's single border
 	},
 	dap = {
 		adapter = {
@@ -708,7 +708,7 @@ require("mini.pick").setup({
 		},
 	},
 	window = {
-		config = { border = "rounded" },
+		config = { border = "single" },
 		prompt_caret = "▎",
 		prompt_prefix = " ",
 	},

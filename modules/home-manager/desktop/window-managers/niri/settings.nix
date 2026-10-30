@@ -246,7 +246,7 @@ in {
             hide-when-single-tab = true;
             place-within-column = true;
             position = "left";
-            corner-radius = 100.0;
+            corner-radius = 0.0;
             gap = -12.0;
             gaps-between-tabs = 10.0;
             width = 5.0;

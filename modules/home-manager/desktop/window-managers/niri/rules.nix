@@ -7,7 +7,7 @@ let
     {
       geometry-corner-radius =
         let
-          radius = 8.0;
+          radius = 0.0;
         in
         {
           bottom-left = radius;

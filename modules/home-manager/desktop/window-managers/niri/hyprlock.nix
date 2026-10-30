@@ -32,6 +32,7 @@ _: {
           position = "0%, 10%";
 
           outline_thickness = 1;
+          rounding = 0;
 
           font_color = "rgb(211, 213, 202)";
           outer_color = "rgba(29, 38, 33, 0.6)";
