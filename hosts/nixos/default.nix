@@ -54,6 +54,7 @@
     ../../modules/nixos/services/udisks2.nix
     ../../modules/nixos/services/mpd.nix
     ../../modules/nixos/services/waydroid.nix
+    ../../modules/nixos/services/suwayomi-server.nix
 
     # Programs
     ../../modules/nixos/programs/nix-ld.nix
