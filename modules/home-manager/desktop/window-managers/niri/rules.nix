@@ -141,12 +141,17 @@ let
       ];
       open-floating = true;
     }
+    # Save/Open file chooser (xdg-desktop-portal-gtk): same footprint as Nemo (800x550)
+    {
+      matches = [ { app-id = "xdg-desktop-portal-gtk"; } ];
+      open-floating = true;
+      default-column-width.fixed = 800;
+      default-window-height.fixed = 550;
+    }
     # System / auth dialogs
     {
       matches = [
         { app-id = "nm-connection-editor"; }
-        { app-id = "blueman-manager"; }
-        { app-id = "xdg-desktop-portal-gtk"; }
         { app-id = "org.kde.polkit-kde-authentication-agent-1"; }
         { app-id = "gcr-prompter"; }
         { app-id = "pinentry"; }
