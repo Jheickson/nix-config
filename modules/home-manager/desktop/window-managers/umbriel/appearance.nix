@@ -44,6 +44,11 @@ in {
         outer = "#${colors.base01}FF";
       };
     };
+    # Niri hid its tab indicator for single-tab columns; match that.
+    # title_bar.mode is already off by default — pin it so no name bar
+    # can appear from either source.
+    tab_bar.hide_when_single = true;
+    title_bar.mode = "off";
 
     overview = {
       background_blur = true;

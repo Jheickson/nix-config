@@ -3,11 +3,13 @@
 # Colemak_dh_wide navigation preserved: A/S columns, W/R rows, T/V workspaces.
 # Deliberate moves vs Niri:
 #  - Mod+Space → scratchpad-toggle terminal (was floating toggle)
-#  - Mod+T → window-toggle-floating (Umbriel default); floating toggle moved
-#    to Mod+Y so Mod+T/V stay workspace navigation like Niri
-#  - Mod+W → window-focus-up (Niri); tab toggle moves to Mod+Ctrl+W
-#  - Mod+1..4 stay extent presets (Niri widths); no direct workspace-number
-#    jumps — use Mod+T/V cycling, back_and_forth, or the overview
+#  - Mod+Y → window-toggle-floating (float was Mod+Space on Niri)
+#  - Mod+W → window-focus-up (same as Niri); tab toggle on Mod+Ctrl+W
+#  - Mod+T/V → workspace prev/next (same as Niri); no direct
+#    workspace-number jumps — use cycling, back_and_forth, or the overview
+#  - Mod+1..4 → extent presets (Niri widths)
+#  - Mod+Shift+Tab → window-move-to-output-next
+#    (was move-column-to-monitor-next on Niri)
 #  - Media/brightness routed through Noctalia (OSD + lock-safe) instead of
 #    raw wpctl/playerctl/brightnessctl, per Umbriel docs
 #  - Screenshots via Noctalia (Umbriel has no screenshot action)
@@ -116,6 +118,9 @@
     "Mod+Ctrl+T" = "window-modify-secondary-extent -0.1";
     "Mod+Ctrl+V" = "window-modify-secondary-extent 0.1";
 
+    # ── Layout ──────────────────────────────────────────────────────
+    "Mod+Shift+O" = "workspace-set-layout toggle scrolling dwindle master stacking";
+
     # ── Maximize / fullscreen / floating ────────────────────────────
     "Mod+Shift+F" = "window-toggle-maximize";
     "Mod+Ctrl+F" = "window-toggle-fullscreen";
@@ -126,13 +131,16 @@
     "Mod+Shift+V" = "column-move-to-workspace-next";
     "Mod+Shift+Up" = "column-move-to-workspace-previous";
     "Mod+Shift+Down" = "column-move-to-workspace-next";
-    "Mod+Ctrl+W" = "column-toggle-tabbed";
+    # ── Window actions ──────────────────────────────────────────────
+    "Mod+Shift+Q" = {
+      action = "window-close";
+      repeat = false;
+    };
 
-    # ── Workspace / monitor movement (Niri: Mod+Ctrl/Shift+Tab) ──────
+
+    # ── Window / workspace across monitors ──────────────────────────
     "Mod+Ctrl+Tab" = "workspace-move-to-output-next";
-    "Mod+Shift+Tab" = "workspace-move-to-output-previous";
-
-
+    "Mod+Shift+Tab" = "window-move-to-output-next";
 
     # ── Overview ────────────────────────────────────────────────────
     "Mod+O" = {
