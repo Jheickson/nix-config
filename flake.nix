@@ -33,6 +33,13 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    umbriel = {
+      # cachix branch always points to the latest commit CI has cached,
+      # guaranteeing binary cache hits. Do NOT add inputs.nixpkgs.follows
+      # here — overriding the input changes derivations and misses the cache.
+      url = "github:noctalia-dev/umbriel/cachix";
+    };
+
     # nix4nvchad = {
     #   url = "github:nix-community/nix4nvchad";
     #   inputs.nixpkgs.follows = "nixpkgs";
