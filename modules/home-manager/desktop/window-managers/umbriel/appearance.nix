@@ -10,6 +10,8 @@
 #    built-ins; custom GLSL would need a rewrite against umbriel_* uniforms.
 #  - Niri blur { passes 2, offset 3, noise .03, saturation 1.0 } →
 #    closest mapping below (offset has no equivalent).
+# Tab bar / title bar live under [appearance.*]: hide both name bars
+# (Niri hid its tab indicator for single-tab columns).
 { config, ... }: let
   colors = config.lib.stylix.colors;
 in {
@@ -21,6 +23,8 @@ in {
       # Niri geometry-corner-radius was 0 everywhere.
       corner_radius = 0;
       shadow.enabled = true;
+      tab_bar.hide_when_single = true;
+      title_bar.mode = "off";
       blur = {
         enabled = true;
         passes = 2;
@@ -44,11 +48,6 @@ in {
         outer = "#${colors.base01}FF";
       };
     };
-    # Niri hid its tab indicator for single-tab columns; match that.
-    # title_bar.mode is already off by default — pin it so no name bar
-    # can appear from either source.
-    tab_bar.hide_when_single = true;
-    title_bar.mode = "off";
 
     overview = {
       background_blur = true;
