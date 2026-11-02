@@ -1,18 +1,17 @@
-# Umbriel keybinds. Defining [keybinds] replaces the built-in set, so
-# everything reachable must be listed here.
-# Colemak_dh_wide navigation preserved: A/S columns, W/R rows, T/V workspaces.
-# Deliberate moves vs Niri:
-#  - Mod+Space → scratchpad-toggle terminal (was floating toggle)
-#  - Mod+Y → window-toggle-floating (float was Mod+Space on Niri)
-#  - Mod+W → window-focus-up (same as Niri); tab toggle on Mod+Ctrl+W
-#  - Mod+T/V → workspace prev/next (same as Niri); no direct
-#    workspace-number jumps — use cycling, back_and_forth, or the overview
-#  - Mod+1..4 → extent presets (Niri widths)
-#  - Mod+Shift+Tab → window-move-to-output-next
-#    (was move-column-to-monitor-next on Niri)
-#  - Media/brightness routed through Noctalia (OSD + lock-safe) instead of
-#    raw wpctl/playerctl/brightnessctl, per Umbriel docs
-#  - Screenshots via Noctalia (Umbriel has no screenshot action)
+  # Umbriel keybinds. Defining [keybinds] replaces the built-in set, so
+  # everything reachable must be listed here.
+  # Colemak_dh_wide navigation preserved: A/S columns, W/R rows, T/V workspaces.
+  # Deliberate moves vs Niri:
+  #  - Mod+Space → scratchpad-toggle terminal (was floating toggle)
+  #  - Mod+Y → window-toggle-floating (float was Mod+Space on Niri)
+  #  - Mod+W → window-focus-up (same as Niri); tab toggle on Mod+Ctrl+W
+  #  - Mod+Shift+Tab → window-move-to-output-next
+  #    (was move-column-to-monitor-next on Niri)
+  #  - Mod+Tab → output-focus-next (next display); scratchpad cycling
+  #    moved to Mod+Ctrl+O
+  #  - Media/brightness routed through Noctalia (OSD + lock-safe) instead of
+  #    raw wpctl/playerctl/brightnessctl, per Umbriel docs
+  #  - Screenshots via Noctalia (Umbriel has no screenshot action)
 { pkgs, ... }: {
   programs.umbriel.settings.keybinds = {
     # ── Media (Noctalia-routed: OSD shows, works while locked) ──────
@@ -98,7 +97,7 @@
     "Mod+V" = "workspace-next";
     "Mod+Up" = "workspace-previous";
     "Mod+Down" = "workspace-next";
-    "Mod+Ctrl+O" = "output-focus-next";
+    "Mod+Ctrl+O" = "scratchpad-focus-next terminal";
 
     # ── Window movement ─────────────────────────────────────────────
     "Mod+Shift+A" = "window-consume-or-expel-left";
@@ -157,7 +156,7 @@
     "Mod+Shift+Space" = "window-toggle-scratchpad terminal";
     "Mod+M" = "scratchpad-toggle music";
     "Mod+Shift+M" = "window-toggle-scratchpad music";
-    "Mod+Tab" = "scratchpad-focus-next terminal";
+    "Mod+Tab" = "output-focus-next";
     "Mod+Ctrl+Space" = {
       action = "window-restore-from-scratchpad terminal";
       repeat = false;
