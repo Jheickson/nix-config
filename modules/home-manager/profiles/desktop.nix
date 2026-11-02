@@ -8,10 +8,9 @@
 {
 
   imports = [
-    # Desktop environment
-    # Window manager (Umbriel active; Niri config kept unimported in ../desktop/window-managers/niri)
-    ../desktop/window-managers/umbriel
-    # ../desktop/window-managers/niri
+    # Window manager (Niri active; Umbriel config kept unimported in ../desktop/window-managers/umbriel)
+    ../desktop/window-managers/niri
+    # ../desktop/window-managers/umbriel
 
     # Notifications
     # ../desktop/notifications/battery/battery-notify.nix
