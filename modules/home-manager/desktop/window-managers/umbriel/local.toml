@@ -1,0 +1,33 @@
+# Local Umbriel overrides — the fast-iteration path.
+#
+# This file is symlinked out-of-store (see default.nix): edits apply the
+# moment you save, with no rebuild. Umbriel watches the include and shows
+# any error in an on-screen panel; validate manually with:
+#   umbriel config validate
+#
+# Merge semantics (base = Nix-generated config.toml, applied first):
+#   - [tables] merge by key — set one key to override just that key.
+#   - Plain arrays and scalars REPLACE the base value wholesale.
+#     e.g. [keybinds] here would discard every Nix-managed bind, so prefer
+#     surgical overrides: add/replace single binds, not the whole table.
+#   - [[window_rule]] / [[workspace]] lists APPEND to the base entries;
+#     later values win on conflict. Set the list to [] first to discard
+#     the base entries entirely.
+#   - Rule of thumb: tweak here while experimenting; once stable, promote
+#     the change into settings.nix / keybinds.nix / rules.nix /
+#     appearance.nix so it stays reproducible, and clear it here.
+#
+# Examples (all commented — uncomment to use):
+#
+# Faster workspace-switch spring while tuning feel:
+# [animation.workspaces]
+# style = "slide"
+# curve = "spring:0.6,700"
+#
+# Try a different border color without touching stylix wiring:
+# [colors.border]
+# focused = "#FF0000FF"
+#
+# Add one experimental bind (merges with the Nix keybind set):
+# [keybinds]
+# "Mod+Shift+G" = "workspace-set-layout toggle scrolling dwindle"

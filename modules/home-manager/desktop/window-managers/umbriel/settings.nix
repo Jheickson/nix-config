@@ -56,6 +56,14 @@ in {
   programs.umbriel = {
     enable = true;
     settings = {
+      # Hybrid override: local.toml is a plain file in this repo,
+      # symlinked out-of-store so edits apply on save with no rebuild
+      # (Umbriel watches and reloads includes). Tables merge by key;
+      # plain arrays/scalars in local.toml replace the base value;
+      # [[window_rule]]/[[workspace]] lists append — set one to [] to
+      # discard base entries. Documented in ./local.toml.
+      include.optional.files = ["~/.config/umbriel/local.toml"];
+
       general = {
         mod_key = "Super";
         # Noctalia runs via its systemd user service, not here.
