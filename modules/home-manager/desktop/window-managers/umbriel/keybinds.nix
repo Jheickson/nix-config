@@ -4,9 +4,9 @@
   # Deliberate moves vs Niri:
   #  - Mod+Space → scratchpad-toggle terminal (was floating toggle)
   #  - Mod+Y → window-toggle-floating (float was Mod+Space on Niri)
-  #  - Mod+W → window-focus-up (same as Niri); tab toggle on Mod+Ctrl+W
+  #  - Mod+W/R → tab next/prev (window-focus steps over tab groups, so
+  #    it can't switch tabs); arrows keep row focus via -or-workspace
   #  - Mod+Shift+Tab → window-move-to-output-next
-  #    (was move-column-to-monitor-next on Niri)
   #  - Mod+Tab → output-focus-next (next display); scratchpad cycling
   #    moved to Mod+Ctrl+O
   #  - Media/brightness routed through Noctalia (OSD + lock-safe) instead of
@@ -87,16 +87,17 @@
     "Mod+U" = "spawn env XDG_CURRENT_DESKTOP=gnome gnome-control-center";
 
     # ── Focus / Navigation ──────────────────────────────────────────
+    # Mod+W/R switch tabs (column-focus-tab-* steps over a group, so
+    # window-focus-up/down can't do it). Non-tab up/down focus + moving
+    # windows out of / into groups stay on the arrows and Mod+Shift+W/R.
     "Mod+A" = "window-focus-left";
     "Mod+S" = "window-focus-right";
     "Mod+Left" = "window-focus-left";
     "Mod+Right" = "window-focus-right";
-    "Mod+W" = "window-focus-up";
-    "Mod+R" = "window-focus-down";
     "Mod+T" = "workspace-previous";
     "Mod+V" = "workspace-next";
-    "Mod+Up" = "workspace-previous";
-    "Mod+Down" = "workspace-next";
+    "Mod+Up" = "window-focus-or-workspace-up";
+    "Mod+Down" = "window-focus-or-workspace-down";
     "Mod+Ctrl+O" = "scratchpad-focus-next terminal";
 
     # ── Window movement ─────────────────────────────────────────────
@@ -130,6 +131,9 @@
     "Mod+Shift+V" = "column-move-to-workspace-next";
     "Mod+Shift+Up" = "column-move-to-workspace-previous";
     "Mod+Shift+Down" = "column-move-to-workspace-next";
+    "Mod+Ctrl+W" = "column-toggle-tabbed";
+    "Mod+W" = "column-focus-tab-next";
+    "Mod+R" = "column-focus-tab-previous";
     # ── Window actions ──────────────────────────────────────────────
     "Mod+Shift+Q" = {
       action = "window-close";
