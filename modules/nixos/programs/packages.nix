@@ -61,7 +61,7 @@ in {
       # mongodb
       # mongodb-compass
       # mongosh
-      # mysql-workbench
+      mysql-workbench
       # qemu
 
       # === DESKTOP APPLICATIONS ===
