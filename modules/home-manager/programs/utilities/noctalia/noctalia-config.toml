@@ -442,7 +442,7 @@ temperature_night = 4000
 
 [notification]
 allowed_urgencies = []
-background_opacity = 0.29999999329447746
+background_opacity = 0.99999997764825821
 blacklist = []
 blacklist_allow_critical = true
 border_color = "on_primary"
