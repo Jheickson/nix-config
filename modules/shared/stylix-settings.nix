@@ -43,9 +43,9 @@ in rec {
   # ──────────────────────────────────────────────────────────────
   # null → generate a scheme from an image.
   # "rebecca" → scrubbed copy of the base16-schemes flake input's base16/rebecca.yaml.
-  themeSource = "lichen-chartreuse-dark";
+  themeSource = null;
   # "iris", "matugen" or "hellwal" (only used when themeSource = null).
-  generator = "iris";
+  generator = "hellwal";
   # "dark" or "light" (unused by hellwal: hellwalPolarity below is derived
   # from hellwalAppearance + hellwalFinish and drives stylix instead).
   polarity = "dark";
@@ -63,7 +63,7 @@ in rec {
   hellwalBackground = "auto";
   # Finish: "original", "neon" (vivid boost), "invert" or "mono" (true
   # greyscale via template op, not --gray-scale).
-  hellwalFinish = "original";
+  hellwalFinish = "neon";
   # Derived: stylix polarity matching what hellwal will actually emit.
   # Function (not a plain value) so // overrides of the three inputs are
   # honored: rec values self-reference and would ignore overrides.
@@ -94,7 +94,7 @@ in rec {
 
   # Wallpaper
   # ──────────────────────────────────────────────────────────────
-  wallpaperSource = ../../assets/wallpapers/Abstract/wallhaven-8g8eg1.png;
+  wallpaperSource = ../../assets/wallpapers/Other/wallhaven-83q8gy.png;
   # null → generate the colorscheme from wallpaperSource.
   # /path/to/image → generate the colorscheme from another image.
   schemeSource = null;
