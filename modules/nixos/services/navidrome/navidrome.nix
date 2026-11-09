@@ -1,28 +1,10 @@
 { pkgs, lib, ... }:
-
-let
-  ndLyrics = pkgs.stdenvNoCC.mkDerivation {
-    pname = "nd-lyrics";
-    version = "8.0.0";
-    src = ./plugins/nd-lyrics.ndp;
-    dontUnpack = true;
-    installPhase = ''
-      install -Dm644 "$src" "$out/share/$pname.ndp"
-    '';
-    passthru.isNavidromePlugin = true;
-    meta = {
-      description = "Navidrome plugin for fetching lyrics from multiple sources";
-      homepage = "https://github.com/J0R6IT0/navidrome-lyrics-plugin";
-      license = lib.licenses.mit;
-    };
-  };
-in
 {
   services.navidrome = {
     enable = true;
     openFirewall = true;
     user = "felipe";
-    plugins = [ ndLyrics ];
+    withPlugins = p: [ p.lyrics-plugin ];
     settings = {
       MusicFolder = "/home/felipe/Music";
       Port = 4533;
