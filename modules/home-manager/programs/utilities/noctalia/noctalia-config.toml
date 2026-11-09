@@ -19,10 +19,10 @@ order = [ "default" ]
     border = "on_primary"
     border_width = 2.0
     capsule = false
-    capsule_fill = "surface_variant"
+    capsule_fill = "surface_container"
     capsule_opacity = 1.0
     capsule_padding = 6.0
-    center = [ "group:g1" ]
+    center = [ "group:g1", "bar_3" ]
     color = "on_surface"
     compositor_blur = false
     contact_shadow = false
@@ -61,7 +61,7 @@ order = [ "default" ]
         accordion = false
         accordion_direction = "end"
         enabled = true
-        fill = "surface_variant"
+        fill = "surface_container"
         id = "g1"
         members = [ "media", "lyrics_3" ]
         opacity = 0.0
@@ -71,7 +71,7 @@ order = [ "default" ]
         accordion = false
         accordion_direction = "end"
         enabled = true
-        fill = "surface_variant"
+        fill = "surface_container"
         id = "g2"
         members = [ "github", "omp-launcher", "bar" ]
         opacity = 0.0
@@ -81,7 +81,7 @@ order = [ "default" ]
         accordion = false
         accordion_direction = "end"
         enabled = true
-        fill = "surface_variant"
+        fill = "surface_container"
         id = "g3"
         members = [ "notifications", "clock" ]
         opacity = 0.0
@@ -91,7 +91,7 @@ order = [ "default" ]
         accordion = false
         accordion_direction = "end"
         enabled = true
-        fill = "surface_variant"
+        fill = "surface_container"
         id = "g4"
         members = [ "spacer_2", "tray", "spacer_3" ]
         opacity = 0.0
@@ -101,7 +101,7 @@ order = [ "default" ]
         accordion = false
         accordion_direction = "end"
         enabled = true
-        fill = "surface_variant"
+        fill = "surface_container"
         id = "g5"
         members = [ "privacy", "bar_2" ]
         opacity = 0.0
@@ -111,7 +111,7 @@ order = [ "default" ]
         accordion = false
         accordion_direction = "end"
         enabled = true
-        fill = "surface_variant"
+        fill = "surface_container"
         id = "g6"
         members = [ "battery_1", "network", "bluetooth", "battery_2" ]
         opacity = 0.0
@@ -306,6 +306,7 @@ widget_order = [
         show_keyboard_layout = true
         show_login_button = true
         show_media = true
+        show_password_reveal = true
         show_session_buttons = true
         show_unlock_hint = true
         show_weather = true
@@ -314,7 +315,7 @@ widget_order = [
     box_height = 196.0
     box_width = 810.0
     cx = 960.0
-    cy = 957.0
+    cy = 957.00006103515625
     enabled = true
     output = "eDP-1"
     placement_height = 1080.0
@@ -329,6 +330,7 @@ widget_order = [
         show_keyboard_layout = true
         show_login_button = true
         show_media = true
+        show_password_reveal = true
         show_session_buttons = true
         show_unlock_hint = true
         show_weather = true
@@ -503,7 +505,8 @@ enabled = [
     "cleboost/ssh-launcher",
     "egno/vial_keymap",
     "h465855hgg/lyrics",
-    "ashur-d/nvim-projects"
+    "ashur-d/nvim-projects",
+    "noctalia/umbriel-companion"
 ]
 
 [shell]
@@ -726,6 +729,11 @@ type = "zumik3-del/opencode-go-usage:bar"
 [widget.bar_2]
 type = "icefish/phone-connect:bar"
 
+[widget.bar_3]
+show_layout_name = true
+show_workspace_name = true
+type = "noctalia/umbriel-companion:bar"
+
 [widget.battery]
 device = "/org/freedesktop/UPower/devices/headset_dev_F5_5B_D3_3D_EA_9E"
 display_mode = "graphic"
@@ -814,8 +822,15 @@ animation = "typewriter"
 cover_shape = "rounded"
 display_mode = "lyrics"
 double_line = false
+enable_scroll = false
+hide_when_no_lyrics = true
 max_chars = 30
+scroll_repeat = "gesture"
 type = "h465855hgg/lyrics:lyrics"
+
+    [widget.lyrics_3.actions]
+    scroll_down = "none"
+    scroll_up = "none"
 
 [widget.media]
 anchor = false
