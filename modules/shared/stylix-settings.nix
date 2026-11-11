@@ -43,7 +43,7 @@ in rec {
   # ──────────────────────────────────────────────────────────────
   # null → generate a scheme from an image.
   # "rebecca" → scrubbed copy of the base16-schemes flake input's base16/rebecca.yaml.
-  themeSource = null;
+  themeSource = "miami";
   # "iris", "matugen" or "hellwal" (only used when themeSource = null).
   generator = "hellwal";
   # "dark" or "light" (unused by hellwal: hellwalPolarity below is derived
@@ -94,7 +94,7 @@ in rec {
 
   # Wallpaper
   # ──────────────────────────────────────────────────────────────
-  wallpaperSource = ../../assets/wallpapers/Other/wallhaven-83q8gy.png;
+  wallpaperSource = ../../assets/wallpapers/Landscape/wallhaven-9dvl38.png;
   # null → generate the colorscheme from wallpaperSource.
   # /path/to/image → generate the colorscheme from another image.
   schemeSource = null;
