@@ -133,6 +133,55 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	end,
 })
 
+-- Mode-colored statusline bar, current buffer tab, and cursor. No plugin
+-- needed: mini.statusline already switches MiniStatuslineMode* per mode, so
+-- tinting the whole bar is just StatusLine's background; mini.tabline's groups
+-- are static and the cursor color comes from 'guicursor', hence the
+-- ModeChanged autocmd for the tab and per-mode groups for the cursor. Accents
+-- come from the stylix base16 palette exposed by colors/stylix.lua as
+-- `_G.stylix_palette` (re-read on every :colorscheme, so the live theme reload
+-- keeps working).
+local mode_styles = {
+	{ hl = "Normal", modes = { "n" }, accent = "base0D" },
+	{ hl = "Insert", modes = { "i" }, accent = "base0B" },
+	{ hl = "Visual", modes = { "v", "V", "\22", "s", "S", "\19" }, accent = "base0A" },
+	{ hl = "Replace", modes = { "R" }, accent = "base08" },
+	{ hl = "Command", modes = { "c" }, accent = "base0E" },
+	{ hl = "Other", modes = { "r", "t", "!" }, accent = "base0C" },
+}
+-- mode() first character -> palette accent (used by the bar/tab recolor)
+local mode_accent = {}
+for _, style in ipairs(mode_styles) do
+	for _, mode in ipairs(style.modes) do
+		mode_accent[mode] = style.accent
+	end
+end
+local applied_accent
+
+local function apply_mode_hl(force)
+	local palette = _G.stylix_palette
+	if not palette then
+		return
+	end
+	local accent = palette[mode_accent[vim.fn.mode():sub(1, 1)] or "base0D"]
+	if not force and accent == applied_accent then
+		return
+	end
+	applied_accent = accent
+	-- base00 (the scheme background) stays legible on every accent, including
+	-- when stylix polarity flips to a light scheme
+	vim.api.nvim_set_hl(0, "StatusLine", { fg = palette.base00, bg = accent })
+	vim.api.nvim_set_hl(0, "MiniTablineCurrent", { fg = palette.base00, bg = accent, bold = true })
+	vim.api.nvim_set_hl(0, "MiniTablineModifiedCurrent", { fg = palette.base00, bg = accent, bold = true })
+end
+
+vim.api.nvim_create_autocmd("ModeChanged", {
+	group = vim.api.nvim_create_augroup("mode-colors", { clear = true }),
+	callback = function()
+		apply_mode_hl()
+	end,
+})
+
 -- mini.pick + mini.starter + mini.statusline highlights (must reapply after
 -- colorscheme changes, including stylix live reloads — mini.statusline's own
 -- defaults point at Cursor/Diff*/IncSearch/StatusLineNC, which the stylix
@@ -173,6 +222,46 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 			fg = vim.api.nvim_get_hl(0, { name = "LineNr" }).fg,
 			bg = vim.api.nvim_get_hl(0, { name = "StatusLine" }).bg,
 		})
+
+		-- Mode-colored bar (see apply_mode_hl above): replace the fg-only
+		-- fallbacks with palette accents. The chip is the accent cut out of the
+		-- palette background so it stands out on the accent-colored bar.
+		if _G.stylix_palette then
+			local palette = _G.stylix_palette
+			for _, style in ipairs(mode_styles) do
+				vim.api.nvim_set_hl(0, "MiniStatuslineMode" .. style.hl, {
+					fg = palette[style.accent],
+					bg = palette.base00,
+					bold = true,
+				})
+				-- Cursor groups are picked by 'guicursor' below; TUI ignores the
+				-- foreground, so the accent background is what actually shows
+				vim.api.nvim_set_hl(0, "ModeCursor" .. style.hl, {
+					fg = palette.base00,
+					bg = palette[style.accent],
+				})
+			end
+			vim.opt.guicursor = table.concat({
+				"n:block-ModeCursorNormal",
+				"v:block-ModeCursorVisual",
+				"ve:ver25-ModeCursorVisual",
+				"c:block-ModeCursorCommand",
+				"sm:block-ModeCursorInsert",
+				"i-ci:ver25-ModeCursorInsert",
+				"r-cr:hor20-ModeCursorReplace",
+				"o:hor20-ModeCursorNormal",
+				"t:block-blinkon500-blinkoff500-TermCursor",
+			}, ",")
+			-- Bar text is base00: maximum contrast with every accent
+			for _, group in ipairs({ "MiniStatuslineDevinfo", "MiniStatuslineFileinfo", "MiniStatuslineLocation" }) do
+				vim.api.nvim_set_hl(0, group, { fg = palette.base00 })
+			end
+			vim.api.nvim_set_hl(0, "MiniStatuslineFilename", { fg = palette.base00, bold = true })
+			-- Inactive windows stay neutral instead of following the mode accent
+			vim.api.nvim_set_hl(0, "MiniStatuslineInactive", { fg = palette.base04, bg = palette.base01 })
+			vim.api.nvim_set_hl(0, "StatusLineNC", { fg = palette.base04, bg = palette.base01 })
+			apply_mode_hl(true)
+		end
 		-- Transparent-window parity with the old matugen theme: stylix's
 		-- transparentBackground only clears Normal/NonText/SignColumn/LineNr
 		vim.api.nvim_set_hl(0, "NormalNC", { bg = "NONE" })
