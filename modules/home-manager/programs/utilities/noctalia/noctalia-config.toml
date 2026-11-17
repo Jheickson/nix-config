@@ -16,7 +16,7 @@ order = [ "default" ]
     [bar.default]
     auto_hide = false
     background_opacity = 0.99999997764825821
-    border = "on_primary"
+    border = "primary"
     border_width = 2.0
     capsule = false
     capsule_fill = "surface_container"
@@ -505,8 +505,7 @@ enabled = [
     "cleboost/ssh-launcher",
     "egno/vial_keymap",
     "h465855hgg/lyrics",
-    "ashur-d/nvim-projects",
-    "noctalia/umbriel-companion"
+    "ashur-d/nvim-projects"
 ]
 
 [shell]
