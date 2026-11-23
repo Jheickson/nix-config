@@ -81,6 +81,17 @@
       "Mod+Down".action = focus-workspace-down;
       # Monitor
       "Mod+Tab".action = focus-monitor-next;
+      # Wheel – Mod scrolls horizontally (columns), Mod+Shift vertically
+      # (workspaces). While the modifier is held, niri consumes all wheel
+      # events, so apps receive no scroll.
+      "Mod+WheelScrollDown".cooldown-ms = 150;
+      "Mod+WheelScrollDown".action = focus-column-right;
+      "Mod+WheelScrollUp".cooldown-ms = 150;
+      "Mod+WheelScrollUp".action = focus-column-left;
+      "Mod+Shift+WheelScrollDown".cooldown-ms = 150;
+      "Mod+Shift+WheelScrollDown".action = focus-workspace-down;
+      "Mod+Shift+WheelScrollUp".cooldown-ms = 150;
+      "Mod+Shift+WheelScrollUp".action = focus-workspace-up;
 
       # ── Window Movement ───────────────────────────────────────────────────
       # Sideways – consume into / expel from adjacent column
