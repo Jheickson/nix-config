@@ -111,6 +111,15 @@
 
       packages.x86_64-linux.default = self.packages.x86_64-linux.hello;
 
+      # Project dev shells. Use with `nix develop ~/nix-config#<name>`.
+      devShells.x86_64-linux.typer = pkgs.mkShell {
+        packages = with pkgs; [
+          go
+          gopls
+          gotools
+        ];
+      };
+
       # nixos - system hostname
       nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
         specialArgs = {
