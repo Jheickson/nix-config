@@ -33,6 +33,67 @@
           group = "git";
         }
       ];
+      # External GUI handlers. prepend_rules keeps yazi's built-in rules
+      # (text → $EDITOR, media, archives, …) intact; new `opener` keys are
+      # merged with the defaults, so `open`/`edit`/`reveal` still work.
+      opener = {
+        # Word-processor formats (docx via AbiWord's OOXML importer)
+        abiword = [
+          {
+            run = "abiword %s";
+            orphan = true; # GUI app: detach, don't block the yazi TUI
+            desc = "AbiWord";
+          }
+        ];
+        # Raster images, for annotation
+        swappy = [
+          {
+            run = "swappy -f %s1";
+            orphan = true;
+            desc = "Swappy";
+          }
+        ];
+        # PDFs, instead of the browser xdg-mime currently picks
+        evince = [
+          {
+            run = "evince %s";
+            orphan = true;
+            desc = "Evince";
+          }
+        ];
+        # HTML, which yazi's text/* rule would otherwise open in $EDITOR
+        zen = [
+          {
+            run = "zen-beta %s";
+            orphan = true;
+            desc = "Zen";
+          }
+        ];
+      };
+      open.prepend_rules = [
+        {
+          url = "*.{docx,doc,dot,odt,ott,rtf,abw,zabw}";
+          use = "abiword";
+        }
+        {
+          # No SVG: gdk-pixbuf in this closure has no SVG loader, so SVG keeps
+          # falling back to xdg-open (Chromium)
+          url = "*.{png,jpg,jpeg,gif,bmp,webp,tiff,tif,avif}";
+          use = "swappy";
+        }
+        {
+          mime = "application/pdf";
+          use = "evince";
+        }
+        {
+          mime = "text/html";
+          use = "zen";
+        }
+        {
+          url = "*.{html,htm,xhtml}";
+          use = "zen";
+        }
+      ];
       # toggle-pane tip: raise caps so a maximized preview uses the space
       preview = {
         max_width = 1000;
